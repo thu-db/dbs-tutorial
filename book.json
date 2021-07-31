@@ -1,0 +1,19 @@
+{
+    "plugins": [
+        "alerts",
+        "click-reveal",
+        "code",
+        "codeblock-label",
+        "expandable-chapters-interactive",
+        "intopic-toc",
+        "katex-pro",
+        "search-plus",
+        "todo"
+      ],
+    "pluginsConfig": {
+        "intopic-toc": {
+            "label": "目录"
+        }
+    },
+    "root": "./docs"
+}
