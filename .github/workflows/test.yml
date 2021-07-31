@@ -1,15 +1,17 @@
-name: Deploy Website
+name: Test Build
 
 on:
   push:
-    branches: 
-      - master
+    branches:
+      - **
+      - !master
   pull_request:
     branches:
-      - master
+      - **
+      - !master
 
 jobs:
-  build-deploy:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,9 +21,3 @@ jobs:
 
       - name: Install dependencies and Build
         run: npm install && npm run build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: _book
