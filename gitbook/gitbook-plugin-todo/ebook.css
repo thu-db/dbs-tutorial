@@ -1,0 +1,9 @@
+li.task {
+  list-style: none;
+}
+li.task > p {
+  display: inline-block;
+}
+input[type='checkbox'].task {
+  margin: 0 0.2em 0.25em -1.6em;
+}
