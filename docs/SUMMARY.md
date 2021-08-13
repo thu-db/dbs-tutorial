@@ -11,6 +11,7 @@
 * step 3: 索引管理
 * step 4: 执行器
 * step 5: 解析器
+    * [未分区](chapter-5/5_parser.md)
 * step 6: 系统管理
 * step 7: 总结
 
