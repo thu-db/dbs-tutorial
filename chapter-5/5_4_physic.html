@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>介绍 · HonKit</title>
+        <title>物理优化 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -92,6 +92,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="5_5_interface.html" />
+    
+    
+    <link rel="prev" href="5_3_logic.html" />
     
 
     </head>
@@ -162,9 +166,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="intro.html">
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-0/intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-0/intro.html">
             
                     
                     介绍
@@ -265,9 +269,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../chapter-5/5_0_title.html">
+        <li class="chapter " data-level="1.8.1" data-path="5_0_title.html">
             
-                <a href="../chapter-5/5_0_title.html">
+                <a href="5_0_title.html">
             
                     
                     标题
@@ -278,9 +282,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../chapter-5/5_1_intro.html">
+        <li class="chapter " data-level="1.8.2" data-path="5_1_intro.html">
             
-                <a href="../chapter-5/5_1_intro.html">
+                <a href="5_1_intro.html">
             
                     
                     介绍
@@ -291,9 +295,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../chapter-5/5_2_sql.html">
+        <li class="chapter " data-level="1.8.3" data-path="5_2_sql.html">
             
-                <a href="../chapter-5/5_2_sql.html">
+                <a href="5_2_sql.html">
             
                     
                     SQL简介
@@ -304,9 +308,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.4" data-path="../chapter-5/5_3_logic.html">
+        <li class="chapter " data-level="1.8.4" data-path="5_3_logic.html">
             
-                <a href="../chapter-5/5_3_logic.html">
+                <a href="5_3_logic.html">
             
                     
                     逻辑优化
@@ -317,9 +321,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.5" data-path="../chapter-5/5_4_physic.html">
+        <li class="chapter active" data-level="1.8.5" data-path="5_4_physic.html">
             
-                <a href="../chapter-5/5_4_physic.html">
+                <a href="5_4_physic.html">
             
                     
                     物理优化
@@ -330,9 +334,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.6" data-path="../chapter-5/5_5_interface.html">
+        <li class="chapter " data-level="1.8.6" data-path="5_5_interface.html">
             
-                <a href="../chapter-5/5_5_interface.html">
+                <a href="5_5_interface.html">
             
                     
                     接口说明
@@ -404,7 +408,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >介绍</a>
+        <a href=".." >物理优化</a>
     </h1>
 </div>
 
@@ -422,7 +426,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><p>Welcome to introduction of Database System</p>
+                                <html><head></head><body><h4 id="54-物理优化：查询计划树到物理执行计划">5.4 物理优化：查询计划树到物理执行计划</h4>
+<p>代数优化改变查询语句中操作的次序和组合，但不涉及底层的存取路径。物理优化就是要选择高效合理的操作算法或存取路径，求得优化的查询计划，达到查询优化的目标。</p>
+<p>查询优化器在物理优化阶段，主要解决的问题是：</p>
+<ul>
+<li>从可选的单表扫描方式中，挑选什么样的单表扫描方式最优？</li>
+<li>对于两表连接，如何连接最优？</li>
+<li>对于多表连接，哪种连接顺序最优？</li>
+<li>对于多表连接，是否需要对每种连接顺序都探索？如果不全部探索，如何找到一种最优组合？</li>
+</ul>
+<p>可以选择基于规则的启发式优化或基于代价估算的优化。基于规则的启发式算法一般相对简单，优化效果一般但是速度较快，适合于解释执行的系统，查询优化和查询执行同时进行。编译执行的方式则是先进行编译优化后整体执行，查询优化和查询执行分离，此时使用基于代价估算的优化更容易获得更好的优化效果，但是可能会面临执行计划的选择空间很大，优化时间开销过高的问题。而将两者结合，先使用启发式算法限制候选空间，对于候选空间内的方案进行代价估计，这样可以在较短时间内获得一个相对较优的执行计划。</p>
 </body></html>
                                 
                                 </section>
@@ -466,6 +479,14 @@
 
             
                 
+                <a href="5_3_logic.html" class="navigation navigation-prev " aria-label="Previous page: 逻辑优化">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="5_5_interface.html" class="navigation navigation-next " aria-label="Next page: 接口说明">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -474,7 +495,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.3.1","depth":2,"next":{"title":"step 1: 缓存管理","level":"1.4","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.4.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]}]},"previous":{"title":"step 0: 整体概述","level":"1.3","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.3.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/intro.md","mtime":"2021-08-14T04:02:10.760Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T04:02:21.606Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"物理优化","level":"1.8.5","depth":2,"next":{"title":"接口说明","level":"1.8.6","depth":2,"path":"chapter-5/5_5_interface.md","ref":"chapter-5/5_5_interface.md","articles":[]},"previous":{"title":"逻辑优化","level":"1.8.4","depth":2,"path":"chapter-5/5_3_logic.md","ref":"chapter-5/5_3_logic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_4_physic.md","mtime":"2021-08-14T04:02:10.760Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T04:02:21.606Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

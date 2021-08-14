@@ -92,6 +92,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="5_2_sql.html" />
+    
+    
+    <link rel="prev" href="5_0_title.html" />
     
 
     </head>
@@ -162,9 +166,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="intro.html">
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-0/intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-0/intro.html">
             
                     
                     介绍
@@ -265,9 +269,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../chapter-5/5_0_title.html">
+        <li class="chapter " data-level="1.8.1" data-path="5_0_title.html">
             
-                <a href="../chapter-5/5_0_title.html">
+                <a href="5_0_title.html">
             
                     
                     标题
@@ -278,9 +282,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../chapter-5/5_1_intro.html">
+        <li class="chapter active" data-level="1.8.2" data-path="5_1_intro.html">
             
-                <a href="../chapter-5/5_1_intro.html">
+                <a href="5_1_intro.html">
             
                     
                     介绍
@@ -291,9 +295,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../chapter-5/5_2_sql.html">
+        <li class="chapter " data-level="1.8.3" data-path="5_2_sql.html">
             
-                <a href="../chapter-5/5_2_sql.html">
+                <a href="5_2_sql.html">
             
                     
                     SQL简介
@@ -304,9 +308,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.4" data-path="../chapter-5/5_3_logic.html">
+        <li class="chapter " data-level="1.8.4" data-path="5_3_logic.html">
             
-                <a href="../chapter-5/5_3_logic.html">
+                <a href="5_3_logic.html">
             
                     
                     逻辑优化
@@ -317,9 +321,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.5" data-path="../chapter-5/5_4_physic.html">
+        <li class="chapter " data-level="1.8.5" data-path="5_4_physic.html">
             
-                <a href="../chapter-5/5_4_physic.html">
+                <a href="5_4_physic.html">
             
                     
                     物理优化
@@ -330,9 +334,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.6" data-path="../chapter-5/5_5_interface.html">
+        <li class="chapter " data-level="1.8.6" data-path="5_5_interface.html">
             
-                <a href="../chapter-5/5_5_interface.html">
+                <a href="5_5_interface.html">
             
                     
                     接口说明
@@ -422,7 +426,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><p>Welcome to introduction of Database System</p>
+                                <html><head></head><body><h4 id="51-解析器概述">5.1 解析器概述</h4>
+<p>在数据库系统中，解析器与执行器的作用紧密相关。当数据库系统需要执行一条查询执行时，需要通过结构化查询语言（SQL）描述这一查询过程传递给解析器。解析器的主要功能在于解析输入的SQL语句并将其转化为一套高效的物理执行计划交由执行器完成。内部的工作流程可以概括为3个部分：</p>
+<ol>
+<li>词法语法分析：SQL语句到抽象语法树</li>
+<li>逻辑优化：抽象语法树到逻辑计划树</li>
+<li>物理优化：逻辑计划树到物理执行计划</li>
+</ol>
+<p>经过词法和语法分析，SQL语句可以转化为抽象语法树，这一部分是编译原理课程的主要内容，期间不需要考虑数据库系统的设计和底层存储结构等任何与数据库系统实现相关的内容。所以这一部分不作为本课程关注的重点。根据我们所给出的语法文件，直接利用antlr的访问者模式可以比较轻松地完成这一步转化工作。</p>
+<p>数据库解析器的特色在于其抽象语法树的后续处理过程，与编译器和解释器不同，此处不会结合系统和虚拟机特性转化为某种编码格式，而是需要结合数据库的一些统计信息和存储结构，在可能面临的很多种执行方案中规划出一套相对较优的实际物理执行计划并传递给执行器完成这一工作。这一部分包含了逻辑优化和物理优化两个过程，这一部分将成为各位同学思考的重点。</p>
 </body></html>
                                 
                                 </section>
@@ -466,6 +478,14 @@
 
             
                 
+                <a href="5_0_title.html" class="navigation navigation-prev " aria-label="Previous page: 标题">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="5_2_sql.html" class="navigation navigation-next " aria-label="Next page: SQL简介">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -474,7 +494,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.3.1","depth":2,"next":{"title":"step 1: 缓存管理","level":"1.4","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.4.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]}]},"previous":{"title":"step 0: 整体概述","level":"1.3","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.3.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/intro.md","mtime":"2021-08-14T04:02:10.760Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T04:02:21.606Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.8.2","depth":2,"next":{"title":"SQL简介","level":"1.8.3","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},"previous":{"title":"标题","level":"1.8.1","depth":2,"path":"chapter-5/5_0_title.md","ref":"chapter-5/5_0_title.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_1_intro.md","mtime":"2021-08-14T04:02:10.760Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T04:02:21.606Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
