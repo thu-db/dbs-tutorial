@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>SQL简介 · HonKit</title>
+        <title>2.4 对外提供的接口 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -92,10 +92,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="5_3_logic.html" />
     
-    
-    <link rel="prev" href="5_1_intro.html" />
+    <link rel="prev" href="variable.html" />
     
 
     </head>
@@ -230,9 +228,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../chapter-2/intro.html">
+        <li class="chapter " data-level="1.5.1" data-path="intro.html">
             
-                <a href="../chapter-2/intro.html">
+                <a href="intro.html">
             
                     
                     2.1 记录管理模块概述
@@ -243,9 +241,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../chapter-2/fixed.html">
+        <li class="chapter " data-level="1.5.2" data-path="fixed.html">
             
-                <a href="../chapter-2/fixed.html">
+                <a href="fixed.html">
             
                     
                     2.2 记录页面的设计模式-定长记录
@@ -256,9 +254,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.3" data-path="../chapter-2/variable.html">
+        <li class="chapter " data-level="1.5.3" data-path="variable.html">
             
-                <a href="../chapter-2/variable.html">
+                <a href="variable.html">
             
                     
                     2.3 记录页面的设计模式-变长记录
@@ -269,9 +267,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.4" data-path="../chapter-2/api.html">
+        <li class="chapter active" data-level="1.5.4" data-path="api.html">
             
-                <a href="../chapter-2/api.html">
+                <a href="api.html">
             
                     
                     2.4 对外提供的接口
@@ -385,9 +383,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="5_0_title.html">
+        <li class="chapter " data-level="1.8.1" data-path="../chapter-5/5_0_title.html">
             
-                <a href="5_0_title.html">
+                <a href="../chapter-5/5_0_title.html">
             
                     
                     标题
@@ -398,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="5_1_intro.html">
+        <li class="chapter " data-level="1.8.2" data-path="../chapter-5/5_1_intro.html">
             
-                <a href="5_1_intro.html">
+                <a href="../chapter-5/5_1_intro.html">
             
                     
                     介绍
@@ -411,9 +409,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8.3" data-path="5_2_sql.html">
+        <li class="chapter " data-level="1.8.3" data-path="../chapter-5/5_2_sql.html">
             
-                <a href="5_2_sql.html">
+                <a href="../chapter-5/5_2_sql.html">
             
                     
                     SQL简介
@@ -424,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.4" data-path="5_3_logic.html">
+        <li class="chapter " data-level="1.8.4" data-path="../chapter-5/5_3_logic.html">
             
-                <a href="5_3_logic.html">
+                <a href="../chapter-5/5_3_logic.html">
             
                     
                     逻辑优化
@@ -437,9 +435,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.5" data-path="5_4_physic.html">
+        <li class="chapter " data-level="1.8.5" data-path="../chapter-5/5_4_physic.html">
             
-                <a href="5_4_physic.html">
+                <a href="../chapter-5/5_4_physic.html">
             
                     
                     物理优化
@@ -450,9 +448,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.6" data-path="5_5_interface.html">
+        <li class="chapter " data-level="1.8.6" data-path="../chapter-5/5_5_interface.html">
             
-                <a href="5_5_interface.html">
+                <a href="../chapter-5/5_5_interface.html">
             
                     
                     接口说明
@@ -524,7 +522,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >SQL简介</a>
+        <a href=".." >2.4 对外提供的接口</a>
     </h1>
 </div>
 
@@ -542,10 +540,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h4 id="52-sql语法简介">5.2 SQL语法简介</h4>
-<p>结构化查询语言(Structured Query Language)简称SQL，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。SQL是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。虽然作为一种数据库语言的基准，但是工业界数据库厂商大多都在SQL基准基础之上进行了一定程度的变化和拓展，导致了当今存在了大量不同版本的SQL文法规范。本次实验任务中，同学们仅需要重点关注于SQL语言中有关于<strong>数据操作语言（DML）</strong>和<strong>数据定义语言（DDL）</strong>的部分重点文法结构。</p>
-<p>所有需要支持的文法已经在<strong>sql.g4</strong>文件中给出，文法对应的功能可以参阅文法手册。</p>
-<p>由于SQL语句转抽象语法树的部分是编译原理课程已经充分研究的内容，所以第一个转化阶段不作为本次实验的重点内容，可以直接基于给出的文法文件利用antlr的访问者模式生成这一部分代码。解析器部分重点的实验内容为逻辑优化和物理优化的过程。</p>
+                                <html><head></head><body><h1 id="24-对外提供的接口">2.4 对外提供的接口</h1>
+<pre><code class="lang-C"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RecordManager</span> {</span>
+  <span class="hljs-keyword">public</span>:
+    RecordManager    (FileManager &amp;fm);            <span class="hljs-comment">// 构造函数</span>
+    ~RecordManager   ();                           <span class="hljs-comment">// 析构函数</span>
+    <span class="hljs-function">RC <span class="hljs-title">create_file</span>   <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file_name)</span></span>;      <span class="hljs-comment">// 创建文件</span>
+    <span class="hljs-function">RC <span class="hljs-title">destroy_file</span>  <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file_name)</span></span>;      <span class="hljs-comment">// 删除文件</span>
+    <span class="hljs-function">RC <span class="hljs-title">open_file</span>     <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file_name)</span></span>;      <span class="hljs-comment">// 通过缓存管理模块打开文件，并获取其fileID</span>
+    <span class="hljs-function">RC <span class="hljs-title">close_file</span>    <span class="hljs-params">()</span></span>;                           <span class="hljs-comment">// 关闭fileID对应文件</span>
+    <span class="hljs-function">RC <span class="hljs-title">get_record</span>    <span class="hljs-params">(<span class="hljs-keyword">int</span> page_id, <span class="hljs-keyword">int</span> slot_id, <span class="hljs-keyword">char</span> *&amp;pData)</span></span>;            
+                                                   <span class="hljs-comment">// 通过页号和槽号访问记录后，相应字节序列可以通过pData访问</span>
+    <span class="hljs-function">RC <span class="hljs-title">delete_record</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> page_id, <span class="hljs-keyword">int</span> slot_id)</span></span>;   <span class="hljs-comment">// 删除特定记录</span>
+    <span class="hljs-function">RC <span class="hljs-title">insert_record</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> page_id, <span class="hljs-keyword">int</span> slot_id, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pData)</span></span>; 
+                                                   <span class="hljs-comment">// 将字节序列pData插入特定位置</span>
+    <span class="hljs-function">RC <span class="hljs-title">update_record</span> <span class="hljs-params">(page_id, slot_id, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pData)</span></span>;
+                                                   <span class="hljs-comment">// 将特定位置记录更新为字节序列pData</span>
+  <span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">int</span> fileID;
+};
+</code></pre>
 </body></html>
                                 
                                 </section>
@@ -589,14 +603,10 @@
 
             
                 
-                <a href="5_1_intro.html" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="variable.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.3 记录页面的设计模式-变长记录">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="5_3_logic.html" class="navigation navigation-next " aria-label="Next page: 逻辑优化">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -605,7 +615,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"SQL简介","level":"1.8.3","depth":2,"next":{"title":"逻辑优化","level":"1.8.4","depth":2,"path":"chapter-5/5_3_logic.md","ref":"chapter-5/5_3_logic.md","articles":[]},"previous":{"title":"介绍","level":"1.8.2","depth":2,"path":"chapter-5/5_1_intro.md","ref":"chapter-5/5_1_intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_2_sql.md","mtime":"2021-08-14T12:47:03.689Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T12:47:13.958Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"next":{"title":"step 3: 索引管理","level":"1.6","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"1.6.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"1.6.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"1.6.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},{"title":"3.4 对外提供的接口","level":"1.6.4","depth":2,"path":"chapter-3/api.md","ref":"chapter-3/api.md","articles":[]}]},"previous":{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/api.md","mtime":"2021-08-14T12:47:03.689Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-14T12:47:13.958Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
