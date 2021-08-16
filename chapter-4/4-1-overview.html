@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>介绍 · HonKit</title>
+        <title>4.1 概述 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -92,6 +92,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="4-2-scan.html" />
+    
     
 
     </head>
@@ -162,9 +164,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="intro.html">
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-0/intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-0/intro.html">
             
                     
                     介绍
@@ -368,9 +370,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../chapter-4/4-1-overview.html">
+        <li class="chapter active" data-level="1.7.1" data-path="4-1-overview.html">
             
-                <a href="../chapter-4/4-1-overview.html">
+                <a href="4-1-overview.html">
             
                     
                     4.1 概述
@@ -381,9 +383,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="../chapter-4/4-2-scan.html">
+        <li class="chapter " data-level="1.7.2" data-path="4-2-scan.html">
             
-                <a href="../chapter-4/4-2-scan.html">
+                <a href="4-2-scan.html">
             
                     
                     4.2 扫描算法
@@ -394,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="../chapter-4/4-3-join.html">
+        <li class="chapter " data-level="1.7.3" data-path="4-3-join.html">
             
-                <a href="../chapter-4/4-3-join.html">
+                <a href="4-3-join.html">
             
                     
                     4.3 连接算法
@@ -407,9 +409,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="../chapter-4/4-4-execution.html">
+        <li class="chapter " data-level="1.7.4" data-path="4-4-execution.html">
             
-                <a href="../chapter-4/4-4-execution.html">
+                <a href="4-4-execution.html">
             
                     
                     4.4 查询执行
@@ -420,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.5" data-path="../chapter-4/4-5-api.html">
+        <li class="chapter " data-level="1.7.5" data-path="4-5-api.html">
             
-                <a href="../chapter-4/4-5-api.html">
+                <a href="4-5-api.html">
             
                     
                     4.5 对外提供的接口
@@ -591,7 +593,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >介绍</a>
+        <a href=".." >4.1 概述</a>
     </h1>
 </div>
 
@@ -609,7 +611,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><p>Welcome to introduction of Database System</p>
+                                <html><head></head><body><h1 id="41-概述">4.1 概述</h1>
+<p>查询处理指的是将查询语句转化为查询结果的过程，主要包含三个步骤：</p>
+<ol>
+<li>解析器对查询语句进行语法分析，转化为语法树。</li>
+<li>优化器首先将语法树转化为关系代数表达式树，我们将其称为逻辑查询计划树。进一步，根据数据的统计信息(如表的大小、是否有索引等)，为逻辑查询的每一步指定操作的顺序、使用的算法、访问数据的方式等，转化为物理查询计划树。</li>
+<li>执行器在数据库上执行查询计划，并返回查询结果。</li>
+</ol>
+<p><img src="executor.svg" alt="executor"></p>
+<p>下图展示了一条 SQL 语句和其对应的逻辑查询计划树，逻辑查询计划树每个节点表示一个关系代数运算。但是，每个关系代数运算存在不同的操作方式，如扫描表时是否使用索引，表的连接采用什么算法等。我们需要根据数据库的统计信息，如索引、记录数量等，为每个关系代数运算选择最优的算法。本章主要介绍扫描算法和连接算法。</p>
+<p><img src="plan_tree.svg" alt="plan_tree"> </p>
 </body></html>
                                 
                                 </section>
@@ -654,6 +665,10 @@
             
                 
                 
+                <a href="4-2-scan.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 4.2 扫描算法">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
             
         
     </div>
@@ -661,7 +676,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.3.1","depth":2,"next":{"title":"step 1: 缓存管理","level":"1.4","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.4.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]}]},"previous":{"title":"step 0: 整体概述","level":"1.3","depth":1,"ref":"","articles":[{"title":"介绍","level":"1.3.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/intro.md","mtime":"2021-08-16T08:37:11.406Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T08:37:20.474Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.1 概述","level":"1.7.1","depth":2,"next":{"title":"4.2 扫描算法","level":"1.7.2","depth":2,"path":"chapter-4/4-2-scan.md","ref":"chapter-4/4-2-scan.md","articles":[]},"previous":{"title":"step 4: 查询处理和执行器","level":"1.7","depth":1,"ref":"","articles":[{"title":"4.1 概述","level":"1.7.1","depth":2,"path":"chapter-4/4-1-overview.md","ref":"chapter-4/4-1-overview.md","articles":[]},{"title":"4.2 扫描算法","level":"1.7.2","depth":2,"path":"chapter-4/4-2-scan.md","ref":"chapter-4/4-2-scan.md","articles":[]},{"title":"4.3 连接算法","level":"1.7.3","depth":2,"path":"chapter-4/4-3-join.md","ref":"chapter-4/4-3-join.md","articles":[]},{"title":"4.4 查询执行","level":"1.7.4","depth":2,"path":"chapter-4/4-4-execution.md","ref":"chapter-4/4-4-execution.md","articles":[]},{"title":"4.5 对外提供的接口","level":"1.7.5","depth":2,"path":"chapter-4/4-5-api.md","ref":"chapter-4/4-5-api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-4/4-1-overview.md","mtime":"2021-08-16T08:37:11.410Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T08:37:20.474Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
