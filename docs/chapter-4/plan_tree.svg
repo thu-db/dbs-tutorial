@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="286.5258 58.53915 395.6066 264.90885" width="395.6066" height="264.90885">
+  <defs>
+    <font-face font-family="Helvetica Neue" font-size="16" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica Neue" font-size="12" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Times" font-size="16" panose-1="0 0 5 0 0 0 0 2 0 0" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="453.6133" cap-height="661.6211" ascent="750" descent="-250" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Times-Roman"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Times" font-size="12" panose-1="0 0 5 0 0 0 0 2 0 0" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="453.6133" cap-height="661.6211" ascent="750" descent="-250" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Times-Roman"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.2\n2021-08-14 11:07:40 +0000</metadata>
+  <g id="Canvas_1" fill="none" stroke-opacity="1" fill-opacity="1" stroke="none" stroke-dasharray="none">
+    <title>Canvas 1</title>
+    <rect fill="white" x="286.5258" y="58.53915" width="395.6066" height="264.90885"/>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_2">
+        <rect x="287.0258" y="157" width="157.9742" height="119" fill="white"/>
+        <rect x="287.0258" y="157" width="157.9742" height="119" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(292.0258 170.38)" fill="black" xml:space="preserve">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="15">SELECT R.A, T.D</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="33.448">   FROM R,S,T</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="51.895996"> WHERE R.B = S.B</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="70.34399">       AND S.C = T.C</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="88.79199">       AND R.A &lt; 10; </tspan>
+        </text>
+      </g>
+      <g id="Graphic_3">
+        <rect x="287.0258" y="93" width="157.9742" height="46" fill="white"/>
+        <rect x="287.0258" y="93" width="157.9742" height="46" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(292.0258 106.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="1.8510987" y="15">R(A,B) S(B,C) T(C,D)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_8">
+        <path d="M 522 189 L 522 206.93846 L 542.28125 197.96923 Z M 562.5625 206.93846 L 562.5625 189 L 542.28125 197.96923 Z" fill="white"/>
+        <path d="M 522 189 L 522 206.93846 L 542.28125 197.96923 Z M 562.5625 206.93846 L 562.5625 189 L 542.28125 197.96923 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_9">
+        <path d="M 596.8301 127.96923 L 576.5488 119 L 576.5488 136.93846 Z M 596.8301 127.96923 L 617.1113 136.93846 L 617.1113 119 Z" fill="white"/>
+        <path d="M 596.8301 127.96923 L 576.5488 119 L 576.5488 136.93846 Z M 596.8301 127.96923 L 617.1113 136.93846 L 617.1113 119 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_15">
+        <text transform="translate(477.421 239.084)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="29132252e-20" y="15">σ</tspan>
+          <tspan font-family="Helvetica Neue" font-size="12" font-weight="400" fill="black" y="15">A&lt;10</tspan>
+        </text>
+      </g>
+      <g id="Graphic_16">
+        <text transform="translate(475.726 300)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="6252776e-19" y="15">R(A,B)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_17">
+        <text transform="translate(564.17725 239.084)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="9023893e-19" y="15">S(B,C)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_18">
+        <text transform="translate(632.3964 190.3964)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3943512e-19" y="15">T(C,D)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_19">
+        <text transform="translate(580 63.53915)" fill="#111">
+          <tspan font-family="Times" font-size="16" font-weight="400" fill="#111" x="0" y="15">Π</tspan>
+          <tspan font-family="Times" font-size="12" font-weight="400" fill="#111" y="15">A,D</tspan>
+        </text>
+      </g>
+      <g id="Line_20">
+        <line x1="497.739" y1="295" x2="496.9471" y2="272.4259" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_22">
+        <line x1="572.9813" y1="234.084" x2="553.2012" y2="213.99317" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_23">
+        <line x1="510.1367" y1="234.084" x2="531.629" y2="212.30335" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_25">
+        <line x1="549.7837" y1="184.68468" x2="586.7631" y2="144.24445" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_26">
+        <line x1="642.7827" y1="185.3964" x2="608.34175" y2="144.51013" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_27">
+        <line x1="596.8018" y1="118.4955" x2="596.8149" y2="97.43914" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

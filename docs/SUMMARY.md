@@ -17,7 +17,12 @@
     * [3.2 索引结构-B树和B+树](chapter-3/btree.md)
     * [3.3 更多的索引结构（阅读内容）](chapter-3/ds.md)
     * [3.4 对外提供的接口](chapter-3/api.md)
-* step 4: 执行器
+* step 4: 查询处理和执行器
+    * [4.1 概述](chapter-4/4-1-overview.md)
+    * [4.2 扫描算法](chapter-4/4-2-scan.md)
+    * [4.3 连接算法](chapter-4/4-3-join.md)
+    * [4.4 查询执行](chapter-4/4-4-execution.md)
+    * [4.5 对外提供的接口](chapter-4/4-5-api.md)
 * step 5: 解析器
     * [标题](chapter-5/5_0_title.md)
     * [介绍](chapter-5/5_1_intro.md)
