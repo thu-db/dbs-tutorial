@@ -299,9 +299,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../chapter-3/intro.md">
+        <li class="chapter " data-level="1.6.1" data-path="../chapter-3/intro.html">
             
-                <span>
+                <a href="../chapter-3/intro.html">
             
                     
                     3.1 索引管理模块概述
@@ -312,9 +312,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../chapter-3/btree.md">
+        <li class="chapter " data-level="1.6.2" data-path="../chapter-3/btree.html">
             
-                <span>
+                <a href="../chapter-3/btree.html">
             
                     
                     3.2 索引结构-B树和B+树
@@ -325,9 +325,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../chapter-3/ds.md">
+        <li class="chapter " data-level="1.6.3" data-path="../chapter-3/ds.html">
             
-                <span>
+                <a href="../chapter-3/ds.html">
             
                     
                     3.3 更多的索引结构（阅读内容）
@@ -338,9 +338,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../chapter-3/api.md">
+        <li class="chapter " data-level="1.6.4" data-path="../chapter-3/api.html">
             
-                <span>
+                <a href="../chapter-3/api.html">
             
                     
                     3.4 对外提供的接口
@@ -615,7 +615,7 @@
 <h2 id="数据库文件布局">数据库文件布局</h2>
 <p>可以在根目录下创建base和global两个目录：global目录中存储一些全局的系统表，如：数据库名和数据库ID的对应关系 (<a href="http://www.postgres.cn/docs/9.3/catalog-pg-database.html" target="_blank">pg_database</a>)。在base目录中，每个数据库对应一个子目录，子目录下也可以有一些系统表，如：关系 (包括表、索引) 名和关系ID的对应关系 (<a href="http://www.postgres.cn/docs/9.3/catalog-pg-class.html" target="_blank">pg_class</a>)。子目录下的表和索引都存储在单独的文件中，子目录和文件都以其ID命名。</p>
 <h2 id="文件的组织结构">文件的组织结构</h2>
-<p>为提高存储空间利用效率和管理的灵活性，文件被划分为页面 (如：4KB) 的集合，每个页面有唯一的标识符，如：文件内字节序列以页面大小为单位从前向后标记为0号页、1号页、2号页...页面的数据区被划分为一个个插槽，每个插槽中放置一条记录。这样，&lt;文件路径，页号，槽号&gt; 就与记录构成了一一对应的关系。</p>
+<p>为提高存储空间利用效率和管理的灵活性，文件被划分为页面 (如：4KB) 的集合，每个页面有唯一的标识符，如：文件内字节序列以页面大小为单位从前向后标记为0号页、1号页、2号页...页面的数据区被划分为一个个插槽，每个插槽中放置一条记录。这样，&lt;文件路径，页号，槽号&gt; 就与记录构成了一一对应的关系。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。</p>
 <h2 id="表的元数据">表的元数据</h2>
 <p>表的元数据包括表的列数、各列的数据类型和长度、表的页数、约束 (检查约束、唯一约束、主键约束、外键约束) 等信息，可以在数据库目录下创建系统表存储 (参考<a href="http://www.postgres.cn/docs/9.3/catalogs-overview.html" target="_blank">PostgreSQL的系统表</a>)，简单的话也可以存储在表的前几页。</p>
 <h2 id="记录相关操作">记录相关操作</h2>
@@ -681,7 +681,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.1 记录管理模块概述","level":"1.5.1","depth":2,"next":{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"previous":{"title":"step 2: 记录管理","level":"1.5","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"1.5.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/intro.md","mtime":"2021-08-16T08:37:11.410Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T08:37:20.474Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.1 记录管理模块概述","level":"1.5.1","depth":2,"next":{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"previous":{"title":"step 2: 记录管理","level":"1.5","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"1.5.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/intro.md","mtime":"2021-08-16T12:05:48.624Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T12:06:05.811Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

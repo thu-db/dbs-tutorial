@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>2.4 对外提供的接口 · HonKit</title>
+        <title>3.2 索引结构-B树和B+树 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -92,8 +92,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="ds.html" />
     
-    <link rel="prev" href="variable.html" />
+    
+    <link rel="prev" href="intro.html" />
     
 
     </head>
@@ -228,9 +230,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="intro.html">
+        <li class="chapter " data-level="1.5.1" data-path="../chapter-2/intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-2/intro.html">
             
                     
                     2.1 记录管理模块概述
@@ -241,9 +243,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="fixed.html">
+        <li class="chapter " data-level="1.5.2" data-path="../chapter-2/fixed.html">
             
-                <a href="fixed.html">
+                <a href="../chapter-2/fixed.html">
             
                     
                     2.2 记录页面的设计模式-定长记录
@@ -254,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.3" data-path="variable.html">
+        <li class="chapter " data-level="1.5.3" data-path="../chapter-2/variable.html">
             
-                <a href="variable.html">
+                <a href="../chapter-2/variable.html">
             
                     
                     2.3 记录页面的设计模式-变长记录
@@ -267,9 +269,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.4" data-path="api.html">
+        <li class="chapter " data-level="1.5.4" data-path="../chapter-2/api.html">
             
-                <a href="api.html">
+                <a href="../chapter-2/api.html">
             
                     
                     2.4 对外提供的接口
@@ -299,9 +301,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../chapter-3/intro.html">
+        <li class="chapter " data-level="1.6.1" data-path="intro.html">
             
-                <a href="../chapter-3/intro.html">
+                <a href="intro.html">
             
                     
                     3.1 索引管理模块概述
@@ -312,9 +314,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../chapter-3/btree.html">
+        <li class="chapter active" data-level="1.6.2" data-path="btree.html">
             
-                <a href="../chapter-3/btree.html">
+                <a href="btree.html">
             
                     
                     3.2 索引结构-B树和B+树
@@ -325,9 +327,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../chapter-3/ds.html">
+        <li class="chapter " data-level="1.6.3" data-path="ds.html">
             
-                <a href="../chapter-3/ds.html">
+                <a href="ds.html">
             
                     
                     3.3 更多的索引结构（阅读内容）
@@ -338,9 +340,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../chapter-3/api.html">
+        <li class="chapter " data-level="1.6.4" data-path="api.html">
             
-                <a href="../chapter-3/api.html">
+                <a href="api.html">
             
                     
                     3.4 对外提供的接口
@@ -593,7 +595,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >2.4 对外提供的接口</a>
+        <a href=".." >3.2 索引结构-B树和B+树</a>
     </h1>
 </div>
 
@@ -611,24 +613,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="24-对外提供的接口">2.4 对外提供的接口</h1>
-<pre><code class="lang-C"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RecordManager</span> {</span>
-  <span class="hljs-keyword">public</span>:
-       RecordManager    ();                        <span class="hljs-comment">// 构造函数</span>
-       ~RecordManager   ();                        <span class="hljs-comment">// 析构函数</span>
-    <span class="hljs-function">RC <span class="hljs-title">CreateFile</span>   <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>;        <span class="hljs-comment">// 创建文件</span>
-    <span class="hljs-function">RC <span class="hljs-title">DestroyFile</span>  <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>;        <span class="hljs-comment">// 删除文件</span>
-    <span class="hljs-function">RC <span class="hljs-title">OpenFile</span>     <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>;        <span class="hljs-comment">// 通过缓存管理模块打开文件，并获取其句柄</span>
-    <span class="hljs-function">RC <span class="hljs-title">CloseFile</span>    <span class="hljs-params">()</span></span>;                            <span class="hljs-comment">// 关闭fileID对应文件</span>
-    <span class="hljs-function">RC <span class="hljs-title">GetRecord</span>    <span class="hljs-params">(<span class="hljs-keyword">const</span> RID &amp;rid, <span class="hljs-keyword">char</span> *&amp;pData)</span></span>;            
-                                                   <span class="hljs-comment">// 通过页号和槽号访问记录后，相应字节序列可以通过pData访问</span>
-    <span class="hljs-function">RC <span class="hljs-title">DeleteRecord</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> RID &amp;rid)</span></span>;   <span class="hljs-comment">// 删除特定记录</span>
-    <span class="hljs-function">RC <span class="hljs-title">InsertRecord</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> RID &amp;rid, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pData)</span></span>; 
-                                                   <span class="hljs-comment">// 将字节序列pData插入特定位置</span>
-    <span class="hljs-function">RC <span class="hljs-title">UpdateRecord</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> RID &amp;rid, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pData)</span></span>;
-                                                   <span class="hljs-comment">// 将特定位置记录更新为字节序列pData</span>
-};
-</code></pre>
+                                <html><head></head><body><h1 id="32-索引结构-b树和b树">3.2 索引结构-B树和B+树</h1>
+<p>B树在先修课程《数据结构》中做过讲解，这里不再赘述。索引结构中我们重点介绍B+树。</p>
+<h2 id="b树概述">B+树概述</h2>
+<p>m 阶B+树具有如下特征：</p>
+<ol>
+<li>每个结点的关键字个数与孩子个数相等，所有非最下层的结点的关键字是对应子树上的最大关键字。</li>
+<li>除根结点以外，每个内部结点的孩子数属于 [(m+1)/2, m]。 </li>
+<li>最下层结点（叶结点）包含了全部“键-值”对，叶结点可以按照键值从小到大连成单向或双向的链表。</li>
+</ol>
+<p>在数据库索引中，每页作为一个结点，是否叶结点、叶结点链表等数据可以存储在页头中。非叶结点要存储若干个 (关键字, 孩子页号) 结构，叶结点要存储若干个 (关键字, 表页号, 表页内槽号) 结构，这种结构可以像表内一条记录一样存储。</p>
+<h3 id="查找">查找</h3>
+<p>给定待查找的关键字，对每个结点找到不小于该关键字的第一项。从根结点开始对每个途经结点重复上述过程，并选择键值对应孩子页为下一个查找结点，从而在索引中找到该关键字的下界所在的叶结点。查找某个关键字范围 [a, b] 内的记录可以先找到关键字 a，然后沿叶结点链表顺序查找，直到某个叶结点存在大于b的关键字。</p>
+<h3 id="插入">插入</h3>
+<p>给定待插入记录的关键字，可以插入到其下界所在的叶结点。如果叶结点最大键值改变，可能需要逐级更新父结点的键值。如果某结点发生上溢，则将其分裂为两个分支数相近的结点，都作为该结点父结点的子结点，父结点也要处理可能的上溢；如果该结点为根结点，则需要创建新的根结点作为父结点。</p>
+<h3 id="删除">删除</h3>
+<p>给定某关键字（范围），查找其下界所在的叶结点，然后沿叶结点链表顺序扫描直到完成删除。如果叶结点最大键值改变，可能需要逐级更新父结点的键值。如果某结点发生下溢，如果其为根结点，其子结点在某些情况下可能成为新的根结点；如果其左/右兄弟有多余的孩子结点，可以过继给它；否则可以将其与左/右兄弟合并成一个结点，删除或更新父结点的关键字，父结点也要处理可能的下溢。</p>
+<h3 id="更新">更新</h3>
+<p>查找给定关键字直到恰好匹配表页号和槽号完成更新，索引结构保持不变。</p>
 </body></html>
                                 
                                 </section>
@@ -672,10 +674,14 @@
 
             
                 
-                <a href="variable.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.3 记录页面的设计模式-变长记录">
+                <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page: 3.1 索引管理模块概述">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="ds.html" class="navigation navigation-next " aria-label="Next page: 3.3 更多的索引结构（阅读内容）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -684,7 +690,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"next":{"title":"step 3: 索引管理","level":"1.6","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"1.6.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"1.6.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"1.6.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},{"title":"3.4 对外提供的接口","level":"1.6.4","depth":2,"path":"chapter-3/api.md","ref":"chapter-3/api.md","articles":[]}]},"previous":{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/api.md","mtime":"2021-08-16T12:05:48.624Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T12:06:05.811Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.2 索引结构-B树和B+树","level":"1.6.2","depth":2,"next":{"title":"3.3 更多的索引结构（阅读内容）","level":"1.6.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},"previous":{"title":"3.1 索引管理模块概述","level":"1.6.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-3/btree.md","mtime":"2021-08-16T12:05:48.624Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T12:06:05.811Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

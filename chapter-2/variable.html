@@ -301,9 +301,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../chapter-3/intro.md">
+        <li class="chapter " data-level="1.6.1" data-path="../chapter-3/intro.html">
             
-                <span>
+                <a href="../chapter-3/intro.html">
             
                     
                     3.1 索引管理模块概述
@@ -314,9 +314,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../chapter-3/btree.md">
+        <li class="chapter " data-level="1.6.2" data-path="../chapter-3/btree.html">
             
-                <span>
+                <a href="../chapter-3/btree.html">
             
                     
                     3.2 索引结构-B树和B+树
@@ -327,9 +327,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../chapter-3/ds.md">
+        <li class="chapter " data-level="1.6.3" data-path="../chapter-3/ds.html">
             
-                <span>
+                <a href="../chapter-3/ds.html">
             
                     
                     3.3 更多的索引结构（阅读内容）
@@ -340,9 +340,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../chapter-3/api.md">
+        <li class="chapter " data-level="1.6.4" data-path="../chapter-3/api.html">
             
-                <span>
+                <a href="../chapter-3/api.html">
             
                     
                     3.4 对外提供的接口
@@ -627,18 +627,18 @@
 
 <p>NULL位图和定长数据部分与定长记录相同；可变列偏移数组的长度为 2字节*可变列数，从而在变长部分区分出各可变列的数据。</p>
 <h2 id="页面布局">页面布局</h2>
-<p>页头需要存储槽容量 (有效槽+无效槽总数) 辅助解读页面字节序列，还需要存储空闲空间的字节偏移量和空闲字节数目便于空闲空间管理。解读页面还需要定长部分 (NULL位图+定长数据) 长度、可变列数目等信息，可以保存在页头，也可由表的元数据推算得到。
-页身从前向后存储数据，从后向前存储槽目录，槽目录存储记录的字节偏移量。槽目录可以每2字节对应从0开始的自然数槽号，这样在通过槽号访问某槽时只需要O(1)时间，但在插入记录时最好在槽目录中从后向前优先利用无效槽号；也可以在槽目录中只存储有效槽号，不过在通过槽号访问某槽时需要遍历槽目录。
-删除记录时可能产生碎片空闲空间，在数据量较小时不处理也无妨。在真实数据库中会有程序定期清理碎片空间，使页内空闲空间尽量连续。</p>
+<p>页头需要存储槽容量 (有效槽+无效槽总数) 辅助解读页面字节序列，还需要存储空闲空间的字节偏移量和空闲字节数目便于空闲空间管理。解读页面还需要定长部分 (NULL位图+定长数据) 长度、可变列数目等信息，可以保存在页头，也可由表的元数据推算得到。</p>
+<p>页身从前向后存储数据，从后向前存储槽目录，槽目录存储记录的字节偏移量。槽目录可以每2字节对应从0开始的自然数槽号，这样在通过槽号访问某槽时只需要O(1)时间，但在插入记录时最好在槽目录中从后向前优先利用无效槽号；也可以在槽目录中只存储有效槽号，不过在通过槽号访问某槽时需要遍历槽目录。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。</p>
+<p>删除记录时可能产生碎片空闲空间，在数据量较小时不处理也无妨。在真实数据库中会有程序定期清理碎片空间，使页内空闲空间尽量连续。</p>
 <h2 id="空闲空间管理">空闲空间管理</h2>
 <h3 id="链表">链表</h3>
 <p>与定长记录类似，页面的空闲空间最大为 4096-64 字节，可以按照一定字节数 (如：32字节) 为单位将空闲空间大小分成若干个级别，每一级别维护一个链表。</p>
 <h3 id="页目录">页目录</h3>
 <p>可以保留一些页作为页目录而不作为数据页，页目录之间通过链表相连；每个页目录记录若干页的空闲空间大小。</p>
 <h3 id="大根堆二叉树">大根堆二叉树</h3>
-<p>可以为每个表创建一个名为&quot;表ID_fsm&quot;的文件管理表的空闲空间。每个FSM页内为一棵大根堆二叉树，叶节点记录某页的空闲空间大小 (也可以将空闲空间大小分成256个级别，使每个节点仅占用1B)，非叶节点记录两个孩子中的较大值。这样，在需要一定空闲空间大小时，仅比较根节点即可判断表内是否有页面满足要求，然后沿二叉树逐级比较向下直到叶节点，即可找到合适的空闲页面。
-如果页面较多，可以构建多级FSM页，高级FSM页的叶节点对应低级FSM页的根节点，且它们具有相同的值。
-假设每个页面数据区大小为10B，则每个页面内可以构建出有4个叶节点的满二叉树；假设共有3级FSM页，例：</p>
+<p>可以为每个表创建一个名为&quot;表ID_fsm&quot;的文件管理表的空闲空间。每个FSM页内为一棵大根堆二叉树，叶节点记录某页的空闲空间大小 (也可以将空闲空间大小分成256个级别，使每个节点仅占用1B)，非叶节点记录两个孩子中的较大值。这样，在需要一定空闲空间大小时，仅比较根节点即可判断表内是否有页面满足要求，然后沿二叉树逐级比较向下直到叶节点，即可找到合适的空闲页面。</p>
+<p>如果页面较多，可以构建多级FSM页，高级FSM页的叶节点对应低级FSM页的根节点，且它们具有相同的值。</p>
+<p>假设每个页面数据区大小为10B，则每个页面内可以构建出有4个叶节点的满二叉树；假设共有3级FSM页，例：</p>
 <pre><code>0     &lt;-- page 0 at level 2 (root page)
   0     &lt;-- page 0 at level 1
    0     &lt;-- page 0 at level 0
@@ -652,8 +652,8 @@
    7
    8
    9
-</code></pre><p>假设命中了8号页内数据区偏移量为5的字节，由 n+⌊n/4+1⌋+⌊n/4^2+1⌋=8 解得 n=5，即8号页对应0级5号页；偏移量为5对应FSM页内1号叶节点。由 5*5+1=26 知对应表内26号页。
-<a href="https://github.com/postgres/postgres/blob/master/src/backend/storage/freespace/README" target="_blank">大根堆二叉树</a>也可以参考PostgreSQL中相应说明。</p>
+</code></pre><p>假设命中了8号页内数据区偏移量为5的字节，由 n+⌊n/4+1⌋+⌊n/4^2+1⌋=8 解得 n=5，即8号页对应0级5号页；偏移量为5对应FSM页内1号叶节点。由 5*5+1=26 知对应表内26号页。</p>
+<p><a href="https://github.com/postgres/postgres/blob/master/src/backend/storage/freespace/README" target="_blank">大根堆二叉树</a>也可以参考PostgreSQL中相应说明。</p>
 </body></html>
                                 
                                 </section>
@@ -713,7 +713,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"next":{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]},"previous":{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/variable.md","mtime":"2021-08-16T08:37:11.410Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T08:37:20.474Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.3 记录页面的设计模式-变长记录","level":"1.5.3","depth":2,"next":{"title":"2.4 对外提供的接口","level":"1.5.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]},"previous":{"title":"2.2 记录页面的设计模式-定长记录","level":"1.5.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","click-reveal","code","codeblock-label","expandable-chapters-interactive","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/variable.md","mtime":"2021-08-16T12:05:48.624Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-16T12:06:05.811Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
