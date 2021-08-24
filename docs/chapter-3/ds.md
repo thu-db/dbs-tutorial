@@ -19,3 +19,5 @@
 
 ## 其它索引结构
 非传统关系型数据库也会用到跳转表 (Skiplist)、布隆过滤 (Bloom Filter) 等数据结构，这些内容已经超出本课程范围。
+{% set authors = ["孙昭言"] %}
+{% include "/template.md" %}

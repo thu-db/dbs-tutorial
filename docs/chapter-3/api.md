@@ -26,3 +26,5 @@ class IndexManager {
                                                     // 更新特定记录的关键字或位置
 };
 ```
+{% set authors = ["孙昭言"] %}
+{% include "/template.md" %}
