@@ -2,4 +2,7 @@
 
 这里是文档的首页。
 
-<small>*实验文档最后更新于 {{ honkit.time.toLocaleString("zh-cn") }}*</small>
+
+{% set param = {hour12: false, timeZone: "Asia/Shanghai"} %}
+
+本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", param) }}
