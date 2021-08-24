@@ -16,4 +16,4 @@
 5. 更新记录。对于定长记录来说，物理组织结构不变；对于变长记录来说，与删除后插入类似。
 
 {% set authors = ["孙昭言"] %}
-{% include "/template.md" %}
+{% include "/footer.md" %}

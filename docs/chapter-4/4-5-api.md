@@ -31,5 +31,6 @@ class HashJoinExecutor: AbstractExecutor {
   bool Next(RID *rid);
 }
 ```
+
 {% set authors = ["李文博"] %}
-{% include "/template.md" %}
+{% include "/footer.md" %}

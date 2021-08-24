@@ -17,5 +17,6 @@ class RecordManager {
                                                    // 将特定位置记录更新为字节序列pData
 };
 ```
+
 {% set authors = ["孙昭言"] %}
-{% include "/template.md" %}
+{% include "/footer.md" %}

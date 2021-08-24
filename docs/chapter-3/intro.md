@@ -13,4 +13,4 @@
 索引的元数据与表的元数据基本相同，可以用相同的方式处理，不过要注意存储使用索引的表。
 
 {% set authors = ["孙昭言"] %}
-{% include "/template.md" %}
+{% include "/footer.md" %}
