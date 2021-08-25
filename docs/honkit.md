@@ -97,3 +97,9 @@ $$
 - [x] 已实现 4
     - [x] 已实现 4-1
     - [x] 已实现 4-2
+
+## include
+
+以下用了 include 功能来加脚注，include 可以直接导入其他 md。
+
+{% include "/footer.md" %}
