@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Calculate timestamp
-        run: node timestamp/run.js
+        run: node timestamp/run.js && cat docs/footer.md
       - name: Store timestamp
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
