@@ -7,12 +7,15 @@
 <small>{{- "author" if authors.length == 1 else "authors" -}}: {{ authors | join(", ") }}</small>
 {% endif %}
 
-
-<script src="https://utteranc.es/client.js"
-        repo="thu-db/dbs-tutorial"
-        issue-term="pathname"
-        label="comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
+<div id="my-comment">
+<script>
+        var discussion = document.getElementById('my-comment');
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'thu-db/dbs-tutorial');
+        script.setAttribute('issue-term', "pathname");
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
 </script>
+</div>
