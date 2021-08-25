@@ -26,18 +26,18 @@ jobs:
 
       - name: Calculate timestamp
         run: node timestamp/run.js && cat docs/footer.md
-      - name: Store timestamp
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: timestamp
-          FOLDER: timestamp
 
       - name: Build honkit
-        run: npm run build && cat docs/footer.md && cat _book/footer.md && rm _book/footer.md
+        run: cat docs/footer.md && npm run build && cat docs/footer.md && cat _book/footer.md && rm _book/footer.md
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: _book
+      - name: Store timestamp
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: timestamp
+          FOLDER: timestamp
