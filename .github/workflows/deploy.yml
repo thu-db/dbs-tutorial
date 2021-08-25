@@ -13,12 +13,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          branch: timestamp
+          path: timestamp
       - uses: actions/setup-node@v1
         with:
           node-version: '10'
 
-      - name: Install dependencies and Build
-        run: npm install && npm run build && rm _book/footer.md
+      - name: Install dependencies
+        run: npm install
+
+      - name: Calculate timestamp
+        run: node timestamp/run.js
+      - name: Store timestamp
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: timestamp
+          FOLDER: timestamp
+
+      - name: Build honkit
+        run: npm run build && rm _book/footer.md
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
