@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/thu-db/dbs-tutorial#readme",
   "devDependencies": {
+    "crypto-js": "^4.1.1",
     "gitbook-plugin-alerts": "^0.2.0",
     "gitbook-plugin-back-to-top-button": "^0.1.4",
     "gitbook-plugin-chapter-fold": "^0.0.4",
