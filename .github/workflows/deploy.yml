@@ -17,6 +17,7 @@ jobs:
         with:
           ref: timestamp
           path: timestamp
+
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
@@ -25,16 +26,18 @@ jobs:
         run: npm install
 
       - name: Calculate timestamp
-        run: node timestamp/run.js && cat docs/footer.md
+        run: node timestamp/run.js
 
       - name: Build honkit
-        run: cat docs/footer.md && npm run build && cat docs/footer.md && cat _book/footer.md && rm _book/footer.md
-      - name: Deploy
+        run: npm run build && rm _book/footer.md
+
+      - name: Deploy honkit
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: _book
+
       - name: Store timestamp
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

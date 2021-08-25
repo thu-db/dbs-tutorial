@@ -1,19 +1,6 @@
 
 ---------------------------------
 
-debug info:
-
-timestamp: {{ timestamp }}
-
-timestamp[file.path]: {{ timestamp[file.path] }}
-
-timestamp[file.path].time: {{ timestamp[file.path].time }}
-
-file: {{ file }}
-
-file.path: {{ file.path }}
-
-
 <small>last update at: {{ timestamp[file.path].time }}</small>
 
 {% if authors %}
