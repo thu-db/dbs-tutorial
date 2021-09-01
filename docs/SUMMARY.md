@@ -24,12 +24,10 @@
     * [4.4 查询执行](chapter-4/4-4-execution.md)
     * [4.5 对外提供的接口](chapter-4/4-5-api.md)
 * step 5: 解析器
-    * [标题](chapter-5/5_0_title.md)
-    * [介绍](chapter-5/5_1_intro.md)
-    * [SQL简介](chapter-5/5_2_sql.md)
-    * [逻辑优化](chapter-5/5_3_logic.md)
-    * [物理优化](chapter-5/5_4_physic.md)
-    * [接口说明](chapter-5/5_5_interface.md)
+    * [5.1 概述](chapter-5/5_1_intro.md)
+    * [5.2 SQL简介](chapter-5/5_2_sql.md)
+    * [5.3 逻辑优化](chapter-5/5_3_logic.md)
+    * [5.4 物理优化](chapter-5/5_4_physic.md)
 * step 6: 系统管理
 * step 7: 总结
 
