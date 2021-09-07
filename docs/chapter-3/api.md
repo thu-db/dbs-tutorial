@@ -7,7 +7,7 @@ class IndexScan {
     RC GetNextEntry (RID &rid);                     // 类似于Python中的迭代器，不断调用获取下一个记录的位置
 };
 
-// 索引关键字只要求单列整型或浮点型
+// 基础功能中，索引关键字只要求单列整型
 class IndexManager {
   public:
        IndexManager  ();                            // 构造函数
@@ -16,13 +16,13 @@ class IndexManager {
     RC DestroyIndex (const char *fileName);         // 删除索引
     RC OpenIndex    (const char *fileName);         // 通过缓存管理模块打开索引，并获取其句柄
     RC CloseIndex   ();                             // 关闭索引
-    RC Search       (double lowerBound, double upperBound, IndexScan &indexScan);            
+    RC Search       (int lowerBound, int upperBound, IndexScan &indexScan);            
                                                     // 查找某个范围内的记录，结果通过迭代器访问
-    RC DeleteRecord (double lowerBound, double upperBound);       
+    RC DeleteRecord (int lowerBound, int upperBound);       
                                                     // 删除某个范围内的记录
-    RC InsertRecord (double key, const RID &rid); 
+    RC InsertRecord (int key, const RID &rid); 
                                                     // 插入某个记录的位置
-    RC UpdateRecord (double oldKey, const RID &oldRid, double newKey, const RID &newRid);
+    RC UpdateRecord (int oldKey, const RID &oldRid, int newKey, const RID &newRid);
                                                     // 更新特定记录的关键字或位置
 };
 ```
