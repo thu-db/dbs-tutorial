@@ -1,7 +1,9 @@
 # 数据库系统概论实验
 
-这里是文档的首页。
+本文档为《数据库系统概论》大作业实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。
 
-评论功能有点小 bug，切换页面后无法加载出评论，如有需要刷新网页即可。
+文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学）完成一个 demo 级别的数据库管理系统。
 
-本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}
+如果你发现了任何章节的纰漏，欢迎通过该文档下方的评论区指出。
+
+本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。 
