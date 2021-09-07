@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>4.5 对外提供的接口 · HonKit</title>
+        <title>0.3 前端约定 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -101,7 +101,7 @@
 
     
     
-    <link rel="prev" href="4-4-execution.html" />
+    <link rel="prev" href="backend.html" />
     
 
     </head>
@@ -172,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../chapter-0/intro.html">
+        <li class="chapter " data-level="1.3.1" data-path="intro.html">
             
-                <a href="../chapter-0/intro.html">
+                <a href="intro.html">
             
                     
                     0.1 概述
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../chapter-0/backend.html">
+        <li class="chapter " data-level="1.3.2" data-path="backend.html">
             
-                <a href="../chapter-0/backend.html">
+                <a href="backend.html">
             
                     
                     0.2 后端约定
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="../chapter-0/frontend.html">
+        <li class="chapter active" data-level="1.3.3" data-path="frontend.html">
             
-                <a href="../chapter-0/frontend.html">
+                <a href="frontend.html">
             
                     
                     0.3 前端约定
@@ -418,9 +418,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="3.1.1" data-path="4-1-overview.html">
+        <li class="chapter " data-level="3.1.1" data-path="../chapter-4/4-1-overview.html">
             
-                <a href="4-1-overview.html">
+                <a href="../chapter-4/4-1-overview.html">
             
                     
                     4.1 概述
@@ -431,9 +431,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.1.2" data-path="4-2-scan.html">
+        <li class="chapter " data-level="3.1.2" data-path="../chapter-4/4-2-scan.html">
             
-                <a href="4-2-scan.html">
+                <a href="../chapter-4/4-2-scan.html">
             
                     
                     4.2 扫描算法
@@ -444,9 +444,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.1.3" data-path="4-3-join.html">
+        <li class="chapter " data-level="3.1.3" data-path="../chapter-4/4-3-join.html">
             
-                <a href="4-3-join.html">
+                <a href="../chapter-4/4-3-join.html">
             
                     
                     4.3 连接算法
@@ -457,9 +457,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.1.4" data-path="4-4-execution.html">
+        <li class="chapter " data-level="3.1.4" data-path="../chapter-4/4-4-execution.html">
             
-                <a href="4-4-execution.html">
+                <a href="../chapter-4/4-4-execution.html">
             
                     
                     4.4 查询执行
@@ -470,9 +470,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.1.5" data-path="4-5-api.html">
+        <li class="chapter " data-level="3.1.5" data-path="../chapter-4/4-5-api.html">
             
-                <a href="4-5-api.html">
+                <a href="../chapter-4/4-5-api.html">
             
                     
                     4.5 对外提供的接口
@@ -622,7 +622,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >4.5 对外提供的接口</a>
+        <a href=".." >0.3 前端约定</a>
     </h1>
 </div>
 
@@ -640,40 +640,74 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="45-对外提供的接口">4.5 对外提供的接口</h1>
-<pre><code class="lang-c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractExecutor</span> {</span>
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span> </span>= <span class="hljs-number">0</span>;
-}
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SeqScanExecutor</span>:</span> AbstractExecutor {
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span></span>;
-}
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IndexScanExecutor</span>:</span> AbstractExecutor {
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span></span>;
-}
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NestedLoopJoinExecutor</span>:</span> AbstractExecutor {
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span></span>;
-}
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SortMergeJoinExecutor</span>:</span> AbstractExecutor {
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span></span>;
-}
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashJoinExecutor</span>:</span> AbstractExecutor {
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span>;
-  <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Next</span><span class="hljs-params">(RID *rid)</span></span>;
-}
+                                <html><head></head><body><h1 id="03-前端约定">0.3 前端约定</h1>
+<h2 id="1-前端含义">1. 前端含义</h2>
+<p>首先本节标题中的“前端”不是指 GUI，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
+<p>在往年（即本文档诞生之前）的实验中并没有明确要求输出格式，验收也采用手动测试、“能看就行”的原则，助教仅额外要求了输出总行数以便检查。输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
+<p>现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
+<h2 id="2-交互模式">2. 交互模式</h2>
+<p>交互模式可以参考 MySQL 的模式，如下是一个示例</p>
+<pre><code>MySQL [curriculum]&gt; SELECT * FROM student;
++------------+--------+-----------+------+
+| id         | name   | status    | sex  |
++------------+--------+-----------+------+
+| 2077310001 | 王五   | 博士生    | 男   |
+| 2077010001 | 张三   | 本科生    | 男   |
+| 2077210001 | 李四   | 硕士生    | 男   |
++------------+--------+-----------+------+
+3 rows in set (0.000 sec)
+MySQL [curriculum]&gt; SELECT COUNT(*)
+    -&gt; FROM
+    -&gt; student
+    -&gt;
+    -&gt; ;
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.000 sec)
+MySQL [curriculum]&gt;
+</code></pre><p>交互模式不给出严格的要求，主要为了便于自己调试以及助教检查。仿照 MySQL 的 shell，以下给一些<strong>可选地</strong>参考实现细节：</p>
+<ul>
+<li>输入时在左边给出前缀并给出当前的数据库名</li>
+<li>跨行输入时给出规整前缀（无需考虑“修改上一行”的操作）</li>
+<li>输入在最后一个字符是 <code>;</code> 后停止</li>
+<li>尝试画表格边框以提高美观度</li>
+<li>尝试计算出一列的最大宽度后输出时用空格补齐以保持规整</li>
+<li>在输出表格后面给出行数和后端查询时间</li>
+</ul>
+<h2 id="3-批处理模式">3. 批处理模式</h2>
+<p>批处理模式下我们不在乎输入输出的友好性，通常是从 stdin 或者一个 SQL 文件读入多行数据，再输出到 stdout 或一个指定文件。在使用 stdin 和 stdout 时常常搭配重定向。</p>
+<p>批处理模式下的输出就如同做 OJ 一般不能夹带任何冗余信息，必须按照约定的格式给出数据，常见格式是用 tab 分隔符，如 MysQL 等成熟的数据库系统会支持包括 CSV、JSON 在内的多种输出方式自选。</p>
+<p>方便起见我们为批处理模式做出如下约定：</p>
+<ul>
+<li>输出统一使用的 CSV 格式的子集：同一行的不同字段间用英文逗号 <code>,</code> 分隔，<strong>无需考虑数据包含逗号的二义性问题。</strong>；</li>
+<li>浮点数输出为两位小数；</li>
+<li>无需考虑非 ascii 字符的编码问题（你自行测试时它很可能是由你终端的设置决定）；</li>
+<li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
+<li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
+<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>。</li>
+</ul>
+<p>TODO: 这里还需要约定表头的写法（或者干脆不输出表头），尤其是列名前要不要带表名，以及一些聚合查询、系统管理语句的表头。</p>
+<h2 id="4-数据导入">4. 数据导入</h2>
+<p>考虑到部分同学实现大量 INSERT 时效率并不高，为了完成压力测试，我们需要新增一种操作将（被认为是安全的）数据直接导入数据库。</p>
+<p>往常没有统一约定读入指令或参数，现在统一约定如下：</p>
+<ul>
+<li>数据导入需要在批量模式下进行，且必须指定数据库；</li>
+<li>使用命令行可选参数 <code>-f &lt;path&gt;</code> 指定导入文件的路径；</li>
+<li>使用命令行可选参数 <code>-t &lt;table&gt;</code> 指定目标表名；</li>
+</ul>
+<p>在上述约定下，假设我们编译得到的可执行程序是 <code>mydb</code>，则可以通过类似如下语句进行数据导入</p>
+<pre><code class="lang-bash">./mydb -b -f path/to/data/student.txt -t student -d curriculum
 </code></pre>
+<p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
+<h2 id="5-desc">5. desc</h2>
+<p>往年实验没有为 <code>desc &lt;table_name&gt;</code> 的指令给出详细的内容要求，这里我们给出如下要求：</p>
+<p>（待商议）</p>
 <hr>
-<p><small>last update at: 2021/8/25 14:33:58</small></p>
-<p><small>author: 李文博</small></p>
+<p><small>last update at: 2021/9/7 20:42:36</small></p>
+<p><small>author: 饶淙元</small></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -686,7 +720,6 @@
         discussion.appendChild(script);
 </script>
 </div>
-
 </body></html>
                                 
                                 </section>
@@ -730,7 +763,7 @@
 
             
                 
-                <a href="4-4-execution.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 4.4 查询执行">
+                <a href="backend.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 0.2 后端约定">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -742,7 +775,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.5 对外提供的接口","level":"3.1.5","depth":2,"next":{"title":"step 5: 解析器","level":"3.2","depth":1,"ref":"","articles":[{"title":"5.1 概述","level":"3.2.1","depth":2,"path":"chapter-5/5_1_intro.md","ref":"chapter-5/5_1_intro.md","articles":[]},{"title":"5.2 SQL简介","level":"3.2.2","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},{"title":"5.3 逻辑优化","level":"3.2.3","depth":2,"path":"chapter-5/5_3_logic.md","ref":"chapter-5/5_3_logic.md","articles":[]},{"title":"5.4 物理优化","level":"3.2.4","depth":2,"path":"chapter-5/5_4_physic.md","ref":"chapter-5/5_4_physic.md","articles":[]}]},"previous":{"title":"4.4 查询执行","level":"3.1.4","depth":2,"path":"chapter-4/4-4-execution.md","ref":"chapter-4/4-4-execution.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-4/4-5-api.md","mtime":"2021-09-07T12:42:27.198Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-07T12:42:37.704Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.3.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 概述","level":"2.1.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.3.2","depth":2,"path":"chapter-0/backend.md","ref":"chapter-0/backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/frontend.md","mtime":"2021-09-07T12:42:27.198Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-07T12:42:37.704Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
