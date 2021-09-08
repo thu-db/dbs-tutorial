@@ -1,9 +1,9 @@
 # 2.4 对外提供的接口
 ```C
-class RecordManager {
+class RecordHandler {
   public:
-       RecordManager  ();                     // 构造函数
-       ~RecordManager ();                     // 析构函数
+       RecordHandler  ();                     // 构造函数
+       ~RecordHandler ();                     // 析构函数
     RC CreateFile     (const char *fileName); // 创建文件
     RC DestroyFile    (const char *fileName); // 删除文件
     RC OpenFile       (const char *fileName); // 通过缓存管理模块打开文件，并获取其句柄
