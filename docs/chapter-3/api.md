@@ -8,10 +8,10 @@ class IndexScan {
 };
 
 // 基础功能中，索引关键字只要求单列整型
-class IndexManager {
+class IndexHandler {
   public:
-       IndexManager  ();                     // 构造函数
-       ~IndexManager ();                     // 析构函数
+       IndexHandler  ();                     // 构造函数
+       ~IndexHandler ();                     // 析构函数
     RC CreateIndex   (const char *fileName); // 创建索引
     RC DestroyIndex  (const char *fileName); // 删除索引
     RC OpenIndex     (const char *fileName); // 通过缓存管理模块打开索引，并获取其句柄
