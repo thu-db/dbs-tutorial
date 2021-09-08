@@ -244,7 +244,46 @@
                 <a href="../chapter-1/intro.html">
             
                     
-                    1.1 概述
+                    1.1 文件管理模块概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../chapter-1/page.html">
+            
+                <a href="../chapter-1/page.html">
+            
+                    
+                    1.2 页式文件系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/cache.html">
+            
+                <a href="../chapter-1/cache.html">
+            
+                    
+                    1.3 LRU 缓存设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../chapter-1/api.html">
+            
+                <a href="../chapter-1/api.html">
+            
+                    
+                    1.4 对外提供接口
             
                 </a>
             
@@ -661,8 +700,8 @@
 </ol>
 <p>逻辑优化部分的代码实现需要一定编译原理的课程基础以及较高的编程能力支持，所以这一部分可能对于部分没有接触过编译原理知识的同学造成过大的负担。所以逻辑优化的内容仅作为选做内容，希望各位对于数据库系统感兴趣的同学可以自行探索并实现这一部分的内容。</p>
 <hr>
-<p><small>last update at: 2021/9/1 17:03:01</small></p>
-<p><small>author: 董昊文</small></p>
+<p><em><small>last update at: 2021/9/1 17:03:01</small></em></p>
+<p><em><small>author: 董昊文</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -735,7 +774,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.3 逻辑优化","level":"3.2.3","depth":2,"next":{"title":"5.4 物理优化","level":"3.2.4","depth":2,"path":"chapter-5/5_4_physic.md","ref":"chapter-5/5_4_physic.md","articles":[]},"previous":{"title":"5.2 SQL简介","level":"3.2.2","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_3_logic.md","mtime":"2021-09-08T11:38:18.168Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-08T11:38:30.248Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.3 逻辑优化","level":"3.2.3","depth":2,"next":{"title":"5.4 物理优化","level":"3.2.4","depth":2,"path":"chapter-5/5_4_physic.md","ref":"chapter-5/5_4_physic.md","articles":[]},"previous":{"title":"5.2 SQL简介","level":"3.2.2","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_3_logic.md","mtime":"2021-09-08T17:09:25.520Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-08T17:09:35.806Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
