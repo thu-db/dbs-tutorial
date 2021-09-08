@@ -1,10 +1,10 @@
 
 ---------------------------------
 
-<small>last update at: {{ timestamp[file.path].time }}</small>
+*<small>last update at: {{ timestamp[file.path].time }}</small>*
 
 {% if authors %}
-<small>{{- "author" if authors.length == 1 else "authors" -}}: {{ authors | join(", ") }}</small>
+*<small>{{- "author" if authors.length == 1 else "authors" -}}: {{ authors | join(", ") }}</small>*
 {% endif %}
 
 <div id="my-comment">

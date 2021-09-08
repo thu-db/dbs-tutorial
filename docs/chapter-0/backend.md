@@ -2,7 +2,7 @@
 
 为了便于后续部分模块介绍，我们假定一个场景以便举例之用。
 
-# 1. 数据库
+## 数据库
 
 参考清华大学课程系统，我们简化出一个简单的模型，包含学生、教师、课程、（同一课程号的）课程的不同开课信息、学生选课信息等表。
 
@@ -20,7 +20,7 @@ USE curriculum;
 
 上述指令属于系统管理指令，但我们的实验文档是按照自下而上的顺序搭建系统，因此在实验前中期你可能更需要关注下面的数据表。
 
-# 2. 数据表
+## 数据表
 
 首先学生 (student) 和老师 (teacher) 有对应的编号 (id)、姓名 (name)、性别 (sex)，此外同学有一个字段身份 (status) 区分本科生、硕士生、研究生。
 
@@ -28,14 +28,14 @@ USE curriculum;
 CREATE TABLE student (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
-    sex VARCAHR(2),
-    status VARCHAR(8) NOT NULL
+    sex VARCAHR(4),
+    status VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE teacher (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
-    sex VARCHAR(2),
+    sex VARCHAR(4),
 );
 ```
 
