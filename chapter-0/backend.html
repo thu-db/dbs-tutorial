@@ -747,8 +747,8 @@
 <h2 id="数据表">数据表</h2>
 <p>首先学生 (student) 和老师 (teacher) 有对应的编号 (id)、姓名 (name)、性别 (sex)，此外同学有一个字段身份 (status) 区分本科生、硕士生、研究生。</p>
 <pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student (
-    id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,
-    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+    id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,  📌 ️主键本身就是<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>？
+    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>, 📌 ️是否支持变长？
     sex VARCAHR(<span class="hljs-number">4</span>),
     status <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
 );
@@ -789,13 +789,17 @@
     <span class="hljs-keyword">FOREIGN</span> KEY (student_id) <span class="hljs-keyword">REFERENCES</span> student(id)
 );
 </code></pre>
+<p>📌 补充三张表对应的E-R图</p>
+<p>📌 补充用户使用SQL的例子，比如</p>
 <blockquote>
-<p><strong>[info] 主键数据类型</strong></p>
-<p>主键会带索引，在我们实验要求中仅对整型索引做要求，因此主键一定是整型或其组合。</p>
-<p>上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。</p>
+<p>(1) &quot;张三数据库系统概论得了95分&quot;，给出相应的写SQL例子</p>
+<p>(2) &quot;张三需要查询自己春季学期的各科成绩&quot;，给出相应的读SQL例子</p>
+<p><strong>[note] 主键数据类型</strong></p>
+<p>1/ 主键会带索引，在我们实验要求中仅对整型索引做要求，因此主键一定是整型或其组合。</p>
+<p>2/ 上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。</p>
 </blockquote>
 <hr>
-<p><em><small>last update at: 2021/9/9 13:40:37</small></em></p>
+<p><em><small>last update at: 2021/9/10 01:19:57</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -868,7 +872,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/frontend.md","ref":"chapter-0/frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/backend.md","mtime":"2021-09-09T14:19:18.163Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T14:19:35.198Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/frontend.md","ref":"chapter-0/frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/backend.md","mtime":"2021-09-09T17:19:46.383Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T17:19:58.244Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
