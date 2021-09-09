@@ -1,4 +1,5 @@
 # 2.4 对外提供的接口
+
 ```C
 class RecordHandler {
   public:

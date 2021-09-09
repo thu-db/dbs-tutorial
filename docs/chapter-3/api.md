@@ -1,4 +1,5 @@
 # 3.4 对外提供的接口
+
 ```C
 class IndexScan {  
   public:
