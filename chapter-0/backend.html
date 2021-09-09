@@ -244,46 +244,7 @@
                 <a href="../chapter-1/intro.html">
             
                     
-                    1.1 文件管理模块概述
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../chapter-1/page.html">
-            
-                <a href="../chapter-1/page.html">
-            
-                    
-                    1.2 页式文件系统设计
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/cache.html">
-            
-                <a href="../chapter-1/cache.html">
-            
-                    
-                    1.3 LRU 缓存设计
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.4" data-path="../chapter-1/api.html">
-            
-                <a href="../chapter-1/api.html">
-            
-                    
-                    1.4 对外提供接口
+                    1.1 概述
             
                 </a>
             
@@ -683,7 +644,7 @@
                                 
                                 <html><head></head><body><h1 id="02-后端约定">0.2 后端约定</h1>
 <p>为了便于后续部分模块介绍，我们假定一个场景以便举例之用。</p>
-<h2 id="数据库">数据库</h2>
+<h1 id="1-数据库">1. 数据库</h1>
 <p>参考清华大学课程系统，我们简化出一个简单的模型，包含学生、教师、课程、（同一课程号的）课程的不同开课信息、学生选课信息等表。</p>
 <p>首先我们创建一个数据库 curriculum：</p>
 <pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> DATABASE curriculum;
@@ -692,19 +653,19 @@
 <pre><code class="lang-SQL">USE curriculum;
 </code></pre>
 <p>上述指令属于系统管理指令，但我们的实验文档是按照自下而上的顺序搭建系统，因此在实验前中期你可能更需要关注下面的数据表。</p>
-<h2 id="数据表">数据表</h2>
+<h1 id="2-数据表">2. 数据表</h1>
 <p>首先学生 (student) 和老师 (teacher) 有对应的编号 (id)、姓名 (name)、性别 (sex)，此外同学有一个字段身份 (status) 区分本科生、硕士生、研究生。</p>
 <pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student (
     id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,
     name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    sex VARCAHR(<span class="hljs-number">4</span>),
-    status <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+    sex VARCAHR(<span class="hljs-number">2</span>),
+    status <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
 );
 
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> teacher (
     id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,
     name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    sex <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">4</span>),
+    sex <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">2</span>),
 );
 </code></pre>
 <p>每门课程 (course) 有唯一的课程号 (id)、课程名 (name)、学分 (credit)。由于同一门课可以由不同老师开设（或同一老师的不同时段）并有不同的课程介绍 (description)，这用课序号 (course_number) 进行区分，我们将这些信息的集合称作一个课程详情 (course_detail)。</p>
@@ -743,8 +704,8 @@
 <p>上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。</p>
 </blockquote>
 <hr>
-<p><em><small>last update at: 2021/9/9 01:09:34</small></em></p>
-<p><em><small>author: 饶淙元</small></em></p>
+<p><small>last update at: 2021/9/9 13:35:59</small></p>
+<p><small>author: 饶淙元</small></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -816,7 +777,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.3.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.3.3","depth":2,"path":"chapter-0/frontend.md","ref":"chapter-0/frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.3.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/backend.md","mtime":"2021-09-09T05:31:42.951Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T05:31:52.797Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.3.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.3.3","depth":2,"path":"chapter-0/frontend.md","ref":"chapter-0/frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.3.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/backend.md","mtime":"2021-09-09T05:35:50.435Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T05:36:00.537Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
