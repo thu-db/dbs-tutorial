@@ -20,7 +20,6 @@
   "devDependencies": {
     "crypto-js": "^4.1.1",
     "gitbook-plugin-alerts": "^0.2.0",
-    "gitbook-plugin-asciidoc-admonition-icons": "^1.1.0",
     "gitbook-plugin-back-to-top-button": "^0.1.4",
     "gitbook-plugin-chapter-fold": "^0.0.4",
     "gitbook-plugin-click-reveal": "^1.0.0",
@@ -30,7 +29,6 @@
     "gitbook-plugin-hide-element": "0.0.4",
     "gitbook-plugin-intopic-toc": "^1.1.1",
     "gitbook-plugin-katex-pro": "^0.13.11",
-    "gitbook-plugin-richquotes": "0.0.9",
     "gitbook-plugin-splitter": "0.0.8",
     "honkit": "^3.6.20",
     "honkit-plugin-search-plus": "^1.0.0",
