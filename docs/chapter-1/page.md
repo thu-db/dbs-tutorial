@@ -62,17 +62,22 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 
 在部分笔者了解的语言/系统上对应的函数如下：
 
-|语言/系统|创建文件|打开文件|关闭文件|删除文件|文件偏移|数据读取|数据写入|
-|--------|--------|-------|-------|-------|--------|--------|-------|
-|Linux/Unix|open|open|close|unlink / rmdir|lseek|read|write|
-|C|fopen|fopen|fclose|fseek|remove|fread|fwrite|
-|C++ (STL)|fstream::open|fstream::open|fstream::close|filesystem::remove|fstream::seekp / fsteam::seekg|fstream::read|fstream::write|
 
-> **[warning] 跨平台要求**
+|操作|Linux / Unix | C (stdio) | C++ (STL)|
+| :---- | :------ | :---- | :---- |
+|创建文件|open|fopen|fstream::open|
+|打开文件|open|fopen|fstream::open|
+|关闭文件|close|fclose|fstream::close|
+|删除文件|unlink / rmdir|remove|filesystem::remove|
+|文件偏移|lseek|fseek|fstream::seekp / fsteam::seekg|
+|数据读取|read|fread|fstream::read|
+|数据写入|write|fwrite|fstream::write|
+
+> **[warning] 跨平台实现**
 
 > 参考实现使用了 Linux/Unix 接口（`<fcntl.h>` 与 `<unistd.h>` 库中的函数），因此在 Windows 上无法使用。如果选择使用 C 或 C++ 的标准库能够（或许会付出性能代价）使你的程序支持跨平台，这本质上是标准库为你封装了不同操作系统的接口。我们的大作业原则上不对操作系统做要求，但是我们仍然建议你的程序能够支持 Linux，因此最好不要用 Windows 或 Mac 系统的接口。
 
-TODO: 确定下我们的大作业是不对操作系统做要求，还是要求必须支持 Linux？
+由于你使用的文件操作库不同，因此文件操作所暴露出的东西也不同，例如 Windows 接口会得到句柄，Linux 接口会得到 fd 号，C 接口会得到 FILE 指针等，我们建议将这些东西存在文件管理器内，对外暴露一个统一的文件号，可能对应内部的数组下标或一个 map 的 key 等。在这种实现下你可以考虑将允许的文件号组成令牌环之类的结构，也可以不限制数量，用一个 map 来存储全局单增的文件号（我们可以不考虑在一次运行中累计开关几亿个文件导致文件号溢出的情况）。参考实现比较特殊，采用了 map + 令牌桶的组合形式 `MyBitMap`，实际容量为 128（可调），即至多允许同时打开 128 个不同的文件。
 
 ## 对外接口
 

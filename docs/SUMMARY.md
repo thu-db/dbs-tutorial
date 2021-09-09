@@ -12,7 +12,7 @@
 * step 1: 文件管理
     * [1.1 文件管理模块概述](chapter-1/intro.md)
     * [1.2 页式文件系统设计](chapter-1/page.md)
-    * [1.3 LRU 缓存设计](chapter-1/cache.md)
+    * [1.3 LRU 缓存设计](chapter-1/buffer.md)
     * [1.4 对外提供接口](chapter-1/api.md)
 * step 2: 记录管理
     * [2.1 记录管理模块概述](chapter-2/intro.md)
