@@ -44,3 +44,5 @@
 ## 附录
 * [FAQ](extra/faq.md)
 * [附件](extra/files.md)
+* 课程安排
+    * [2021秋](extra/timeline/2021F.md)
