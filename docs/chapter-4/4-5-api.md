@@ -1,6 +1,6 @@
 # 4.5 对外提供的接口
 
-```c++
+```C++
 class AbstractExecutor {
   void Init() = 0;
   bool Next(RID *rid) = 0;

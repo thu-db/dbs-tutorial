@@ -1,6 +1,6 @@
 # 2.4 对外提供的接口
 
-```C
+```C++
 class RecordHandler {
   public:
        RecordHandler  ();                     // 构造函数

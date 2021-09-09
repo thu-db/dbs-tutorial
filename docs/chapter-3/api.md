@@ -1,6 +1,6 @@
 # 3.4 对外提供的接口
 
-```C
+```C++
 class IndexScan {  
   public:
        IndexScan    ();         // 构造函数
