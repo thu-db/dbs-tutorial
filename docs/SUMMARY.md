@@ -2,7 +2,6 @@
 
 ## 总述
 * [实验简介](README.md)
-* [honkit 演示](honkit.md)
 * step 0: 整体介绍
     * [0.1 概述](chapter-0/intro.md)
     * [0.2 后端约定](chapter-0/backend.md)
