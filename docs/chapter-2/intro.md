@@ -1,7 +1,7 @@
 # 2.1 记录管理模块概述
 
 ## 数据库文件布局
-可以在根目录下创建base和global两个目录：global目录中存储一些全局的系统表，如：数据库名和数据库ID的对应关系 ([pg_database](http://www.postgres.cn/docs/9.3/catalog-pg-database.html))。在base目录中，每个数据库对应一个子目录，子目录下也可以有一些系统表，如：关系 (包括表、索引) 名和关系ID的对应关系 ([pg_class](http://www.postgres.cn/docs/9.3/catalog-pg-class.html))。子目录下的表和索引都存储在单独的文件中，子目录和文件都以其ID命名。
+可以在根目录下创建base和global两个目录：global目录中存储一些全局的系统表，如：数据库名和数据库ID的对应关系 ([pg_database](http://www.postgres.cn/docs/9.3/catalog-pg-database.html))。在base目录中，每个数据库对应一个子目录，子目录下也可以有一些系统表，如：关系 (包括表、索引) 名和关系ID的对应关系 ([pg_class](http://www.postgres.cn/docs/9.3/catalog-pg-class.html))。子目录下的表、索引、日志等都存储在单独的文件中，子目录和文件都以其ID命名。
 
 ## 文件的组织结构
 为提高存储空间利用效率和管理的灵活性，文件被划分为页面 (如固定大小为4KB) 的集合，每个页面有唯一的标识符。页面的数据区被划分为一个个插槽，每个插槽中放置一条记录。这样，(文件路径，页号，槽号) 就与记录构成了一一对应的关系。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。
