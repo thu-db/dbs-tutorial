@@ -688,14 +688,22 @@
 <p>表的元数据包括表的列数、各列的数据类型和长度、表的页数、约束 (检查约束、唯一约束、主键约束、外键约束) 等信息，可以在数据库目录下创建系统表存储 (参考<a href="http://www.postgres.cn/docs/9.3/catalogs-overview.html" target="_blank">PostgreSQL的系统表</a>)，简单的话也可以存储在表的前几页。</p>
 <h2 id="记录相关操作">记录相关操作</h2>
 <ol>
-<li>记录的序列化和反序列化。在字节序列和一条记录间相互转换。</li>
-<li>访问记录。根据数据库名和表名确定文件路径，根据页号和槽号找到记录的位置，通过反序列化解读出记录的内容。</li>
-<li>插入记录。先找到空闲空间，再插入记录的序列化表示；如果没有空闲空间可能需要向缓存管理模块申请新页。</li>
-<li>删除记录。先找到记录的位置，再将其删除；产生的碎片空闲空间视情况合并。</li>
-<li>更新记录。对于定长记录来说，物理组织结构不变；对于变长记录来说，与删除后插入类似。</li>
+<li><p>记录的序列化和反序列化。在字节序列和一条记录间相互转换。</p>
+</li>
+<li><p>访问记录。根据数据库名和表名确定文件路径，根据页号和槽号找到记录的位置，通过反序列化解读出记录的内容。</p>
+</li>
+<li><p>插入记录。先找到空闲空间，再插入记录的序列化表示；如果没有空闲空间可能需要向缓存管理模块申请新页。</p>
+</li>
+<li><p>删除记录。先找到记录的位置，再将其删除；产生的碎片空闲空间视情况合并。</p>
+</li>
+<li><p>更新记录。对于定长记录来说，物理组织结构不变；对于变长记录来说，与删除后插入类似。</p>
+</li>
 </ol>
+<h2 id="一些测试相关的要求">一些测试相关的要求</h2>
+<p>我们要求的数据类型包括INT, FLOAT, VARCHAR(i)三种。其中INT为32位整型，FLOAT为单精度浮点型，VARCHAR为字符串，且用括号中的 i 表示字符串最大长度。在实际数据库中，VARCHAR会作为变长列存储，占用空间由具体字符串的实际长度决定；同学们在实现时将其作为定长列或变长列存储均可。</p>
+<p>在基础功能中，我们限定一条记录的各列最大长度之和不会超过2048字节。我们希望保证一页至少能完整地存储一条记录。</p>
 <hr>
-<p><em><small>last update at: 2021/9/7 22:20:40</small></em></p>
+<p><em><small>last update at: 2021/9/9 13:31:51</small></em></p>
 <p><em><small>author: 孙昭言</small></em></p>
 <div id="my-comment">
 <script>
@@ -765,7 +773,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"next":{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"previous":{"title":"step 2: 记录管理","level":"2.2","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/intro.md","mtime":"2021-09-08T17:09:25.520Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-08T17:09:35.806Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"next":{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"previous":{"title":"step 2: 记录管理","level":"2.2","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/intro.md","mtime":"2021-09-09T05:31:42.951Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T05:31:52.797Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
