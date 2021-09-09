@@ -29,7 +29,12 @@ jobs:
         run: node timestamp/run.js
 
       - name: Build honkit
-        run: npm run build && rm _book/footer.md
+        run: |
+          npm run build
+          rm _book/footer.md
+          mkdir -p _book/download
+          zip -qr _book/download/filesystem.zip ./filesystem
+          cp SQL.g4 _book/download/
 
       - name: Deploy honkit
         uses: JamesIves/github-pages-deploy-action@releases/v3

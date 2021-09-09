@@ -41,3 +41,6 @@
 * step 6: 系统管理
 * step 7: 总结
 
+## 附录
+* [FAQ](extra/faq.md)
+* [附件](extra/files.md)
