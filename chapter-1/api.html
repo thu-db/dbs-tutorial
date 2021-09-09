@@ -101,7 +101,7 @@
 
     
     
-    <link rel="prev" href="cache.html" />
+    <link rel="prev" href="buffer.html" />
     
 
     </head>
@@ -263,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.3" data-path="cache.html">
+        <li class="chapter " data-level="2.1.3" data-path="buffer.html">
             
-                <a href="cache.html">
+                <a href="buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -680,10 +680,57 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="14-对外提供的接口">1.4 对外提供的接口</h1>
-<p>TODO: 整理接口</p>
-<p><code>C++</code></p>
+<pre><code class="lang-C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> FD;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span> *BufferType;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileManager</span>
+{</span>
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">FileManager</span>();
+  ~<span class="hljs-built_in">FileManager</span>();
+
+  <span class="hljs-comment">// 下面的 BufferType 可以自行考虑具体实现，但是内存管理上最好由缓存系统管理而非文件系统</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function">FD <span class="hljs-title">openFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(FD fd)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+
+  <span class="hljs-comment">// 文档提到的另一种思路，上层系统直接传文件名</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(string filename, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(string filename, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferManager</span>
+{</span>
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">BufferManager</span>();
+  ~<span class="hljs-built_in">BufferManager</span>();
+
+  <span class="hljs-comment">// 这里只展示用 FD 的方法，如果采用文件名直传，则所有 FD 都可以改为文件名</span>
+
+  <span class="hljs-comment">// 这些文件操作不一定需要，也可以实现成上层传文件名，底层自动处理打开、创建</span>
+  <span class="hljs-comment">// 如果实现则直接调用 FileManager 的操作</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function">FD <span class="hljs-title">openFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(FD fd)</span></span>;
+
+  <span class="hljs-comment">// 是否需要删文件的接口取决于你的系统实现</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeFile</span><span class="hljs-params">(string filename)</span></span>;
+
+  <span class="hljs-comment">// 1. 如果采用读引用的方法，则可以参考这两个接口，读写用的 buffer 空间由底层管理</span>
+  <span class="hljs-function">BufferType <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">markDirty</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID)</span></span>;
+
+  <span class="hljs-comment">// 2. 如果采用读拷贝的方法，则可以参考这两个接口，读写用的 buffer 空间由上层管理</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+};
+</code></pre>
 <hr>
-<p><em><small>last update at: 2021/9/9 01:09:34</small></em></p>
+<p><em><small>last update at: 2021/9/9 19:00:09</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -741,7 +788,7 @@
 
             
                 
-                <a href="cache.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 1.3 LRU 缓存设计">
+                <a href="buffer.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 1.3 LRU 缓存设计">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -753,7 +800,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"next":{"title":"step 2: 记录管理","level":"2.2","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"previous":{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/cache.md","ref":"chapter-1/cache.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/api.md","mtime":"2021-09-09T06:11:11.425Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T06:11:27.549Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"next":{"title":"step 2: 记录管理","level":"2.2","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"previous":{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/buffer.md","ref":"chapter-1/buffer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/api.md","mtime":"2021-09-09T10:59:56.841Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T11:00:10.298Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

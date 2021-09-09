@@ -263,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.3" data-path="cache.html">
+        <li class="chapter " data-level="2.1.3" data-path="buffer.html">
             
-                <a href="cache.html">
+                <a href="buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -684,12 +684,12 @@
 <p>这个模块属于是数据库的底层设施，甚至不算数据库的一部分，它的全名叫《页式文件管理系统》，是一个管理文件及其缓存的系统。在课改前的大作业中是没有算进需要实现的几个模块之一的，但助教商讨认为，了解本模块对于理解数据库的上层实现有重要意义，因此我们依然提供了往年<del>祖传</del>的实现（后文简称“参考实现”），但也进行了详细讲解，以便有需要的同学按照教程自行实现。</p>
 <h2 id="需求">需求</h2>
 <p>首先需要理解我们为什么需要数据库，为什么需要一个专用的文件管理系统。</p>
-<h3 id="1-大文件">1 大文件</h3>
+<h3 id="1-大文件">1. 大文件</h3>
 <p>数据库被设计用来存储大量数据（<strong>通常是高于计算机内存的</strong>）并进行增删查改等操作，我们在操作时内存通常只能取数据库文件的一小部分进行局部操作。</p>
 <p>尽管我们不必将一个数据库存在一个文件中，也即我们可以通过将不同表拆分成不同文件、将数据和索引拆分成不同文件等手段来减小文件的大小，但一般至少一张表的数据会存入同一个文件中，我们仍然可能因为一张表有上G条记录而出现超过内存大小的文件。</p>
-<h3 id="2-页式管理">2 页式管理</h3>
+<h3 id="2-页式管理">2. 页式管理</h3>
 <p>因此我们需要一种策略将数据库的文件拆分成更小的单元，将文件操作体现在这些单元之上。因此，首先我们需要一个页式文件系统，将文件以页为单位进行拆分——页的大小不必是一样的，但是简单起见我们实现的是固定页大小的。本文档中还会提到页的概念，如无特别解释均指代页式文件系统的“页”，它的大小或许恰好与操作系统的页相同，或许不同，需要注意区分。 </p>
-<h3 id="3-缓存引入">3 缓存引入</h3>
+<h3 id="3-缓存引入">3. 缓存引入</h3>
 <p>完成页式文件系统后，我们需要操作的成本问题：</p>
 <ul>
 <li><p>一方面，我们不能在每次读写时都去文件中获取一页，IO 时间会有较高成本，我们希望通过更多的 CPU 计算来减少 IO 频次，提高数据库引擎性能，在文件较小时，针对这一问题有一种经典的减少 IO 操作法（维护一些 meta 信息时仍然可以参考这种手段）：启动程序时（或者第一次读写时）将文件内容全部读入内存，操作完毕后在结束程序时（或者其他合适的时机，但保证频率应该较低）将文件内容写回文件。</p>
@@ -715,7 +715,7 @@
 </ul>
 <p>本章剩下几节将给出完成这些组件的文档。</p>
 <hr>
-<p><em><small>last update at: 2021/9/9 13:40:37</small></em></p>
+<p><em><small>last update at: 2021/9/9 19:00:09</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -785,7 +785,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"next":{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},"previous":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/cache.md","ref":"chapter-1/cache.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/api.md","ref":"chapter-1/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/intro.md","mtime":"2021-09-09T06:11:11.425Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T06:11:27.549Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"next":{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},"previous":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/buffer.md","ref":"chapter-1/buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/api.md","ref":"chapter-1/api.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/intro.md","mtime":"2021-09-09T10:59:56.841Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T11:00:10.298Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

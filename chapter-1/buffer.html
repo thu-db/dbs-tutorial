@@ -265,9 +265,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.1.3" data-path="cache.html">
+        <li class="chapter active" data-level="2.1.3" data-path="buffer.html">
             
-                <a href="cache.html">
+                <a href="buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -704,7 +704,7 @@
 <p>我们可以只用内存来缓存读取，所有的写入均直接写到磁盘上，这种策略称作写直达，它的性能比不上下面介绍的写回，但是它的实现相对简单，在某些特殊的硬件缓存上可能会考虑这一策略来保证硬件逻辑的简洁性。但是在我们这种内存与磁盘性能差异以及 CPU 性能下，一般不会考虑这一策略，尤其是对局部数据频繁 UPDATE 或先 DELETE 再 INSERT 时它的性能会非常差。</p>
 <h3 id="2-写回-write-back">2. 写回 (Write-Back)</h3>
 <p>写回策略在更多缓存系统中被使用，它一般配合 Dirty 位一并使用。无论是读还是写，我们总是需要先从文件中获取该页数据到内存，然后所有写入均在内存中直接操作，当该页缓存被舍弃（或者文件被关闭等）时再将缓存中的变化写回到文件中。</p>
-<p>出于性能考虑，我们不应该将所有被舍弃的页均写回文件，因为其中可能有很多页只发生了读，没有被写过。为了区分被写过的页，我们引入 Dirty 标记位，当一页缓存被写入时，我们将对应的 Dirty 标记置为 True，当该页被舍弃时，可以根据 Dirty 判断是否需要将写回文件。</p>
+<p>出于性能考虑，我们不应该将所有被舍弃的页均写回文件，因为其中可能有很多页只发生了读，没有被写过。为了区分被写过的页，我们引入 Dirty 标记位，当一页缓存被写入时，我们将对应的 Dirty 标记置为 True（一般将这种页面称作“脏页”），当该页被舍弃时，可以根据 Dirty 判断是否需要将写回文件。</p>
 <h2 id="置换策略">置换策略</h2>
 <p>当缓存页被占满时，我们为了新的缓存页不得不放弃原有的一页，此时需要一个策略来决定放弃哪一页。</p>
 <p>在介绍置换策略时，这些策略并非针对页式文件系统，而是这类缓存置换问题的通用算法，因此下面介绍算法时将不再提到“页”，而是直接用“数据项”来指代任何缓存系统中的目标数据。</p>
@@ -712,6 +712,7 @@
 <p><strong>[info] 决策内容的思考</strong></p>
 <p>除了占满时决定放弃谁外，即使缓存没被占满，我们或许也需要一个策略来判断应该用哪一个空位。这个问题或许并不重要，因为对多数策略来说用哪一个缓存页是无关紧要的。但如果再考虑到 CPU 本身的缓存，选择一些近期刚被舍弃的缓存页可能会给性能带来一定幅度的提升。</p>
 </blockquote>
+<p>下面介绍几种基础的缓存置换算法（推荐使用 LRU，实现简单且有不错的性能，你也可以选择自己喜欢的策略）。</p>
 <h3 id="1-lru">1. LRU</h3>
 <p>LRU (Last-Recently-Used) 即最近最少使用算法，是一种非常常见的缓存置换算法。它按照使用次序，将最后使用时间较久远的数据先替换掉。</p>
 <blockquote>
@@ -729,6 +730,7 @@
 <thead>
 <tr>
 <th>访问数据</th>
+<th>缓存命中</th>
 <th>舍弃缓存项</th>
 <th>（访问后）缓存内容</th>
 </tr>
@@ -736,56 +738,67 @@
 <tbody>
 <tr>
 <td>1</td>
+<td>F</td>
 <td>_</td>
 <td>[ 1 ? ? &gt;</td>
 </tr>
 <tr>
 <td>2</td>
+<td>F</td>
 <td>_</td>
 <td>[ 2 1 ? &gt;</td>
 </tr>
 <tr>
 <td>3</td>
+<td>F</td>
 <td>_</td>
 <td>[ 3 2 1 &gt;</td>
 </tr>
 <tr>
 <td>3</td>
+<td>T</td>
 <td>_</td>
 <td>[ 3 2 1 &gt;</td>
 </tr>
 <tr>
 <td>3</td>
+<td>T</td>
 <td>_</td>
 <td>[ 3 2 1 &gt;</td>
 </tr>
 <tr>
 <td>1</td>
+<td>T</td>
 <td>_</td>
 <td>[ 1 3 2 &gt;</td>
 </tr>
 <tr>
 <td>4</td>
+<td>F</td>
 <td>2</td>
 <td>[ 4 1 3 &gt;</td>
 </tr>
 <tr>
 <td>4</td>
+<td>T</td>
 <td>2</td>
 <td>[ 4 1 3 &gt;</td>
 </tr>
 <tr>
 <td>4</td>
+<td>T</td>
 <td>2</td>
 <td>[ 4 1 3 &gt;</td>
 </tr>
 <tr>
 <td>2</td>
+<td>F</td>
 <td>3</td>
 <td>[ 2 4 1 &gt;</td>
 </tr>
 <tr>
 <td>1</td>
+<td>T</td>
 <td>_</td>
 <td>[ 1 2 4 &gt;</td>
 </tr>
@@ -800,6 +813,7 @@
 <thead>
 <tr>
 <th>访问数据</th>
+<th>缓存命中</th>
 <th>舍弃缓存项</th>
 <th>（访问后）缓存内容</th>
 </tr>
@@ -807,51 +821,61 @@
 <tbody>
 <tr>
 <td>1</td>
+<td>F</td>
 <td>_</td>
 <td>1(1) ?(0) ?(0)</td>
 </tr>
 <tr>
 <td>1</td>
+<td>T</td>
 <td>_</td>
 <td>1(2) ?(0) ?(0)</td>
 </tr>
 <tr>
 <td>2</td>
+<td>F</td>
 <td>_</td>
 <td>1(2) 2(1) ?(0)</td>
 </tr>
 <tr>
 <td>3</td>
+<td>F</td>
 <td>_</td>
 <td>1(2) 2(1) 3(1)</td>
 </tr>
 <tr>
 <td>4</td>
+<td>F</td>
 <td>2</td>
 <td>1(2) 4(1) 3(1)</td>
 </tr>
 <tr>
 <td>1</td>
+<td>T</td>
 <td>_</td>
 <td>1(3) 4(1) 3(1)</td>
 </tr>
 <tr>
 <td>5</td>
+<td>F</td>
 <td>3</td>
 <td>1(3) 4(1) 5(1)</td>
 </tr>
 <tr>
 <td>6</td>
+<td>F</td>
 <td>4</td>
 <td>1(3) 6(1) 5(1)</td>
 </tr>
 <tr>
 <td>7</td>
+<td>F</td>
 <td>5</td>
 <td>1(3) 6(1) 7(1)</td>
 </tr>
 <tr>
 <td>1</td>
+<td>T</td>
 <td>_</td>
 <td>1(4) 6(1) 7(1)</td>
 </tr>
@@ -866,9 +890,88 @@
 </ul>
 <p>因此这一策略在实际应用中并不常见。</p>
 <h3 id="3-fifo">3. FIFO</h3>
-<p>TODO: 补充剩下内容</p>
+<p>FIFO (First-In-First-Out) 即先进先出，只需要维护一个队列，只考虑数据项入队的时间，当队列满时将最早入队的元素出队。</p>
+<p>下面构造一种简单情况使得 FIFO 的性能比 LRU 和 LFU 好。同样假设容量为 3 的存储整数的缓存，我们依次访问数据序列 <code>1 2 3 1 4 5 3</code>，缓存变化如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>访问数据</th>
+<th>命中缓存</th>
+<th>舍弃缓存项</th>
+<th>（访问后）缓存内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>F</td>
+<td>_</td>
+<td>[ 1 ? ? &gt;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>F</td>
+<td>_</td>
+<td>[ 1 2 ? &gt;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>F</td>
+<td>_</td>
+<td>[ 1 2 3 &gt;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>T</td>
+<td>_</td>
+<td>[ 1 2 3 &gt;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>F</td>
+<td>1</td>
+<td>[ 2 3 4 &gt;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>F</td>
+<td>2</td>
+<td>[ 3 4 5 &gt;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>T</td>
+<td>_</td>
+<td>[ 3 4 5 &gt;</td>
+</tr>
+</tbody>
+</table>
+<p>共计缓存命中 2 次，如果用 LRU 或者 LFU 均只能命中一次。</p>
+<p>FIFO 实现简单，只需要一个最基本的队列，但是可能会导致频繁访问项被舍弃，并且存在 Belady 现象，实际应用并不广泛。</p>
+<blockquote>
+<p><strong>[info] Belady现象</strong></p>
+<p>使用 FIFO 等算法时，可能出现在相同的访存序列下，缓存容量增大后，缓存缺失次数反而升高的异常现象。</p>
+<p>感兴趣的同学可以自行构造这样的例子，《操作系统》课程中也会讲到相关知识。</p>
+</blockquote>
+<h2 id="系统组装">系统组装</h2>
+<p>有了上述基础，我们下面完成一个缓存管理器（参考实现的 <code>BufPageManager</code>）只需要一些组装。它底层依赖一个页式文件系统管理器（参考实现的 <code>FileManager</code>）和一个缓存置换器（参考实现的 <code>FindReplace</code>）。</p>
+<p>它对外提供的接口与页式文件系统基本一致，只是需要考虑是真的要调用文件系统，还是直接进行内存操作。注意写操作可能有两种实现办法：</p>
+<ol>
+<li>不提供单独的写入接口，对外的读取接口返回缓存的引用，外部修改时需要手动调用缓存管理器的接口将对应页标记为 dirty</li>
+<li>提供单独的写入接口，对外的读取接口返回的是一页的拷贝，缓存中给的数据独此一份，调用写接口时会用传进来的数据覆盖原有的缓存页并标记 dirty</li>
+</ol>
+<p>前一种实现性能更高，但是用起来也有更高的风险；后一种更直观，但是会引入拷贝一页的成本。无论是哪一种实现，均是基于写回策略。</p>
+<p>在参考实现中，采用的上述第一种方案，因此它还为缓存管理器提供了以下接口：</p>
+<ul>
+<li>close: 关闭管理器，将所有脏页写回文件（个人建议写入析构函数）</li>
+<li>writeBack: 将指定页面写回并舍弃</li>
+<li>release: 将指定页面舍弃，即使是脏页也不写回</li>
+<li>access: 标记一页被访问过</li>
+<li>markDirty: 标记一页为脏页</li>
+<li>allocPage: 越过查找缓存直接进行文件 IO，需要调用方保证该页不在缓存</li>
+</ul>
 <hr>
-<p><em><small>last update at: 2021/9/9 01:09:34</small></em></p>
+<p><em><small>last update at: 2021/9/9 19:00:09</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -942,7 +1045,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"next":{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/api.md","ref":"chapter-1/api.md","articles":[]},"previous":{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/cache.md","mtime":"2021-09-09T06:11:11.425Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T06:11:27.549Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"next":{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/api.md","ref":"chapter-1/api.md","articles":[]},"previous":{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/buffer.md","mtime":"2021-09-09T10:59:56.841Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T11:00:10.298Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

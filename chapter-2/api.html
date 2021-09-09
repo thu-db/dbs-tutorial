@@ -263,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/cache.html">
+        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/buffer.html">
             
-                <a href="../chapter-1/cache.html">
+                <a href="../chapter-1/buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -680,10 +680,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="24-对外提供的接口">2.4 对外提供的接口</h1>
-<pre><code class="lang-C"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RecordHandler</span> {</span>
+<pre><code class="lang-C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RecordHandler</span> {</span>
   <span class="hljs-keyword">public</span>:
-       RecordHandler  ();                     <span class="hljs-comment">// 构造函数</span>
-       ~RecordHandler ();                     <span class="hljs-comment">// 析构函数</span>
+       <span class="hljs-built_in">RecordHandler</span>  ();                     <span class="hljs-comment">// 构造函数</span>
+       ~<span class="hljs-built_in">RecordHandler</span> ();                     <span class="hljs-comment">// 析构函数</span>
     <span class="hljs-function">RC <span class="hljs-title">CreateFile</span>     <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>; <span class="hljs-comment">// 创建文件</span>
     <span class="hljs-function">RC <span class="hljs-title">DestroyFile</span>    <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>; <span class="hljs-comment">// 删除文件</span>
     <span class="hljs-function">RC <span class="hljs-title">OpenFile</span>       <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fileName)</span></span>; <span class="hljs-comment">// 通过缓存管理模块打开文件，并获取其句柄</span>
@@ -698,7 +698,7 @@
 };
 </code></pre>
 <hr>
-<p><em><small>last update at: 2021/9/9 13:31:51</small></em></p>
+<p><em><small>last update at: 2021/9/9 19:00:09</small></em></p>
 <p><em><small>author: 孙昭言</small></em></p>
 <div id="my-comment">
 <script>
@@ -768,7 +768,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"next":{"title":"step 3: 索引管理","level":"2.3","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},{"title":"3.4 对外提供的接口","level":"2.3.4","depth":2,"path":"chapter-3/api.md","ref":"chapter-3/api.md","articles":[]}]},"previous":{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/api.md","mtime":"2021-09-09T06:11:11.425Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T06:11:27.549Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"next":{"title":"step 3: 索引管理","level":"2.3","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},{"title":"3.4 对外提供的接口","level":"2.3.4","depth":2,"path":"chapter-3/api.md","ref":"chapter-3/api.md","articles":[]}]},"previous":{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/api.md","mtime":"2021-09-09T10:59:56.841Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T11:00:10.298Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
