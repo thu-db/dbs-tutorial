@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>2.3 记录页面的设计模式-变长记录 · HonKit</title>
+        <title>附件 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -100,10 +100,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="api.html" />
     
-    
-    <link rel="prev" href="fixed.html" />
+    <link rel="prev" href="faq.html" />
     
 
     </head>
@@ -297,9 +295,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.1" data-path="intro.html">
+        <li class="chapter " data-level="2.2.1" data-path="../chapter-2/intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-2/intro.html">
             
                     
                     2.1 记录管理模块概述
@@ -310,9 +308,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.2" data-path="fixed.html">
+        <li class="chapter " data-level="2.2.2" data-path="../chapter-2/fixed.html">
             
-                <a href="fixed.html">
+                <a href="../chapter-2/fixed.html">
             
                     
                     2.2 记录页面的设计模式-定长记录
@@ -323,9 +321,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2.3" data-path="variable.html">
+        <li class="chapter " data-level="2.2.3" data-path="../chapter-2/variable.html">
             
-                <a href="variable.html">
+                <a href="../chapter-2/variable.html">
             
                     
                     2.3 记录页面的设计模式-变长记录
@@ -336,9 +334,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.4" data-path="api.html">
+        <li class="chapter " data-level="2.2.4" data-path="../chapter-2/api.html">
             
-                <a href="api.html">
+                <a href="../chapter-2/api.html">
             
                     
                     2.4 对外提供的接口
@@ -627,9 +625,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../extra/faq.html">
+        <li class="chapter " data-level="5.1" data-path="faq.html">
             
-                <a href="../extra/faq.html">
+                <a href="faq.html">
             
                     
                     FAQ
@@ -640,9 +638,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="../extra/files.html">
+        <li class="chapter active" data-level="5.2" data-path="files.html">
             
-                <a href="../extra/files.html">
+                <a href="files.html">
             
                     
                     附件
@@ -683,7 +681,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >2.3 记录页面的设计模式-变长记录</a>
+        <a href=".." >附件</a>
     </h1>
 </div>
 
@@ -701,51 +699,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="23-记录页面的设计模式-变长记录">2.3 记录页面的设计模式-变长记录</h1>
-<h2 id="记录储存格式">记录储存格式</h2>
-<p>可以以按照 (NULL位图, 定长数据, 可变列的偏移数组, 变长数据) 的格式存储变长记录。以0.2提到的course表中 (30240262, &apos;Database&apos;, 2) 的一行为例：</p>
-<table>
-  <tbody><tr>
-    <td align="center">0 (1B)</td>
-    <td align="center">30240262 (4B)</td>
-    <td align="center">2 (4B)</td>
-    <td align="center">19 (2B)</td>
-    <td align="center">&apos;Database&apos; (8B)</td>
-  </tr>
-</tbody></table>
-
-<p>NULL位图和定长数据部分与定长记录相同；可变列偏移数组的长度为 2字节*可变列数，从而在变长部分区分出各可变列的数据。在本例中，19为第一个变长列结束的位置。由于其也是最后一个变长列，所以19也表示本行的长度。</p>
-<h2 id="页面布局">页面布局</h2>
-<p>页头需要存储槽容量 (有效槽+无效槽总数) 辅助解读页面字节序列，还需要存储空闲空间的字节偏移量和空闲字节数目便于空闲空间管理。解读页面还需要定长部分 (NULL位图+定长数据) 长度、可变列数目等信息，可以保存在页头，也可由表的元数据推算得到。</p>
-<p>页身从前向后存储数据，从后向前存储槽目录，槽目录存储记录的字节偏移量。槽目录可以每2字节对应从0开始的自然数槽号，这样在通过槽号访问某槽时只需要O(1)时间，但在插入记录时最好在槽目录中从后向前优先利用无效槽号；也可以在槽目录中只存储有效槽号，不过在通过槽号访问某槽时需要遍历槽目录。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。</p>
-<p>删除记录时可能产生碎片空闲空间，在数据量较小时不处理也无妨。在真实数据库中会有程序定期清理碎片空间，使页内空闲空间尽量连续。</p>
-<h2 id="空闲空间管理">空闲空间管理</h2>
-<h3 id="链表">链表</h3>
-<p>与定长记录类似，页面的空闲空间最大为 4096-64 字节，可以按照一定字节数 (如：32字节) 为单位将空闲空间大小分成若干个级别，每一级别维护一个链表。</p>
-<h3 id="页目录">页目录</h3>
-<p>可以保留一些页作为页目录而不作为数据页，页目录之间通过链表相连；每个页目录记录若干页的空闲空间大小。</p>
-<h3 id="大根堆二叉树">大根堆二叉树</h3>
-<p>可以为每个表创建一个名为&quot;表ID_fsm&quot;的文件管理表的空闲空间。每个FSM页内为一棵大根堆二叉树，叶节点记录某页的空闲空间大小 (也可以将空闲空间大小分成256个级别，使每个节点仅占用1B)，非叶节点记录两个孩子中的较大值。这样，在需要一定空闲空间大小时，仅比较根节点即可判断表内是否有页面满足要求，然后沿二叉树逐级比较向下直到叶节点，即可找到合适的空闲页面。</p>
-<p>如果页面较多，可以构建多级FSM页，高级FSM页的叶节点对应低级FSM页的根节点，且它们具有相同的值。</p>
-<p>假设每个页面数据区大小为10B，则每个页面内可以构建出有4个叶节点的满二叉树；假设共有3级FSM页，例：</p>
-<pre><code>0     &lt;-- page 0 at level 2 (root page)
-  0     &lt;-- page 0 at level 1
-   0     &lt;-- page 0 at level 0
-   1     &lt;-- page 1 at level 0
-   2     &lt;-- ...
-   3
-  1     &lt;-- page 1 at level 1
-   4
-   5
-   6
-   7
-   8
-   9
-</code></pre><p>假设命中了8号页内数据区偏移量为5的字节，由 n+⌊n/4+1⌋+⌊n/4^2+1⌋=8 解得 n=5，即8号页对应0级5号页；偏移量为5对应FSM页内1号叶节点。由 5*5+1=26 知对应表内26号页。</p>
-<p><a href="https://github.com/postgres/postgres/blob/master/src/backend/storage/freespace/README" target="_blank">大根堆二叉树</a>也可以参考PostgreSQL中相应说明。</p>
+                                <html><head></head><body><h1 id="附件">附件</h1>
+<p>如下是本实验提供的附件：</p>
+<ul>
+<li>页式文件系统参考实现: <a href="../download/filesystem.zip">filesystem.zip</a></li>
+<li>Anltr 文法文件: <a href="../download/SQL.g4">SQL.g4</a></li>
+</ul>
 <hr>
-<p><em><small>last update at: 2021/9/9 13:31:51</small></em></p>
-<p><em><small>author: 孙昭言</small></em></p>
+<p><em><small>last update at: 2021/9/9 20:49:25</small></em></p>
+<p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -802,14 +764,10 @@
 
             
                 
-                <a href="fixed.html" class="navigation navigation-prev " aria-label="Previous page: 2.2 记录页面的设计模式-定长记录">
+                <a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: FAQ">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="api.html" class="navigation navigation-next " aria-label="Next page: 2.4 对外提供的接口">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -818,7 +776,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"next":{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]},"previous":{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-2/variable.md","mtime":"2021-09-09T12:49:07.026Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T12:49:27.221Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"附件","level":"5.2","depth":1,"previous":{"title":"FAQ","level":"5.1","depth":1,"path":"extra/faq.md","ref":"extra/faq.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"extra/files.md","mtime":"2021-09-09T12:49:07.030Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T12:49:27.221Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
