@@ -40,6 +40,8 @@
     - 上述内存块的元信息，记录对应的文件、页号、dirty 标记等，判断是否命中缓存及对应数据的位置（对应参考实现的 `BufPageManager::hash` 和 `BufPageManager::dirty`）
     - 一个缓存替换算法，未命中缓存时决定将新的缓存页放在哪（对应参考实现的 `BufPageManager::replace` 配合 `BufPageManager::last`）
 
+📌 文件系统操作与查询执行计划（查询树）的对应关系
+
 本章剩下几节将给出完成这些组件的文档。
 
 {% set authors = ["饶淙元"] %}
