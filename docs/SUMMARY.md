@@ -3,16 +3,16 @@
 ## 总述
 * [实验简介](README.md)
 * step 0: 整体介绍
-    * [0.1 概述](chapter-0/intro.md)
-    * [0.2 后端约定](chapter-0/backend.md)
-    * [0.3 前端约定](chapter-0/frontend.md)
+    * [0.1 概述](chapter-0/0-1-intro.md)
+    * [0.2 后端约定](chapter-0/0-2-backend.md)
+    * [0.3 前端约定](chapter-0/0-3-frontend.md)
 
 ## 底层支持
 * step 1: 文件管理
-    * [1.1 文件管理模块概述](chapter-1/intro.md)
-    * [1.2 页式文件系统设计](chapter-1/page.md)
-    * [1.3 LRU 缓存设计](chapter-1/buffer.md)
-    * [1.4 对外提供接口](chapter-1/api.md)
+    * [1.1 文件管理模块概述](chapter-1/1-1-intro.md)
+    * [1.2 页式文件系统设计](chapter-1/1-2-page.md)
+    * [1.3 LRU 缓存设计](chapter-1/1-3-buffer.md)
+    * [1.4 对外提供接口](chapter-1/1-4-api.md)
 * step 2: 记录管理
     * [2.1 记录管理模块概述](chapter-2/intro.md)
     * [2.2 记录页面的设计模式-定长记录](chapter-2/fixed.md)
@@ -40,7 +40,7 @@
 ## 系统管理
 * step 6: 系统管理
     * [6.1 概述](chapter-6/6_1_intro.md)
-* step 7: 总结
+<!--* step 7: 总结-->
 
 ## 附录
 * [FAQ](extra/faq.md)
