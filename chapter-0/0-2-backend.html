@@ -816,12 +816,12 @@
 <p>结合上面的 schema，我们可以给出一些简单的 SQL 例子：</p>
 <h3 id="1-出成绩">1. 出成绩</h3>
 <p>假设2021年秋季学期张三同学（学号2077010001）选上了数据库（课程号30240262，课序号0），那么在他选课时可能会发生……</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student_course <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2077010001</span>, <span class="hljs-number">30240262</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&apos;*&apos;</span>, <span class="hljs-string">&apos;2021-秋&apos;</span>);
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student_course <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2077010001</span>, <span class="hljs-number">30240262</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&apos;*&apos;</span>, <span class="hljs-string">&apos;2021-秋&apos;</span>);
 Query OK, <span class="hljs-number">1</span> <span class="hljs-type">row</span> affected (<span class="hljs-number">0.000</span> sec)
 </code></pre>
 <p>注意这个插入语句没有指明 column，因此它是按照 table 默认 column 顺序给所有列赋值了。此时刚选课还没有成绩，因此成绩部分暂时用 <code>&apos;*&apos;</code> 代替。</p>
 <p>一学期后张三认真完成作业，顺利通过验收，获得绩点 A，那么数据库内可能发生……</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> UPDATE student_course <span class="hljs-keyword">SET</span> grade <span class="hljs-operator">=</span> <span class="hljs-string">&apos;A&apos;</span> <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span> <span class="hljs-number">2077010001</span> <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span> <span class="hljs-number">30240262</span> <span class="hljs-keyword">AND</span> term <span class="hljs-operator">=</span> <span class="hljs-string">&apos;2021-秋&apos;</span>;
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> UPDATE student_course <span class="hljs-keyword">SET</span> grade <span class="hljs-operator">=</span> <span class="hljs-string">&apos;A&apos;</span> <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span> <span class="hljs-number">2077010001</span> <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span> <span class="hljs-number">30240262</span> <span class="hljs-keyword">AND</span> term <span class="hljs-operator">=</span> <span class="hljs-string">&apos;2021-秋&apos;</span>;
 Query OK, <span class="hljs-number">1</span> <span class="hljs-type">row</span> affected (<span class="hljs-number">0.001</span> sec)
 <span class="hljs-keyword">Rows</span> matched: <span class="hljs-number">1</span>  Changed: <span class="hljs-number">1</span>  Warnings: <span class="hljs-number">0</span>
 </code></pre>
@@ -830,7 +830,7 @@ Query OK, <span class="hljs-number">1</span> <span class="hljs-type">row</span> 
 <p>假设管理员想查询张三同学《数据库系统概论》课程的成绩（假定没有重名同学，管理员不知道对应的学号和课程号），他可以……</p>
 <p><strong>分步查询</strong></p>
 <p>我们可以逐步完成，先找到张三的学号，再找到数据库课程的课程号，最后完成成绩查询：</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;张三&apos;</span>;
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;张三&apos;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+</span>
 <span class="hljs-operator">|</span> id         <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+</span>
@@ -838,7 +838,7 @@ Query OK, <span class="hljs-number">1</span> <span class="hljs-type">row</span> 
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+</span>
 <span class="hljs-number">1</span> <span class="hljs-type">row</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.000</span> sec)
 
-MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> course <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span><span class="hljs-string">&apos;数据库系统概论&apos;</span>;
+mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> course <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span><span class="hljs-string">&apos;数据库系统概论&apos;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----------+</span>
 <span class="hljs-operator">|</span> id       <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----------+</span>
@@ -846,7 +846,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 <span class="hljs-operator">+</span><span class="hljs-comment">----------+</span>
 <span class="hljs-number">1</span> <span class="hljs-type">row</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.000</span> sec)
 
-MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> grade <span class="hljs-keyword">FROM</span> student_course <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span> <span class="hljs-number">2077010001</span> <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span> <span class="hljs-number">30240262</span>;
+mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> grade <span class="hljs-keyword">FROM</span> student_course <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span> <span class="hljs-number">2077010001</span> <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span> <span class="hljs-number">30240262</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">-------+</span>
 <span class="hljs-operator">|</span> grade <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">-------+</span>
@@ -856,7 +856,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 </code></pre>
 <p><strong>嵌套查询</strong></p>
 <p>通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，进而提高效率：</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> grade <span class="hljs-keyword">FROM</span> student_course <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span>
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> grade <span class="hljs-keyword">FROM</span> student_course <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span>
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> (<span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;张三&apos;</span>) <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span>
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> (<span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> course <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;数据库系统概论&apos;</span>);
 <span class="hljs-operator">+</span><span class="hljs-comment">-------+</span>
@@ -868,7 +868,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 </code></pre>
 <p><strong>连接查询</strong></p>
 <p>连接查询则是用（可能是隐式的） JOIN 语法，这是以截然不同的逻辑去解决问题：</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> SQL_NO_CACHE grade <span class="hljs-keyword">FROM</span> student_course, student, course 
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> SQL_NO_CACHE grade <span class="hljs-keyword">FROM</span> student_course, student, course 
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> <span class="hljs-keyword">WHERE</span> student_id <span class="hljs-operator">=</span> student.id <span class="hljs-keyword">AND</span> course_id <span class="hljs-operator">=</span> course.id <span class="hljs-keyword">AND</span>
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> course.name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;数据库系统概论&apos;</span> <span class="hljs-keyword">AND</span> student.name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;张三&apos;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">-------+</span>
@@ -885,7 +885,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 </blockquote>
 <h3 id="2-成绩单查询">2. 成绩单查询</h3>
 <p>假设张三想获取自己2021年秋季学期的成绩单，当他登录查询成绩单的网站时，数据库中可能跑了指令（这里直接用连接语法）……</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> student_id, student.name student_name, course_id, course.name course_name, grade
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> student_id, student.name student_name, course_id, course.name course_name, grade
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> <span class="hljs-keyword">FROM</span> student_course, student, course <span class="hljs-keyword">WHERE</span> student.name <span class="hljs-operator">=</span> <span class="hljs-string">&apos;张三&apos;</span> <span class="hljs-keyword">AND</span> term <span class="hljs-operator">=</span> <span class="hljs-string">&apos;2021秋&apos;</span> <span class="hljs-keyword">AND</span>
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> student.id <span class="hljs-operator">=</span> student_id <span class="hljs-keyword">AND</span> course.id <span class="hljs-operator">=</span> course_id;
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+--------------+-----------+-----------------------+-------+</span>
@@ -905,7 +905,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 <p>本节的举例只是做一个 MySQL 效果展示以及一些<del>好看的</del>输出格式样例，相关语法不一定是实验内容。</p>
 </blockquote>
 <hr>
-<p><em><small>last update at: 2021/9/10 23:24:43</small></em></p>
+<p><em><small>last update at: 2021/9/10 23:53:35</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -978,7 +978,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/0-3-frontend.md","ref":"chapter-0/0-3-frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/0-1-intro.md","ref":"chapter-0/0-1-intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-2-backend.md","mtime":"2021-09-10T15:24:33.650Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:24:44.030Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/0-3-frontend.md","ref":"chapter-0/0-3-frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/0-1-intro.md","ref":"chapter-0/0-1-intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-2-backend.md","mtime":"2021-09-10T15:53:25.058Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:53:36.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

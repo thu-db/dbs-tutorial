@@ -745,7 +745,7 @@
 <h2 id="运行模式">运行模式</h2>
 <h3 id="1-交互模式">1. 交互模式</h3>
 <p>交互模式可以参考 MySQL 的模式，如下是一个示例</p>
-<pre><code class="lang-SQL">MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> student;
+<pre><code class="lang-SQL">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> student;
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+--------+-----------+------+</span>
 <span class="hljs-operator">|</span> id         <span class="hljs-operator">|</span> name   <span class="hljs-operator">|</span> status    <span class="hljs-operator">|</span> sex  <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+--------+-----------+------+</span>
@@ -754,7 +754,7 @@
 <span class="hljs-operator">|</span> <span class="hljs-number">2077210001</span> <span class="hljs-operator">|</span> 李四   <span class="hljs-operator">|</span> 硕士生    <span class="hljs-operator">|</span> 男   <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">------------+--------+-----------+------+</span>
 <span class="hljs-number">3</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.000</span> sec)
-MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>)
+mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>)
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> <span class="hljs-keyword">FROM</span>
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> student
     <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span>
@@ -765,11 +765,11 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span> <span class="hljs-keyw
 <span class="hljs-operator">|</span>        <span class="hljs-number">3</span> <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----------+</span>
 <span class="hljs-number">1</span> <span class="hljs-type">row</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.000</span> sec)
-MySQL [curriculum]<span class="hljs-operator">&gt;</span>
+mysql<span class="hljs-operator">&gt;</span>
 </code></pre>
 <p>交互模式不给出严格的要求，主要为了便于自己调试以及助教检查，能看出数据即可。仿照 MySQL 的 shell，以下给一些<strong>可选地</strong>参考实现细节：</p>
 <ul>
-<li>输入时在左边给出前缀并给出当前的数据库名</li>
+<li>输入时在左边给出前缀并给出当前使用的数据库名</li>
 <li>跨行输入时给出规整前缀（无需考虑“修改上一行”的操作）</li>
 <li>输入在最后一个字符是 <code>;</code> 后停止</li>
 <li>尝试画表格边框以提高美观度</li>
@@ -805,7 +805,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span>
 <p>往年实验没有为 <code>desc &lt;table_name&gt;</code> 的指令给出详细的内容要求，这里我们给出如下要求：</p>
 <p>TODO: 待商议</p>
 <hr>
-<p><em><small>last update at: 2021/9/10 23:24:43</small></em></p>
+<p><em><small>last update at: 2021/9/10 23:53:35</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -874,7 +874,7 @@ MySQL [curriculum]<span class="hljs-operator">&gt;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-10T15:24:33.650Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:24:44.030Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-10T15:53:25.058Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:53:36.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
