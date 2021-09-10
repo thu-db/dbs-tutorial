@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>0.2 后端约定 · HonKit</title>
+        <title>0.1 概述 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -100,10 +100,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="frontend.html" />
+    <link rel="next" href="0-2-backend.html" />
     
-    
-    <link rel="prev" href="intro.html" />
     
 
     </head>
@@ -161,9 +159,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="intro.html">
+        <li class="chapter active" data-level="1.2.1" data-path="0-1-intro.html">
             
-                <a href="intro.html">
+                <a href="0-1-intro.html">
             
                     
                     0.1 概述
@@ -174,9 +172,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2" data-path="backend.html">
+        <li class="chapter " data-level="1.2.2" data-path="0-2-backend.html">
             
-                <a href="backend.html">
+                <a href="0-2-backend.html">
             
                     
                     0.2 后端约定
@@ -187,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="frontend.html">
+        <li class="chapter " data-level="1.2.3" data-path="0-3-frontend.html">
             
-                <a href="frontend.html">
+                <a href="0-3-frontend.html">
             
                     
                     0.3 前端约定
@@ -226,9 +224,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.1.1" data-path="../chapter-1/intro.html">
+        <li class="chapter " data-level="2.1.1" data-path="../chapter-1/1-1-intro.html">
             
-                <a href="../chapter-1/intro.html">
+                <a href="../chapter-1/1-1-intro.html">
             
                     
                     1.1 文件管理模块概述
@@ -239,9 +237,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.2" data-path="../chapter-1/page.html">
+        <li class="chapter " data-level="2.1.2" data-path="../chapter-1/1-2-page.html">
             
-                <a href="../chapter-1/page.html">
+                <a href="../chapter-1/1-2-page.html">
             
                     
                     1.2 页式文件系统设计
@@ -252,9 +250,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/buffer.html">
+        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/1-3-buffer.html">
             
-                <a href="../chapter-1/buffer.html">
+                <a href="../chapter-1/1-3-buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -265,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.4" data-path="../chapter-1/api.html">
+        <li class="chapter " data-level="2.1.4" data-path="../chapter-1/1-4-api.html">
             
-                <a href="../chapter-1/api.html">
+                <a href="../chapter-1/1-4-api.html">
             
                     
                     1.4 对外提供接口
@@ -626,19 +624,6 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" >
-            
-                <span>
-            
-                    
-                    step 7: 总结
-            
-                </span>
-            
-
-            
-        </li>
-    
 
     
         
@@ -734,7 +719,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >0.2 后端约定</a>
+        <a href=".." >0.1 概述</a>
     </h1>
 </div>
 
@@ -752,74 +737,28 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="02-后端约定">0.2 后端约定</h1>
-<p>为了便于后续部分模块介绍，我们假定一个场景以便举例之用。</p>
-<h2 id="数据库">数据库</h2>
-<p>参考清华大学课程系统，我们简化出一个简单的模型，包含学生、教师、课程、（同一课程号的）课程的不同开课信息、学生选课信息等表。</p>
-<p>首先我们创建一个数据库 curriculum：</p>
-<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> DATABASE curriculum;
-</code></pre>
-<p>实际使用时还应该用到数据库切换指令</p>
-<pre><code class="lang-SQL">USE curriculum;
-</code></pre>
-<p>上述指令属于系统管理指令，但我们的实验文档是按照自下而上的顺序搭建系统，因此在实验前中期你可能更需要关注下面的数据表。</p>
-<h2 id="数据表">数据表</h2>
-<p>首先学生 (student) 和老师 (teacher) 有对应的编号 (id)、姓名 (name)、性别 (sex)，此外同学有一个字段身份 (status) 区分本科生、硕士生、研究生。</p>
-<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student (
-    id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,  📌 ️主键本身就是<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>？
-    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>, 📌 ️是否支持变长？
-    sex VARCAHR(<span class="hljs-number">4</span>),
-    status <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
-);
-
-<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> teacher (
-    id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,
-    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    sex <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">4</span>),
-);
-</code></pre>
-<p>每门课程 (course) 有唯一的课程号 (id)、课程名 (name)、学分 (credit)。由于同一门课可以由不同老师开设（或同一老师的不同时段）并有不同的课程介绍 (description)，这用课序号 (course_number) 进行区分，我们将这些信息的集合称作一个课程详情 (course_detail)。</p>
-<p>注意 course_detail 使用了复合主键 (course_id, course_number)。</p>
-<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> course (
-    id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,
-    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    credit <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>
-);
-
-<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> course_detail (
-    course_id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    course_number <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    teacher_id <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,
-    description <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">4096</span>),
-    <span class="hljs-keyword">PRIMARY</span> KEY (course_id, course_number),
-    <span class="hljs-keyword">FOREIGN</span> KEY (course_id) <span class="hljs-keyword">REFERENCES</span> course(id),
-    <span class="hljs-keyword">FOREIGN</span> KEY (teacher_id) <span class="hljs-keyword">REFERENCES</span> teacher(id)
-);
-</code></pre>
-<p>最后，一位同学的选课信息 (student_course) 需要添加成绩 (grade)、学期 (term) 信息。注意它有复合主键 (student_id, course_id, term)，这暗示着一门课在一个学期只能被一名同学选一次（更多的时候一名同学只能选一门课一次，但这不由数据库保证），(course_id, course_number) 构成了复合外键指向 course 的复合主键。</p>
-<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student_course (
-    student_id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    course_id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    course_number <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    grade <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">3</span>),
-    term <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
-    <span class="hljs-keyword">PRIMARY</span> KEY (student_id, course_id, term),
-    <span class="hljs-keyword">FOREIGN</span> KEY course_id_number(course_id, course_number) <span class="hljs-keyword">REFERENCES</span> course_detail(course_id, course_number),
-    <span class="hljs-keyword">FOREIGN</span> KEY (student_id) <span class="hljs-keyword">REFERENCES</span> student(id)
-);
-</code></pre>
-<p>📌 补充三张表对应的E-R图</p>
-<p>📌 补充用户使用SQL的例子，比如</p>
-<blockquote>
-<p>(1) &quot;张三数据库系统概论得了95分&quot;，给出相应的写SQL例子</p>
-<p>(2) &quot;张三需要查询自己春季学期的各科成绩&quot;，给出相应的读SQL例子</p>
-<p><strong>[note] 主键数据类型</strong></p>
-<p>1/ 主键会带索引，在我们实验要求中仅对整型索引做要求，因此主键一定是整型或其组合。</p>
-<p>2/ 上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。</p>
-</blockquote>
+                                <html><head></head><body><h1 id="01-概述">0.1 概述</h1>
+<p>本文档假定同学们已经具备了基本的 SQL 知识（如，DML功能和基本写法），因此内容将重点放在数据库引擎开发上。我们的数据库系统架构如图所示：</p>
+<p><img src="structure.svg" alt="structure"></p>
+<p>整体数据库框架主要由以下几部分组成。</p>
+<ol>
+<li>命令解析器，输入用户提交的SQL命令，解析用户指令，调用系统管理模块和查询解析模块的方法执行指令。</li>
+<li>查询解析模块，实现基本的 DML (Data Manipulation Language, 数据操作语言)，对数据库里的数据进行增删改查等基本操作。</li>
+<li>记录管理模块，上层增删查改的目标即是一条条记录，这个模块将文件数据组织成记录供上层使用。</li>
+<li>索引模块，查询执行过程中能会调用，通过直接从索引文件中读取数据来加速查询执行。</li>
+<li>页式文件系统（及其缓冲区），数据库底层存储模块，支持高层模块以页为单位进行文件读写。</li>
+<li>系统管理模块，实现基本的 DDL (Data Definition Language, 数据定义语言)，对数据库和数据表的存储进行管理。</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>还有涉及到交互问题的用户部分，这将在《0.3 前端约定》一节中提到。</li>
+<li>命令解析器将随文档一并提供（文法见<a href="../extra/files.html">附件</a>），我们统一使用 ANTLR4 来作为解析工具，详见第五章相关内容。</li>
+<li>页式文件系统及其缓冲区有一份“祖传实现”（代码见<a href="../extra/files.html">附件</a>），但我们也在第一章提供了编写指引，愿意的话可以自行实现。</li>
+<li>记录管理模块、索引模块、查询解析模块、系统管理模块是实验的主要内容。</li>
+</ol>
 <hr>
-<p><em><small>last update at: 2021/9/10 01:19:57</small></em></p>
-<p><em><small>author: 饶淙元</small></em></p>
+<p><em><small>last update at: 2021/9/10 23:24:43</small></em></p>
+<p><em><small>authors: 饶淙元, 周煊赫</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -832,6 +771,10 @@
         discussion.appendChild(script);
 </script>
 </div>
+
+
+
+
 </body></html>
                                 
                                 </section>
@@ -875,12 +818,8 @@
 
             
                 
-                <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page: 0.1 概述">
-                    <i class="fa fa-angle-left"></i>
-                </a>
                 
-                
-                <a href="frontend.html" class="navigation navigation-next " aria-label="Next page: 0.3 前端约定">
+                <a href="0-2-backend.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 0.2 后端约定">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -891,7 +830,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"next":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/frontend.md","ref":"chapter-0/frontend.md","articles":[]},"previous":{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/intro.md","ref":"chapter-0/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/backend.md","mtime":"2021-09-10T14:55:58.983Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T14:56:09.343Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.1 概述","level":"1.2.1","depth":2,"next":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"previous":{"title":"step 0: 整体介绍","level":"1.2","depth":1,"ref":"","articles":[{"title":"0.1 概述","level":"1.2.1","depth":2,"path":"chapter-0/0-1-intro.md","ref":"chapter-0/0-1-intro.md","articles":[]},{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},{"title":"0.3 前端约定","level":"1.2.3","depth":2,"path":"chapter-0/0-3-frontend.md","ref":"chapter-0/0-3-frontend.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-1-intro.md","mtime":"2021-09-10T15:24:33.650Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:24:44.030Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>0.3 前端约定 · HonKit</title>
+        <title>1.4 对外提供接口 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -101,7 +101,7 @@
 
     
     
-    <link rel="prev" href="backend.html" />
+    <link rel="prev" href="1-3-buffer.html" />
     
 
     </head>
@@ -159,9 +159,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="intro.html">
+        <li class="chapter " data-level="1.2.1" data-path="../chapter-0/0-1-intro.html">
             
-                <a href="intro.html">
+                <a href="../chapter-0/0-1-intro.html">
             
                     
                     0.1 概述
@@ -172,9 +172,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="backend.html">
+        <li class="chapter " data-level="1.2.2" data-path="../chapter-0/0-2-backend.html">
             
-                <a href="backend.html">
+                <a href="../chapter-0/0-2-backend.html">
             
                     
                     0.2 后端约定
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="frontend.html">
+        <li class="chapter " data-level="1.2.3" data-path="../chapter-0/0-3-frontend.html">
             
-                <a href="frontend.html">
+                <a href="../chapter-0/0-3-frontend.html">
             
                     
                     0.3 前端约定
@@ -224,9 +224,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.1.1" data-path="../chapter-1/intro.html">
+        <li class="chapter " data-level="2.1.1" data-path="1-1-intro.html">
             
-                <a href="../chapter-1/intro.html">
+                <a href="1-1-intro.html">
             
                     
                     1.1 文件管理模块概述
@@ -237,9 +237,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.2" data-path="../chapter-1/page.html">
+        <li class="chapter " data-level="2.1.2" data-path="1-2-page.html">
             
-                <a href="../chapter-1/page.html">
+                <a href="1-2-page.html">
             
                     
                     1.2 页式文件系统设计
@@ -250,9 +250,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.3" data-path="../chapter-1/buffer.html">
+        <li class="chapter " data-level="2.1.3" data-path="1-3-buffer.html">
             
-                <a href="../chapter-1/buffer.html">
+                <a href="1-3-buffer.html">
             
                     
                     1.3 LRU 缓存设计
@@ -263,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.4" data-path="../chapter-1/api.html">
+        <li class="chapter active" data-level="2.1.4" data-path="1-4-api.html">
             
-                <a href="../chapter-1/api.html">
+                <a href="1-4-api.html">
             
                     
                     1.4 对外提供接口
@@ -624,19 +624,6 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" >
-            
-                <span>
-            
-                    
-                    step 7: 总结
-            
-                </span>
-            
-
-            
-        </li>
-    
 
     
         
@@ -732,7 +719,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >0.3 前端约定</a>
+        <a href=".." >1.4 对外提供接口</a>
     </h1>
 </div>
 
@@ -750,75 +737,58 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="03-前端约定">0.3 前端约定</h1>
-<h2 id="前端含义">前端含义</h2>
-<p>首先本节标题中的“前端”不是指 GUI，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
-<p>在往年（即本文档诞生之前）的实验中验收采用手动测试（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI （📌 CLI全称）下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
-<p>现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
-<h2 id="运行模式">运行模式</h2>
-<h3 id="1-交互模式">1. 交互模式</h3>
-<p>交互模式可以参考 MySQL 的模式，如下是一个示例</p>
-<pre><code>MySQL [curriculum]&gt; SELECT * FROM student;
-+------------+--------+-----------+------+
-| id         | name   | status    | sex  |
-+------------+--------+-----------+------+
-| 2077310001 | 王五   | 博士生    | 男   |
-| 2077010001 | 张三   | 本科生    | 男   |
-| 2077210001 | 李四   | 硕士生    | 男   |
-+------------+--------+-----------+------+
-3 rows in set (0.000 sec)
-MySQL [curriculum]&gt; SELECT COUNT(*)
-    -&gt; FROM
-    -&gt; student
-    -&gt;
-    -&gt; ;
-+----------+
-| COUNT(*) |
-+----------+
-|        3 |
-+----------+
-1 row in set (0.000 sec)
-MySQL [curriculum]&gt;
-</code></pre><p>交互模式不给出严格的要求，主要为了便于自己调试以及助教检查。仿照 MySQL 的 shell，以下给一些<strong>可选地</strong>参考实现细节：</p>
-<ul>
-<li>输入时在左边给出前缀并给出当前的数据库名</li>
-<li>跨行输入时给出规整前缀（无需考虑“修改上一行”的操作）</li>
-<li>输入在最后一个字符是 <code>;</code> 后停止</li>
-<li>尝试画表格边框以提高美观度</li>
-<li>尝试计算出一列的最大宽度后输出时用空格补齐以保持规整</li>
-<li>在输出表格后面给出行数和后端查询时间</li>
-</ul>
-<p>📌 前端这些要求是否要学生自己实现</p>
-<h3 id="2-批处理模式">2. 批处理模式</h3>
-<p>批处理模式下我们不在乎输入输出的友好性，通常是从 stdin 或者一个 SQL 文件读入多行数据，再输出到 stdout 或一个指定文件。在使用 stdin 和 stdout 时常常搭配重定向。</p>
-<p>批处理模式下的输出就如同做 OJ 一般不能夹带任何冗余信息，必须按照约定的格式给出数据，常见格式是用 tab 分隔符，如 MysQL 等成熟的数据库系统会支持包括 CSV、JSON 在内的多种输出方式自选。</p>
-<p>方便起见我们为批处理模式做出如下约定：</p>
-<ul>
-<li>输出统一使用的 CSV 格式的子集：同一行的不同字段间用英文逗号 <code>,</code> 分隔，<strong>无需考虑数据包含逗号的二义性问题。</strong>；</li>
-<li>浮点数输出为两位小数；</li>
-<li>无需考虑非 ASCII 字符的编码及长度问题，最终测试可以假定全是 ASCII 可打印字符（你自行测试时它很可能是由你终端的设置决定）；</li>
-<li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
-<li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
-<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>。</li>
-</ul>
-<p>TODO: 这里还需要约定表头的写法（或者干脆不输出表头），尤其是列名前要不要带表名，以及一些聚合查询、系统管理语句的表头。</p>
-<h2 id="数据导入">数据导入</h2>
-<p>考虑到部分同学实现大量 INSERT 时效率并不高，为了完成压力测试，我们需要新增一种操作将（被认为是安全的）数据直接导入数据库。</p>
-<p>往常没有统一约定读入指令或参数，现在统一约定如下：</p>
-<ul>
-<li>数据导入需要在批量模式下进行，且必须指定数据库；</li>
-<li>使用命令行可选参数 <code>-f &lt;path&gt;</code> 指定导入文件的路径；</li>
-<li>使用命令行可选参数 <code>-t &lt;table&gt;</code> 指定目标表名；</li>
-</ul>
-<p>在上述约定下，假设我们编译得到的可执行程序是 <code>mydb</code>，则可以通过类似如下语句进行数据导入</p>
-<pre><code class="lang-bash">./mydb -b -f path/to/data/student.txt -t student -d curriculum
+                                <html><head></head><body><h1 id="14-对外提供的接口">1.4 对外提供的接口</h1>
+<pre><code class="lang-C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> FD;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span> *BufferType;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileManager</span>
+{</span>
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">FileManager</span>();
+  ~<span class="hljs-built_in">FileManager</span>();
+
+  <span class="hljs-comment">// 下面的 BufferType 可以自行考虑具体实现，但是内存管理上最好由缓存系统管理而非文件系统</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function">FD <span class="hljs-title">openFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(FD fd)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+
+  <span class="hljs-comment">// 文档提到的另一种思路，上层系统直接传文件名</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(string filename, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(string filename, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferManager</span>
+{</span>
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">BufferManager</span>();
+  ~<span class="hljs-built_in">BufferManager</span>();
+
+  <span class="hljs-comment">// 这里只展示用 FD 的方法，如果采用文件名直传，则所有 FD 都可以改为文件名</span>
+
+  <span class="hljs-comment">// 这些文件操作不一定需要，也可以实现成上层传文件名，底层自动处理打开、创建</span>
+  <span class="hljs-comment">// 如果实现则直接调用 FileManager 的操作</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function">FD <span class="hljs-title">openFile</span><span class="hljs-params">(string filename)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">closeFile</span><span class="hljs-params">(FD fd)</span></span>;
+
+  <span class="hljs-comment">// 是否需要删文件的接口取决于你的系统实现</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeFile</span><span class="hljs-params">(string filename)</span></span>;
+
+  <span class="hljs-comment">// 1. 如果采用读引用的方法，则可以参考这两个接口，读写用的 buffer 空间由底层管理</span>
+  <span class="hljs-function">BufferType <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">markDirty</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID)</span></span>;
+
+  <span class="hljs-comment">// 2. 如果采用读拷贝的方法，则可以参考这两个接口，读写用的 buffer 空间由上层管理</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readPage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writePage</span><span class="hljs-params">(FD fd, <span class="hljs-keyword">int</span> pageID, BufferType buffer)</span></span>;
+};
 </code></pre>
-<p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
-<h2 id="desc">desc</h2>
-<p>往年实验没有为 <code>desc &lt;table_name&gt;</code> 的指令给出详细的内容要求，这里我们给出如下要求：</p>
-<p>TODO: 待商议</p>
 <hr>
-<p><em><small>last update at: 2021/9/10 01:19:57</small></em></p>
+<p><em><small>last update at: 2021/9/10 23:24:43</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -832,6 +802,7 @@ MySQL [curriculum]&gt;
         discussion.appendChild(script);
 </script>
 </div>
+
 </body></html>
                                 
                                 </section>
@@ -875,7 +846,7 @@ MySQL [curriculum]&gt;
 
             
                 
-                <a href="backend.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 0.2 后端约定">
+                <a href="1-3-buffer.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 1.3 LRU 缓存设计">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -887,7 +858,7 @@ MySQL [curriculum]&gt;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/intro.md","ref":"chapter-1/intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/page.md","ref":"chapter-1/page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/buffer.md","ref":"chapter-1/buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/api.md","ref":"chapter-1/api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/backend.md","ref":"chapter-0/backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/frontend.md","mtime":"2021-09-10T14:55:58.983Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T14:56:09.343Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"next":{"title":"step 2: 记录管理","level":"2.2","depth":1,"ref":"","articles":[{"title":"2.1 记录管理模块概述","level":"2.2.1","depth":2,"path":"chapter-2/intro.md","ref":"chapter-2/intro.md","articles":[]},{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"path":"chapter-2/variable.md","ref":"chapter-2/variable.md","articles":[]},{"title":"2.4 对外提供的接口","level":"2.2.4","depth":2,"path":"chapter-2/api.md","ref":"chapter-2/api.md","articles":[]}]},"previous":{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-1/1-4-api.md","mtime":"2021-09-10T15:24:33.650Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T15:24:44.030Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
