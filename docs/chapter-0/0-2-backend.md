@@ -101,7 +101,7 @@ CREATE TABLE student_course (
 假设2021年秋季学期张三同学（学号2077010001）选上了数据库（课程号30240262，课序号0），那么在他选课时可能会发生……
 
 ```SQL
-MySQL [curriculum]> INSERT INTO student_course VALUES (2077010001, 30240262, 0, '*', '2021-秋');
+mysql> INSERT INTO student_course VALUES (2077010001, 30240262, 0, '*', '2021-秋');
 Query OK, 1 row affected (0.000 sec)
 ```
 
@@ -110,7 +110,7 @@ Query OK, 1 row affected (0.000 sec)
 一学期后张三认真完成作业，顺利通过验收，获得绩点 A，那么数据库内可能发生……
 
 ```SQL
-MySQL [curriculum]> UPDATE student_course SET grade = 'A' WHERE student_id = 2077010001 AND course_id = 30240262 AND term = '2021-秋';
+mysql> UPDATE student_course SET grade = 'A' WHERE student_id = 2077010001 AND course_id = 30240262 AND term = '2021-秋';
 Query OK, 1 row affected (0.001 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 ```
@@ -126,7 +126,7 @@ Rows matched: 1  Changed: 1  Warnings: 0
 我们可以逐步完成，先找到张三的学号，再找到数据库课程的课程号，最后完成成绩查询：
 
 ```SQL
-MySQL [curriculum]> SELECT id FROM student WHERE name = '张三';
+mysql> SELECT id FROM student WHERE name = '张三';
 +------------+
 | id         |
 +------------+
@@ -134,7 +134,7 @@ MySQL [curriculum]> SELECT id FROM student WHERE name = '张三';
 +------------+
 1 row in set (0.000 sec)
 
-MySQL [curriculum]> SELECT id FROM course WHERE name ='数据库系统概论';
+mysql> SELECT id FROM course WHERE name ='数据库系统概论';
 +----------+
 | id       |
 +----------+
@@ -142,7 +142,7 @@ MySQL [curriculum]> SELECT id FROM course WHERE name ='数据库系统概论';
 +----------+
 1 row in set (0.000 sec)
 
-MySQL [curriculum]> SELECT grade FROM student_course WHERE student_id = 2077010001 AND course_id = 30240262;
+mysql> SELECT grade FROM student_course WHERE student_id = 2077010001 AND course_id = 30240262;
 +-------+
 | grade |
 +-------+
@@ -156,7 +156,7 @@ MySQL [curriculum]> SELECT grade FROM student_course WHERE student_id = 20770100
 通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，进而提高效率：
 
 ```SQL
-MySQL [curriculum]> SELECT grade FROM student_course WHERE student_id =
+mysql> SELECT grade FROM student_course WHERE student_id =
     -> (SELECT id FROM student WHERE name = '张三') AND course_id =
     -> (SELECT id FROM course WHERE name = '数据库系统概论');
 +-------+
@@ -172,7 +172,7 @@ MySQL [curriculum]> SELECT grade FROM student_course WHERE student_id =
 连接查询则是用（可能是隐式的） JOIN 语法，这是以截然不同的逻辑去解决问题：
 
 ```SQL
-MySQL [curriculum]> SELECT SQL_NO_CACHE grade FROM student_course, student, course 
+mysql> SELECT SQL_NO_CACHE grade FROM student_course, student, course 
     -> WHERE student_id = student.id AND course_id = course.id AND
     -> course.name = '数据库系统概论' AND student.name = '张三';
 +-------+
@@ -194,7 +194,7 @@ MySQL [curriculum]> SELECT SQL_NO_CACHE grade FROM student_course, student, cour
 假设张三想获取自己2021年秋季学期的成绩单，当他登录查询成绩单的网站时，数据库中可能跑了指令（这里直接用连接语法）……
 
 ```SQL
-MySQL [curriculum]> SELECT student_id, student.name student_name, course_id, course.name course_name, grade
+mysql> SELECT student_id, student.name student_name, course_id, course.name course_name, grade
     -> FROM student_course, student, course WHERE student.name = '张三' AND term = '2021秋' AND
     -> student.id = student_id AND course.id = course_id;
 +------------+--------------+-----------+-----------------------+-------+

@@ -16,7 +16,7 @@
 交互模式可以参考 MySQL 的模式，如下是一个示例
 
 ```SQL
-MySQL [curriculum]> SELECT * FROM student;
+mysql> SELECT * FROM student;
 +------------+--------+-----------+------+
 | id         | name   | status    | sex  |
 +------------+--------+-----------+------+
@@ -25,7 +25,7 @@ MySQL [curriculum]> SELECT * FROM student;
 | 2077210001 | 李四   | 硕士生    | 男   |
 +------------+--------+-----------+------+
 3 rows in set (0.000 sec)
-MySQL [curriculum]> SELECT COUNT(*)
+mysql> SELECT COUNT(*)
     -> FROM
     -> student
     ->
@@ -36,12 +36,12 @@ MySQL [curriculum]> SELECT COUNT(*)
 |        3 |
 +----------+
 1 row in set (0.000 sec)
-MySQL [curriculum]>
+mysql>
 ```
 
 交互模式不给出严格的要求，主要为了便于自己调试以及助教检查，能看出数据即可。仿照 MySQL 的 shell，以下给一些**可选地**参考实现细节：
 
-- 输入时在左边给出前缀并给出当前的数据库名
+- 输入时在左边给出前缀并给出当前使用的数据库名
 - 跨行输入时给出规整前缀（无需考虑“修改上一行”的操作）
 - 输入在最后一个字符是 `;` 后停止
 - 尝试画表格边框以提高美观度
