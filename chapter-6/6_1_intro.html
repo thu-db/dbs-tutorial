@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>5.3 逻辑优化 · HonKit</title>
+        <title>6.1 概述 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -100,10 +100,6 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="5_4_physic.html" />
-    
-    
-    <link rel="prev" href="5_2_sql.html" />
     
 
     </head>
@@ -530,9 +526,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="3.2.1" data-path="5_1_intro.html">
+        <li class="chapter " data-level="3.2.1" data-path="../chapter-5/5_1_intro.html">
             
-                <a href="5_1_intro.html">
+                <a href="../chapter-5/5_1_intro.html">
             
                     
                     5.1 概述
@@ -543,9 +539,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2.2" data-path="5_2_sql.html">
+        <li class="chapter " data-level="3.2.2" data-path="../chapter-5/5_2_sql.html">
             
-                <a href="5_2_sql.html">
+                <a href="../chapter-5/5_2_sql.html">
             
                     
                     5.2 SQL简介
@@ -556,9 +552,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.2.3" data-path="5_3_logic.html">
+        <li class="chapter " data-level="3.2.3" data-path="../chapter-5/5_3_logic.html">
             
-                <a href="5_3_logic.html">
+                <a href="../chapter-5/5_3_logic.html">
             
                     
                     5.3 逻辑优化
@@ -569,9 +565,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2.4" data-path="5_4_physic.html">
+        <li class="chapter " data-level="3.2.4" data-path="../chapter-5/5_4_physic.html">
             
-                <a href="5_4_physic.html">
+                <a href="../chapter-5/5_4_physic.html">
             
                     
                     5.4 物理优化
@@ -608,9 +604,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.1.1" data-path="../chapter-6/6_1_intro.html">
+        <li class="chapter active" data-level="4.1.1" data-path="6_1_intro.html">
             
-                <a href="../chapter-6/6_1_intro.html">
+                <a href="6_1_intro.html">
             
                     
                     6.1 概述
@@ -734,7 +730,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >5.3 逻辑优化</a>
+        <a href=".." >6.1 概述</a>
     </h1>
 </div>
 
@@ -752,27 +748,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h4 id="53-逻辑优化：抽象语法树到逻辑计划树（选做）">5.3 逻辑优化：抽象语法树到逻辑计划树（选做）</h4>
-<p>查询优化器在逻辑优化阶段主要解决的问题是：如何找出SQL语句的等价变换形式，使SQL执行更高效；一般可以使用代数优化的方式完成这一过程。代数优化是通过关系代数中一些等价变化的方式调整原始的抽象语法树结构，使其变化为执行过程上更为简洁高效的逻辑计划树的形式。主要是一些基于规则的固定转化模式，逻辑优化过程基于如下的经验规则：</p>
-<ol>
-<li>尽早进行选择运算，这样可以尽早降低运算数据的规模</li>
-<li>合并同表的多个选择和投影运算，减少表的扫描次数</li>
-<li>合并投影运算和其他双目运算（笛卡尔积，等值连接，并集差集），减少表的扫描次数</li>
-<li>合并选择运算与笛卡尔积，避免直接计算笛卡尔积</li>
-<li>提取公共子表达式，重复使用</li>
-</ol>
-<p>基于上述的经验规则，常用的变化包括如下几类：</p>
-<ol>
-<li>列裁剪：运算过程中仅保留必要的列，忽略其余列，降低数据传输开销。</li>
-<li>谓词下推：将查询语句中的过滤表达式计算尽可能下推到距离数据源最近的地方，以尽早完成数据的过滤，进而显著地减少数据传输或计算的开销。</li>
-<li>子查询合并：在语义等价条件下，多个子查询可以合并成一个子查询，这样多次表扫描，多次连接减少为单次表扫描和单次连接。</li>
-<li>谓词重写：利用一些等价规则将IN、OR、LIKE、BETWEEN、AND等谓词进行等价转化。</li>
-<li>条件化简：对于WHERE、HAVING等条件进行化简，例如常量传递和不等式变化等。</li>
-</ol>
-<p>逻辑优化部分的代码实现需要一定编译原理的课程基础以及较高的编程能力支持，所以这一部分可能对于部分没有接触过编译原理知识的同学造成过大的负担。所以逻辑优化的内容仅作为选做内容，希望各位对于数据库系统感兴趣的同学可以自行探索并实现这一部分的内容。</p>
+                                <html><head></head><body><h4 id="61-系统管理">6.1 系统管理</h4>
+<p>在数据库系统中，系统管理模块主要提供两方面的功能，即基本的数据定义语言和存储管理。</p>
+<h5 id="1-数据定义语言（data-definition-language）">1. 数据定义语言（Data Definition Language）</h5>
+<p>数据定义语言用于定义数据库中各类对象的数据结构，如关系表、索引、视图等。对于任意的数据结构，常见的数据定义语言主要包括创建（CREATE）、修改（ALTER）、和删除（DELETE）三类。比如，如果我们希望在学生选课信息表中添加&quot;是否退课&quot;属性，就可以利用如下的数据定义语言实现：</p>
+<pre><code class="lang-SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student_course
+<span class="hljs-keyword">ADD</span> is_dropout <span class="hljs-type">char</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>;
+</code></pre>
+<h5 id="2-数据库和数据表的存储管理-阅读内容">2. 数据库和数据表的存储管理 (阅读内容)</h5>
+<p>如前面第二章介绍，数据库的存储管理主要包括系统表空间管理和用户表空间管理两类，每类表空间又各自由一个或多个数据文件组成，如用户数据、临时数据、日志数据等等。因此，在做一个项目的时候，往往先创建一个数据库实例（CREATE DATABASE），然后创建表空间（CREATE TABLESPACE），再创建用户（CREATE USER），然后用户指定这个表空间。</p>
+<p>首先，实际数据库中提供表空间的创建、修改、撤销、重命名等功能。例如学校管理员Stephen新建了一个教务数据库Lesson，然后需要创建一个表空间并分配给自己管理，则SQL语句如下：</p>
+<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span>SPACE lesson_space DATAFILE <span class="hljs-string">&apos;./lesson_space.dbf&apos;</span> SIZE <span class="hljs-number">2000</span>M;
+</code></pre>
+<pre><code class="lang-SQL"><span class="hljs-keyword">GRANT</span> lesson_space <span class="hljs-keyword">to</span> Stephen;
+</code></pre>
+<p>其次，为了方便对数据库中不同的表空间进行管理，实际数据库中经常维护大量的系统视图，提供不同表空间在不同方面的统计信息，例如：</p>
+<p><img src="sys-view.jpeg" alt="structure"></p>
 <hr>
-<p><em><small>last update at: 2021/9/1 17:03:01</small></em></p>
-<p><em><small>author: 董昊文</small></em></p>
+<p><em><small>last update at: 2021/9/10 09:29:58</small></em></p>
+<p><em><small>author: 周煊赫</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -785,6 +779,7 @@
         discussion.appendChild(script);
 </script>
 </div>
+
 
 </body></html>
                                 
@@ -829,14 +824,6 @@
 
             
                 
-                <a href="5_2_sql.html" class="navigation navigation-prev " aria-label="Previous page: 5.2 SQL简介">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="5_4_physic.html" class="navigation navigation-next " aria-label="Next page: 5.4 物理优化">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -845,7 +832,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.3 逻辑优化","level":"3.2.3","depth":2,"next":{"title":"5.4 物理优化","level":"3.2.4","depth":2,"path":"chapter-5/5_4_physic.md","ref":"chapter-5/5_4_physic.md","articles":[]},"previous":{"title":"5.2 SQL简介","level":"3.2.2","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_3_logic.md","mtime":"2021-09-10T01:29:48.345Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T01:29:59.253Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.1 概述","level":"4.1.1","depth":2,"next":{"title":"step 7: 总结","level":"4.2","depth":1,"ref":"","articles":[]},"previous":{"title":"step 6: 系统管理","level":"4.1","depth":1,"ref":"","articles":[{"title":"6.1 概述","level":"4.1.1","depth":2,"path":"chapter-6/6_1_intro.md","ref":"chapter-6/6_1_intro.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-6/6_1_intro.md","mtime":"2021-09-10T01:29:48.345Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-10T01:29:59.253Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
