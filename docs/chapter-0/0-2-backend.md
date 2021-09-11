@@ -195,18 +195,19 @@ mysql> SELECT SQL_NO_CACHE grade FROM student_course, student, course
 
 ```SQL
 mysql> SELECT student_id, student.name student_name, course_id, course.name course_name, grade
-    -> FROM student_course, student, course WHERE student.name = '张三' AND term = '2021秋' AND
+    -> FROM student_course, student, course WHERE student.name = '张三' AND term = '2021-秋' AND
     -> student.id = student_id AND course.id = course_id;
 +------------+--------------+-----------+-----------------------+-------+
 | student_id | student_name | course_id | course_name           | grade |
 +------------+--------------+-----------+-----------------------+-------+
 | 2077010001 | 张三         |  30240063 | 信号处理原理          | A     |
 | 2077010001 | 张三         |  30240163 | 软件工程              | A     |
+| 2077010001 | 张三         |  30240262 | 数据库系统概论        | A     |
 | 2077010001 | 张三         |  30240382 | 编译原理              | A     |
 | 2077010001 | 张三         |  40240354 | 计算机组成原理        | A     |
 | 2077010001 | 张三         |  40240513 | 计算机网络原理        | A     |
 +------------+--------------+-----------+-----------------------+-------+
-5 rows in set (0.000 sec)
+6 rows in set (0.000 sec)
 ```
 
 注意这里用到了很多细节操作，包括连接时同表间出现重名字段需要加表名前缀，没有出现则不用加；SELECT 后面的字段名后可以加别称来让输出结果的表头更好看（如 `student_name`）。
