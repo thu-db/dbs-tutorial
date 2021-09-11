@@ -28,14 +28,14 @@ USE curriculum;
 CREATE TABLE student (
     id INT NOT NULL PRIMARY KEY, 
     name VARCHAR(32) NOT NULL,
-    sex VARCAHR(4),
+    sex VARCHAR(4),
     status VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE teacher (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
-    sex VARCHAR(4),
+    sex VARCHAR(4)
 );
 ```
 
