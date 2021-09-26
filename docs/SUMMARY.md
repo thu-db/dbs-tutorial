@@ -30,7 +30,6 @@
     * [4.2 扫描算法](chapter-4/4-2-scan.md)
     * [4.3 连接算法](chapter-4/4-3-join.md)
     * [4.4 查询执行](chapter-4/4-4-execution.md)
-    * [4.5 对外提供的接口](chapter-4/4-5-api.md)
 * step 5: 解析器
     * [5.1 概述](chapter-5/5_1_intro.md)
     * [5.2 SQL简介](chapter-5/5_2_sql.md)
