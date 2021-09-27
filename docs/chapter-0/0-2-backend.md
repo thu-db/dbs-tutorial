@@ -214,7 +214,7 @@ mysql> SELECT student_id, student.name student_name, course_id, course.name cour
 
 > **[warning] 仅供展示**
 
-> 本节的举例只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。
+> 整个 step 0 中的举例均只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。
 
 {% set authors = ["饶淙元"] %}
 
