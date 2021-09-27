@@ -762,7 +762,13 @@ mysql<span class="hljs-operator">&gt;</span>
 <li>尝试画表格边框以提高美观度</li>
 <li>尝试计算出一列的最大宽度后输出时用空格补齐以保持规整</li>
 <li>在输出表格后面给出行数和后端查询时间</li>
+<li>输出某一字段时，对应列的表头采用 <code>&lt;table_name&gt;.&lt;column_name&gt;</code> 的格式输出（尤指 <code>JOIN</code> 意义下），当字段名没有歧义时可以只输出 <code>&lt;column_name&gt;</code> 以精简显示</li>
+<li>输出聚合查询（若实现了该部分内容）时直接以 <code>SELECT</code> 后的 <code>selector</code> 作为对应列的表头即可。</li>
 </ul>
+<blockquote>
+<p><strong>[info] 没有歧义的字段名</strong></p>
+<p>在多表查询下可能多张表有相同的字段，例如当我们多表查询 <code>course</code>, <code>course_detail</code>, <code>teacher</code> 时，如果表头显示 <code>name</code> 则会有 <code>course.name</code> 与 <code>teacher.name</code> 的歧义，而显示 <code>credit</code> 与 <code>course.credit</code> 均可确定地指明同一字段。</p>
+</blockquote>
 <h3 id="2-批处理模式">2. 批处理模式</h3>
 <p>批处理模式下我们不在乎输入输出的友好性，通常是从 stdin 或者一个 SQL 文件读入多行数据，再输出到 stdout 或一个指定文件。在使用 stdin 和 stdout 时常常搭配重定向。</p>
 <p>批处理模式下的输出就如同做 OJ 一般不能夹带任何冗余信息，必须按照约定的格式给出数据，常见格式是用 tab 分隔符，如 MysQL 等成熟的数据库系统会支持包括 CSV、JSON 在内的多种输出方式自选。</p>
@@ -773,9 +779,9 @@ mysql<span class="hljs-operator">&gt;</span>
 <li>无需考虑非 ASCII 字符的编码及长度问题，最终测试可以假定全是 ASCII 可打印字符（你自行测试时它很可能是由你终端的设置决定）；</li>
 <li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
 <li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
-<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>。</li>
+<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>；</li>
+<li>表头无需精简，同 <code>SELECT</code> 后的 <code>selector</code> 或 <code>*</code> （参考所提供的文法文件）一致即可，我们保证如果做自动测试则一定不会在 <code>selector</code> 中添加额外的空白符。</li>
 </ul>
-<p>TODO: 这里还需要约定表头的写法（或者干脆不输出表头），尤其是列名前要不要带表名，以及一些聚合查询、系统管理语句的表头。</p>
 <h2 id="数据导入">数据导入</h2>
 <p>考虑到部分同学实现大量 INSERT 时效率并不高，为了完成压力测试，我们需要新增一种操作将（被认为是安全的）数据直接导入数据库。</p>
 <p>往常没有统一约定读入指令或参数，现在统一约定如下：</p>
@@ -792,7 +798,7 @@ mysql<span class="hljs-operator">&gt;</span>
 <p>往年实验没有为 <code>desc &lt;table_name&gt;</code> 的指令给出详细的内容要求，这里我们给出如下要求：</p>
 <p>TODO: 待商议</p>
 <hr>
-<p><em><small>last update at: 2021/9/10 23:53:35</small></em></p>
+<p><em><small>last update at: 2021/9/28 24:54:19</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -861,7 +867,7 @@ mysql<span class="hljs-operator">&gt;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-27T12:42:20.891Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-27T12:42:35.207Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-27T16:54:10.922Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-27T16:54:20.585Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
