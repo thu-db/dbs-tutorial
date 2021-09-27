@@ -25,7 +25,7 @@
     * [3.4 对外提供的接口](chapter-3/api.md)
 
 ## 解析与执行
-* step 4: 查询处理和执行器
+* step 4: 查询处理
     * [4.1 概述](chapter-4/4-1-overview.md)
     * [4.2 扫描算法](chapter-4/4-2-scan.md)
     * [4.3 连接算法](chapter-4/4-3-join.md)
