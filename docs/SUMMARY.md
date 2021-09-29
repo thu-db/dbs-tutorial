@@ -39,6 +39,8 @@
 ## 系统管理
 * step 6: 系统管理
     * [6.1 概述](chapter-6/6_1_intro.md)
+    * [6.2 基本功能](chapter-6/6_2_basic.md)
+    * [6.3 进阶功能](chapter-6/6_3_advanced.md)    
 <!--* step 7: 总结-->
 
 ## 附录
