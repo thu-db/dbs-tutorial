@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>5.3 逻辑优化 · HonKit</title>
+        <title>6.2 基本功能 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -100,10 +100,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="5_4_physic.html" />
+    <link rel="next" href="6_3_advanced.html" />
     
     
-    <link rel="prev" href="5_2_sql.html" />
+    <link rel="prev" href="6_1_intro.html" />
     
 
     </head>
@@ -517,9 +517,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="3.2.1" data-path="5_1_intro.html">
+        <li class="chapter " data-level="3.2.1" data-path="../chapter-5/5_1_intro.html">
             
-                <a href="5_1_intro.html">
+                <a href="../chapter-5/5_1_intro.html">
             
                     
                     5.1 概述
@@ -530,9 +530,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2.2" data-path="5_2_sql.html">
+        <li class="chapter " data-level="3.2.2" data-path="../chapter-5/5_2_sql.html">
             
-                <a href="5_2_sql.html">
+                <a href="../chapter-5/5_2_sql.html">
             
                     
                     5.2 SQL简介
@@ -543,9 +543,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.2.3" data-path="5_3_logic.html">
+        <li class="chapter " data-level="3.2.3" data-path="../chapter-5/5_3_logic.html">
             
-                <a href="5_3_logic.html">
+                <a href="../chapter-5/5_3_logic.html">
             
                     
                     5.3 逻辑优化
@@ -556,9 +556,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2.4" data-path="5_4_physic.html">
+        <li class="chapter " data-level="3.2.4" data-path="../chapter-5/5_4_physic.html">
             
-                <a href="5_4_physic.html">
+                <a href="../chapter-5/5_4_physic.html">
             
                     
                     5.4 物理优化
@@ -595,9 +595,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.1.1" data-path="../chapter-6/6_1_intro.html">
+        <li class="chapter " data-level="4.1.1" data-path="6_1_intro.html">
             
-                <a href="../chapter-6/6_1_intro.html">
+                <a href="6_1_intro.html">
             
                     
                     6.1 概述
@@ -608,9 +608,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.1.2" data-path="../chapter-6/6_2_basic.html">
+        <li class="chapter active" data-level="4.1.2" data-path="6_2_basic.html">
             
-                <a href="../chapter-6/6_2_basic.html">
+                <a href="6_2_basic.html">
             
                     
                     6.2 基本功能
@@ -621,9 +621,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.1.3" data-path="../chapter-6/6_3_advanced.html">
+        <li class="chapter " data-level="4.1.3" data-path="6_3_advanced.html">
             
-                <a href="../chapter-6/6_3_advanced.html">
+                <a href="6_3_advanced.html">
             
                     
                     6.3 进阶功能
@@ -734,7 +734,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >5.3 逻辑优化</a>
+        <a href=".." >6.2 基本功能</a>
     </h1>
 </div>
 
@@ -752,27 +752,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="53-逻辑优化：抽象语法树到逻辑计划树（选做）">5.3 逻辑优化：抽象语法树到逻辑计划树（选做）</h1>
-<p>查询优化器在逻辑优化阶段主要解决的问题是：如何找出SQL语句的等价变换形式，使SQL执行更高效；一般可以使用代数优化的方式完成这一过程。代数优化是通过关系代数中一些等价变化的方式调整原始的抽象语法树结构，使其变化为执行过程上更为简洁高效的逻辑计划树的形式。主要是一些基于规则的固定转化模式，逻辑优化过程基于如下的经验规则：</p>
-<ol>
-<li>尽早进行选择运算，这样可以尽早降低运算数据的规模</li>
-<li>合并同表的多个选择和投影运算，减少表的扫描次数</li>
-<li>合并投影运算和其他双目运算（笛卡尔积，等值连接，并集差集），减少表的扫描次数</li>
-<li>合并选择运算与笛卡尔积，避免直接计算笛卡尔积</li>
-<li>提取公共子表达式，重复使用</li>
-</ol>
-<p>基于上述的经验规则，常用的变化包括如下几类：</p>
-<ol>
-<li>列裁剪：运算过程中仅保留必要的列，忽略其余列，降低数据传输开销。</li>
-<li>谓词下推：将查询语句中的过滤表达式计算尽可能下推到距离数据源最近的地方，以尽早完成数据的过滤，进而显著地减少数据传输或计算的开销。</li>
-<li>子查询合并：在语义等价条件下，多个子查询可以合并成一个子查询，这样多次表扫描，多次连接减少为单次表扫描和单次连接。</li>
-<li>谓词重写：利用一些等价规则将IN、OR、LIKE、BETWEEN、AND等谓词进行等价转化。</li>
-<li>条件化简：对于WHERE、HAVING等条件进行化简，例如常量传递和不等式变化等。</li>
-</ol>
-<p>逻辑优化部分的代码实现需要一定编译原理的课程基础以及较高的编程能力支持，所以这一部分可能对于部分没有接触过编译原理知识的同学造成过大的负担。所以逻辑优化的内容仅作为选做内容，希望各位对于数据库系统感兴趣的同学可以自行探索并实现这一部分的内容。</p>
+                                <html><head></head><body><h1 id="62-基本功能">6.2 基本功能</h1>
+<h2 id="1-数据库存储管理">1. 数据库存储管理</h2>
+<h3 id="创建数据库">创建数据库</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> DATABASE curriculum_backup;
+</code></pre>
+<h3 id="删除数据库">删除数据库</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">DROP</span> DATABASE curriculum_backup;
+</code></pre>
+<h3 id="切换数据库">切换数据库</h3>
+<pre><code class="lang-SQL">USE DATABASE curriculum_backup;
+</code></pre>
+<h3 id="列出数据库以及包含的所有表名">列出数据库以及包含的所有表名</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">SHOW</span> DATABASE curriculum;
+</code></pre>
+<h2 id="2-表存储管理">2. 表存储管理</h2>
+<h3 id="创建数据表">创建数据表</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> scholars(
+    studentid <span class="hljs-type">INT</span>,
+    awardname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+    awardtime <span class="hljs-type">DATE</span>
+);
+</code></pre>
+<h3 id="列出表的模式信息">列出表的模式信息</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">TABLE</span> scholars;
+</code></pre>
+<h3 id="删除数据表">删除数据表</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> scholars;
+</code></pre>
+<h3 id="表重命名">表重命名</h3>
+<pre><code class="lang-SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student RENAME <span class="hljs-keyword">TO</span> student_2021;
+</code></pre>
 <hr>
-<p><em><small>last update at: 2021/9/27 17:08:01</small></em></p>
-<p><em><small>author: 董昊文</small></em></p>
+<p><em><small>last update at: 2021/9/29 12:19:11</small></em></p>
+<p><em><small>author: 周煊赫</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');
@@ -785,7 +798,6 @@
         discussion.appendChild(script);
 </script>
 </div>
-
 </body></html>
                                 
                                 </section>
@@ -829,12 +841,12 @@
 
             
                 
-                <a href="5_2_sql.html" class="navigation navigation-prev " aria-label="Previous page: 5.2 SQL简介">
+                <a href="6_1_intro.html" class="navigation navigation-prev " aria-label="Previous page: 6.1 概述">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="5_4_physic.html" class="navigation navigation-next " aria-label="Next page: 5.4 物理优化">
+                <a href="6_3_advanced.html" class="navigation navigation-next " aria-label="Next page: 6.3 进阶功能">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -845,7 +857,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.3 逻辑优化","level":"3.2.3","depth":2,"next":{"title":"5.4 物理优化","level":"3.2.4","depth":2,"path":"chapter-5/5_4_physic.md","ref":"chapter-5/5_4_physic.md","articles":[]},"previous":{"title":"5.2 SQL简介","level":"3.2.2","depth":2,"path":"chapter-5/5_2_sql.md","ref":"chapter-5/5_2_sql.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-5/5_3_logic.md","mtime":"2021-09-29T04:19:03.449Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-29T04:19:12.459Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.2 基本功能","level":"4.1.2","depth":2,"next":{"title":"6.3 进阶功能","level":"4.1.3","depth":2,"path":"chapter-6/6_3_advanced.md","ref":"chapter-6/6_3_advanced.md","articles":[]},"previous":{"title":"6.1 概述","level":"4.1.1","depth":2,"path":"chapter-6/6_1_intro.md","ref":"chapter-6/6_1_intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-6/6_2_basic.md","mtime":"2021-09-29T04:19:03.449Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-29T04:19:12.459Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
