@@ -753,38 +753,38 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="62-基本功能">6.2 基本功能</h1>
-<h2 id="1-数据库存储管理">1. 数据库存储管理</h2>
-<h3 id="创建数据库">创建数据库</h3>
+<h2 id="数据库存储管理">数据库存储管理</h2>
+<h3 id="1-创建数据库">1. 创建数据库</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> DATABASE curriculum_backup;
 </code></pre>
-<h3 id="删除数据库">删除数据库</h3>
+<h3 id="2-删除数据库">2. 删除数据库</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">DROP</span> DATABASE curriculum_backup;
 </code></pre>
-<h3 id="切换数据库">切换数据库</h3>
+<h3 id="3-切换数据库">3. 切换数据库</h3>
 <pre><code class="lang-SQL">USE DATABASE curriculum_backup;
 </code></pre>
-<h3 id="列出数据库以及包含的所有表名">列出数据库以及包含的所有表名</h3>
+<h3 id="4-列出数据库以及包含的所有表名">4. 列出数据库以及包含的所有表名</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">SHOW</span> DATABASE curriculum;
 </code></pre>
-<h2 id="2-表存储管理">2. 表存储管理</h2>
-<h3 id="创建数据表">创建数据表</h3>
+<h2 id="表存储管理">表存储管理</h2>
+<h3 id="1-创建数据表">1. 创建数据表</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> scholars(
     studentid <span class="hljs-type">INT</span>,
     awardname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
     awardtime <span class="hljs-type">DATE</span>
 );
 </code></pre>
-<h3 id="列出表的模式信息">列出表的模式信息</h3>
+<h3 id="2-列出表的模式信息">2. 列出表的模式信息</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">TABLE</span> scholars;
 </code></pre>
-<h3 id="删除数据表">删除数据表</h3>
+<h3 id="3-删除数据表">3. 删除数据表</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> scholars;
 </code></pre>
-<h3 id="表重命名">表重命名</h3>
+<h3 id="4-表重命名">4. 表重命名</h3>
 <pre><code class="lang-SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student RENAME <span class="hljs-keyword">TO</span> student_2021;
 </code></pre>
 <hr>
-<p><em><small>last update at: 2021/9/29 12:19:11</small></em></p>
+<p><em><small>last update at: 2021/9/29 12:22:21</small></em></p>
 <p><em><small>author: 周煊赫</small></em></p>
 <div id="my-comment">
 <script>
@@ -857,7 +857,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6.2 基本功能","level":"4.1.2","depth":2,"next":{"title":"6.3 进阶功能","level":"4.1.3","depth":2,"path":"chapter-6/6_3_advanced.md","ref":"chapter-6/6_3_advanced.md","articles":[]},"previous":{"title":"6.1 概述","level":"4.1.1","depth":2,"path":"chapter-6/6_1_intro.md","ref":"chapter-6/6_1_intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-6/6_2_basic.md","mtime":"2021-09-29T04:19:03.449Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-29T04:19:12.459Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.2 基本功能","level":"4.1.2","depth":2,"next":{"title":"6.3 进阶功能","level":"4.1.3","depth":2,"path":"chapter-6/6_3_advanced.md","ref":"chapter-6/6_3_advanced.md","articles":[]},"previous":{"title":"6.1 概述","level":"4.1.1","depth":2,"path":"chapter-6/6_1_intro.md","ref":"chapter-6/6_1_intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-6/6_2_basic.md","mtime":"2021-09-29T04:22:10.858Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-29T04:22:22.214Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
