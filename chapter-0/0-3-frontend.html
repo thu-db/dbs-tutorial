@@ -755,6 +755,11 @@
 <p>首先本节标题中的“前端”不是指 GUI (Graphical User Interface，俗称“图形界面”)，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
 <p>在往年（即本文档诞生之前）的实验中验收采用手动测试（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI (Command-Line Interface，俗称“命令行”) 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
 <p>现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
+<blockquote>
+<p><strong>[info] 自动化测试</strong></p>
+<p>截止 2021 年秋季学期尚未部署自动化测试，因此批处理模式不在检查范围之内。</p>
+<p>但笔者仍然建议实现批处理模式以便黑盒自测。</p>
+</blockquote>
 <h2 id="运行模式">运行模式</h2>
 <h3 id="1-交互模式">1. 交互模式</h3>
 <p>交互模式可以参考 MySQL 的模式，如下是一个示例</p>
@@ -789,7 +794,7 @@ mysql<span class="hljs-operator">&gt;</span>
 <li>尝试计算出一列的最大宽度后输出时用空格补齐以保持规整</li>
 <li>在输出表格后面给出行数和后端查询时间</li>
 <li>输出某一字段时，对应列的表头采用 <code>&lt;table_name&gt;.&lt;column_name&gt;</code> 的格式输出（尤指 <code>JOIN</code> 意义下），当字段名没有歧义时可以只输出 <code>&lt;column_name&gt;</code> 以精简显示</li>
-<li>输出聚合查询（若实现了该部分内容）时直接以 <code>SELECT</code> 后的 <code>selector</code> 作为对应列的表头即可。</li>
+<li>输出聚合查询（若实现了该功能）时直接以 <code>SELECT</code> 后的 <code>selector</code> 作为对应列的表头即可。</li>
 </ul>
 <blockquote>
 <p><strong>[info] 没有歧义的字段名</strong></p>
@@ -804,6 +809,7 @@ mysql<span class="hljs-operator">&gt;</span>
 <li>浮点数输出为两位小数；</li>
 <li>无需考虑非 ASCII 字符的编码及长度问题，最终测试可以假定全是 ASCII 可打印字符（你自行测试时它很可能是由你终端的设置决定）；</li>
 <li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
+<li>无需输出执行时间；</li>
 <li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
 <li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>；</li>
 <li>表头无需精简，同 <code>SELECT</code> 后的 <code>selector</code> 或 <code>*</code> （参考所提供的文法文件）一致即可，我们保证如果做自动测试则一定不会在 <code>selector</code> 中添加额外的空白符。</li>
@@ -822,9 +828,42 @@ mysql<span class="hljs-operator">&gt;</span>
 <p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
 <h2 id="desc">desc</h2>
 <p>往年实验没有为 <code>desc &lt;table_name&gt;</code> 的指令给出详细的内容要求，这里我们给出如下要求：</p>
-<p>TODO: 待商议</p>
+<ol>
+<li>首先输出一张表（格式同 SELECT），表中包含从左到右四列： Field、Type、Null、Default</li>
+<li>接下来输出主键信息</li>
+<li>然后输出外键信息</li>
+<li>（如果实现了）按字典序输出 UNIQUE 信息</li>
+<li>最后按字典序输出索引信息</li>
+</ol>
+<p>注意上面五部分中只有第一部分是一定有的（一张表至少有一列，我们的语法文件已经保证了这一点），剩下四部分如果没有则直接跳过，如果有则<strong>一行一条信息</strong>，每条信息后加分号。每一部分各条信息的顺序不作要求。</p>
+<p>这里用举例的方法给出一个参考，注意这里相比后端约定章节中的 <code>student_course</code> 表多了几个字段用于演示 UNIQUE 与 INDEX，这里的 <code>index_field_A</code> 与 <code>index_field_a</code> 形成组合索引，而 <code>index_field_B</code> 是单列索引。</p>
+<pre><code class="lang-SQL">mydb<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">desc</span> student_course;
+<span class="hljs-operator">+</span><span class="hljs-comment">---------------+-------------+------+---------+</span>
+<span class="hljs-operator">|</span> Field         <span class="hljs-operator">|</span> Type        <span class="hljs-operator">|</span> <span class="hljs-keyword">Null</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">Default</span> <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">---------------+-------------+------+---------+</span>
+<span class="hljs-operator">|</span> student_id    <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> course_id     <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> course_number <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> grade         <span class="hljs-operator">|</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">3</span>)  <span class="hljs-operator">|</span> YES  <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> term          <span class="hljs-operator">|</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>) <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> unique_field  <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> index_field_A <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> index_field_a <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span> index_field_B <span class="hljs-operator">|</span> <span class="hljs-type">INT</span>         <span class="hljs-operator">|</span> <span class="hljs-keyword">NO</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">NULL</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">---------------+-------------+------+---------+</span>
+<span class="hljs-keyword">PRIMARY</span> KEY (student_id, course_id, term);
+<span class="hljs-keyword">FOREIGN</span> KEY (student_id) <span class="hljs-keyword">REFERENCES</span> student(id);
+<span class="hljs-keyword">FOREIGN</span> KEY course_id_number(course_id, course_number) <span class="hljs-keyword">REFERENCES</span> course_detail(course_id, course_number);
+<span class="hljs-keyword">UNIQUE</span> (unique_field);
+INDEX (index_field_A, index_field_a);
+INDEX (index_field_B);
+</code></pre>
+<blockquote>
+<p><strong>[info] Default NULL</strong></p>
+<p>注意默认值显示为 <code>NULL</code> 有两种含义：当该字段有 <code>NOT NULL</code> 约束时，表示没有默认值，此时 <code>INSERT</code> 必须对该字段赋值；否则表示默认值为 <code>NULL</code>。</p>
+</blockquote>
 <hr>
-<p><em><small>last update at: 2021/9/28 24:54:19</small></em></p>
+<p><em><small>last update at: 2021/9/30 20:29:10</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -838,6 +877,7 @@ mysql<span class="hljs-operator">&gt;</span>
         discussion.appendChild(script);
 </script>
 </div>
+
 </body></html>
                                 
                                 </section>
@@ -893,7 +933,7 @@ mysql<span class="hljs-operator">&gt;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-29T04:25:50.158Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-29T04:25:59.670Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.3 前端约定","level":"1.2.3","depth":2,"next":{"title":"step 1: 文件管理","level":"2.1","depth":1,"ref":"","articles":[{"title":"1.1 文件管理模块概述","level":"2.1.1","depth":2,"path":"chapter-1/1-1-intro.md","ref":"chapter-1/1-1-intro.md","articles":[]},{"title":"1.2 页式文件系统设计","level":"2.1.2","depth":2,"path":"chapter-1/1-2-page.md","ref":"chapter-1/1-2-page.md","articles":[]},{"title":"1.3 LRU 缓存设计","level":"2.1.3","depth":2,"path":"chapter-1/1-3-buffer.md","ref":"chapter-1/1-3-buffer.md","articles":[]},{"title":"1.4 对外提供接口","level":"2.1.4","depth":2,"path":"chapter-1/1-4-api.md","ref":"chapter-1/1-4-api.md","articles":[]}]},"previous":{"title":"0.2 后端约定","level":"1.2.2","depth":2,"path":"chapter-0/0-2-backend.md","ref":"chapter-0/0-2-backend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"chapter-0/0-3-frontend.md","mtime":"2021-09-30T12:28:53.560Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-30T12:29:11.672Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
