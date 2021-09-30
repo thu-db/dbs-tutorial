@@ -44,8 +44,8 @@ db_statement
     ;
 
 io_statement
-    : 'LOAD' 'DATA' 'INFILE' String 'INTO' 'TABLE' Identifier       # load_data
-    | 'STORE' 'DATA' 'OUTFILE' String 'FROM' 'TABLE' Identifier     # store_data
+    : 'LOAD' 'FROM' 'FILE' String 'TO' 'TABLE' Identifier     # load_data
+    | 'DUMP' 'TO' 'FILE' String 'FROM' 'TABLE' Identifier     # dump_data
     ;
 
 table_statement
@@ -69,7 +69,7 @@ alter_statement
     | 'ALTER' 'TABLE' Identifier 'DROP' 'FOREIGN' 'KEY' Identifier              # alter_table_drop_foreign_key
     | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' Identifier 'PRIMARY' 'KEY' '(' identifiers ')'      # alter_table_add_pk
     | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' Identifier 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
-    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'   # alter_table_add_unique
+    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'             # alter_table_add_unique
     ;
 
 field_list
@@ -77,9 +77,9 @@ field_list
     ;
 
 field
-    : Identifier type_ ('NOT' Null)? ('DEFAULT' value)?                                 # normal_field
-    | 'PRIMARY' 'KEY' '(' identifiers ')'                                               # primary_key_field
-    | 'FOREIGN' 'KEY' '(' Identifier ')' 'REFERENCES' Identifier '(' Identifier ')'     # foreign_key_field
+    : Identifier type_ ('NOT' Null)? ('DEFAULT' value)?                                               # normal_field
+    | 'PRIMARY' 'KEY' (Identifier)? '(' identifiers ')'                                               # primary_key_field
+    | 'FOREIGN' 'KEY' (Identifier)? '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'   # foreign_key_field
     ;
 
 type_
@@ -108,13 +108,17 @@ where_and_clause
     ;
 
 where_clause
-    : column operate expression             # where_operator_expression
+    : column operator expression            # where_operator_expression
+    | column operator '(' select_table ')'  # where_operator_select
+    | column 'IS' ('NOT')? Null             # where_null
+    | column 'IN' value_list                # where_in_list
+    | column 'IN' '(' select_table ')'      # where_in_select
+    | column 'LIKE' String                  # where_like_string
     ;
 
 column
     : Identifier '.' Identifier
     ;
-
 
 expression
     : value
@@ -140,7 +144,7 @@ identifiers
     : Identifier (',' Identifier)*
     ;
 
-operate
+operator
     : EqualOrAssign
     | Less
     | LessEqual
