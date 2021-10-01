@@ -1,6 +1,8 @@
 
 ---------------------------------
 
+![visitors](https://visitor-badge.glitch.me/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}&left_color=green&right_color=red)
+
 *<small>last update at: {{ timestamp[file.path].time }}</small>*
 
 {% if authors %}

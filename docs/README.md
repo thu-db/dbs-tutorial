@@ -6,4 +6,6 @@
 
 如果你发现了任何章节的纰漏，欢迎通过该文档下方的评论区指出。
 
+![visitors](https://visitor-badge.glitch.me/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}&left_color=green&right_color=red)
+
 *本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。*
