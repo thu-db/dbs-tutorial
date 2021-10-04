@@ -6,6 +6,6 @@
 
 如果你发现了任何章节的纰漏，欢迎通过对应文档下方的评论区指出。
 
-![visitors](https://visitor-badge-reloaded.herokuapp.com/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }})
+![visitors]https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }})
 
 *本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。*
