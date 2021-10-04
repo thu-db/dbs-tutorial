@@ -21,5 +21,6 @@
             "label": "目录"
         }
     },
-    "root": "./docs"
+    "root": "./docs",
+    "title": "dbs-tutorial"
 }
