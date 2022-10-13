@@ -336,19 +336,6 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.4" data-path="../chapter-2/api.html">
-            
-                <a href="../chapter-2/api.html">
-            
-                    
-                    2.4 对外提供的接口（仅供参考）
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -400,19 +387,6 @@
             
                     
                     3.3 更多的索引结构（阅读内容）
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3.4" data-path="../chapter-3/api.html">
-            
-                <a href="../chapter-3/api.html">
-            
-                    
-                    3.4 对外提供的接口（仅供参考）
             
                 </a>
             
@@ -760,22 +734,57 @@
 </blockquote>
 <hr>
 <blockquote>
-<p><strong>[success] 批量导入数据时有性能要求吗？</strong></p>
-<p>没有。批量导入数据的功能仅仅为了便于测试之用，这并不作为数据库正式功能，你能在验收当天导入即可:D。现场验收时可能会提问实现细节。</p>
+<p><strong>[success] 数据库是否一定要按照本文档介绍的方式实现？</strong></p>
+<p>不一定，本文档只是帮助大家更好地实现自己的数据库。只要数据库实现了说明文档要求的功能，并能够通过最终测试，就都是符合大作业要求的。</p>
 </blockquote>
 <hr>
 <blockquote>
-<p><strong>[success] 会考查 SQL 语法错误的输入报错吗？</strong></p>
-<p>不会。可能会考查破坏完成性约束等异常输入，但是输入一定是能通过 parser 的。</p>
+<p><strong>[success] 数据库有性能要求吗？</strong></p>
+<p>对于索引功能，要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能要求每条语句执行时间不超过30分钟。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 数据库可以实现说明文档没有列举的选做功能吗？</strong></p>
+<p>可以，但是需要自己构造测例进行展示，并向助教解释该功能的实现。对于说明文档列举的必做、选做功能，我们会准备测例进行测试。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 数据库一定要实现批量导入数据的功能吗？</strong></p>
+<p>由于最终测试的表有很多行，无法通过逐行插入的方式导入到数据库中，所以大家一定要实现批量导入数据的功能。但是该功能仅仅为了便于测试之用，并不在考查范围内。要求大家在验收前就将最终测试的数据导入到数据库中。</p>
 </blockquote>
 <hr>
 <blockquote>
 <p><strong>[success] 最终测试时会有多大数据规模？</strong></p>
-<p>（最后更新于 2020秋）单数据库测试，其总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B。</p>
+<p>（最后更新于 2022秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 最终测试的测例会提前发布吗？</strong></p>
+<p>不会。但是我们会提前发布最终测试的数据，大家可以导入到自己的数据库中，并自己构造测例进行测试。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 验收时会考查 SQL 语法错误的输入报错吗？</strong></p>
+<p>不会，输入一定是能通过 parser 的。但是一些输入语句可能会破坏完整性约束，要求数据库按照说明文档要求的方式执行。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 大作业是否可以多次验收？</strong></p>
+<p>同学们可以选择正常验收日期中的任意一天验收，并可以在该天内多次验收，不可以在多个日期验收。迟交的同学只有一次验收机会。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 是否可以在验收时修改源代码？</strong></p>
+<p>不可以。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>[success] 如果多人组队完成，验收时所有人都必须到场吗？</strong></p>
+<p>不要求所有人都到场，但是验收时助教会提问一些数据库实现的细节，要求到场的人能够回答。</p>
 </blockquote>
 <hr>
 <p><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/faq.md" alt="visitors"></p>
-<p><em><small>last update at: 2021/9/9 20:49:25</small></em></p>
+<p><em><small>last update at: 2022/10/13 18:43:55</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -848,7 +857,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"FAQ","level":"5.1","depth":1,"next":{"title":"附件","level":"5.2","depth":1,"path":"extra/files.md","ref":"extra/files.md","articles":[]},"previous":{"title":"6.3 进阶功能","level":"4.1.3","depth":2,"path":"chapter-6/6_3_advanced.md","ref":"chapter-6/6_3_advanced.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/faq.md","mtime":"2022-03-28T17:59:26.514Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-03-28T17:59:35.813Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"FAQ","level":"5.1","depth":1,"next":{"title":"附件","level":"5.2","depth":1,"path":"extra/files.md","ref":"extra/files.md","articles":[]},"previous":{"title":"6.3 进阶功能","level":"4.1.3","depth":2,"path":"chapter-6/6_3_advanced.md","ref":"chapter-6/6_3_advanced.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/faq.md","mtime":"2022-10-13T10:43:36.664Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-13T10:43:56.054Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
