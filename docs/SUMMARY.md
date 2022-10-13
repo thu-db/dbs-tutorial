@@ -44,5 +44,10 @@
 ## 附录
 * [FAQ](extra/faq.md)
 * [附件](extra/files.md)
+* 文法解释
+    * [总述](extra/explanation/intro.md)
+    * [数据库管理文法](extra/explanation/db.md)
+    * [表格管理文法](extra/explanation/table.md)
+    * [查询解析文法](extra/explanation/query.md)
 * 课程安排
     * [2021秋](extra/timeline/2021F.md)
