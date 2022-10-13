@@ -27,5 +27,3 @@ class IndexHandler {
                                              // 更新特定记录的关键字或位置
 };
 ```
-
-{% include "/footer.md" %}
