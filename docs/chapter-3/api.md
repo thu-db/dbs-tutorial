@@ -28,5 +28,4 @@ class IndexHandler {
 };
 ```
 
-<!-- {% set authors = ["孙昭言"] %} -->
 {% include "/footer.md" %}
