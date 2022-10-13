@@ -18,5 +18,3 @@ class RecordHandler {
                                               // 将特定位置记录更新为字节序列pData
 };
 ```
-
-{% include "/footer.md" %}
