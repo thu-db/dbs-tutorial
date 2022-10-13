@@ -19,5 +19,5 @@ class RecordHandler {
 };
 ```
 
-{% set authors = ["孙昭言"] %}
+<!-- {% set authors = ["孙昭言"] %} -->
 {% include "/footer.md" %}
