@@ -17,12 +17,10 @@
     * [2.1 记录管理模块概述](chapter-2/intro.md)
     * [2.2 记录页面的设计模式-定长记录](chapter-2/fixed.md)
     * [2.3 记录页面的设计模式-变长记录](chapter-2/variable.md)
-    <!-- * [2.4 对外提供的接口（仅供参考）](chapter-2/api.md) -->
 * step 3: 索引管理
     * [3.1 索引管理模块概述](chapter-3/intro.md)
     * [3.2 索引结构-B树和B+树](chapter-3/btree.md)
     * [3.3 更多的索引结构（阅读内容）](chapter-3/ds.md)
-    <!-- * [3.4 对外提供的接口（仅供参考）](chapter-3/api.md) -->
 
 ## 解析与执行
 * step 4: 查询处理和执行器
