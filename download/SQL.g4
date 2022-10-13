@@ -67,8 +67,8 @@ alter_statement
     | 'ALTER' 'TABLE' Identifier 'DROP' 'INDEX' '(' identifiers ')'             # alter_drop_index
     | 'ALTER' 'TABLE' Identifier 'DROP' 'PRIMARY' 'KEY' (Identifier)?           # alter_table_drop_pk
     | 'ALTER' 'TABLE' Identifier 'DROP' 'FOREIGN' 'KEY' Identifier              # alter_table_drop_foreign_key
-    | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' Identifier 'PRIMARY' 'KEY' '(' identifiers ')'      # alter_table_add_pk
-    | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' Identifier 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
+    | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' (Identifier)? 'PRIMARY' 'KEY' '(' identifiers ')'      # alter_table_add_pk
+    | 'ALTER' 'TABLE' Identifier 'ADD' 'CONSTRAINT' (Identifier)? 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
     | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'             # alter_table_add_unique
     ;
 
@@ -117,7 +117,7 @@ where_clause
     ;
 
 column
-    : Identifier '.' Identifier
+    : (Identifier '.')? Identifier
     ;
 
 expression

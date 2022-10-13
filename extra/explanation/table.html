@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>2021秋 · dbs-tutorial</title>
+        <title>表格管理文法 · dbs-tutorial</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -100,6 +100,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="query.html" />
+    
+    
+    <link rel="prev" href="db.html" />
     
 
     </head>
@@ -656,9 +660,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.3.1" data-path="../explanation/intro.html">
+        <li class="chapter " data-level="5.3.1" data-path="intro.html">
             
-                <a href="../explanation/intro.html">
+                <a href="intro.html">
             
                     
                     总述
@@ -669,9 +673,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3.2" data-path="../explanation/db.html">
+        <li class="chapter " data-level="5.3.2" data-path="db.html">
             
-                <a href="../explanation/db.html">
+                <a href="db.html">
             
                     
                     数据库管理文法
@@ -682,9 +686,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3.3" data-path="../explanation/table.html">
+        <li class="chapter active" data-level="5.3.3" data-path="table.html">
             
-                <a href="../explanation/table.html">
+                <a href="table.html">
             
                     
                     表格管理文法
@@ -695,9 +699,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3.4" data-path="../explanation/query.html">
+        <li class="chapter " data-level="5.3.4" data-path="query.html">
             
-                <a href="../explanation/query.html">
+                <a href="query.html">
             
                     
                     查询解析文法
@@ -727,9 +731,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="5.4.1" data-path="2021F.html">
+        <li class="chapter " data-level="5.4.1" data-path="../timeline/2021F.html">
             
-                <a href="2021F.html">
+                <a href="../timeline/2021F.html">
             
                     
                     2021秋
@@ -775,7 +779,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >2021秋</a>
+        <a href="../.." >表格管理文法</a>
     </h1>
 </div>
 
@@ -793,8 +797,69 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="2021秋课程安排">2021秋课程安排</h1>
-<p>TODO: 补充一些时间结点以及相关要求。</p>
+                                <html><head></head><body><h1 id="表格管理文法">表格管理文法</h1>
+<p>本节内容包括表格的 schema 相关的文法，包括表格本身的增删改以及索引的增减等。注意本节内容除非有特殊说明，否则在正常执行时均不对输出进行要求。</p>
+<h2 id="createtable">create_table</h2>
+<p>根据指定的 <code>field_list</code> 创建名为 <code>Identifier</code> 的空表。输出内容不做要求。</p>
+<p>注意 <code>field_list</code> 中是逗号隔开的若干 <code>field</code>，每个 <code>field</code> 都包含有三种语句：</p>
+<ul>
+<li><code>normal_field</code>：用于创建新的列，这里不做赘述。但你应当保证逻辑的严密性，考虑到同名列、默认值类型等细节问题。</li>
+<li><code>primary_key_field</code>：用于创建主键约束，详见后文 <a href="#altertableaddpk">alter_table_add_pk</a> 部分的说明。</li>
+<li><code>foreign_key_field</code>：用于创建外键约束，详见后文 <a href="#altertableaddforeignkey">alter_table_add_foreign_key</a> 部分的说明。</li>
+</ul>
+<h2 id="droptable">drop_table</h2>
+<p>删除当前数据库中名为 <code>Identifier</code> 的现有数据表，包括其元信息与所有行数据。</p>
+<h2 id="describetable">describe_table</h2>
+<p>显示当前数据库中名为 <code>Identifier</code> 的现有数据表的信息，输出的格式和内容应遵循<a href="../../chapter-0/0-3-frontend.html">《0.3 前端约定》</a>一节的规定。</p>
+<h2 id="alteraddindex">alter_add_index</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中创建一个新的索引，这个索引建在 <code>identifiers</code> 这些（一或多）列上。</p>
+<p>注意虽然这里没有给索引命名，但同一张表中不应该有同名索引（即不能在相同列上建两次索引）。进一步考虑到联合索引的相关问题，你应该维护一个包含 <code>identifiers</code> 元组的索引名。</p>
+<p>例如，无论你的底层实现是怎样的，就上层管理而言， <code>(course_id)</code>、<code>(course_id, course_number)</code>、<code>(course_number, course_id)</code> 是三个不同的索引，它们可以同时存在，各自被删除。</p>
+<p>另外还应考虑到索引可能是自动创建的，例如添加主键约束、<code>UNIQUE</code> 约束时自动创建了索引，在这些情况下你有两种处理思路：</p>
+<ol>
+<li><p>手动创建的索引与自动创建的索引互不干扰，它们同时存在，都可以发挥作用，删除时各自分别考虑。例如你可能先在列 <code>id</code> 上建了索引，又为该列添加了主键约束，之后删除了 <code>id</code> 上的索引，那么此时删除操作正常执行，但主键约束仍然存在，<code>id</code> 上自动创建的索引也仍然存在。</p>
+</li>
+<li><p>自动创建的索引会复用或覆盖手动创建的索引，当有约束带来被自动创建的索引时，不能手动删除对应索引，当约束被删除时，相应索引随即被删除。例如你可能先在列 <code>id</code> 上建了索引，又为 <code>id</code> 建了主键约束，此时不能手动删除 <code>id</code> 上的索引，如果删除了主键约束则 <code>id</code> 上的索引亦被删除。</p>
+</li>
+</ol>
+<p>两种处理方式都是可以接受的，</p>
+<h2 id="alterdropindex">alter_drop_index</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中删除建立在 <code>identifiers</code> 这些（一或多）列上的索引。</p>
+<p>注意其他一些约束也会添加</p>
+<p>注意一个因其他约束而存在的索引是不能被删除，例如主键约束、<code>UNIQUE</code> 约束等，此时应该给出报错并拒绝执行指令。</p>
+<h2 id="altertabledroppk">alter_table_drop_pk</h2>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除现有主键约束。后一个 <code>Identifier</code> 表示主键名，考虑到如果存在主键，则一定唯一，因此可以不给定主键名。测例默认未给出，如果你有需要也可以在验收时要求加上。</p>
+<h2 id="altertabledropforeignkey">alter_table_drop_foreign_key</h2>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除名为（后一个） <code>Identifier</code> 的现有外键约束。</p>
+<h2 id="altertableaddpk">alter_table_add_pk</h2>
+<p>在当前数据库中中名为（前一个） <code>Identifier</code> 的现有表中创建名为（后一个） <code>Identifier</code> 的新主键约束，约束建立在 <code>identifiers</code> 这些（一或多）列。</p>
+<p>由于主键的唯一性，主键约束名通常是可以省略的。你可以根据自己的设计需求或理念来决定是否要求给出主键名，测例默认没有加。</p>
+<p><strong>注意创建主键时如果对应列没有索引，则应当自动创建索引。</strong></p>
+<h2 id="altertableaddforeignkey">alter_table_add_foreign_key</h2>
+<p>在当前数据库中中名为（前一个） <code>Identifier</code> 的现有表中创建名为（后一个） <code>Identifier</code> 的新外键约束，约束建立在（前一个） <code>identifiers</code> 这些（一或多）列上，关联到当前数据库的名为（后一个） <code>Identifier</code> 的现有表的（后一个）<code>identifiers</code> 的（一或多）列上。</p>
+<p>注意一般外键需要一个名字以便进行删除操作，如果你愿意也可以忽视给定的名字，按某种规则自行为其设置名字，但要保证能够正常完成删除操作。</p>
+<p>不同于索引，外键应用名字进行区分，即可能存在名为 <code>fk1</code> 与 <code>fk2</code> 的两个内容（即从何列关联到了何列）一样的外键，但这并不是考查内容，验收测例并不包含这种情况。</p>
+<p><strong>注意我们约定创建外键并不要求被关联的目标表上对应列有索引，但如果你实现为自动创建索引，这也是可接受的，但不能因其没有对应索引而报错并拒绝执行指令。</strong></p>
+<h2 id="altertableaddunique">alter_table_add_unique</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中创建一个新的 <code>UNIQUE</code> 约束，这个约束建在 <code>identifiers</code> 这些（一或多）列上。</p>
+<p>UNIQUE 约束的实现效果相当于创建了索引并添加了 <code>NOT NULL</code> 约束。</p>
+<hr>
+<p><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/explanation/table.md" alt="visitors"></p>
+<p><em><small>last update at: 2022/10/13 20:30:35</small></em></p>
+<p><em><small>author: 饶淙元</small></em></p>
+<div id="my-comment">
+<script>
+        var discussion = document.getElementById('my-comment');
+        var script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'thu-db/dbs-tutorial');
+        script.setAttribute('issue-term', "pathname");
+        script.setAttribute('theme', 'github-light');
+        script.setAttribute('crossorigin', 'anonymous');
+        discussion.appendChild(script);
+</script>
+</div>
+
 </body></html>
                                 
                                 </section>
@@ -838,6 +903,14 @@
 
             
                 
+                <a href="db.html" class="navigation navigation-prev " aria-label="Previous page: 数据库管理文法">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="query.html" class="navigation navigation-next " aria-label="Next page: 查询解析文法">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -846,7 +919,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2021秋","level":"5.4.1","depth":2,"previous":{"title":"课程安排","level":"5.4","depth":1,"ref":"","articles":[{"title":"2021秋","level":"5.4.1","depth":2,"path":"extra/timeline/2021F.md","ref":"extra/timeline/2021F.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/timeline/2021F.md","mtime":"2022-10-13T12:30:27.252Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-13T12:30:36.229Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"表格管理文法","level":"5.3.3","depth":2,"next":{"title":"查询解析文法","level":"5.3.4","depth":2,"path":"extra/explanation/query.md","ref":"extra/explanation/query.md","articles":[]},"previous":{"title":"数据库管理文法","level":"5.3.2","depth":2,"path":"extra/explanation/db.md","ref":"extra/explanation/db.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/explanation/table.md","mtime":"2022-10-13T12:30:27.252Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-13T12:30:36.229Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
