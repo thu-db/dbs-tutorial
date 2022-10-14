@@ -796,7 +796,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="查询解析文法">查询解析文法</h1>
-<p>这里的查询解析包含了对具体某张表的数据的增删查改。</p>
+<p>这里的查询解析包含了对具体某张表的数据的增删查改。注意该部分的指令可能存在性能瓶颈，要求执行完毕后输出总用时，推荐以秒为单位。</p>
 <h2 id="whereandclause">where_and_clause</h2>
 <p>虽然 <code>where_and_clause</code> 只是几个完整文法的一个公用部分，但是本身已经足够复杂，这里单独进行解释。</p>
 <p>注意 <code>where_and_clause</code> 是支持 <code>AND</code> 与运算的一系列条件，我们的必做项只对 <code>AND</code> 进行要求。</p>
@@ -823,17 +823,16 @@
 <p>由于我们不断简化作业内容后， <code>INSERT</code> 语句不需要指定列名，<code>ALTER</code> 增减列也已经被删除，因此在必做内容里， <code>DEFAULT</code> 值除了在 <code>DESC</code> 中展示外没有任何作用。</p>
 </blockquote>
 <h2 id="deletefromtable">delete_from_table</h2>
-<!--Unfinished-->
-<p>在当前数据库中名为 <code>Identifier</code> 的现有表中删除符合条件的若干行数据。</p>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中删除符合条件的若干行数据。该指令的输出应当包含成功删除的条数。</p>
 <h2 id="updatetable">update_table</h2>
-<!--Unfinished-->
-<p>在当前数据库中名为 <code>Identifier</code> 的现有表中将符合条件的若干行数据的指定列进行更新。</p>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中将符合条件的若干行数据的指定列进行更新。该指令的输出应当包含成功更新的条数。</p>
+<p>由于 <code>set_clause</code> 的文法比较简单，这里的 <code>SET</code> 只支持最简单的常量赋值。你也可以考虑扩展文法来支持一些更复杂的更新，例如如何实现形如 <code>SET count = count + 1</code> 这样的更新。</p>
 <h2 id="selecttable">select_table</h2>
-<!--Unfinished-->
-<p>在当前数据库中名为 <code>Identifier</code> 的现有表中选出符合条件的若干行数据的指定列。</p>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中选出符合条件的若干行数据的指定列。该指令的输出应当包含选出来的表格，最后面附带总行数（或者你也可以为你输出的表格的每一行增加行号，则可以省略额外的行数输出）。</p>
+<p>对于输出表格的相关要求参考 <a href="../../chapter-0/0-3-frontend.html">《0.3 前端约定》</a> 一节关于交互模式的说明，这不是强制要求，但你自己设计的输出也应该包含不少于该说明的信息量。</p>
 <hr>
 <p><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/explanation/query.md" alt="visitors"></p>
-<p><em><small>last update at: 2022/10/13 20:30:35</small></em></p>
+<p><em><small>last update at: 2022/10/14 17:47:33</small></em></p>
 <p><em><small>author: 饶淙元</small></em></p>
 <div id="my-comment">
 <script>
@@ -903,7 +902,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"查询解析文法","level":"5.3.4","depth":2,"next":{"title":"课程安排","level":"5.4","depth":1,"ref":"","articles":[{"title":"2021秋","level":"5.4.1","depth":2,"path":"extra/timeline/2021F.md","ref":"extra/timeline/2021F.md","articles":[]}]},"previous":{"title":"表格管理文法","level":"5.3.3","depth":2,"path":"extra/explanation/table.md","ref":"extra/explanation/table.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/explanation/query.md","mtime":"2022-10-13T13:33:21.508Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-13T13:33:30.427Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"查询解析文法","level":"5.3.4","depth":2,"next":{"title":"课程安排","level":"5.4","depth":1,"ref":"","articles":[{"title":"2021秋","level":"5.4.1","depth":2,"path":"extra/timeline/2021F.md","ref":"extra/timeline/2021F.md","articles":[]}]},"previous":{"title":"表格管理文法","level":"5.3.3","depth":2,"path":"extra/explanation/table.md","ref":"extra/explanation/table.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"extra/explanation/query.md","mtime":"2022-10-14T09:47:16.918Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-14T09:47:35.161Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
