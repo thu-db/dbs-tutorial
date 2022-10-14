@@ -797,7 +797,7 @@
                                 
                                 <html><head></head><body><h1 id="23-记录页面的设计模式-变长记录">2.3 记录页面的设计模式-变长记录</h1>
 <h2 id="记录储存格式">记录储存格式</h2>
-<p>可以以按照 (NULL位图, 定长数据, 可变列的偏移数组, 变长数据) 的格式存储变长记录。以0.2提到的course表中 (30240262, &apos;Database&apos;, 2) 的一行为例：</p>
+<p>我们提供一种 (NULL位图, 定长数据, 可变列的偏移数组, 变长数据) 的格式存储变长记录。以0.2提到的course表中 (30240262, &apos;Database&apos;, 2) 的一行为例：</p>
 <table>
   <tbody><tr>
     <td align="center">0 (1B)</td>
@@ -814,12 +814,13 @@
 <p>页身从前向后存储数据，从后向前存储槽目录，槽目录存储记录的字节偏移量。槽目录可以每2字节对应从0开始的自然数槽号，这样在通过槽号访问某槽时只需要O(1)时间，但在插入记录时最好在槽目录中从后向前优先利用无效槽号；也可以在槽目录中只存储有效槽号，不过在通过槽号访问某槽时需要遍历槽目录。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。</p>
 <p>删除记录时可能产生碎片空闲空间，在数据量较小时不处理也无妨。在真实数据库中会有程序定期清理碎片空间，使页内空闲空间尽量连续。</p>
 <h2 id="空闲空间管理">空闲空间管理</h2>
+<p>我们介绍几种常用的管理页面空闲空间的方式。</p>
 <h3 id="链表">链表</h3>
 <p>与定长记录类似，页面的空闲空间最大为 4096-64 字节，可以按照一定字节数 (如：32字节) 为单位将空闲空间大小分成若干个级别，每一级别维护一个链表。</p>
 <h3 id="页目录">页目录</h3>
 <p>可以保留一些页作为页目录而不作为数据页，页目录之间通过链表相连；每个页目录记录若干页的空闲空间大小。</p>
 <h3 id="大根堆二叉树">大根堆二叉树</h3>
-<p>可以为每个表创建一个名为&quot;表ID_fsm&quot;的文件管理表的空闲空间。每个FSM页内为一棵大根堆二叉树，叶节点记录某页的空闲空间大小 (也可以将空闲空间大小分成256个级别，使每个节点仅占用1B)，非叶节点记录两个孩子中的较大值。这样，在需要一定空闲空间大小时，仅比较根节点即可判断表内是否有页面满足要求，然后沿二叉树逐级比较向下直到叶节点，即可找到合适的空闲页面。</p>
+<p>可以为每个表创建一个文件管理表的空闲空间。每个FSM页内为一棵大根堆二叉树，叶节点记录某页的空闲空间大小 (也可以将空闲空间大小分成256个级别，使每个节点仅占用1B)，非叶节点记录两个孩子中的较大值。这样，在需要一定空闲空间大小时，仅比较根节点即可判断表内是否有页面满足要求，然后沿二叉树逐级比较向下直到叶节点，即可找到合适的空闲页面。</p>
 <p>如果页面较多，可以构建多级FSM页，高级FSM页的叶节点对应低级FSM页的根节点，且它们具有相同的值。</p>
 <p>假设每个页面数据区大小为10B，则每个页面内可以构建出有4个叶节点的满二叉树；假设共有3级FSM页，例：</p>
 <pre><code>0     &lt;-- page 0 at level 2 (root page)
@@ -839,7 +840,7 @@
 <p><a href="https://github.com/postgres/postgres/blob/master/src/backend/storage/freespace/README" target="_blank">大根堆二叉树</a>也可以参考PostgreSQL中相应说明。</p>
 <hr>
 <p><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-2/variable.md" alt="visitors"></p>
-<p><em><small>last update at: 2021/9/9 13:31:51</small></em></p>
+<p><em><small>last update at: 2022/10/15 00:16:38</small></em></p>
 <p><em><small>author: 孙昭言</small></em></p>
 <div id="my-comment">
 <script>
@@ -909,7 +910,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"next":{"title":"step 3: 索引管理","level":"2.3","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]}]},"previous":{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"chapter-2/variable.md","mtime":"2022-10-14T09:47:16.914Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-14T09:47:35.161Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.3 记录页面的设计模式-变长记录","level":"2.2.3","depth":2,"next":{"title":"step 3: 索引管理","level":"2.3","depth":1,"ref":"","articles":[{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"path":"chapter-3/btree.md","ref":"chapter-3/btree.md","articles":[]},{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]}]},"previous":{"title":"2.2 记录页面的设计模式-定长记录","level":"2.2.2","depth":2,"path":"chapter-2/fixed.md","ref":"chapter-2/fixed.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"chapter-2/variable.md","mtime":"2022-10-14T16:16:29.511Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-14T16:16:39.684Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

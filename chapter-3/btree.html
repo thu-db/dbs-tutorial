@@ -800,27 +800,25 @@
                                 <html><head></head><body><h1 id="32-索引结构-b树和b树">3.2 索引结构-B树和B+树</h1>
 <p>B树在先修课程《数据结构》中做过讲解，这里不再赘述。索引结构中我们重点介绍B+树。</p>
 <h2 id="b树概述">B+树概述</h2>
-<p>m 阶B+树具有如下特征：</p>
+<p>这里提供 m 阶B+树的一种实现方式：</p>
 <ol>
-<li><p>每个结点的关键字个数与孩子个数相等，所有非最下层的结点的关键字是对应子树上的最大关键字。</p>
+<li><p>非叶结点的关键字个数与孩子结点个数相等。其存储的关键字有序排列，且与存储的孩子结点指针一一对应，每个关键字都是对应子树的最大关键字。</p>
 </li>
-<li><p>除根结点以外，每个内部结点的孩子数属于 [(m+1)/2, m]。 </p>
+<li><p>除根结点以外，每个内部结点的孩子数都在 [(m+1)/2, m] 范围内。 </p>
 </li>
-<li><p>最下层结点（叶结点）包含了全部“键-值”对，叶结点可以按照键值从小到大连成单向或双向的链表。</p>
+<li><p>最下层结点（叶结点）存储了全部的原始数据（“键-值”对），每个叶结点存储的数据按照&quot;键&quot;有序排列。叶结点可以按照键值从小到大连成单向或双向的链表。</p>
 </li>
 </ol>
-<p>在数据库索引中，每页作为一个结点，是否叶结点、叶结点链表等数据可以存储在页头中。非叶结点要存储若干个 (关键字, 孩子页号) 结构，叶结点要存储若干个 (关键字, 表页号, 表页内槽号) 结构，这种结构可以像表内一条记录一样存储。</p>
+<p>在数据库索引中，每页作为一个结点（这样一个B+树结点所占的最大空间为页面大小），是否叶结点、叶结点链表指针等信息可以存储在页头中。非叶结点要存储若干个 (关键字, 孩子页号) 结构，叶结点要存储若干个 (关键字, 记录位置) 的“键-值”对结构，这些结构可以像表内一条记录一样存储。</p>
 <h3 id="查找">查找</h3>
-<p>给定待查找的关键字，对每个结点找到不小于该关键字的第一项。从根结点开始对每个途经结点重复上述过程，并选择键值对应孩子页为下一个查找结点，从而在索引中找到该关键字的下界所在的叶结点。查找某个关键字范围 [a, b] 内的记录可以先找到关键字 a，然后沿叶结点链表顺序查找，直到某个叶结点存在大于b的关键字。</p>
+<p>给定查找键，对于非叶结点，找到不小于查找键的第一项（如果不存在则选择结点存储的最大项），选择对应的孩子页为下一个查找结点。从根结点开始对每个途经结点重复上述过程，直到到达某个叶结点。找到该叶结点中不小于查找键的第一项（可能不存在），对应的记录的相应属性值为表中不小于查找键的最小值。如果要查找某个关键字范围 [a, b] 内的记录，可以先找到关键字 a 对应的“键-值”对，然后沿叶结点链表顺序查找，直到某个关键字大于b。</p>
 <h3 id="插入">插入</h3>
-<p>给定待插入记录的关键字，可以插入到其下界所在的叶结点。如果叶结点最大键值改变，可能需要逐级更新父结点的键值。如果某结点发生上溢，则将其分裂为两个分支数相近的结点，都作为该结点父结点的子结点，父结点也要处理可能的上溢；如果该结点为根结点，则需要创建新的根结点作为父结点。</p>
+<p>给定待插入记录，将其对应属性值作为查找键，可以找到B+树中的一个“键-值”对，其具有不小于查找键的最小关键字。将该记录的相应关键字和记录位置作为新的“键-值”对插入到查找到的位置（可能需要移动B+树中现有的数据）。如果叶结点最大关键字改变，可能需要逐级更新父结点的相应关键字。如果某结点发生上溢，则将其分裂为两个分支数相近的结点，都作为该结点父结点的子结点，父结点也要处理可能的上溢；如果该结点为根结点，则需要创建新的根结点作为父结点。</p>
 <h3 id="删除">删除</h3>
-<p>给定某关键字（范围），查找其下界所在的叶结点，然后沿叶结点链表顺序扫描直到完成删除。如果叶结点最大键值改变，可能需要逐级更新父结点的键值。如果某结点发生下溢，如果其为根结点，其子结点在某些情况下可能成为新的根结点；如果其左/右兄弟有多余的孩子结点，可以过继给它；否则可以将其与左/右兄弟合并成一个结点，删除或更新父结点的关键字，父结点也要处理可能的下溢。</p>
-<h3 id="更新">更新</h3>
-<p>查找给定关键字直到恰好匹配表页号和槽号完成更新，索引结构保持不变。</p>
+<p>给定查找键，可以找到B+树中的一个“键-值”对，然后沿叶结点链表顺序扫描，将关键字等于查找键的“键-值”对都删掉。如果叶结点最大关键字改变，可能需要逐级更新父结点的关键字。如果某结点发生下溢，且其为根结点，其子结点在某些情况下可能成为新的根结点；如果其左/右兄弟有多余的孩子结点，可以过继给它；否则可以将其与左/右兄弟合并成一个结点，删除或更新父结点的关键字，父结点也要处理可能的下溢。</p>
 <hr>
 <p><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-3/btree.md" alt="visitors"></p>
-<p><em><small>last update at: 2021/9/9 13:31:51</small></em></p>
+<p><em><small>last update at: 2022/10/15 00:16:38</small></em></p>
 <p><em><small>author: 孙昭言</small></em></p>
 <div id="my-comment">
 <script>
@@ -894,7 +892,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"next":{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},"previous":{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"chapter-3/btree.md","mtime":"2022-10-14T09:47:16.914Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-14T09:47:35.161Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.2 索引结构-B树和B+树","level":"2.3.2","depth":2,"next":{"title":"3.3 更多的索引结构（阅读内容）","level":"2.3.3","depth":2,"path":"chapter-3/ds.md","ref":"chapter-3/ds.md","articles":[]},"previous":{"title":"3.1 索引管理模块概述","level":"2.3.1","depth":2,"path":"chapter-3/intro.md","ref":"chapter-3/intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["alerts","back-to-top-button","chapter-fold","click-reveal","code","codeblock-label","expandable-chapters-interactive","hide-element","intopic-toc","katex-pro","search-plus","todo"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"目录"},"todo":{},"codeblock-label":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"katex-pro":{},"fontsettings":{"theme":"white","family":"sans","size":2},"click-reveal":{},"highlight":{},"expandable-chapters-interactive":{},"back-to-top-button":{},"alerts":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"dbs-tutorial","gitbook":"*"},"file":{"path":"chapter-3/btree.md","mtime":"2022-10-14T16:16:29.511Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2022-10-14T16:16:39.684Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
