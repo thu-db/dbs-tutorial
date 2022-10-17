@@ -15,6 +15,9 @@
 
 注意 `where_operator_select` 与 `where_in_select` 均涉及到嵌套子查询，但前者必须检查子查询 `select_table` 的返回结果是否有且只有一条，后者子查询返回任意数量条均不影响其执行。
 
+多数条件的含义是显然的，但是一个可能存在争议的点在于字符串匹配的大小写敏感问题。如 MySQL 等数据库系统区分了 `nonbinary string` 和 `binary string`，一般的 `CHAR`、`VARCHAR` 等类型均为 `nonbinary string`，其一个重要特点是在进行字符串匹配或比较时不区分大小写。
+尽管你可以选择实现得如同 MySQL 一般，但简便起见强烈建议你使用 `binary string`，用 ASCII 序进行比较，也即区分大小写，相信这对多数语言而言实现起来都会更容易。
+
 > **[info] SQL的弱类型特性**
 
 > 如 MySQL 等主流 SQL 均采用弱类型，例如在 `WHERE` 中不会区分字符串与整型，常量 `123` 与 `"123"` 通常是等价的。
