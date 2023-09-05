@@ -82,14 +82,61 @@ CREATE TABLE student_course (
 );
 ```
 
-<!--TODO: 补充表的ER图-->
-
 !!!info "主键数据类型"
     1. 主键会带索引，在我们实验要求中仅对整型索引做要求，因此主键一定是整型或其组合。
     
     2. 上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。
     
     3. 主键一定 NOT NULL，我们上面的例子中显式地写出来了，也可以省略，但不能指定为 NULL。
+
+上述表结构的 ER 图如下：
+
+``` mermaid
+erDiagram
+    STUDENT {
+        INT id PK
+        VARCHAR(32) name
+        VARCHAR(4) sex
+        VARCHAR(32) status
+    } 
+
+    TEACHER {
+        INT id PK
+        VARCHAR(32) name
+        VARCHAR(4) sex
+    }
+
+    COURSE {
+        INT id PK
+        VARCHAR(32) name
+        INT credit
+    }
+
+    COURSE_DETAIL {
+        INT course_id PK,FK
+        INT course_number PK
+        INT teacher_id FK
+        VARCHAR(4096) description
+    }
+
+    STUDENT_COURSE {
+        INT student_id PK,FK
+        INT course_id PK,FK
+        INT course_number FK
+        VARCHAR(3) grade
+        VARCHAR(16) term PK
+
+    }
+
+    TEACHER |o--o{ COURSE_DETAIL : "teaches"
+    COURSE ||--o| COURSE_DETAIL : "has"
+    COURSE_DETAIL ||--o{ STUDENT_COURSE : "has"
+    STUDENT ||--o{ STUDENT_COURSE : "has"
+```
+
+!!! INFO "ER图"
+    ER图中实体的名字通常用全大写字母表示，但是实际上我们创建的表名是小写字母，注意不要混淆。
+
 
 ## 举例
 
@@ -152,7 +199,7 @@ mysql> SELECT grade FROM student_course WHERE student_id = 2077010001 AND course
 
 **嵌套查询**
 
-通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，进而提高效率：
+通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，节约与数据库通信时间，进而提高效率：
 
 ```SQL
 mysql> SELECT grade FROM student_course WHERE student_id =
@@ -168,7 +215,15 @@ mysql> SELECT grade FROM student_course WHERE student_id =
 
 **连接查询**
 
-连接查询则是用（可能是隐式的） JOIN 语法，这是以截然不同的逻辑去解决问题：
+连接查询则是用 JOIN 语法（包含隐式JOIN），这是以截然不同的逻辑去解决问题：
+
+??? NOTE "隐式JOIN"
+
+    我们将使用 `JOIN` 关键字的查询称为“显式 JOIN”，包含 `INNER JOIN`，`OUTER JOIN`，`LEFT JOIN`，`RIGHT JOIN`，`FULL JOIN`等。
+
+    与之相对的便是下例中用到的 “隐式 JOIN”，它指不使用 `JOIN` 关键字，而是在 `FROM` 后用逗号隔开多个表名来对它们进行做内连接（INNER JOIN）。
+    这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN。
+
 
 ```SQL
 mysql> SELECT SQL_NO_CACHE grade FROM student_course, student, course 
@@ -211,5 +266,5 @@ mysql> SELECT student_id, student.name student_name, course_id, course.name cour
 
 注意这里用到了很多细节操作，包括连接时同表间出现重名字段需要加表名前缀，没有出现则不用加；SELECT 后面的字段名后可以加别称来让输出结果的表头更好看（如 `student_name`）。
 
-!!!warning "仅供展示"
+!!!warning "声明：仅供展示"
     整个 step 0 中的举例均只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。

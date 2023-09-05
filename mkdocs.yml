@@ -47,7 +47,7 @@ nav:
     - 表格管理文法: extra/explanation/table.md
     - 查询解析文法: extra/explanation/query.md
   - 课程安排:
-    - 2021秋: extra/timeline/2021F.md
+    - 2023秋: extra/timeline/2023F.md
 
 theme:
   name: material
@@ -89,12 +89,16 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.details
-  - pymdownx.superfences
   - pymdownx.keys
   - pymdownx.mark
   - pymdownx.caret
   - pymdownx.tilde:
       smart_delete: false
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+        - class: mermaid
+        - format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
   - git-authors:
@@ -106,17 +110,18 @@ plugins:
       sort_authors_by: name
       authorship_threshold_percent: 1
       exclude:
-          - index.md
-      enabled: true
-      strict: true
+      - index.md
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+      locale: zh
   - search:
-      lang: zh
+      lang: en
+
+extra:
+    # Add counter suffix for development to avoid extra counts of page visit
+    counter_suffix: !ENV [COUNTER_SUFFIX, ""]
 
 extra_javascript:
-  # Next 3 lines for mathjax
-  # - javascripts/mathjax.js 
-  # - https://polyfill.io/v3/polyfill.min.js?features=es6
-  # - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   # Next 3 lines for katex
   - javascripts/katex.js 
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
