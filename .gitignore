@@ -1,5 +1,4 @@
-/node_modules/
-/_book/
-/timestamp/
-/.antlr/
-/.vscode/
+/node_modules
+/site
+/.antlr
+/.vscode

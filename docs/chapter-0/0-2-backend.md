@@ -39,7 +39,7 @@ CREATE TABLE teacher (
 );
 ```
 
-!!! info "CHAR 与 VARCHAR"
+!!!info "CHAR 与 VARCHAR"
     在常见数据库系统中，通常用 CHAR 作为（存储）定长字符串，VARCHAR 作为变长字符串。
 
     在我们的实验中，暂时将变长作为选做，语法上简便起见统一使用 VARCHAR，具体实现是定长还是变长由你自己决定。
@@ -84,7 +84,7 @@ CREATE TABLE student_course (
 
 <!--TODO: 补充表的ER图-->
 
-!!! info "主键数据类型"
+!!!info "主键数据类型"
     1. 主键会带索引，在我们实验要求中仅对整型索引做要求，因此主键一定是整型或其组合。
     
     2. 上述复合主键 (student_id, course_id, term) 中的 term 是 VARCHAR，这仅用于举例。
@@ -182,7 +182,7 @@ mysql> SELECT SQL_NO_CACHE grade FROM student_course, student, course
 1 row in set (0.000 sec)
 ```
 
-!!! info "连接与嵌套查询"
+!!!info "连接与嵌套查询"
 
     某些情况下连接查询和嵌套查询经过优化器后执行的真正查询是完全相同的，尤其在为了匹配单条记录时它们通常能达到相同的情况，用哪一种取决于你的思维习惯。
 
@@ -211,5 +211,5 @@ mysql> SELECT student_id, student.name student_name, course_id, course.name cour
 
 注意这里用到了很多细节操作，包括连接时同表间出现重名字段需要加表名前缀，没有出现则不用加；SELECT 后面的字段名后可以加别称来让输出结果的表头更好看（如 `student_name`）。
 
-!!! warning "仅供展示"
+!!!warning "仅供展示"
     整个 step 0 中的举例均只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。
