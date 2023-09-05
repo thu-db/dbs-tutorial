@@ -1246,11 +1246,13 @@
   <h1>Footer</h1>
 
 <hr />
-<p><img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}" /></p>
+<p>
+<figure><img src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}" /><figcaption>visitors</figcaption>
+</figure>
+</p>
 <p><em><small>last update at: {{ timestamp[file.path].time }}</small></em></p>
-<p>{% if authors %}
-<em><small>{{- "author" if authors.length == 1 else "authors" -}}: {{ authors | join(", ") }}</small></em>
-{% endif %}</p>
+<p _="%" endif="endif">{% if authors %}
+<em><small>{{- "author" if authors.length == 1 else "authors" -}}: {{ authors | join(", ") }}</small></em></p>
 <div id="my-comment">
 <script>
         var discussion = document.getElementById('my-comment');

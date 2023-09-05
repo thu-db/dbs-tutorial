@@ -1268,7 +1268,10 @@
 
 <h1 id="41">4.1 概述</h1>
 <p>查询处理指的是将数据从数据库中取出来的过程，包括查询解析、查询优化和查询执行三个步骤。</p>
-<p><img alt="executor" src="../executor.svg" /></p>
+<p>
+<figure><img src="../executor.svg" /><figcaption>executor</figcaption>
+</figure>
+</p>
 <p>查询处理的第一步是查询解析，将上层的数据库查询语言转化为底层文件系统的操作。数据库的 SQL 语句对用户非常直观，但对系统内部实现并不友好，因此第一步需要将用户输入的 SQL 语句转化为一种中间表示，如关系代数。这一步骤类似于编译器语法解析的过程，查询解析器接受用户输入的 SQL，将其解析为关系代数表达式树。查询解析的详细介绍可参阅 5.1 和 5.2.</p>
 <p>对于一条 SQL 查询，其对应的关系代数表达式往往有多种，如当我们想查询学号为2077010001同学的名字时，会写出下面这样的 SQL：</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2077010001</span><span class="p">;</span>
