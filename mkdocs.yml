@@ -52,6 +52,10 @@ nav:
 theme:
   name: material
   language: zh
+  logo: assets/images/logo.png
+  icon:
+    logo: material/library
+  favicon: assets/images/favicon.png
   custom_dir: 'theme-override/'
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -105,6 +109,8 @@ plugins:
           - index.md
       enabled: true
       strict: true
+  - search:
+      lang: zh
 
 extra_javascript:
   # Next 3 lines for mathjax
