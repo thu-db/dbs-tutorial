@@ -1,3 +1,4 @@
 mkdocs
 mkdocs-material
 mkdocs-git-authors-plugin
+markdown-captions
