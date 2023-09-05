@@ -1479,15 +1479,15 @@
 <h2 id="_3">置换策略</h2>
 <p>当缓存页被占满时，我们为了新的缓存页不得不放弃原有的一页，此时需要一个策略来决定放弃哪一页。</p>
 <p>在介绍置换策略时，这些策略并非针对页式文件系统，而是这类缓存置换问题的通用算法，因此下面介绍算法时将不再提到“页”，而是直接用“数据项”来指代任何缓存系统中的目标数据。</p>
-<div class="admonition info 决策内容的思考">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">决策内容的思考</p>
 <p>除了占满时决定放弃谁外，即使缓存没被占满，我们或许也需要一个策略来判断应该用哪一个空位。这个问题或许并不重要，因为对多数策略来说用哪一个缓存页是无关紧要的。但如果再考虑到 CPU 本身的缓存，选择一些近期刚被舍弃的缓存页可能会给性能带来一定幅度的提升。</p>
 </div>
 <p>下面介绍几种基础的缓存置换算法（推荐使用 LRU，实现简单且有不错的性能，你也可以选择自己喜欢的策略）。</p>
 <h3 id="1-lru">1. LRU</h3>
 <p>LRU (Last-Recently-Used) 即最近最少使用算法，是一种非常常见的缓存置换算法。它按照使用次序，将最后使用时间较久远的数据先替换掉。</p>
-<div class="admonition info lru 名字解读">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">LRU 名字解读</p>
 <p>“最近最少使用” 对部分同学来说可能有些拗口，可以根据英文这样来理解它：</p>
 <ol>
 <li>
@@ -1721,8 +1721,8 @@
 </table>
 <p>共计缓存命中 2 次，如果用 LRU 或者 LFU 均只能命中一次。</p>
 <p>FIFO 实现简单，只需要一个最基本的队列，但是可能会导致频繁访问项被舍弃，并且存在 Belady 现象，实际应用并不广泛。</p>
-<div class="admonition info belady现象">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">Belady现象</p>
 <p>使用 FIFO 等算法时，可能出现在相同的访存序列下，缓存容量增大后，缓存缺失次数反而升高的异常现象。</p>
 <p>感兴趣的同学可以自行构造这样的例子，《操作系统》课程中也会讲到相关知识。</p>
 </div>
@@ -1755,7 +1755,7 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-1/1-3-buffer/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-1/1-3-buffer/".slice(0, -1) + ".md"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>

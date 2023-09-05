@@ -1266,54 +1266,54 @@
 
 <h1 id="faq">FAQ</h1>
 <p>这里收集了一些近年来本实验相关的常见问题，我们会在每年课程进行中动态更新本节。</p>
-<div class="admonition success 数据库各模块是否必须按照说明文档中的建议时间完成">
-<p class="admonition-title">Success</p>
+<div class="admonition success">
+<p class="admonition-title">数据库各模块是否必须按照说明文档中的建议时间完成</p>
 <p>不一定。但我们建议大家合理规划时间，把数据库各模块分散在整个学期完成，为各模块组装后的端到端测试留出足够的 Debug 时间和测试时间。由于代码量较大，系统较复杂，希望大家不要把大量代码集中在验收前完成。</p>
 </div>
-<hr />
-<p>!!!success  参考实现的页式文件系统似乎有 bug，同时打开多个文件会出现混乱？</p>
-<pre><code>在参考代码 `testfilesystem.cpp` 中展示了正确用法：启动系统时要调用静态成员函数 `MyBitMap::initConst()`，否则哈希值计算错误可能导致多个文件被视为同一个。
-</code></pre>
-<hr />
-<p>!!!success  数据库可以使用自定义文法吗？</p>
-<pre><code>必做功能不可以，选做功能可以。不过我们希望大家尽量使用本文档中提供的文法，以节约验收的时间成本。
-</code></pre>
-<hr />
-<p>!!!success  数据库有性能要求吗？</p>
-<pre><code>对于索引功能，要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能要求每条语句执行时间不超过30分钟。
-</code></pre>
-<hr />
-<p>!!!success  数据库可以实现说明文档没有列举的选做功能吗？</p>
-<pre><code>可以，但是需要自己构造测例进行展示，并向助教解释该功能的实现。对于说明文档列举的必做、选做功能，我们会准备测例进行测试。
-</code></pre>
-<hr />
-<p>!!!success  数据库一定要实现批量导入数据的功能吗？</p>
-<pre><code>由于最终测试的表有很多行，无法通过逐行插入的方式导入到数据库中，所以大家一定要实现批量导入数据的功能。但是该功能仅仅为了便于测试之用，并不在考查范围内。要求大家在验收前就将最终测试的数据导入到数据库中。
-</code></pre>
-<hr />
-<p>!!!success  最终测试时会有多大数据规模？</p>
-<pre><code>（最后更新于 2022秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B。
-</code></pre>
-<hr />
-<p>!!!success  最终测试的测例会提前发布吗？</p>
-<pre><code>不会。但是我们会提前发布最终测试的数据，大家可以导入到自己的数据库中，并自己构造测例进行测试。
-</code></pre>
-<hr />
-<p>!!!success  验收时会考查 SQL 语法错误的输入报错吗？</p>
-<pre><code>不会，输入一定是能通过 parser 的。但是一些输入语句可能会破坏完整性约束，要求数据库按照说明文档要求的方式执行。
-</code></pre>
-<hr />
-<p>!!!success  大作业是否可以多次验收？</p>
-<pre><code>同学们可以选择正常验收日期中的任意一天验收，并可以在该天内多次验收，不可以在多个日期验收。迟交的同学只有一次验收机会。
-</code></pre>
-<hr />
-<p>!!!success  是否可以在验收时修改源代码？</p>
-<pre><code>不可以。
-</code></pre>
-<hr />
-<p>!!!success  如果多人组队完成，验收时所有人都必须到场吗？</p>
-<pre><code>不要求所有人都到场，但是验收时助教会提问一些数据库实现的细节，要求到场的人能够回答。
-</code></pre>
+<div class="admonition success">
+<p class="admonition-title">参考实现的页式文件系统似乎有 bug，同时打开多个文件会出现混乱？</p>
+<p>在参考代码 <code>testfilesystem.cpp</code> 中展示了正确用法：启动系统时要调用静态成员函数 <code>MyBitMap::initConst()</code>，否则哈希值计算错误可能导致多个文件被视为同一个。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">数据库可以使用自定义文法吗？</p>
+<p>必做功能不可以，选做功能可以。不过我们希望大家尽量使用本文档中提供的文法，以节约验收的时间成本。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">数据库有性能要求吗？</p>
+<p>对于索引功能，要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能要求每条语句执行时间不超过30分钟。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">数据库可以实现说明文档没有列举的选做功能吗？</p>
+<p>可以，但是需要自己构造测例进行展示，并向助教解释该功能的实现。对于说明文档列举的必做、选做功能，我们会准备测例进行测试。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">数据库一定要实现批量导入数据的功能吗？</p>
+<p>由于最终测试的表有很多行，无法通过逐行插入的方式导入到数据库中，所以大家一定要实现批量导入数据的功能。但是该功能仅仅为了便于测试之用，并不在考查范围内。要求大家在验收前就将最终测试的数据导入到数据库中。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">最终测试时会有多大数据规模？</p>
+<p>（最后更新于 2022秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">最终测试的测例会提前发布吗？</p>
+<p>不会。但是我们会提前发布最终测试的数据，大家可以导入到自己的数据库中，并自己构造测例进行测试。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">验收时会考查 SQL 语法错误的输入报错吗？</p>
+<p>不会，输入一定是能通过 parser 的。但是一些输入语句可能会破坏完整性约束，要求数据库按照说明文档要求的方式执行。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">大作业是否可以多次验收？</p>
+<p>同学们可以选择正常验收日期中的任意一天验收，并可以在该天内多次验收，不可以在多个日期验收。迟交的同学只有一次验收机会。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">是否可以在验收时修改源代码？</p>
+<p>不可以。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">如果多人组队完成，验收时所有人都必须到场吗？</p>
+<p>不要求所有人都到场，但是验收时助教会提问一些数据库实现的细节，要求到场的人能够回答。</p>
+</div>
 
 
 
@@ -1326,7 +1326,7 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/faq/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/faq/".slice(0, -1) + ".md"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>
@@ -1335,7 +1335,7 @@
 
 <div class="md-source-date">
     <small>
-        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (78.38%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (21.62%)</span>
+        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
     </small>
 </div>
 

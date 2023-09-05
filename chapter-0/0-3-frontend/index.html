@@ -1405,8 +1405,8 @@
 <p>首先本节标题中的“前端”不是指 GUI (Graphical User Interface，俗称“图形界面”)，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
 <p>在往年（即本文档诞生之前）的实验中验收采用手动测试（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI (Command-Line Interface，俗称“命令行”) 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
 <p>现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
-<div class="admonition info 自动化测试">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">自动化测试</p>
 <p>截止 2022 年秋季学期尚未部署自动化测试，因此批处理模式不在检查范围之内。</p>
 <p>但笔者仍然建议实现批处理模式以便黑盒自测。</p>
 </div>
@@ -1446,8 +1446,8 @@
 <li>输出某一字段时，对应列的表头采用 <code>&lt;table_name&gt;.&lt;column_name&gt;</code> 的格式输出（尤指 <code>JOIN</code> 意义下），当字段名没有歧义时可以只输出 <code>&lt;column_name&gt;</code> 以精简显示</li>
 <li>输出聚合查询（若实现了该功能）时直接以 <code>SELECT</code> 后的 <code>selector</code> 作为对应列的表头即可。</li>
 </ul>
-<div class="admonition info 没有歧义的字段名">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">没有歧义的字段名</p>
 <p>在多表查询下可能多张表有相同的字段，例如当我们多表查询 <code>course</code>, <code>course_detail</code>, <code>teacher</code> 时，如果表头显示 <code>name</code> 则会有 <code>course.name</code> 与 <code>teacher.name</code> 的歧义，而显示 <code>credit</code> 与 <code>course.credit</code> 均可确定地指明同一字段。</p>
 </div>
 <h3 id="2">2. 批处理模式</h3>
@@ -1508,8 +1508,8 @@
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_A</span><span class="p">,</span><span class="w"> </span><span class="n">index_field_a</span><span class="p">);</span>
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_B</span><span class="p">);</span>
 </code></pre></div>
-<div class="admonition info default null">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">Default NULL</p>
 <p>注意默认值显示为 <code>NULL</code> 有两种含义：当该字段有 <code>NOT NULL</code> 约束时，表示没有默认值，此时 <code>INSERT</code> 必须对该字段赋值；否则表示默认值为 <code>NULL</code>。</p>
 </div>
 
@@ -1524,7 +1524,7 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-3-frontend/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-3-frontend/".slice(0, -1) + ".md"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>

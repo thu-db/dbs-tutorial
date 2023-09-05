@@ -1418,8 +1418,8 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 <p>假设该表每条记录均用这样的定长 72 字节记录，那么一页至多能存 $ \lfloor \frac {8192} {72} \rfloor = 113 $ 条记录，剩余 56 字节，这 56 字节中的 $ \lceil \frac {113} {8} \rceil = 15$ 字节正好可以用来维护一个 bitmap 表示一条记录的位置是否被占用了。剩余 41 个字节可以用于指向下一页等页面元信息。</p>
 <p>在上述约定下，一页中至多可以存 113 条记录，即使还没有插入记录，这些空间也已经被分配了，但是我们会用上述的 bitmap 暗示它们没有存有效数据，这种被预分配出来等待一条记录插入的位置称为槽 (slot)。一页空间被分为若干槽、记录槽状态的 bitmap 以及页面元信息。</p>
 <p>页面空间的具体使用将在下一章记录管理模块详细介绍，下面来讨论下具体实现需要的工具。</p>
-<div class="admonition warning 一条记录的组成">
-<p class="admonition-title">Warning</p>
+<div class="admonition warning">
+<p class="admonition-title">一条记录的组成</p>
 <p>尽管在上述例子里我们将一条记录设计成了其字段的连续堆积，但实际上也可以将定长改为变长，或者按行存储改为按列存储等。此外我们的数据库需要支持 NULL，因此还需要考虑其表示等。另外在一些常用数据库如 MySQL 中 VARCHAR 也不是单字节而是宽字符，上述例子仅仅是一个简单示意，页内数据的组织参考下一章记录管理模块的相关内容。</p>
 </div>
 <h2 id="_3">底层接口</h2>
@@ -1434,9 +1434,10 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 <li>数据写入：需要允许我们将一页的数据一次性从内存写入到文件（此前理应已经完成了偏移设定）</li>
 </ul>
 <p>上述操作对你来说不一定会感到自然，尤其是如果你此前的文件操作多为文本文件读写，可能会很不适应。但是在二进制文件读写时，这些是非常常见的底层操作，无论你用何种常见语言（如 C、C++、Java、Python、Go、Rust 等），用操作系统的接口还是语言标准库提供的接口，都应该能找到上述功能对应的接口。</p>
-<p>!!!info  创建 &amp; 打开文件</p>
-<pre><code>实际上很多语言/系统中创建与打开文件使用了同一接口，这主要是因为在常见接口中用只写 (Write Only) 方法打开文件本身就会起到删除原有文件、创建新文件的效果。不同实现方可能为这些接口起的名字很不相同（例如 Windows API 中使用 `CreateFileA`），需要查询相应文档以理解其使用方式。
-</code></pre>
+<div class="admonition info">
+<p class="admonition-title">创建 &amp; 打开文件</p>
+<p>实际上很多语言/系统中创建与打开文件使用了同一接口，这主要是因为在常见接口中用只写 (Write Only) 方法打开文件本身就会起到删除原有文件、创建新文件的效果。不同实现方可能为这些接口起的名字很不相同（例如 Windows API 中使用 <code>CreateFileA</code>），需要查询相应文档以理解其使用方式。</p>
+</div>
 <p>在部分笔者了解的语言/系统上对应的函数如下：</p>
 <table>
 <thead>
@@ -1492,8 +1493,8 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 </tr>
 </tbody>
 </table>
-<div class="admonition warning 跨平台实现">
-<p class="admonition-title">Warning</p>
+<div class="admonition warning">
+<p class="admonition-title">跨平台实现</p>
 <p>参考实现使用了 Linux/Unix 接口（<code>&lt;fcntl.h&gt;</code> 与 <code>&lt;unistd.h&gt;</code> 库中的函数），因此在 Windows 上无法使用。如果选择使用 C 或 C++ 的标准库能够（或许会付出性能代价）使你的程序支持跨平台，这本质上是标准库为你封装了不同操作系统的接口。我们的大作业原则上不对操作系统做要求，但是我们仍然建议你的程序能够支持 Linux，因此最好不要用 Windows 或 Mac 系统的接口。</p>
 </div>
 <p>由于你使用的文件操作库不同，因此文件操作所暴露出的东西也不同，例如 Windows 接口会得到句柄，Linux 接口会得到 fd 号，C 接口会得到 FILE 指针等，我们建议将这些东西存在文件管理器内，对外暴露一个统一的文件号，可能对应内部的数组下标或一个 map 的 key 等。在这种实现下你可以考虑将允许的文件号组成令牌环之类的结构，也可以不限制数量，用一个 map 来存储全局单增的文件号（我们可以不考虑在一次运行中累计开关几亿个文件导致文件号溢出的情况）。参考实现比较特殊，采用了 map + 令牌桶的组合形式 <code>MyBitMap</code>，实际容量为 128（可调），即至多允许同时打开 128 个不同的文件。</p>
@@ -1532,7 +1533,7 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-1/1-2-page/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-1/1-2-page/".slice(0, -1) + ".md"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>

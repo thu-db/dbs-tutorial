@@ -1384,8 +1384,8 @@
 <p>注意 <code>where_operator_select</code> 与 <code>where_in_select</code> 均涉及到嵌套子查询，但前者必须检查子查询 <code>select_table</code> 的返回结果是否有且只有一条，后者子查询返回任意数量条均不影响其执行。</p>
 <p>多数条件的含义是显然的，但是一个可能存在争议的点在于字符串匹配的大小写敏感问题。如 MySQL 等数据库系统区分了 <code>nonbinary string</code> 和 <code>binary string</code>，一般的 <code>CHAR</code>、<code>VARCHAR</code> 等类型均为 <code>nonbinary string</code>，其一个重要特点是在进行字符串匹配或比较时不区分大小写。
 尽管你可以选择实现得如同 MySQL 一般，但简便起见强烈建议你使用 <code>binary string</code>，用 ASCII 序进行比较，也即区分大小写，相信这对多数语言而言实现起来都会更容易。</p>
-<div class="admonition info sql的弱类型特性">
-<p class="admonition-title">Info</p>
+<div class="admonition info">
+<p class="admonition-title">SQL的弱类型特性</p>
 <p>如 MySQL 等主流 SQL 均采用弱类型，例如在 <code>WHERE</code> 中不会区分字符串与整型，常量 <code>123</code> 与 <code>"123"</code> 通常是等价的。</p>
 <p>但是简便起见，强烈建议你采用强类型实现，当类型不匹配时直接报错并拒绝执行指令。</p>
 </div>
@@ -1400,7 +1400,6 @@
 <li>遇到第一条非法数据时终止执行并回滚，前面数据也不会插入。</li>
 </ol>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
 <p>由于我们不断简化作业内容后， <code>INSERT</code> 语句不需要指定列名，<code>ALTER</code> 增减列也已经被删除，因此在必做内容里， <code>DEFAULT</code> 值除了在 <code>DESC</code> 中展示外没有任何作用。</p>
 </div>
 <h2 id="delete_from_table">delete_from_table</h2>
@@ -1423,7 +1422,7 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/explanation/query/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/extra/explanation/query/".slice(0, -1) + ".md"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>
