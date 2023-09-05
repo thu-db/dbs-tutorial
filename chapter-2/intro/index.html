@@ -11,23 +11,25 @@
       
       
       
+        <link rel="prev" href="../../chapter-1/1-4-api/">
       
-        <link rel="next" href="chapter-0/0-1-intro/">
+      
+        <link rel="next" href="../fixed/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
     
     
       
-        <title>数据库系统概论实验文档</title>
+        <title>2.1 记录管理模块概述 - 数据库系统概论实验文档</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -48,7 +50,7 @@
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#21" class="md-skip">
           跳转至
         </a>
       
@@ -93,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              实验简介
+              2.1 记录管理模块概述
             
           </span>
         </div>
@@ -186,7 +188,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -213,18 +215,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -233,7 +226,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -278,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-1-intro/" class="md-nav__link">
+      <a href="../../chapter-0/0-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -298,7 +290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-2-backend/" class="md-nav__link">
+      <a href="../../chapter-0/0-2-backend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -318,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-3-frontend/" class="md-nav__link">
+      <a href="../../chapter-0/0-3-frontend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-1-intro/" class="md-nav__link">
+      <a href="../../chapter-1/1-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -399,7 +391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-2-page/" class="md-nav__link">
+      <a href="../../chapter-1/1-2-page/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -419,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-3-buffer/" class="md-nav__link">
+      <a href="../../chapter-1/1-3-buffer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -439,7 +431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-4-api/" class="md-nav__link">
+      <a href="../../chapter-1/1-4-api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -464,17 +456,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
@@ -487,7 +481,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             step 2: 记录管理
@@ -498,9 +492,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="chapter-2/intro/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2.1 记录管理模块概述
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -509,6 +523,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    数据库系统文件布局
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    文件的组织结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    表的元数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    记录相关操作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    一些测试相关的要求
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -520,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/fixed/" class="md-nav__link">
+      <a href="../fixed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -540,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/variable/" class="md-nav__link">
+      <a href="../variable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -601,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/intro/" class="md-nav__link">
+      <a href="../../chapter-3/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -621,7 +690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/btree/" class="md-nav__link">
+      <a href="../../chapter-3/btree/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -641,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/ds/" class="md-nav__link">
+      <a href="../../chapter-3/ds/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -702,7 +771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-1-overview/" class="md-nav__link">
+      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -722,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-2-scan/" class="md-nav__link">
+      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -742,7 +811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-3-join/" class="md-nav__link">
+      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -762,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-4-execution/" class="md-nav__link">
+      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_1_intro/" class="md-nav__link">
+      <a href="../../chapter-5/5_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_2_sql/" class="md-nav__link">
+      <a href="../../chapter-5/5_2_sql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -863,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_3_logic/" class="md-nav__link">
+      <a href="../../chapter-5/5_3_logic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_4_physic/" class="md-nav__link">
+      <a href="../../chapter-5/5_4_physic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -944,7 +1013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_1_intro/" class="md-nav__link">
+      <a href="../../chapter-6/6_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -964,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_2_basic/" class="md-nav__link">
+      <a href="../../chapter-6/6_2_basic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_3_advanced/" class="md-nav__link">
+      <a href="../../chapter-6/6_3_advanced/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1011,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/faq/" class="md-nav__link">
+      <a href="../../extra/faq/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1030,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/files/" class="md-nav__link">
+      <a href="../../extra/files/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1083,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/intro/" class="md-nav__link">
+      <a href="../../extra/explanation/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1103,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/db/" class="md-nav__link">
+      <a href="../../extra/explanation/db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1123,7 +1192,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/table/" class="md-nav__link">
+      <a href="../../extra/explanation/table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1143,7 +1212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/query/" class="md-nav__link">
+      <a href="../../extra/explanation/query/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1204,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/timeline/2021F/" class="md-nav__link">
+      <a href="../../extra/timeline/2021F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1245,6 +1314,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    数据库系统文件布局
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    文件的组织结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    表的元数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    记录相关操作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    一些测试相关的要求
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1262,12 +1374,34 @@
   
 
 
-<h1 id="_1">数据库系统概论实验</h1>
-<p>本文档为《数据库系统概论》大作业实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。</p>
-<p>文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学），从底层数据存储，到上层查询解析优化，最终完成一个 demo 级别的数据库管理系统。</p>
-<p>如果你发现了任何章节的纰漏，欢迎通过对应文档下方的评论区指出。</p>
-<p><img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}" /></p>
-<p><em>本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。</em></p>
+<h1 id="21">2.1 记录管理模块概述</h1>
+<h2 id="_1">数据库系统文件布局</h2>
+<p>这里介绍一种可能的布局方式，大家也可以自行设计不同的方式。我们在根目录下创建base和global两个目录：global目录中存储一些全局的系统表，如：数据库名称和数据库ID的对应关系 (<a href="http://www.postgres.cn/docs/9.3/catalog-pg-database.html">pg_database</a>)。在base目录中，每个数据库实例对应一个子目录，子目录下也可以有一些系统表，如：关系 (包括表、索引) 名和关系ID的对应关系 (<a href="http://www.postgres.cn/docs/9.3/catalog-pg-class.html">pg_class</a>)。子目录下的表、索引、日志等都存储在单独的文件中，子目录和文件都以其ID命名。</p>
+<h2 id="_2">文件的组织结构</h2>
+<p>为提高存储空间利用效率和管理的灵活性，文件被划分为页面 (如：固定大小为4KB) 的集合，每个页面有唯一的标识符。页面的数据区被划分为一个个插槽，每个插槽中放置一条记录。这样，(文件路径，页号，槽号) 就与记录构成了一一对应的关系。某条记录的页号和槽号建议不要轻易修改，否则相关的索引也要修改。</p>
+<h2 id="_3">表的元数据</h2>
+<p>表的元数据包括表的列数、各列的数据类型和长度、表的页数、约束 (检查约束、唯一约束、主键约束、外键约束) 等信息。我们在数据库实例的目录下创建系统表存储元数据 (参考<a href="http://www.postgres.cn/docs/9.3/catalogs-overview.html">PostgreSQL的系统表</a>)，如果元数据比较简单的话也可以存储在该表的前几页。</p>
+<h2 id="_4">记录相关操作</h2>
+<ol>
+<li>
+<p>记录的序列化和反序列化。在字节序列和一条记录间相互转换。</p>
+</li>
+<li>
+<p>访问记录。根据数据库名和表名确定文件路径，根据页号和槽号找到记录的位置，通过反序列化解读出记录的内容。</p>
+</li>
+<li>
+<p>插入记录。先找到空闲空间，再插入记录的序列化表示；如果没有空闲空间可能需要向缓存管理模块申请新页。</p>
+</li>
+<li>
+<p>删除记录。先找到记录的位置，再将其删除；产生的碎片空闲空间视情况合并。</p>
+</li>
+<li>
+<p>更新记录。对于定长记录来说，物理组织结构不变；对于变长记录来说，与删除后插入类似。</p>
+</li>
+</ol>
+<h2 id="_5">一些测试相关的要求</h2>
+<p>我们要求的数据类型包括INT, FLOAT, VARCHAR(i)三种。其中INT为32位整型，FLOAT为单精度浮点型，VARCHAR为字符串，且用括号中的 i 表示字符串最大长度。在实际数据库中，VARCHAR会作为变长列存储，占用空间由具体字符串的实际长度决定；同学们在实现时将其作为定长列或变长列存储均可。</p>
+<p>对于基础功能，我们限定表的各列最大长度之和不会超过2048字节，因为我们希望保证一个大小为 4KB 的页至少能完整地存储一条记录。除非你打算将一条记录的跨页面存储作为扩展功能实现，否则不需要考虑最大长度超过2048字节的记录。</p>
 
 
 
@@ -1280,12 +1414,18 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-2/intro/".slice(0, -1) + ".md/test"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>
 </div>
 
+
+<div class="md-source-date">
+    <small>
+        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (6.25%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (93.75%)</span>
+    </small>
+</div>
 
 
 <div id="my-comment">
@@ -1332,15 +1472,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
+          
+          <a href="../../chapter-1/1-4-api/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1.4 对外提供接口" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                1.4 对外提供接口
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="chapter-0/0-1-intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 0.1 概述" rel="next">
+          <a href="../fixed/" class="md-footer__link md-footer__link--next" aria-label="下一页: 2.2 记录页面的设计模式-定长记录" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                0.1 概述
+                2.2 记录页面的设计模式-定长记录
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1377,12 +1533,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../javascripts/katex.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
       

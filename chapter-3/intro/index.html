@@ -11,23 +11,25 @@
       
       
       
+        <link rel="prev" href="../../chapter-2/variable/">
       
-        <link rel="next" href="chapter-0/0-1-intro/">
+      
+        <link rel="next" href="../btree/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
     
     
       
-        <title>数据库系统概论实验文档</title>
+        <title>3.1 索引管理模块概述 - 数据库系统概论实验文档</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -48,7 +50,7 @@
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#31" class="md-skip">
           跳转至
         </a>
       
@@ -93,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              实验简介
+              3.1 索引管理模块概述
             
           </span>
         </div>
@@ -186,7 +188,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -213,18 +215,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -233,7 +226,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -278,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-1-intro/" class="md-nav__link">
+      <a href="../../chapter-0/0-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -298,7 +290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-2-backend/" class="md-nav__link">
+      <a href="../../chapter-0/0-2-backend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -318,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-3-frontend/" class="md-nav__link">
+      <a href="../../chapter-0/0-3-frontend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-1-intro/" class="md-nav__link">
+      <a href="../../chapter-1/1-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -399,7 +391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-2-page/" class="md-nav__link">
+      <a href="../../chapter-1/1-2-page/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -419,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-3-buffer/" class="md-nav__link">
+      <a href="../../chapter-1/1-3-buffer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -439,7 +431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-4-api/" class="md-nav__link">
+      <a href="../../chapter-1/1-4-api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -500,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/intro/" class="md-nav__link">
+      <a href="../../chapter-2/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -520,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/fixed/" class="md-nav__link">
+      <a href="../../chapter-2/fixed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -540,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/variable/" class="md-nav__link">
+      <a href="../../chapter-2/variable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -565,17 +557,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
@@ -588,7 +582,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             step 3: 索引管理
@@ -599,9 +593,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="chapter-3/intro/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3.1 索引管理模块概述
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -610,6 +624,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    记录的组织方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    索引的元数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    主键与外键
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -621,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/btree/" class="md-nav__link">
+      <a href="../btree/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -641,7 +696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/ds/" class="md-nav__link">
+      <a href="../ds/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -702,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-1-overview/" class="md-nav__link">
+      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -722,7 +777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-2-scan/" class="md-nav__link">
+      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -742,7 +797,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-3-join/" class="md-nav__link">
+      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -762,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-4-execution/" class="md-nav__link">
+      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_1_intro/" class="md-nav__link">
+      <a href="../../chapter-5/5_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_2_sql/" class="md-nav__link">
+      <a href="../../chapter-5/5_2_sql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -863,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_3_logic/" class="md-nav__link">
+      <a href="../../chapter-5/5_3_logic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_4_physic/" class="md-nav__link">
+      <a href="../../chapter-5/5_4_physic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -944,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_1_intro/" class="md-nav__link">
+      <a href="../../chapter-6/6_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -964,7 +1019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_2_basic/" class="md-nav__link">
+      <a href="../../chapter-6/6_2_basic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_3_advanced/" class="md-nav__link">
+      <a href="../../chapter-6/6_3_advanced/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1011,7 +1066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/faq/" class="md-nav__link">
+      <a href="../../extra/faq/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1030,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/files/" class="md-nav__link">
+      <a href="../../extra/files/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1083,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/intro/" class="md-nav__link">
+      <a href="../../extra/explanation/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1103,7 +1158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/db/" class="md-nav__link">
+      <a href="../../extra/explanation/db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1123,7 +1178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/table/" class="md-nav__link">
+      <a href="../../extra/explanation/table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1143,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/query/" class="md-nav__link">
+      <a href="../../extra/explanation/query/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1204,7 +1259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/timeline/2021F/" class="md-nav__link">
+      <a href="../../extra/timeline/2021F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1245,6 +1300,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    记录的组织方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    索引的元数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    主键与外键
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1262,12 +1346,28 @@
   
 
 
-<h1 id="_1">数据库系统概论实验</h1>
-<p>本文档为《数据库系统概论》大作业实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。</p>
-<p>文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学），从底层数据存储，到上层查询解析优化，最终完成一个 demo 级别的数据库管理系统。</p>
-<p>如果你发现了任何章节的纰漏，欢迎通过对应文档下方的评论区指出。</p>
-<p><img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}" /></p>
-<p><em>本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。</em></p>
+<h1 id="31">3.1 索引管理模块概述</h1>
+<p>本实验涉及的数据库索引建立在某个表的一列或多列之上。输入一个属性值，或者将多个属性值一起作为输入，我们将这些属性值称为查找键。索引能快速地定位相应属性值等于查找键的记录的位置，避免将整个表的所有记录都扫描一次。如果索引使用一些特殊的组织数据的方式，还可能加速范围查询 (如：B+树可以通过叶结点间的链表快速访问相应属性值在范围 [a, b] 内的记录)。由于索引是表的附加结构，当表的内容发生变化时，DBMS必须同步更新该表的索引。由此可见，索引虽然有助于提高查询性能，但是索引本身也会带来存储和维护开销。与表一样，一个索引结构同样存储在一个页式文件中。</p>
+<p>本节内容对应教材《数据库系统设计与原理(第2版)》（冯建华等，清华大学出版社）第8章：索引和散列。</p>
+<h2 id="_1">记录的组织方式</h2>
+<p>表和索引都是记录的集合。索引存储查找键和相应记录的位置的对应关系，如：通过 (关键字, 表页号, 表页内槽号) 的方式存储。这种三元组可以视为一条条记录。以0.2提到的course表的主键id的索引为例，其一行可以分为三个定长列：(id, 表页号，表页内槽号)。</p>
+<p>这里介绍一些表和索引的常见记录组织方式：</p>
+<ol>
+<li>
+<p>堆文件组织：一条记录可以放在文件中的任何地方，只要那里有足够的空间存放这条记录，记录间不用考虑先后顺序的。</p>
+</li>
+<li>
+<p>顺序文件组织：记录根据其"查找键"的值顺序存储。顺序索引即按照这种方式组织，具有聚集索引（即教材中的“簇集索引”）的表也是如此。</p>
+</li>
+<li>
+<p>散列文件组织：在每条记录的某个/些属性上计算一个散列函数，根据散列的结果来确定记录的存储位置。</p>
+</li>
+</ol>
+<h2 id="_2">索引的元数据</h2>
+<p>索引的元数据与表的元数据基本相同，可以用相同的方式处理，不过要注意存储索引建立在哪个表上。</p>
+<h2 id="_3">主键与外键</h2>
+<p><strong>如果主键约束作用于某列或某几列（此时也称为“联合主键”）上，这些列都不能存储NULL值，且这些列的值组成的多元组具有唯一性，自动在这些列上创建索引。</strong>对于主键的索引是否要作为表的聚集索引，本实验不做要求，不过我们介绍一些实际数据库的情况。在MySQL的InnoDB引擎（MySQL 8.0默认引擎）中，主键上的索引会被选作表的聚集索引；而在MyISAM引擎中，主键上的索引也仅作为辅助索引，表按照堆文件组织。在PostgreSQL中，主键上的索引不会自动作为表的聚集索引。</p>
+<p><strong>对于外键约束的列和被外键引用的列，本实验不做任何限定。</strong>我们同样介绍一些实际数据库的情况。在MySQL中，如果外键约束作用于某列或某几列（此时也称为“联合外键”）上，且这些列不存在合适的索引，自动在这些列上创建索引；在被外键引用的列上必须有索引。在PostgreSQL中，外键约束不会自动在这些列上创建索引；但是被其引用的列必须是主键或受到唯一约束，这样的列在PostgreSQL中会被自动创建索引。</p>
 
 
 
@@ -1280,12 +1380,18 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-3/intro/".slice(0, -1) + ".md/test"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>
 </div>
 
+
+<div class="md-source-date">
+    <small>
+        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (7.14%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (92.86%)</span>
+    </small>
+</div>
 
 
 <div id="my-comment">
@@ -1332,15 +1438,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
+          
+          <a href="../../chapter-2/variable/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 2.3 记录页面的设计模式-变长记录" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                2.3 记录页面的设计模式-变长记录
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="chapter-0/0-1-intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 0.1 概述" rel="next">
+          <a href="../btree/" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.2 索引结构-B树和B+树" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                0.1 概述
+                3.2 索引结构-B树和B+树
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1377,12 +1499,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../javascripts/katex.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
       

@@ -11,23 +11,25 @@
       
       
       
+        <link rel="prev" href="../1-3-buffer/">
       
-        <link rel="next" href="chapter-0/0-1-intro/">
+      
+        <link rel="next" href="../../chapter-2/intro/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
     
     
       
-        <title>数据库系统概论实验文档</title>
+        <title>1.4 对外提供接口 - 数据库系统概论实验文档</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -48,7 +50,7 @@
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#14" class="md-skip">
           跳转至
         </a>
       
@@ -93,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              实验简介
+              1.4 对外提供接口
             
           </span>
         </div>
@@ -186,7 +188,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+    <a href="../.." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -213,18 +215,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -233,7 +226,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -278,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-1-intro/" class="md-nav__link">
+      <a href="../../chapter-0/0-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -298,7 +290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-2-backend/" class="md-nav__link">
+      <a href="../../chapter-0/0-2-backend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -318,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-0/0-3-frontend/" class="md-nav__link">
+      <a href="../../chapter-0/0-3-frontend/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -343,17 +335,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
@@ -366,7 +360,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             step 1: 文件管理
@@ -379,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-1-intro/" class="md-nav__link">
+      <a href="../1-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -399,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-2-page/" class="md-nav__link">
+      <a href="../1-2-page/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -419,7 +413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-1/1-3-buffer/" class="md-nav__link">
+      <a href="../1-3-buffer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -437,9 +431,18 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="chapter-1/1-4-api/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -448,6 +451,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -500,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/intro/" class="md-nav__link">
+      <a href="../../chapter-2/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -520,7 +524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/fixed/" class="md-nav__link">
+      <a href="../../chapter-2/fixed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -540,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-2/variable/" class="md-nav__link">
+      <a href="../../chapter-2/variable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -601,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/intro/" class="md-nav__link">
+      <a href="../../chapter-3/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -621,7 +625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/btree/" class="md-nav__link">
+      <a href="../../chapter-3/btree/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -641,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-3/ds/" class="md-nav__link">
+      <a href="../../chapter-3/ds/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -702,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-1-overview/" class="md-nav__link">
+      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -722,7 +726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-2-scan/" class="md-nav__link">
+      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -742,7 +746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-3-join/" class="md-nav__link">
+      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -762,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-4/4-4-execution/" class="md-nav__link">
+      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_1_intro/" class="md-nav__link">
+      <a href="../../chapter-5/5_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_2_sql/" class="md-nav__link">
+      <a href="../../chapter-5/5_2_sql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -863,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_3_logic/" class="md-nav__link">
+      <a href="../../chapter-5/5_3_logic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-5/5_4_physic/" class="md-nav__link">
+      <a href="../../chapter-5/5_4_physic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -944,7 +948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_1_intro/" class="md-nav__link">
+      <a href="../../chapter-6/6_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -964,7 +968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_2_basic/" class="md-nav__link">
+      <a href="../../chapter-6/6_2_basic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="chapter-6/6_3_advanced/" class="md-nav__link">
+      <a href="../../chapter-6/6_3_advanced/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1011,7 +1015,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/faq/" class="md-nav__link">
+      <a href="../../extra/faq/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1030,7 +1034,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/files/" class="md-nav__link">
+      <a href="../../extra/files/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1083,7 +1087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/intro/" class="md-nav__link">
+      <a href="../../extra/explanation/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1103,7 +1107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/db/" class="md-nav__link">
+      <a href="../../extra/explanation/db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1123,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/table/" class="md-nav__link">
+      <a href="../../extra/explanation/table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1143,7 +1147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/explanation/query/" class="md-nav__link">
+      <a href="../../extra/explanation/query/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1204,7 +1208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extra/timeline/2021F/" class="md-nav__link">
+      <a href="../../extra/timeline/2021F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1262,12 +1266,56 @@
   
 
 
-<h1 id="_1">数据库系统概论实验</h1>
-<p>本文档为《数据库系统概论》大作业实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。</p>
-<p>文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学），从底层数据存储，到上层查询解析优化，最终完成一个 demo 级别的数据库管理系统。</p>
-<p>如果你发现了任何章节的纰漏，欢迎通过对应文档下方的评论区指出。</p>
-<p><img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/{{ file.path }}" /></p>
-<p><em>本文档最后发布于 {{ file.mtime.toLocaleString("zh-cn", {hour12: false, timeZone: "Asia/Shanghai"}) }}。</em></p>
+<h1 id="14">1.4 对外提供的接口</h1>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FD</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">BufferType</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FileManager</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">FileManager</span><span class="p">();</span>
+<span class="w">  </span><span class="o">~</span><span class="n">FileManager</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// 下面的 BufferType 可以自行考虑具体实现，但是内存管理上最好由缓存系统管理而非文件系统</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">createFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="n">FD</span><span class="w"> </span><span class="nf">openFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 文档提到的另一种思路，上层系统直接传文件名</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BufferManager</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">BufferManager</span><span class="p">();</span>
+<span class="w">  </span><span class="o">~</span><span class="n">BufferManager</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// 这里只展示用 FD 的方法，如果采用文件名直传，则所有 FD 都可以改为文件名</span>
+
+<span class="w">  </span><span class="c1">// 这些文件操作不一定需要，也可以实现成上层传文件名，底层自动处理打开、创建</span>
+<span class="w">  </span><span class="c1">// 如果实现则直接调用 FileManager 的操作</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">createFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="n">FD</span><span class="w"> </span><span class="nf">openFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 是否需要删文件的接口取决于你的系统实现</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 1. 如果采用读引用的方法，则可以参考这两个接口，读写用的 buffer 空间由底层管理</span>
+<span class="w">  </span><span class="n">BufferType</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">markDirty</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// 2. 如果采用读拷贝的方法，则可以参考这两个接口，读写用的 buffer 空间由上层管理</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
 
 
 
@@ -1280,12 +1328,18 @@
     <script>
         const img = document.createElement("img")
         // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/".slice(0, -1) + ".md/test"
+        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-1/1-4-api/".slice(0, -1) + ".md/test"
         img.alt = "visitor badge"
         document.querySelector("#visitor-badge-insert-div").appendChild(img)
     </script>
 </div>
 
+
+<div class="md-source-date">
+    <small>
+        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
+    </small>
+</div>
 
 
 <div id="my-comment">
@@ -1332,15 +1386,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
+          
+          <a href="../1-3-buffer/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1.3 LRU 缓存设计" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                1.3 LRU 缓存设计
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="chapter-0/0-1-intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 0.1 概述" rel="next">
+          <a href="../../chapter-2/intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 2.1 记录管理模块概述" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                0.1 概述
+                2.1 记录管理模块概述
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1377,12 +1447,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../javascripts/katex.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
       
