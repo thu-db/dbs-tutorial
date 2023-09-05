@@ -8,7 +8,7 @@ $$
 \Pi_{grade}(\sigma_{id=2077010001}(student) \Join student\_course)
 $$
 
-![](plan_tree.svg)
+![查询计划树](plan_tree.svg)
 
 - 物化（Materialization）
 

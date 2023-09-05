@@ -79,6 +79,9 @@ theme:
 
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
+  - markdown_captions
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.details
