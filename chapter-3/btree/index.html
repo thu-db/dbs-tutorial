@@ -1314,11 +1314,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../extra/timeline/2021F/" class="md-nav__link">
+      <a href="../../extra/timeline/2023F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2021秋
+    2023秋
   </span>
   
 
@@ -1438,6 +1438,17 @@
 <h3 id="_3">删除</h3>
 <p>给定查找键，可以找到B+树中的一个“键-值”对，然后沿叶结点链表顺序扫描，将关键字等于查找键的“键-值”对都删掉。如果叶结点最大关键字改变，可能需要逐级更新父结点的关键字。如果某结点发生下溢，且其为根结点，其子结点在某些情况下可能成为新的根结点；如果其左/右兄弟有多余的孩子结点，可以过继给它；否则可以将其与左/右兄弟合并成一个结点，删除或更新父结点的关键字，父结点也要处理可能的下溢。</p>
 
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      
+    
+  </small>
+</div>
+
 
 
 
@@ -1446,34 +1457,34 @@
 
 
 <div id="visitor-badge-insert-div">
-    <script>
-        const img = document.createElement("img")
-        // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-3/btree/".slice(0, -1) + ".md"
-        img.alt = "visitor badge"
-        document.querySelector("#visitor-badge-insert-div").appendChild(img)
-    </script>
+  <script>
+    var counter_img = document.createElement("img")
+    // Change suffix to be compatable with old honkit style path
+    counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-3/btree/".slice(0, -1) + ".md" + ""
+    counter_img.alt = "visitor badge"
+    document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
+  </script>
 </div>
 
 
 <div class="md-source-date">
-    <small>
-        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (6.67%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (93.33%)</span>
-    </small>
+  <small>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (6.67%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (93.33%)</span>
+  </small>
 </div>
 
 
 <div id="my-comment">
-    <script>
-        var discussion = document.getElementById('my-comment');
-        var script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.setAttribute('repo', 'thu-db/dbs-tutorial');
-        script.setAttribute('issue-term', "pathname");
-        script.setAttribute('theme', 'github-light');
-        script.setAttribute('crossorigin', 'anonymous');
-        discussion.appendChild(script);
-    </script>
+  <script>
+    var discussion = document.getElementById('my-comment');
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'thu-db/dbs-tutorial');
+    script.setAttribute('issue-term', "pathname");
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    discussion.appendChild(script);
+  </script>
 </div>
 
 
@@ -1481,9 +1492,9 @@
 
 </script>
 <style>
-    .hidden {
-        display: none !important;
-    }
+  .hidden {
+    display: none !important;
+  }
 </style>
 
 

@@ -1328,11 +1328,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../extra/timeline/2021F/" class="md-nav__link">
+      <a href="../../extra/timeline/2023F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2021秋
+    2023秋
   </span>
   
 
@@ -1503,8 +1503,6 @@
 <span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">student_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">student</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
-<!--TODO: 补充表的ER图-->
-
 <div class="admonition info">
 <p class="admonition-title">主键数据类型</p>
 <ol>
@@ -1518,6 +1516,52 @@
 <p>主键一定 NOT NULL，我们上面的例子中显式地写出来了，也可以省略，但不能指定为 NULL。</p>
 </li>
 </ol>
+</div>
+<p>上述表结构的 ER 图如下：</p>
+<div class="highlight"><pre><span></span><code>erDiagram
+    STUDENT {
+        INT id PK
+        VARCHAR(32) name
+        VARCHAR(4) sex
+        VARCHAR(32) status
+    } 
+
+    TEACHER {
+        INT id PK
+        VARCHAR(32) name
+        VARCHAR(4) sex
+    }
+
+    COURSE {
+        INT id PK
+        VARCHAR(32) name
+        INT credit
+    }
+
+    COURSE_DETAIL {
+        INT course_id PK,FK
+        INT course_number PK
+        INT teacher_id FK
+        VARCHAR(4096) description
+    }
+
+    STUDENT_COURSE {
+        INT student_id PK,FK
+        INT course_id PK,FK
+        INT course_number FK
+        VARCHAR(3) grade
+        VARCHAR(16) term PK
+
+    }
+
+    TEACHER |o--o{ COURSE_DETAIL : &quot;teaches&quot;
+    COURSE ||--o| COURSE_DETAIL : &quot;has&quot;
+    COURSE_DETAIL ||--o{ STUDENT_COURSE : &quot;has&quot;
+    STUDENT ||--o{ STUDENT_COURSE : &quot;has&quot;
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">ER图</p>
+<p>ER图中实体的名字通常用全大写字母表示，但是实际上我们创建的表名是小写字母，注意不要混淆。</p>
 </div>
 <h2 id="_3">举例</h2>
 <p>结合上面的 schema，我们可以给出一些简单的 SQL 例子：</p>
@@ -1562,7 +1606,7 @@
 <span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>嵌套查询</strong></p>
-<p>通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，进而提高效率：</p>
+<p>通过嵌套子查询可以将上述三步在一行 SQL 里完成，对一些上层应用来说处理成子查询能够有效减少查询次数，节约与数据库通信时间，进而提高效率：</p>
 <div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">grade</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student_course</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">student_id</span><span class="w"> </span><span class="o">=</span>
 <span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">course_id</span><span class="w"> </span><span class="o">=</span>
 <span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;数据库系统概论&#39;</span><span class="p">);</span>
@@ -1574,7 +1618,13 @@
 <span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>连接查询</strong></p>
-<p>连接查询则是用（可能是隐式的） JOIN 语法，这是以截然不同的逻辑去解决问题：</p>
+<p>连接查询则是用 JOIN 语法（包含隐式JOIN），这是以截然不同的逻辑去解决问题：</p>
+<details class="note">
+<summary>隐式JOIN</summary>
+<p>我们将使用 <code>JOIN</code> 关键字的查询称为“显式 JOIN”，包含 <code>INNER JOIN</code>，<code>OUTER JOIN</code>，<code>LEFT JOIN</code>，<code>RIGHT JOIN</code>，<code>FULL JOIN</code>等。</p>
+<p>与之相对的便是下例中用到的 “隐式 JOIN”，它指不使用 <code>JOIN</code> 关键字，而是在 <code>FROM</code> 后用逗号隔开多个表名来对它们进行做内连接（INNER JOIN）。
+这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN。</p>
+</details>
 <div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SQL_NO_CACHE</span><span class="w"> </span><span class="n">grade</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student_course</span><span class="p">,</span><span class="w"> </span><span class="n">student</span><span class="p">,</span><span class="w"> </span><span class="n">course</span><span class="w"> </span>
 <span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">student_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">student</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">course_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">course</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span>
 <span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">course</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;数据库系统概论&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">;</span>
@@ -1609,8 +1659,19 @@
 </code></pre></div>
 <p>注意这里用到了很多细节操作，包括连接时同表间出现重名字段需要加表名前缀，没有出现则不用加；SELECT 后面的字段名后可以加别称来让输出结果的表头更好看（如 <code>student_name</code>）。</p>
 <div class="admonition warning">
-<p class="admonition-title">仅供展示</p>
+<p class="admonition-title">声明：仅供展示</p>
 <p>整个 step 0 中的举例均只是做一个 MySQL 效果展示以及一些<del>好看的</del>输出格式样例，相关语法不一定是实验内容。</p>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      
+    
+  </small>
 </div>
 
 
@@ -1621,34 +1682,34 @@
 
 
 <div id="visitor-badge-insert-div">
-    <script>
-        const img = document.createElement("img")
-        // Change suffix to be compatable with old honkit style path
-        img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-2-backend/".slice(0, -1) + ".md"
-        img.alt = "visitor badge"
-        document.querySelector("#visitor-badge-insert-div").appendChild(img)
-    </script>
+  <script>
+    var counter_img = document.createElement("img")
+    // Change suffix to be compatable with old honkit style path
+    counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-2-backend/".slice(0, -1) + ".md" + ""
+    counter_img.alt = "visitor badge"
+    document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
+  </script>
 </div>
 
 
 <div class="md-source-date">
-    <small>
-        Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
-    </small>
+  <small>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
+  </small>
 </div>
 
 
 <div id="my-comment">
-    <script>
-        var discussion = document.getElementById('my-comment');
-        var script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.setAttribute('repo', 'thu-db/dbs-tutorial');
-        script.setAttribute('issue-term', "pathname");
-        script.setAttribute('theme', 'github-light');
-        script.setAttribute('crossorigin', 'anonymous');
-        discussion.appendChild(script);
-    </script>
+  <script>
+    var discussion = document.getElementById('my-comment');
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'thu-db/dbs-tutorial');
+    script.setAttribute('issue-term', "pathname");
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    discussion.appendChild(script);
+  </script>
 </div>
 
 
@@ -1656,9 +1717,9 @@
 
 </script>
 <style>
-    .hidden {
-        display: none !important;
-    }
+  .hidden {
+    display: none !important;
+  }
 </style>
 
 
