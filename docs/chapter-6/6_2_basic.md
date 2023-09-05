@@ -55,7 +55,3 @@ DROP TABLE scholars;
 ```SQL
 ALTER TABLE student RENAME TO student_2021; 
 ```
-
-{% set authors = ["周煊赫"] %}
-
-{% include "/footer.md" %}

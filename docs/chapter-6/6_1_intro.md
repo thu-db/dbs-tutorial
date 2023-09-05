@@ -30,10 +30,3 @@ GRANT lesson_space to Stephen;
 其次，为了方便对数据库中不同的表空间进行管理，实际数据库中经常维护大量的系统视图，提供不同表空间在不同方面的统计信息，例如：
 
 ![structure](sys-view.jpeg)
-
-
-
-
-{% set authors = ["周煊赫"] %}
-{% include "/footer.md" %}
-

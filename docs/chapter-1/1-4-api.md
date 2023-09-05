@@ -50,6 +50,3 @@ public:
   void writePage(FD fd, int pageID, BufferType buffer);
 };
 ```
-
-{% set authors = ["饶淙元"] %}
-{% include "/footer.md" %}

@@ -13,39 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
         with:
-          ref: timestamp
-          path: timestamp
+          fetch-depth: 0
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-python@v4
         with:
-          node-version: '14'
+          python-version: 3.x
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Calculate timestamp
-        run: node timestamp/run.js
-
-      - name: Build honkit
-        run: |
-          npm run build
-          rm -f _book/footer.md
-          mkdir -p _book/download
-          zip -qr _book/download/filesystem.zip ./filesystem
-          cp SQL.g4 _book/download/
-
-      - name: Deploy honkit
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: _book
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
 
-      - name: Store timestamp
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: timestamp
-          FOLDER: timestamp
+      - run: pip install -r requirements.txt
+      - run: mkdocs gh-deploy --force

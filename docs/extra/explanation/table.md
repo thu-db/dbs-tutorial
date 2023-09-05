@@ -77,7 +77,3 @@
 在当前数据库中名为 `Identifier` 的现有表中创建一个新的 `UNIQUE` 约束，这个约束建在 `identifiers` 这些（一或多）列上。
 
 UNIQUE 约束的实现效果相当于创建了索引并添加了 `NOT NULL` 约束。
-
-{% set authors = ["饶淙元"] %}
-
-{% include "/footer.md" %}

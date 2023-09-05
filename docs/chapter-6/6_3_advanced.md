@@ -71,8 +71,3 @@ CREATE HASH INDEX idx_studentid ON student(id);
 ```sql
 DROP INDEX idx_studentid ON student;
 ```
-
-
-{% set authors = ["周煊赫"] %}
-
-{% include "/footer.md" %}

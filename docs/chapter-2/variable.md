@@ -56,6 +56,3 @@ NULL位图和定长数据部分与定长记录相同；可变列偏移数组的�
 假设命中了8号页内数据区偏移量为5的字节，由 n+⌊n/4+1⌋+⌊n/4^2+1⌋=8 解得 n=5，即8号页对应0级5号页；偏移量为5对应FSM页内1号叶节点。由 5*5+1=26 知对应表内26号页。
 
 [大根堆二叉树](https://github.com/postgres/postgres/blob/master/src/backend/storage/freespace/README)也可以参考PostgreSQL中相应说明。
-
-{% set authors = ["孙昭言"] %}
-{% include "/footer.md" %}

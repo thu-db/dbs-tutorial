@@ -8,11 +8,11 @@
 
 现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。
 
-> **[info] 自动化测试**
+!!!info  自动化测试
 
-> 截止 2022 年秋季学期尚未部署自动化测试，因此批处理模式不在检查范围之内。
+    截止 2022 年秋季学期尚未部署自动化测试，因此批处理模式不在检查范围之内。
 
-> 但笔者仍然建议实现批处理模式以便黑盒自测。
+    但笔者仍然建议实现批处理模式以便黑盒自测。
 
 ## 运行模式
 
@@ -55,9 +55,9 @@ mysql>
 - 输出某一字段时，对应列的表头采用 `<table_name>.<column_name>` 的格式输出（尤指 `JOIN` 意义下），当字段名没有歧义时可以只输出 `<column_name>` 以精简显示
 - 输出聚合查询（若实现了该功能）时直接以 `SELECT` 后的 `selector` 作为对应列的表头即可。
 
-> **[info] 没有歧义的字段名**
+!!!info  没有歧义的字段名
 
-> 在多表查询下可能多张表有相同的字段，例如当我们多表查询 `course`, `course_detail`, `teacher` 时，如果表头显示 `name` 则会有 `course.name` 与 `teacher.name` 的歧义，而显示 `credit` 与 `course.credit` 均可确定地指明同一字段。
+    在多表查询下可能多张表有相同的字段，例如当我们多表查询 `course`, `course_detail`, `teacher` 时，如果表头显示 `name` 则会有 `course.name` 与 `teacher.name` 的歧义，而显示 `credit` 与 `course.credit` 均可确定地指明同一字段。
 
 ### 2. 批处理模式
 
@@ -131,11 +131,7 @@ INDEX (index_field_A, index_field_a);
 INDEX (index_field_B);
 ```
 
-> **[info] Default NULL**
+!!!info  Default NULL
 
-> 注意默认值显示为 `NULL` 有两种含义：当该字段有 `NOT NULL` 约束时，表示没有默认值，此时 `INSERT` 必须对该字段赋值；否则表示默认值为 `NULL`。
+    注意默认值显示为 `NULL` 有两种含义：当该字段有 `NOT NULL` 约束时，表示没有默认值，此时 `INSERT` 必须对该字段赋值；否则表示默认值为 `NULL`。
 
-
-{% set authors = ["饶淙元"] %}
-
-{% include "/footer.md" %}

@@ -51,6 +51,3 @@
     - 一个缓存替换算法，未命中缓存时决定将新的缓存页放在哪（对应参考实现的 `BufPageManager::replace` 配合 `BufPageManager::last`）
 
 本章剩下几节将给出完成这些组件的文档。
-
-{% set authors = ["饶淙元"] %}
-{% include "/footer.md" %}
