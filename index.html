@@ -1305,8 +1305,8 @@
 
 
 <h1 id="_1">数据库系统概论实验</h1>
-<p>本文档为《数据库系统概论》大作业实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。</p>
-<p>文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学），从底层数据存储，到上层查询解析优化，最终完成一个 demo 级别的数据库管理系统。</p>
+<p>本文档为《数据库系统概论》大作业“单用户关系数据库管理系统”的实验文档，于 2021 年暑假开始编写，并计划于接下来几年内不断完善。</p>
+<p>文档志在通过 step-by-step 的模式引导选课同学（或其他有兴趣的同学），从底层数据存储，到上层查询解析优化，最终完成一个 demo 级别的单用户关系型数据库管理系统。</p>
 <p>如果你发现了任何章节的纰漏，欢迎通过对应文档下方的评论区指出。</p>
 
   <hr>
@@ -1314,7 +1314,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月7日</span>
       
     
   </small>
@@ -1331,7 +1331,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/".slice(0, -1) + ".md" + ""
+    if ("" == "")
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md"
+    else
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
