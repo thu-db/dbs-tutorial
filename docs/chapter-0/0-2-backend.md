@@ -129,7 +129,7 @@ erDiagram
     }
 
     TEACHER |o--o{ COURSE_DETAIL : "teaches"
-    COURSE ||--o| COURSE_DETAIL : "has"
+    COURSE ||--o{ COURSE_DETAIL : "has"
     COURSE_DETAIL ||--o{ STUDENT_COURSE : "has"
     STUDENT ||--o{ STUDENT_COURSE : "has"
 ```
