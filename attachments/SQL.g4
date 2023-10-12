@@ -27,7 +27,6 @@ program
 
 statement
     : db_statement ';'
-    | io_statement ';'
     | table_statement ';'
     | alter_statement ';'
     | Annotation ';'
@@ -41,11 +40,6 @@ db_statement
     | 'USE' Identifier                  # use_db                  
     | 'SHOW' 'TABLES'                   # show_tables
 	| 'SHOW' 'INDEXES'					# show_indexes
-    ;
-
-io_statement
-    : 'LOAD' 'FROM' 'FILE' String 'TO' 'TABLE' Identifier     # load_data
-    | 'DUMP' 'TO' 'FILE' String 'FROM' 'TABLE' Identifier     # dump_data
     ;
 
 table_statement
