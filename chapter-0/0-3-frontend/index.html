@@ -1082,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-6/6_1_intro/" class="md-nav__link">
+      <a href="../../chapter-6/6_1_intro.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1102,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-6/6_2_basic/" class="md-nav__link">
+      <a href="../../chapter-6/6_2_basic.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1122,7 +1122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-6/6_3_advanced/" class="md-nav__link">
+      <a href="../../chapter-6/6_3_advanced.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1464,7 +1464,7 @@
 <h2 id="_1">前端含义</h2>
 <p>首先本节标题中的“前端”不是指 GUI (Graphical User Interface，图形界面)，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
 <p>在本文档诞生之前，实验验收采用手动测试的方法（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI (Command-Line Interface，俗称“命令行”) 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
-<p>现在我们在这方面进行给出了一定的规范，以便完成手动检查和自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
+<p>现在我们在这方面进行给出了一定的规范，以便完成手动检查和自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。强烈建议你后端运行结果统一返回为包含meta信息和数据的“表”，前端输出时再根据当前的运行模式来分别输出为不同的格式（但 <code>DESC</code> 需要特别处理，其要求见后文）。</p>
 <div class="admonition info">
 <p class="admonition-title">自动化测试</p>
 <p>实验从 2023 年秋季学期开始引入了基于 GitLab CI 的自动化测试，并作为评分标准的一部分，因此批处理模式与交互模式都是必须支持的。</p>
@@ -1527,7 +1527,7 @@
 <li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
 <li>无需输出执行时间和行数统计；</li>
 <li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
-<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>；</li>
+<li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code> （交互模式也适用）；</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">命令行参数</p>
