@@ -36,9 +36,9 @@ nav:
     - "5.3 逻辑优化": chapter-5/5_3_logic.md
     - "5.4 物理优化": chapter-5/5_4_physic.md
   - "step 6: 系统管理":
-    - "6.1 概述": chapter-6/6_1_intro.md
-    - "6.2 基本功能": chapter-6/6_2_basic.md
-    - "6.3 进阶功能": chapter-6/6_3_advanced.md
+    - "6.1 概述": chapter-6/6-1-intro.md
+    - "6.2 基本功能": chapter-6/6-2-db.md
+    - "6.3 进阶功能": chapter-6/6-3-table.md
   - FAQ: extra/faq.md
   - 附件: extra/files.md
   - 文法解释:
