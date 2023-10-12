@@ -115,7 +115,7 @@ plugins:
       fallback_to_build_date: true
       locale: zh
   - search:
-      lang: en
+      lang: zh
 
 extra:
     # Add counter suffix for development to avoid extra counts of page visit
