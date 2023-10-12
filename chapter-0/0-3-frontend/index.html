@@ -1462,12 +1462,12 @@
 
 <h1 id="03">0.3 前端约定</h1>
 <h2 id="_1">前端含义</h2>
-<p>首先本节标题中的“前端”不是指 GUI (Graphical User Interface，俗称“图形界面”)，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
-<p>在本文档诞生之前，实验验收采用手动测试（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI (Command-Line Interface，俗称“命令行”) 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
-<p>现在我们希望能够在这方面进行一定的规范，以便手动检查和将来可能会到来的自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
+<p>首先本节标题中的“前端”不是指 GUI (Graphical User Interface，图形界面)，而是指我们设计的系统（更像是一个引擎）与人交互时所提供的输入输出形式。</p>
+<p>在本文档诞生之前，实验验收采用手动测试的方法（如查看输出总行数），输入方面同样也没有给出足够具体的要求，例如是否需要支持多行输入，分号隔开的多语句输入等。最终同学们作业大多呈现为 CLI (Command-Line Interface，俗称“命令行”) 下的单行输入、<code>|</code> 等符号作为列分隔符的多行输出。</p>
+<p>现在我们在这方面进行给出了一定的规范，以便完成手动检查和自动化测试。我们将手动检查时的模式称作“交互模式”，将面向自动化测试的模式称作“批处理模式”。</p>
 <div class="admonition info">
 <p class="admonition-title">自动化测试</p>
-<p>实验从 2023 年秋季学期开始引入了自动化测试，并作为评分标准之一，因此批处理模式与交互模式都是必须支持的。</p>
+<p>实验从 2023 年秋季学期开始引入了基于 GitLab CI 的自动化测试，并作为评分标准的一部分，因此批处理模式与交互模式都是必须支持的。</p>
 </div>
 <h2 id="_2">运行模式</h2>
 <h3 id="1">1. 交互模式</h3>
@@ -1512,19 +1512,29 @@
 <h3 id="2">2. 批处理模式</h3>
 <p>批处理模式下我们不在乎输入输出的友好性，通常是从 stdin 或者一个 SQL 文件读入多行数据，再输出到 stdout 或一个指定文件。在使用 stdin 和 stdout 时常常搭配重定向。</p>
 <p>批处理模式下的输出就如同做 OJ 一般不能夹带任何冗余信息，必须按照约定的格式给出数据，常见格式是用 tab 分隔符，如 MysQL 等成熟的数据库系统会支持包括 CSV、JSON 在内的多种输出方式自选。</p>
-<p>方便起见我们为批处理模式做出如下约定：</p>
+<p>为了适配自动化测试，我们为批处理模式做出如下约定：</p>
 <ul>
-<li>输出统一使用的 CSV 格式的子集：同一行的不同字段间用英文逗号 <code>,</code> 分隔，<strong>无需考虑数据包含逗号的二义性问题。</strong>；</li>
+<li><strong>完成一个 SQL 语句执行结果的输出后，额外输出 <code>-</code> 开始的一行作为分隔符，你可以在 <code>-</code> 后面加入注释以便调试等，这不会影响评测</strong>。</li>
+<li>仅下述语句需要给出对应表头并输出内容，其他直接输出分隔符即可：<ul>
+<li><code>SELECT</code> 语句，注意表头无需精简，在 <code>SELECT</code> 后的 <code>selector</code> 不是 <code>*</code> 时，表头与 <code>selector</code> 一致即可；在 <code>selector</code> 是 <code>*</code> 时，如果是单表则表头为列名，如果是多表则表头为 <code>&lt;table&gt;.&lt;column&gt;</code>，如 <code>student.id</code>，我们保证自动化测试时不会在 <code>selector</code> 中留坑</li>
+<li><code>SHOW</code> 开头的语句，对于 <code>SHOW XX</code> 的语句，输出的表头即为 <code>XX</code></li>
+<li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code> 语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示增/删/改的行数。</li>
+</ul>
+</li>
+<li>输出统一使用简化的 CSV 格式：同一行的不同字段间用英文逗号 <code>,</code> 分隔，<strong>无需考虑数据包含逗号的二义性问题。</strong>；</li>
 <li>浮点数输出为两位小数；</li>
 <li>无需考虑非 ASCII 字符的编码及长度问题，最终测试可以假定全是 ASCII 可打印字符（你自行测试时它很可能是由你终端的设置决定）；</li>
 <li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
-<li>无需输出执行时间；</li>
+<li>无需输出执行时间和行数统计；</li>
 <li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
 <li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code>；</li>
-<li>表头无需精简，同 <code>SELECT</code> 后的 <code>selector</code> 或 <code>*</code> （参考所提供的文法文件）一致即可，我们保证如果做自动测试则一定不会在 <code>selector</code> 中添加额外的空白符。</li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">命令行参数</p>
+<p>命令行参数可以用 <code>argv</code> 来手动处理，也可以使用一些用于处理命令行参数的库，例如 C++ 可以使用单头文件的第三方库 <a href="https://github.com/p-ranav/argparse">argparse</a> ，Python 可以使用内置库 <code>argparse</code>。</p>
+</div>
 <h2 id="_3">数据导入</h2>
-<p>考虑到部分同学实现大量 INSERT 时效率并不高，为了完成压力测试，我们需要新增一种操作将（被认为是安全的）数据直接导入数据库。</p>
+<p>考虑到部分同学实现大量 INSERT 时效率并不高，为了完成压力测试，我们需要新增一种操作将数据直接导入数据库。</p>
 <p>往常没有统一约定读入指令或参数，现在统一约定如下：</p>
 <ul>
 <li>数据导入需要在批量模式下进行，且必须指定数据库；</li>
@@ -1535,6 +1545,7 @@
 <div class="highlight"><pre><span></span><code>./mydb<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>path/to/data/student.txt<span class="w"> </span>-t<span class="w"> </span>student<span class="w"> </span>-d<span class="w"> </span>curriculum
 </code></pre></div>
 <p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
+<p>注意，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查。</p>
 <h2 id="desc">desc</h2>
 <p>这里我们给出 <code>DESC &lt;table_name&gt;</code> 指令的输出规范：</p>
 <ol>
@@ -1544,7 +1555,7 @@
 <li>（如果实现了）按字典序输出 UNIQUE 信息</li>
 <li>最后按字典序输出索引信息</li>
 </ol>
-<p>注意上面五部分中只有第一部分是一定有的（一张表至少有一列，我们的语法文件已经保证了这一点），剩下四部分如果没有则直接跳过，如果有则<strong>一行一条信息</strong>，每条信息后加分号。每一部分各条信息的顺序不作要求。</p>
+<p>注意上面五部分中只有第一部分是一定有的（一张表至少有一列，我们的语法文件已经保证了这一点），剩下四部分如果没有则直接跳过，如果有则<strong>一行一条信息</strong>，每条信息后加分号。每一部分各条信息的顺序不作要求。在批处理模式中，第一部分的“表”按前文提及的简化的 CSV 格式输出，后面部分按照上述要求输出。</p>
 <p>这里用举例的方法给出一个参考，注意这里相比后端约定章节中的 <code>student_course</code> 表多了几个字段用于演示 UNIQUE 与 INDEX，这里的 <code>index_field_A</code> 与 <code>index_field_a</code> 形成组合索引，而 <code>index_field_B</code> 是单列索引。</p>
 <div class="highlight"><pre><span></span><code><span class="n">mydb</span><span class="o">&gt;</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="n">student_course</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">---------------+-------------+------+---------+</span>
@@ -1567,9 +1578,11 @@
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_A</span><span class="p">,</span><span class="w"> </span><span class="n">index_field_a</span><span class="p">);</span>
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_B</span><span class="p">);</span>
 </code></pre></div>
+<p>在自动化测试时对表之后的内容请参考上述示例使用空格，连续的多个空格会被视为一个空格，但是缺少空格或不该有的空格可能会被判定为错误。</p>
 <div class="admonition info">
 <p class="admonition-title">Default NULL</p>
 <p>注意默认值显示为 <code>NULL</code> 有两种含义：当该字段有 <code>NOT NULL</code> 约束时，表示没有默认值，此时 <code>INSERT</code> 必须对该字段赋值；否则表示默认值为 <code>NULL</code>。</p>
+<p>在必做内容中不要求支持部分字段插入，也不要求实现新增列的操作，因此 Default 实际没有用上。</p>
 </div>
 
   <hr>
@@ -1577,7 +1590,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月7日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月12日</span>
       
     
   </small>
@@ -1595,7 +1608,7 @@
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
     if ("chapter-0/0-3-frontend/" == "")
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md"
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-3-frontend/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"

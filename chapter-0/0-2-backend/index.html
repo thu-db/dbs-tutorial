@@ -1536,7 +1536,7 @@
 </ol>
 </div>
 <p>上述表结构的 ER 图如下：</p>
-<div class="highlight"><pre><span></span><code>erDiagram
+<pre class="mermaid"><code>erDiagram
     STUDENT {
         INT id PK
         VARCHAR(32) name
@@ -1572,11 +1572,10 @@
 
     }
 
-    TEACHER |o--o{ COURSE_DETAIL : &quot;teaches&quot;
-    COURSE ||--o| COURSE_DETAIL : &quot;has&quot;
-    COURSE_DETAIL ||--o{ STUDENT_COURSE : &quot;has&quot;
-    STUDENT ||--o{ STUDENT_COURSE : &quot;has&quot;
-</code></pre></div>
+    TEACHER |o--o{ COURSE_DETAIL : "teaches"
+    COURSE ||--o| COURSE_DETAIL : "has"
+    COURSE_DETAIL ||--o{ STUDENT_COURSE : "has"
+    STUDENT ||--o{ STUDENT_COURSE : "has"</code></pre>
 <div class="admonition info">
 <p class="admonition-title">ER图</p>
 <p>ER图中实体的名字通常用全大写字母表示，但是实际上我们创建的表名是小写字母，注意不要混淆。</p>
@@ -1704,7 +1703,7 @@
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
     if ("chapter-0/0-2-backend/" == "")
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md"
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-0/0-2-backend/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
