@@ -19,17 +19,17 @@
  */
 #define PAGE_SIZE_IDX 13
 #define MAX_FMT_INT_NUM 128
-//#define BUF_PAGE_NUM 65536
+// #define BUF_PAGE_NUM 65536
 #define MAX_FILE_NUM 128
 #define MAX_TYPE_NUM 256
 /*
  * 缓存中页面个数上限
  */
-#define CAP 60000
+#define CAP 6000
 /*
  * hash算法的模
  */
-#define MOD 60000
+#define MOD 6000
 #define IN_DEBUG 0
 #define DEBUG_DELETE 0
 #define DEBUG_ERASE 1
@@ -43,7 +43,7 @@
  */
 #define MAX_TB_NUM 31
 #define RELEASE 1
-typedef unsigned int* BufType;
+typedef unsigned int *BufType;
 typedef unsigned int uint;
 typedef unsigned short ushort;
 typedef unsigned char uchar;
@@ -51,7 +51,7 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef double db;
 typedef int INT;
-typedef int(cf)(uchar*, uchar*);
+typedef int(cf)(uchar *, uchar *);
 int current = 0;
 int tt = 0;
 #endif
