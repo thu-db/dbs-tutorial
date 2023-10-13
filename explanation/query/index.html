@@ -10,13 +10,13 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-4/4-2-scan/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/explanation/query/">
       
       
-        <link rel="prev" href="../4-1-overview/">
+        <link rel="prev" href="../table/">
       
       
-        <link rel="next" href="../4-3-join/">
+        <link rel="next" href="../../ci/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>4.2 扫描算法 - 数据库系统概论实验文档</title>
+        <title>查询解析文法 - 数据库系统概论实验文档</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#42" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.2 扫描算法
+              查询解析文法
             
           </span>
         </div>
@@ -710,20 +710,18 @@
       
   
   
-    
-  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -737,7 +735,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             step 4: 查询处理
@@ -750,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-1-overview/" class="md-nav__link">
+      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -768,18 +766,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +777,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -800,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-3-join/" class="md-nav__link">
+      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -820,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-4-execution/" class="md-nav__link">
+      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1071,18 +1059,20 @@
       
   
   
+    
+  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
@@ -1096,7 +1086,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             文法解释
@@ -1109,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../explanation/intro/" class="md-nav__link">
+      <a href="../intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1129,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../explanation/db/" class="md-nav__link">
+      <a href="../db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1149,7 +1139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../explanation/table/" class="md-nav__link">
+      <a href="../table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1167,9 +1157,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../explanation/query/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    查询解析文法
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1178,6 +1188,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where_and_clause" class="md-nav__link">
+    where_and_clause
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insert_into_table" class="md-nav__link">
+    insert_into_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete_from_table" class="md-nav__link">
+    delete_from_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update_table" class="md-nav__link">
+    update_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#select_table" class="md-nav__link">
+    select_table
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1330,6 +1395,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where_and_clause" class="md-nav__link">
+    where_and_clause
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insert_into_table" class="md-nav__link">
+    insert_into_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete_from_table" class="md-nav__link">
+    delete_from_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update_table" class="md-nav__link">
+    update_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#select_table" class="md-nav__link">
+    select_table
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1347,37 +1455,53 @@
   
 
 
-<h1 id="42">4.2 扫描算法</h1>
-<!-- 表的扫描是物理查询计划中最基本的操作，如对于 `SELECT * FROM A;` 这样一条简单的 SQL 查询，我们只需要将表`A`扫描一遍，输出表`A`的所有记录即可。
-
-而大部分情况下，查询会包含一个谓词，如 `SELECT * FROM A WHERE a < 10`，这时我们在扫描表`A`的同时，还需要判断表`A`的每条记录是否符合谓词条件。对于这类查询，表的扫描算法主要有两种：
-
-- 顺序扫描 (Sequential Scan)。最基本的扫描算法，扫描一张表的所有记录，判断记录是否符合选择条件，符合则将其加入查询结果，不符合则丢弃。
-- 索引扫描 (Index Scan)。如果选择条件对应的列上有索引，便可以利用索引来得到符合条件的记录，避免全表扫描的过程。 -->
-
-<p>在查询处理中，表的扫描是最基本的操作，扫描算子位于查询计划树的叶子结点。简单而言，扫描算法的作用是寻找一张或多张表中满足查询条件的记录的位置，并将这些记录提取出来。</p>
-<p>以下我们假设一张表的所有记录存储在单个文件中，则最直接的扫描算法为全表扫描：</p>
-<ul>
-<li>全表扫描 (Sequential Scan)：数据库系统逐一将表文件的每块数据读入内存，判断每条记录是否满足查询条件。</li>
-</ul>
-<p>全表扫描是最简单效率最低的扫描算法，但也是最通用的扫描算法，无论被扫描的表以什么形式存储、是否建有索引，都可以采用全表扫描算法。</p>
-<p>如果查询条件涉及的列上建有索引，我们可以利用索引来加速扫描，而根据索引是簇集索引或非簇集索引，索引扫描分为两种策略：</p>
-<ul>
-<li>
-<p>簇集索引扫描：如果索引为簇集索引，则表的数据按照索引列顺序排列，可利用索引加速扫描过程。</p>
-</li>
-<li>
-<p>非簇集索引扫描：非簇集索引的索引列有序排列，但其对应的记录的其他列却是随机存储的，因此通过索引文件找到满足条件的记录的位置后，还需要一系列随机访问从表文件取出原始记录数据。</p>
-</li>
-</ul>
-<p>选择全表扫描还是索引扫描，并不是一个显而易见的问题。如果仅仅根据查询条件涉及的列上是否有索引来选择扫描算法，对于某些查询并不会达到理想的效果。特别是非簇集索引扫描，其中包含的随机访问操作会带来很大的开销。在选择索引扫描算法时，还需要考虑查询的选择率（满足查询条件的记录数 / 记录总数），在选择率较高的情况下，非簇集索引扫描可能产生更大的开销。</p>
+<h1 id="_1">查询解析文法</h1>
+<p>这里的查询解析包含了对具体某张表的数据的增删查改。注意该部分的指令可能存在性能瓶颈，要求执行完毕后输出总用时，推荐以秒为单位。</p>
+<h2 id="where_and_clause">where_and_clause</h2>
+<p>虽然 <code>where_and_clause</code> 只是几个完整文法的一个公用部分，但是本身已经足够复杂，这里单独进行解释。</p>
+<p>注意 <code>where_and_clause</code> 是支持 <code>AND</code> 与运算的一系列条件，我们的必做项只对 <code>AND</code> 进行要求。</p>
+<p>每一个条件对应一个 <code>where_clause</code> 语句，这里面包含了必做与选做项内容，其格式均为 <code>column</code>+操作符+操作对象。</p>
+<p><code>column</code> 表示当前被筛选的表的列名，其文法中的前后两个 <code>Identifier</code> 分表表示表名和列名，简单起见我们约定当且仅当语句只涉及到一张表时，可以省略前一个 <code>Identifier</code>，此时列名是没有二义性的。</p>
+<p>注意 <code>where_operator_select</code> 与 <code>where_in_select</code> 均涉及到嵌套子查询，但前者必须检查子查询 <code>select_table</code> 的返回结果是否有且只有一条，后者子查询返回任意数量条均不影响其执行。</p>
+<p>多数条件的含义是显然的，但是一个可能存在争议的点在于字符串匹配的大小写敏感问题。如 MySQL 等数据库系统区分了 <code>nonbinary string</code> 和 <code>binary string</code>，一般的 <code>CHAR</code>、<code>VARCHAR</code> 等类型均为 <code>nonbinary string</code>，其一个重要特点是在进行字符串匹配或比较时不区分大小写。
+尽管你可以选择实现得如同 MySQL 一般，但简便起见强烈建议你使用 <code>binary string</code>，用 ASCII 序进行比较，也即区分大小写，相信这对多数语言而言实现起来都会更容易。</p>
+<div class="admonition info">
+<p class="admonition-title">SQL的弱类型特性</p>
+<p>如 MySQL 等主流 SQL 均采用弱类型，例如在 <code>WHERE</code> 中不会区分字符串与整型，常量 <code>123</code> 与 <code>"123"</code> 通常是等价的。</p>
+<p>但是简便起见，强烈建议你采用强类型实现，当类型不匹配时直接报错并拒绝执行指令。</p>
+</div>
+<h2 id="insert_into_table">insert_into_table</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中插入若干行新数据。该指令的输出应当包含成功插入的条数。</p>
+<p>简便起见我们默认不支持指定列的名称，需要将全部列按顺序给出对应列的值，执行器需要完成数量、类型等检查工作。</p>
+<p>可选的，你可以实现扩展语法，手动指定列的名字并只给出对应列的值，其他值自动使用 <code>DEFAULT</code> 值。</p>
+<p>由于一次可能插入多条数据，其中可能部分数据有问题，包括破坏完整性约束、类型不匹配、数量不匹配等（下称非法数据），此时你可能采用一些不同的处理手段：</p>
+<ol>
+<li>将所有能插入的数据均插入；</li>
+<li>遇到第一条非法数据时终止执行，但不影响前面数据的插入；</li>
+<li>遇到第一条非法数据时终止执行并回滚，前面数据也不会插入。</li>
+</ol>
+<div class="admonition info">
+<p>由于我们不断简化作业内容后， <code>INSERT</code> 语句不需要指定列名，<code>ALTER</code> 增减列也已经被删除，因此在必做内容里， <code>DEFAULT</code> 值除了在 <code>DESC</code> 中展示外没有任何作用。</p>
+</div>
+<h2 id="delete_from_table">delete_from_table</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中删除符合条件的若干行数据。该指令的输出应当包含成功删除的条数。</p>
+<h2 id="update_table">update_table</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中将符合条件的若干行数据的指定列进行更新。该指令的输出应当包含成功更新的条数。</p>
+<p>由于 <code>set_clause</code> 的文法比较简单，这里的 <code>SET</code> 只支持最简单的常量赋值。你也可以考虑扩展文法来支持一些更复杂的更新，例如如何实现形如 <code>SET count = count + 1</code> 这样的更新。</p>
+<h2 id="select_table">select_table</h2>
+<p>在当前数据库中名为 <code>Identifier</code> 的现有表中选出符合条件的若干行数据的指定列。该指令的输出应当包含选出来的表格，最后面附带总行数（或者你也可以为你输出的表格的每一行增加行号，则可以省略额外的行数输出）。</p>
+<p>对于输出表格的相关要求参考 <a href="../../chapter-0/0-3-frontend/">《0.3 前端约定》</a> 一节关于交互模式的说明，这不是强制要求，但你自己设计的输出也应该包含不少于该说明的信息量。</p>
+<div class="admonition info">
+<p class="admonition-title">跨库查询</p>
+<p>如 MySQL 等支持多数据库的 DBMS 通常会支持跨库查询，即在 <code>SELECT</code> 语句的 <code>FROM</code> 后指定来自不同数据库的表。我们的大作业对此不做要求，对于涉及到的表名只需要在当前数据库内查找即可。</p>
+</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月13日</span>
       
     
   </small>
@@ -1394,10 +1518,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-4/4-2-scan/" == "")
+    if ("explanation/query/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-4/4-2-scan/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/explanation/query/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1406,7 +1530,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (15.38%), <a href='mailto:lwb21@mails.tsinghua.edu.cn'>Wenbo Li</a> (84.62%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
   </small>
 </div>
 
@@ -1457,7 +1581,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../4-1-overview/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 4.1 概述">
+          <a href="../table/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 数据表管理文法">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1467,20 +1591,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                4.1 概述
+                数据表管理文法
               </div>
             </div>
           </a>
         
         
           
-          <a href="../4-3-join/" class="md-footer__link md-footer__link--next" aria-label="下一页: 4.3 连接算法">
+          <a href="../../ci/" class="md-footer__link md-footer__link--next" aria-label="下一页: CI 说明">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                4.3 连接算法
+                CI 说明
               </div>
             </div>
             <div class="md-footer__button md-icon">
