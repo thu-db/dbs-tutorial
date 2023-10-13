@@ -19,7 +19,7 @@
 
 ## describe_table
 
-显示当前数据库中名为 `Identifier` 的现有数据表的信息，输出的格式和内容应遵循[《0.3 前端约定》](../../chapter-0/0-3-frontend.md)一节的规定。
+显示当前数据库中名为 `Identifier` 的现有数据表的信息，输出的格式和内容应遵循[《0.3 前端约定》](../chapter-0/0-3-frontend.md)一节的规定。
 
 
 ## alter_add_index

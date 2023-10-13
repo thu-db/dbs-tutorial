@@ -40,13 +40,14 @@ nav:
     - "6.1 概述": chapter-6/6-1-intro.md
     - "6.2 数据库管理": chapter-6/6-2-db.md
     - "6.3 数据表管理": chapter-6/6-3-table.md
-  - FAQ: faq.md
-  - 附件: files.md
   - 文法解释:
     - 总述: explanation/intro.md
     - 数据库管理文法: explanation/db.md
     - 数据表管理文法: explanation/table.md
     - 查询解析文法: explanation/query.md
+  - CI 说明: ci.md
+  - FAQ: faq.md
+  - 附件: files.md
   - 课程安排:
     - 2023秋: timeline/2023F.md
 
