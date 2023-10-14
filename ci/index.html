@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6a10b989.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
@@ -1250,6 +1250,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 测例格式
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 测例格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1 输入文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 输出文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1406,6 +1433,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 测例格式
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 测例格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    4.1 输入文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4.2 输出文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1427,9 +1481,10 @@
 
 <h1 id="ci">CI 说明</h1>
 <p>CI（Continuous Integration，持续集成）是指软件发布流程的构建和单元测试阶段，GitLab、GitHub 等常见的基于 Git 的集成软件开发平台都带有类似的功能，我们将基于清华大学部署的 GitLab 的 CI 完成实验的自动化测试。</p>
-<div class="admonition note">
-<p class="admonition-title">集成测试</p>
 <p>截止2023年秋我们实际上使用的是集成测试而非单元测试，它并不能让你的实验每完成一部分后便进行测试，它只能在你将整个实验几大模块都完成后基于SQL的执行情况进行功能性测试。</p>
+<div class="admonition abstract">
+<p class="admonition-title">激励机制</p>
+<p>如果你反馈了 CI 漏洞、测例错误、评测器逻辑错误等，甚至提了 PR，助教将根据贡献程度给同一问题的第一个提出者大作业加分，加分会在学期末进行汇总，至多累计（按大作业满分100计算意义下的）5分。</p>
 </div>
 <h2 id="1">1. 使用说明</h2>
 <p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
@@ -1461,7 +1516,60 @@
 <p>注意评测机的空间一般来说可以和任意一个 Linux 文件系统一样可以任意读写，但是原则上你应该只操作 <code>./</code> 路径下的空间，例如将数据存储在 <code>./data</code> 下是一个很好的选择。另外这部分空间会在评测结束后便清理掉，因此你不能指望助教提供你的程序在评测时生成的数据以协助你DEBUG。</p>
 <h2 id="3">3. 本地测试</h2>
 <p>CI 所用的测例均为公开测例，评测器用 Python 编写，同学们应该可以比较容易地在本地运行，因此建议在本地通过测试后再进行 CI 测试，以防无效的 CI 阻塞评测进度。这里强烈建议大家将用于开发的分支和用于提交到 CI 的分支区分开，作为避免滥用 CI 的防呆法，我们在初始的 CI 配置了设置了只有名为 <code>ci</code> 的分支 push 后会自动运行 CI，其他分支的 push 需要手动启动 CI。</p>
+<div class="admonition warn">
+<p class="admonition-title">Windows 支持问题</p>
+<p>由于 Windows 系统底层与MacOS、Linux的固有差异，一些进程级的操作在两边会有所差异，尽管助教已经尽量修复了这些问题，目前仍然未能解决的遗留问题，如果同学们有解决办法欢迎积极贡献。</p>
+<p>例如 Windows 下在 read 子进程的 stdout 时无法用 <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> 为父进程抛出 <code>KeyboardInterrupedt</code>，这可能用在你发现自己的数据库运行测例时太长时间无响应而想强行终止评测的情况，由于这一问题你可能只好直接关闭运行评测器的终端来强制终止进程。 </p>
+</div>
 <p>TODO: 完成 Checker 后在此补充本地运行评测器的方法。</p>
+<h2 id="4">4. 测例格式</h2>
+<p>尽管理论上你可以在完全不了解测例的格式甚至内容的情况下写出一个符合要求的 DBMS，从而直接通过测例，但相信多数同学还是会在实验过程中遇到测例未通过的情况，或者希望自行构造一些测例来辅助 DEBUG，甚至评测器本身也会存在一些 BUG，因此在这里解释一下测例的格式。</p>
+<h3 id="41">4.1 输入文件</h3>
+<p>测例的输入文件是 <code>.sql</code> 后缀的 SQL 文件，在文件头部用 SQL 注释语法标记了一些信息，它们定义了一些简易的键值对信息，用 SQL 单行注释符号 <code>--</code> 开头，在一个空格后追加 <code>@</code> 和键名，然后用 <code>:</code> 和一个空格隔开后面的值内容，下面是一个例子：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- @Name: system</span>
+<span class="c1">-- @Depends: init</span>
+<span class="c1">-- @Description: Check basic database-level operation</span>
+<span class="c1">-- @Score: 5</span>
+</code></pre></div>
+<p>依次可以看到：</p>
+<ul>
+<li>这个测例的名称为 <code>system</code></li>
+<li>该测例依赖另一个测例 <code>init</code>，这意味着只有 <code>init</code> 成功执行后 <code>system</code> 才会被执行，否则会放弃执行 <code>system</code>；如果存在多个依赖，则用空格隔开，例如 <code>-- @Depends: init init-2 init-3</code></li>
+<li>对该测例的描述，主要用于标注测例的意图</li>
+<li>通过该测例可以获得5分</li>
+</ul>
+<p>注意理论上这些标记信息应该在文件头部，先后顺序不重要，但每个信息只能出现一次；不在文件头部或者重复信息属于未定义行为。</p>
+<div class="admonition warning">
+<p class="admonition-title">未定义行为</p>
+<p>未定义行为的表现可能会随着评测器的升级而改变，例如在上面的例子中如果同一个信息出现两次，有可能是第一次的生效，有可能是第二次的生效，也有可能评测器报错，这取决于评测器的具体实现。</p>
+</div>
+<p>输入文件后面则是正常的 SQL 语句，每一行都是一个完整的以 <code>;</code> 结尾的一个 SQL 语句，对应文法文件的 <code>statement</code>，不会出现用 <code>;</code> 隔开的多个语句的情况。空行和 <code>--</code> 开头的注释行会被忽略。</p>
+<h3 id="42">4.2 输出文件</h3>
+<p>输出文件也即测例的答案，但是注意 SQL 的答案和常规的 DSA OJ 不同，可以认为它充满了 Special Judge，它的行序与列序有时候是有序的，有时候是无序的（详见<a href="../chapter-0/0-3-frontend/">《0.3 前端约定》</a>一节），因此我们需要带有标注语法的输出文件格式来标明这些信息。</p>
+<p>输出文件是助教自定义的 <code>.ans</code> 后缀的文本文件。它由一些 <code>@</code> 打头的标记信息（下称 flag）、纯文本的答案和用于增强可读性的空行（除了答案区域外，空行可以任意添加）组成。一个答案的例子如下：</p>
+<div class="highlight"><pre><span></span><code>@SQL: DESC TBL;
+@DESC
+@BEGIN
+Field,Type,Null,Default
+a,INT,NO,NULL
+b,VARCHAR(16),NO,NULL
+c,FLOAT,NO,NULL
+@END
+</code></pre></div>
+<p>目前实现的 flag 说明如下：</p>
+<ul>
+<li><code>@SQL:</code> 说明了它在测例文件中对应的 SQL 语句，仅用于维护方便，评测器不会用到这一信息</li>
+<li><code>@DESC</code> 说明了这是一个 <code>DESC &lt;table&gt;</code> 语句，这一语句很特殊，因为它除了需要输出一张表外还需要额外输出其他信息，因此需要特别的 flag 标记和解析器来处理，如果不是这样的语句则不需要写 <code>@DESC</code></li>
+<li><code>@BEGIN</code> 与 <code>@END</code> 之间的若干行是 SQL 预计所期望的输出文本，注意这里的 <code>DESC</code> 恰好没有下面的约束信息（即表 <code>TBL</code> 没有创建任何约束），所以下面的内容被省略了，表与约束之间的一个空行也被省略了，加上它不影响正确性。注意 <code>@BEGIN</code> 与 <code>@END</code> 必须放在一个 SQL 语句对应的答案的最后，它之后的 flag 会被视为下一个 SQL 的答案的 flag。在最后一个 <code>@END</code> 后面添加标记信息属于未定义行为。</li>
+<li>由于 <code>SELECT *</code> 不需要考虑列序，所以同样需要一个 flag，<code>@STAR</code> 用于标记这个信息。</li>
+<li>如果需要按行排序，则需要用 <code>@ORDER:</code> 标记排序字段，注意冒号后有一个空格，如果有多个排序关键字则将字段名用空格隔开。此外排序默认是降序排序，如果是升序排序则用 <code>@ASC</code> 标记。通常 SQL 语法要求缺省情况下是 <code>ASC</code> 升序排序，与此处的约定相反，需要特别注意。</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">DESC? DESC!</p>
+<p>缺省为降序显然不合常理，这主要是因为 SQL 里通常缺省为升序 <code>ASC</code>，降序 <code>DESC</code> 需要显式标记，而 <code>DESC</code> 已经被 <code>DESC &lt;table&gt;</code> 抢占了，并且很难想到合适的替代词汇，所以只好将 <code>ASC</code> 设定为需要显式给出。</p>
+</div>
+<p>在排序上有一个无法绕过的问题：假设数据按列 <code>C</code> 排序，那么对 <code>C</code> 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 <code>C</code>，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
+在我们的测例里测试 <code>ORDER BY</code> 的地方会避免这种情况，保证 <code>SELECT</code> 了所有排序关键字，如果你自己构造测例需要留意这一点。</p>
 
   <hr>
 <div class="md-source-file">
