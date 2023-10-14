@@ -1347,10 +1347,10 @@
 
 <h1 id="faq">FAQ</h1>
 <p>这里收集了一些近年来本实验相关的常见问题，我们会在每年课程进行中动态更新本节。</p>
-<div class="admonition question">
-<p class="admonition-title">数据库各模块是否必须按照说明文档中的建议时间完成？</p>
-<p>不一定。但我们建议大家合理规划时间，把数据库各模块分散在整个学期完成，为各模块组装后的端到端测试留出足够的 Debug 时间和测试时间。由于代码量较大，系统较复杂，希望大家不要把大量代码集中在验收前完成。</p>
-</div>
+<!-- !!!question "数据库各模块是否必须按照说明文档中的建议时间完成？"
+
+    不一定。但我们建议大家合理规划时间，把数据库各模块分散在整个学期完成，为各模块组装后的端到端测试留出足够的 Debug 时间和测试时间。由于代码量较大，系统较复杂，希望大家不要把大量代码集中在验收前完成。 -->
+
 <div class="admonition question">
 <p class="admonition-title">参考实现的页式文件系统似乎有 bug，同时打开多个文件会出现混乱？</p>
 <p>在参考代码 <code>testfilesystem.cpp</code> 中展示了正确用法：启动系统时要调用静态成员函数 <code>MyBitMap::initConst()</code>，否则哈希值计算错误可能导致多个文件被视为同一个。</p>
@@ -1361,7 +1361,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">数据库有性能要求吗？</p>
-<p>对于索引功能，要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能 CI 范围内以 CI 要求为准，线下验收部分要求每条语句执行时间不超过30分钟。</p>
+<p>对于索引功能（如在SELECT、INSERT等语句中涉及索引列与常量的比较操作），要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能 CI 范围内以 CI 要求为准，线下验收部分要求每条语句执行时间不超过30分钟。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">数据库可以实现说明文档没有列举的选做功能吗？</p>
@@ -1373,7 +1373,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">最终测试时会有多大数据规模？</p>
-<p>（最后更新于 2022秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B。</p>
+<p>（最后更新于 2023秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B，表名、列名长度不超过 32B。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">最终测试的测例会提前发布吗？</p>
@@ -1405,7 +1405,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月13日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月14日</span>
       
     
   </small>
@@ -1434,7 +1434,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (85.71%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (14.29%)</span>
   </small>
 </div>
 
