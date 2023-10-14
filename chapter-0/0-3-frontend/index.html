@@ -1580,7 +1580,7 @@
 <li>最后输出索引信息</li>
 </ol>
 <p>注意上面五部分中只有第一部分是一定有的（一张表至少有一列，我们的语法文件已经保证了这一点），剩下四部分如果没有则直接跳过，如果有则<strong>一行一条信息</strong>，每条信息后加分号。每一部分各条信息的顺序不作要求。在批处理模式中，第一部分的“表”按前文提及的简化的 CSV 格式输出，后面部分按照上述要求输出。</p>
-<p>这里用举例的方法给出一个参考，注意这里相比后端约定章节中的 <code>student_course</code> 表多了几个字段用于演示 UNIQUE 与 INDEX，这里的 <code>index_field_A</code> 与 <code>index_field_a</code> 形成组合索引，而 <code>index_field_B</code> 是单列索引。</p>
+<p>这里用举例的方法给出一个参考，注意这里相比后端约定章节中的 <code>student_course</code> 表多了几个字段用于演示 UNIQUE 与 INDEX，这里的 <code>index_field_A</code> 与 <code>index_field_a</code> 形成组合索引，而 <code>index_field_B</code> 是单列索引。另外下面 <code>course_id_number</code> 是一个命名外键，其他的约束都是匿名的，如果有名字则都应该加在第一个小括号左边，和小括号之间没有空格。</p>
 <div class="highlight"><pre><span></span><code><span class="n">mydb</span><span class="o">&gt;</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="n">student_course</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">---------------+-------------+------+---------+</span>
 <span class="o">|</span><span class="w"> </span><span class="n">Field</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">Null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Default</span><span class="w"> </span><span class="o">|</span>
