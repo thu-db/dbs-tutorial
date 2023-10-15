@@ -32,9 +32,9 @@ nav:
     - "4.3 逻辑优化": chapter-4/4_3_logic.md
     - "4.4 物理优化": chapter-4/4_4_physic.md
   - "step 5: 系统管理":
-    - "5.1 概述": chapter-5/_5-1-intro.md
-    - "5.2 数据库管理": chapter-5/_5-2-db.md
-    - "5.3 数据表管理": chapter-5/_5-3-table.md
+    - "5.1 概述": chapter-5/5-1-intro.md
+    - "5.2 数据库管理": chapter-5/5-2-db.md
+    - "5.3 数据表管理": chapter-5/5-3-table.md
   - "step 6: 查询处理":
     - "6.1 概述": chapter-6/6-1-overview.md
     - "6.2 扫描算法": chapter-6/6-2-scan.md

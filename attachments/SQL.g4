@@ -53,7 +53,7 @@ table_statement
     ;
 
 select_table
-    : 'SELECT' selectors 'FROM' identifiers ('WHERE' where_and_clause)? ('GROUP' 'BY' column)? ('LIMIT' Integer ('OFFSET' Integer)?)?
+    : 'SELECT' selectors 'FROM' identifiers ('WHERE' where_and_clause)? ('GROUP' 'BY' column)? ('ORDER' 'BY' column (order)?)? ('LIMIT' Integer ('OFFSET' Integer)?)?
     ;
 
 alter_statement
@@ -80,6 +80,11 @@ type_
     : 'INT'
     | 'VARCHAR' '(' Integer ')'
     | 'FLOAT'
+    ;
+
+order
+    : 'ASC'
+    | 'DESC'
     ;
 
 value_lists
