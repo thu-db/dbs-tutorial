@@ -10,13 +10,13 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-6/6-1-intro/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-5/_5-3-table/">
       
       
-        <link rel="prev" href="../../chapter-5/5_4_physic/">
+        <link rel="prev" href="../_5-2-db/">
       
       
-        <link rel="next" href="../6-2-db/">
+        <link rel="next" href="../../chapter-4/4-1-overview/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>6.1 概述 - 数据库系统概论实验文档</title>
+        <title>5.3 数据表管理 - 数据库系统概论实验文档</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#61" class="md-skip">
+        <a href="#53" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.1 概述
+              5.3 数据表管理
             
           </span>
         </div>
@@ -728,7 +728,7 @@
             
   
   <span class="md-ellipsis">
-    step 4: 查询处理
+    step 4: 解析器
   </span>
   
 
@@ -738,7 +738,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            step 4: 查询处理
+            step 4: 解析器
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -748,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
+      <a href="../5_1_intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -768,11 +768,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
+      <a href="../5_2_sql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 扫描算法
+    4.2 SQL简介
   </span>
   
 
@@ -788,11 +788,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
+      <a href="../5_3_logic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.3 连接算法
+    4.3 逻辑优化
   </span>
   
 
@@ -808,134 +808,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
+      <a href="../5_4_physic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.4 查询执行
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    step 5: 解析器
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            step 5: 解析器
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../chapter-5/5_1_intro/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.1 概述
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../chapter-5/5_2_sql/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.2 SQL简介
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../chapter-5/5_3_logic/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.3 逻辑优化
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../chapter-5/5_4_physic/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.4 物理优化
+    4.4 物理优化
   </span>
   
 
@@ -969,26 +846,66 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   <span class="md-ellipsis">
-    step 6: 系统管理
+    step 5: 系统管理
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            step 6: 系统管理
+            step 5: 系统管理
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_5-1-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_5-2-db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 数据库管理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1005,7 +922,115 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5.3 数据表管理
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    5.3 数据表管理
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    基本管理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    进阶管理（选做）
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 6: 查询处理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            step 6: 查询处理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/4-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1014,7 +1039,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1026,11 +1050,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../6-2-db/" class="md-nav__link">
+      <a href="../../chapter-4/4-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    6.2 数据库管理
+    6.2 扫描算法
   </span>
   
 
@@ -1046,11 +1070,31 @@
   
   
     <li class="md-nav__item">
-      <a href="../6-3-table/" class="md-nav__link">
+      <a href="../../chapter-4/4-3-join/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    6.3 数据表管理
+    6.3 连接算法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/4-4-execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.4 查询执行
   </span>
   
 
@@ -1330,6 +1374,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    基本管理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    进阶管理（选做）
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1347,16 +1413,44 @@
   
 
 
-<h1 id="61">6.1 系统管理模块概述</h1>
-<p>在前面的章节中，我们已经讲述了如何从页式文件系统出发，逐步实现记录管理、索引管理，解析 SQL 语句并凭此执行一个查询来操作数据。但是，我们距离一个数据库管理系统仍然还有一些路要走，所幸这部分内容已经逐渐远离底层内容，难度已经远低于前面的模块。</p>
-<p>前面的模块涉及到了 DML 完成的操作，而系统管理模块主要负责 DDL 完成的操作，包括对数据库的创建与删除、对数据表 Schema 的增删改等。在前述章节中，我们往往默认这些信息（例如表的 Schema）已经有了，我们基于此做了一些操作，但实际情况中这是需要从零开始逐步完成的，本章讲述了一些进行系统管理的参考实现方法。</p>
+<h1 id="53">5.3 数据表管理</h1>
+<h2 id="_1">基本管理</h2>
+<p>在上一节中数据库的管理推荐了“文件夹即数据库”的思路，类似的对于数据表也推荐“文件即数据表”的思路。但是这里仍然有一些细节值得考虑：</p>
+<ol>
+<li>索引和数据文件应当放到在一起还是分作不同的文件？</li>
+<li>数据表的 Schema 应该存储在数据文件中还是单独存储在元信息文件中？如果采用元信息文件，应该一张表一个文件还是所有表共用一个文件？</li>
+</ol>
+<p>上述问题没有固定的答案，不同的选择会让你有着完全不同的数据组织方式。例如如果你将元信息单独放在元信息文件中，那么它们甚至不必基于页式文件系统与记录管理系统：这些文件通常较小，很可能写不满一页，完全可以每次读写时都全文件读写，将它们保存为自定义的二进制格式甚至是文本文件。</p>
+<p>一种可能的采用较少文件的策略如下：</p>
+<ul>
+<li>对于一张表，所有信息存放在同一个文件中</li>
+<li>第一页存放元信息，包括表的 Schema、索引信息、表与各个索引数据页第一页的编号等</li>
+<li>创建表时新建该文件并完成第一页内容，删除表时删除该文件即可，删除索引时则需要修改元信息并将索引使用的页都标记为空页</li>
+</ul>
+<p>一种可能得采用较多文件的策略如下：</p>
+<ul>
+<li>每一张表由一个数据文件、一个元信息文件、若干个索引文件组成</li>
+<li>数据文件与索引文件第一页便是数据页，表的 Schme、索引元信息等都存放在元信息文件中</li>
+<li>删除表时需要将上述文件都删除，删除索引是只需要修改元信息并删除索引文件</li>
+</ul>
+<p>在确定了上述策略后，关于主外键等完整性约束的实现则比较自然，在增删这些约束时，在元信息中变动相应记录，如果涉及到索引的增删也一并完成；在对数据增删查改时也应该从数据表的元信息中获取这些约束，并根据约束的存在做相应检查。</p>
+<h2 id="_2">进阶管理（选做）</h2>
+<p>选做部分中还涉及到增删改一列的 Schema 等操作，这属于更麻烦一些的操作，它或者会导致你在设计时的麻烦，或者会导致执行时的麻烦（低效）。注意为了避免引起不必要的误会，这部分文法我们从文法文件中移除了，你可以自行添加对应 <code>Alter</code> 文法，格式可以参考 <a href="https://dev.mysql.com/doc/refman/en/alter-table.html">MySQL文法</a>，完成这部分选做内容需要包含以下支持：</p>
+<ul>
+<li>删除一列</li>
+<li>新增一列</li>
+<li>修改一列的 列名、default、NULL 等元信息</li>
+</ul>
+<p>在不考虑效率的情况下，这些实现可能相对容易，例如如果你采用了文件较多的数据表管理版本，那么在修改数据表 Schema 时，你可以将来的数据文件重命名，新建一个数据文件，将原来的数据依次插入到新文件中，完成后再删除旧文件。</p>
+<p>但是这样的办法是很笨重的，很多时候我们都有更好的选择，例如对于删除一列的操作，我们可以在 Schema 中进行标记，知道每条记录中的某一部分是无效数据，而不直接操作数据文件；我们可以为所有记录都预留是否允许 NULL 的 flag，从而在修改 NULL / NOT NULL 时无需对记录进行操作；我们可以在最初创建表时就将记录设置为某些更大的长度以预留空间（采用类似于 <code>std::vector</code> 的思路在迫不得已时进行倍增扩容），从而在新增一列时我们只需要知道这些列都是 default 值，而不需要修改全部列内容。</p>
+<p>注意，如果你真的采用了全部数据重新插入的办法，则这部分选做内容只能获取部分分数。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月12日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
       
     
   </small>
@@ -1373,10 +1467,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-6/6-1-intro/" == "")
+    if ("chapter-5/_5-3-table/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-6/6-1-intro/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-5/_5-3-table/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1436,7 +1530,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../../chapter-5/5_4_physic/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.4 物理优化">
+          <a href="../_5-2-db/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.2 数据库管理">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1446,20 +1540,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                5.4 物理优化
+                5.2 数据库管理
               </div>
             </div>
           </a>
         
         
           
-          <a href="../6-2-db/" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.2 数据库管理">
+          <a href="../../chapter-4/4-1-overview/" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.1 概述">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                6.2 数据库管理
+                6.1 概述
               </div>
             </div>
             <div class="md-footer__button md-icon">
