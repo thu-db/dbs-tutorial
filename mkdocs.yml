@@ -26,20 +26,20 @@ nav:
     - "3.1 索引管理模块概述": chapter-3/intro.md
     - "3.2 索引结构-B树和B+树": chapter-3/btree.md
     - "3.3 更多的索引结构（阅读内容）": chapter-3/ds.md
-  - "step 4: 查询处理":
-    - "4.1 概述": chapter-4/4-1-overview.md
-    - "4.2 扫描算法": chapter-4/4-2-scan.md
-    - "4.3 连接算法": chapter-4/4-3-join.md
-    - "4.4 查询执行": chapter-4/4-4-execution.md
-  - "step 5: 解析器":
-    - "5.1 概述": chapter-5/5_1_intro.md
-    - "5.2 SQL简介": chapter-5/5_2_sql.md
-    - "5.3 逻辑优化": chapter-5/5_3_logic.md
-    - "5.4 物理优化": chapter-5/5_4_physic.md
-  - "step 6: 系统管理":
-    - "6.1 概述": chapter-6/6-1-intro.md
-    - "6.2 数据库管理": chapter-6/6-2-db.md
-    - "6.3 数据表管理": chapter-6/6-3-table.md
+  - "step 4: 解析器":
+    - "4.1 概述": chapter-5/5_1_intro.md
+    - "4.2 SQL简介": chapter-5/5_2_sql.md
+    - "4.3 逻辑优化": chapter-5/5_3_logic.md
+    - "4.4 物理优化": chapter-5/5_4_physic.md
+  - "step 5: 系统管理":
+    - "5.1 概述": chapter-5/_5-1-intro.md
+    - "5.2 数据库管理": chapter-5/_5-2-db.md
+    - "5.3 数据表管理": chapter-5/_5-3-table.md
+  - "step 6: 查询处理":
+    - "6.1 概述": chapter-4/4-1-overview.md
+    - "6.2 扫描算法": chapter-4/4-2-scan.md
+    - "6.3 连接算法": chapter-4/4-3-join.md
+    - "6.4 查询执行": chapter-4/4-4-execution.md
   - 文法解释:
     - 总述: explanation/intro.md
     - 数据库管理文法: explanation/db.md
