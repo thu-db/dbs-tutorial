@@ -961,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-1-intro/" class="md-nav__link">
+      <a href="../../chapter-5/5-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -981,7 +981,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-2-db/" class="md-nav__link">
+      <a href="../../chapter-5/5-2-db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1001,7 +1001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-3-table/" class="md-nav__link">
+      <a href="../../chapter-5/5-3-table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1661,7 +1661,7 @@
 <summary>隐式JOIN</summary>
 <p>我们将使用 <code>JOIN</code> 关键字的查询称为“显式 JOIN”，包含 <code>INNER JOIN</code>，<code>OUTER JOIN</code>，<code>LEFT JOIN</code>，<code>RIGHT JOIN</code>，<code>FULL JOIN</code>等。</p>
 <p>与之相对的便是下例中用到的 “隐式 JOIN”，它指不使用 <code>JOIN</code> 关键字，而是在 <code>FROM</code> 后用逗号隔开多个表名来对它们进行做内连接（INNER JOIN）。
-这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN。</p>
+这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN，如果在 <code>WHERE</code> 后面给出了连接条件则一定是等值连接，否则默认为求笛卡尔积。</p>
 </details>
 <div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SQL_NO_CACHE</span><span class="w"> </span><span class="n">grade</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student_course</span><span class="p">,</span><span class="w"> </span><span class="n">student</span><span class="p">,</span><span class="w"> </span><span class="n">course</span><span class="w"> </span>
 <span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">student_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">student</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">course_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">course</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span>
@@ -1706,7 +1706,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月12日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
       
     
   </small>

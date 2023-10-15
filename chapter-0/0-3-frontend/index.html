@@ -961,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-1-intro/" class="md-nav__link">
+      <a href="../../chapter-5/5-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -981,7 +981,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-2-db/" class="md-nav__link">
+      <a href="../../chapter-5/5-2-db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1001,7 +1001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../chapter-5/_5-3-table/" class="md-nav__link">
+      <a href="../../chapter-5/5-3-table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1602,7 +1602,7 @@
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_A</span><span class="p">,</span><span class="w"> </span><span class="n">index_field_a</span><span class="p">);</span>
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_B</span><span class="p">);</span>
 </code></pre></div>
-<p>注意，在自动化测试时<strong>输出完表格后，在输出约束信息前必须输出一个空行</strong>作为分隔（如果没有任何约束信息，则空行输出与否不影响结果正确性），并且下面的格式需要严格按照上述标准。由于我们的文法允许匿名主外键、索引，而有的同学会为它们设定默认名字，因此对于本来没有名字的约束即便你输出了自定义名字也不会影响正确性，但是本来有名字的约束你需要准确输出名字。</p>
+<p>注意，在自动化测试时<strong>输出完表格后，在输出约束信息前必须输出一个空行</strong>作为分隔（如果没有任何约束信息，则空行输出与否不影响结果正确性），并且下面的格式需要严格按照上述标准。由于我们的文法允许匿名主外键、索引，而有的同学会为它们设定默认名字，因此我们统一要求<strong>输出约束名与否不影响正确性</strong>。</p>
 <div class="admonition info">
 <p class="admonition-title">Default NULL</p>
 <p>注意默认值显示为 <code>NULL</code> 有两种含义：当该字段有 <code>NOT NULL</code> 约束时，表示没有设置默认值，此时 <code>INSERT</code> 必须对该字段赋值；否则表示默认值为 <code>NULL</code>。</p>

@@ -10,13 +10,13 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-5/_5-2-db/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-5/5-3-table/">
       
       
-        <link rel="prev" href="../_5-1-intro/">
+        <link rel="prev" href="../5-2-db/">
       
       
-        <link rel="next" href="../_5-3-table/">
+        <link rel="next" href="../../chapter-6/6-1-overview/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>5.2 数据库管理 - 数据库系统概论实验文档</title>
+        <title>5.3 数据表管理 - 数据库系统概论实验文档</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#52" class="md-skip">
+        <a href="#53" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.2 数据库管理
+              5.3 数据表管理
             
           </span>
         </div>
@@ -873,11 +873,31 @@
   
   
     <li class="md-nav__item">
-      <a href="../_5-1-intro/" class="md-nav__link">
+      <a href="../5-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     5.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-2-db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 数据库管理
   </span>
   
 
@@ -906,7 +926,7 @@
           
   
   <span class="md-ellipsis">
-    5.2 数据库管理
+    5.3 数据表管理
   </span>
   
 
@@ -917,7 +937,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 数据库管理
+    5.3 数据表管理
   </span>
   
 
@@ -939,22 +959,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    1. 创建数据库
+  <a href="#_1" class="md-nav__link">
+    基本管理
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    2. 切换数据库
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    3. 删除数据库
+  <a href="#_2" class="md-nav__link">
+    进阶管理（选做）
   </a>
   
 </li>
@@ -963,26 +976,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../_5-3-table/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.3 数据表管理
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1388,22 +1381,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    1. 创建数据库
+  <a href="#_1" class="md-nav__link">
+    基本管理
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    2. 切换数据库
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    3. 删除数据库
+  <a href="#_2" class="md-nav__link">
+    进阶管理（选做）
   </a>
   
 </li>
@@ -1427,24 +1413,37 @@
   
 
 
-<h1 id="52">5.2 数据库管理</h1>
-<h2 id="1">1. 创建数据库</h2>
-<p>大作业需要实现一个单用户多数据库的数据库管理系统，因此必然会涉及到不同数据库的创建、删除、切换等操作。简便起见，这里我们推荐采用 “文件夹即数据库” 管理方法，创建一个数据库时我们在数据文件夹下创建一个同名文件夹表示该数据库，当需要查询有哪些数据库时只需要扫描文件夹即可。</p>
-<p>例如，假设用户的所有数据均存放在 <code>./data</code> 下，那么当用户使用 <code>CREATE DATABASE mydb</code> 时，会试图创建一个文件夹 <code>./data/mydb</code>，如果文件夹创建成功则数据库 <code>mydb</code> 创建成功。</p>
-<p>对于大作业的需求而言采用“文件夹即数据库”的思路已经够用，但这里也介绍一下采用引入一个 meta 文件的更严谨的方法，例如创建一个 <code>./data/db</code> 文件来存储所有数据库的元信息，它主要包含了被创建的所有数据库的名字（以及其他可能的元信息，例如对多用户数据库可能会包含权限记录等），这样可以保证即便用户手动创建了一个 <code>./data/test</code> 文件夹也不会导致莫名多出来一个 <code>test</code> 数据库。这样做的好处是降低了数据库和文件系统本身的耦合性，另外如果你创建数据库时除了创建文件夹外还做了其他操作（例如生成一个 <code>./data/mydb/meta</code> 的元信息文件），那么可以避免上述手动创建文件夹导致的异常数据——我们通常认为删改文件（夹）导致异常是合理的，但是创建一个看上去无害的文件（夹）不应该影响系统的正常使用。</p>
-<div class="admonition tip">
-<p class="admonition-title">文件系统操作</p>
-<p>在 C 语言的标准库中只有文件级别的操作，没有文件系统级别的操作，例如遍历一个文件夹的所有文件、创建或删除一个文件夹、移动一个文件等，这导致我们需要用操作系统的接口来实现这些操作，比如 Windows 的 <code>&lt;Windows.h&gt;</code>，Linux 的 <code>&lt;dirent.h&gt;</code> 与 <code>&lt;sys/stat.h&gt;</code> 等。</p>
-<p>C++ 在 C++17 中终于引入了 <code>&lt;filesystem&gt;</code> 库，可以跨系统地完成相关操作；常用高级语言通常都支持这些操作，如 Java 的 <code>java.io.File</code>、Python 的<code>os.path</code> 或 <code>pathlib</code> 等。</p>
-<p>如果你想使用 C 语言的系统耦合库来处理文件系统，请务必保证你的程序能在 Linux 上正常运行。</p>
-</div>
-<p>此外也有数据库采用“文件即数据库”的做法，例如 SQLite，它将所有数据全部写入一个文件中，这样做理论上效果与文件夹相差不大，只是（后文会提到）用文件夹的方法借用了文件系统来区分不同表格、索引等，而单文件法需要自行组织这些结构。如果你有兴趣也可以采用单文件法，它可以降低对文件系统的依赖，但这可能会导致你无法采用 <a href="./6-3-table.md">数据表管理</a> 中介绍的方法。</p>
-<h2 id="2">2. 切换数据库</h2>
-<p>执行 DML 需要已经指定了某个数据库后在该数据库中执行，因此我们通常需要用 <code>USE &lt;database&gt;</code> 语句来显式地指出当前使用的数据库。</p>
-<p>一种最简单的实现模式是仅在前端记录当前所使用的数据库，每次执行查询时将数据库名一并发送给后端；但这不是最佳实践，通常我们在切换数据库时还可能会关闭原来数据库的文件、刷新缓存、预加载新数据库的一些文件等，所以最好在前端与后端都记录当前正在使用的数据库：后端记录状态以处理查询，前端可以在交互模式下为用户展示当前正在使用的数据库。</p>
-<p>如果启动 DBMS 时没有使用 <code>-d</code> 参数指明数据库，则当前没有使用任何数据库，此时 DBMS 应当不允许用户执行基于具体数据库的 DML 。</p>
-<h2 id="3">3. 删除数据库</h2>
-<p>如果创建数据库采用了创建文件夹的方法，那么删除数据库自然也应该删除文件夹，但注意这里应该是递归删除，数据库内的数据表等都要删除。删除数据库的操作可能和已经打开的文件等冲突，你应该妥善处理这一问题。</p>
+<h1 id="53">5.3 数据表管理</h1>
+<h2 id="_1">基本管理</h2>
+<p>在上一节中数据库的管理推荐了“文件夹即数据库”的思路，类似的对于数据表也推荐“文件即数据表”的思路。但是这里仍然有一些细节值得考虑：</p>
+<ol>
+<li>索引和数据文件应当放到在一起还是分作不同的文件？</li>
+<li>数据表的 Schema 应该存储在数据文件中还是单独存储在元信息文件中？如果采用元信息文件，应该一张表一个文件还是所有表共用一个文件？</li>
+</ol>
+<p>上述问题没有固定的答案，不同的选择会让你有着完全不同的数据组织方式。例如如果你将元信息单独放在元信息文件中，那么它们甚至不必基于页式文件系统与记录管理系统：这些文件通常较小，很可能写不满一页，完全可以每次读写时都全文件读写，将它们保存为自定义的二进制格式甚至是文本文件。</p>
+<p>一种可能的采用较少文件的策略如下：</p>
+<ul>
+<li>对于一张表，所有信息存放在同一个文件中</li>
+<li>第一页存放元信息，包括表的 Schema、索引信息、表与各个索引数据页第一页的编号等</li>
+<li>创建表时新建该文件并完成第一页内容，删除表时删除该文件即可，删除索引时则需要修改元信息并将索引使用的页都标记为空页</li>
+</ul>
+<p>一种可能得采用较多文件的策略如下：</p>
+<ul>
+<li>每一张表由一个数据文件、一个元信息文件、若干个索引文件组成</li>
+<li>数据文件与索引文件第一页便是数据页，表的 Schme、索引元信息等都存放在元信息文件中</li>
+<li>删除表时需要将上述文件都删除，删除索引是只需要修改元信息并删除索引文件</li>
+</ul>
+<p>在确定了上述策略后，关于主外键等完整性约束的实现则比较自然，在增删这些约束时，在元信息中变动相应记录，如果涉及到索引的增删也一并完成；在对数据增删查改时也应该从数据表的元信息中获取这些约束，并根据约束的存在做相应检查。</p>
+<h2 id="_2">进阶管理（选做）</h2>
+<p>选做部分中还涉及到增删改一列的 Schema 等操作，这属于更麻烦一些的操作，它或者会导致你在设计时的麻烦，或者会导致执行时的麻烦（低效）。注意为了避免引起不必要的误会，这部分文法我们从文法文件中移除了，你可以自行添加对应 <code>Alter</code> 文法，格式可以参考 <a href="https://dev.mysql.com/doc/refman/en/alter-table.html">MySQL文法</a>，完成这部分选做内容需要包含以下支持：</p>
+<ul>
+<li>删除一列</li>
+<li>新增一列</li>
+<li>修改一列的列名、default、NULL 等元信息</li>
+</ul>
+<p>在不考虑效率的情况下，这些实现可能相对容易，例如如果你采用了文件较多的数据表管理版本，那么在修改数据表 Schema 时，你可以将来的数据文件重命名，新建一个数据文件，将原来的数据依次插入到新文件中，完成后再删除旧文件。</p>
+<p>但是这样的办法是很笨重的，很多时候我们都有更好的选择，例如对于删除一列的操作，我们可以在 Schema 中进行标记，知道每条记录中的某一部分是无效数据，而不直接操作数据文件；我们可以为所有记录都预留是否允许 NULL 的 flag，从而在修改 NULL / NOT NULL 时无需对记录进行操作；我们可以在最初创建表时就将记录设置为某些更大的长度以预留空间（采用类似于 <code>std::vector</code> 的思路在迫不得已时进行倍增扩容），从而在新增一列时我们只需要知道这些列都是 default 值，而不需要修改全部列内容。</p>
+<p>注意，如果你真的采用了全部数据重新插入的办法，则这部分选做内容只能获取部分分数。</p>
 
   <hr>
 <div class="md-source-file">
@@ -1468,10 +1467,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-5/_5-2-db/" == "")
+    if ("chapter-5/5-3-table/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-5/_5-2-db/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-5/5-3-table/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1531,7 +1530,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../_5-1-intro/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.1 概述">
+          <a href="../5-2-db/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.2 数据库管理">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1541,20 +1540,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                5.1 概述
+                5.2 数据库管理
               </div>
             </div>
           </a>
         
         
           
-          <a href="../_5-3-table/" class="md-footer__link md-footer__link--next" aria-label="下一页: 5.3 数据表管理">
+          <a href="../../chapter-6/6-1-overview/" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.1 概述">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                5.3 数据表管理
+                6.1 概述
               </div>
             </div>
             <div class="md-footer__button md-icon">
