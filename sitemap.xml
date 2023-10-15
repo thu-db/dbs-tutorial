@@ -96,26 +96,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-1-overview/</loc>
-         <lastmod>2023-10-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-2-scan/</loc>
-         <lastmod>2023-10-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-3-join/</loc>
-         <lastmod>2023-10-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-4-execution/</loc>
-         <lastmod>2023-10-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/5_1_intro/</loc>
          <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
@@ -147,6 +127,26 @@
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/_5-3-table/</loc>
+         <lastmod>2023-10-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-1-overview/</loc>
+         <lastmod>2023-10-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-2-scan/</loc>
+         <lastmod>2023-10-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-3-join/</loc>
+         <lastmod>2023-10-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-4-execution/</loc>
          <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>

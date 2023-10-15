@@ -10,13 +10,13 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-4/4-4-execution/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-6/6-3-join/">
       
       
-        <link rel="prev" href="../4-3-join/">
+        <link rel="prev" href="../6-2-scan/">
       
       
-        <link rel="next" href="../../explanation/intro/">
+        <link rel="next" href="../6-4-execution/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>6.4 查询执行 - 数据库系统概论实验文档</title>
+        <title>6.3 连接算法 - 数据库系统概论实验文档</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#44" class="md-skip">
+        <a href="#43" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.4 查询执行
+              6.3 连接算法
             
           </span>
         </div>
@@ -976,7 +976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-1-overview/" class="md-nav__link">
+      <a href="../6-1-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -996,31 +996,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-2-scan/" class="md-nav__link">
+      <a href="../6-2-scan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     6.2 扫描算法
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4-3-join/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    6.3 连接算法
   </span>
   
 
@@ -1045,7 +1025,79 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    6.3 连接算法
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    6.3 连接算法
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nested-loop-join" class="md-nav__link">
+    嵌套循环连接 (Nested Loop Join)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sort-merge-join" class="md-nav__link">
+    排序归并连接 (Sort-Merge Join)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hash-join" class="md-nav__link">
+    哈希连接 (Hash Join)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-4-execution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1106,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1330,6 +1381,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nested-loop-join" class="md-nav__link">
+    嵌套循环连接 (Nested Loop Join)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sort-merge-join" class="md-nav__link">
+    排序归并连接 (Sort-Merge Join)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hash-join" class="md-nav__link">
+    哈希连接 (Hash Join)
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1347,47 +1427,62 @@
   
 
 
-<h1 id="44">4.4 查询执行</h1>
-<p>截至目前，我们讨论的都是单个关系代数操作的执行算法。现在我们需要考虑，对于一个涉及多个算子的查询计划树，我们应该怎样去执行。一个最简单的策略是将所有查询算子按照一定的方法排序，每次执行一个算子，执行完后再执行下一个算子，称为<strong>物化</strong>策略。这种方法的缺点是需要将中间结果暂存，往往需要存到磁盘上，带来较大的开销。另一种策略是将多个算子同时执行，一个算子处理一条数据后，将数据传递给下一个算子，不需要存储中间结果，这种策略称为<strong>流水线</strong>策略。</p>
-<p>我们考虑以下面这个关系代数表达式为例，描述物化策略和流水线策略的执行过程。</p>
-<div class="arithmatex">\[
-\Pi_{grade}(\sigma_{id=2077010001}(student) \Join student\_course)
-\]</div>
-<p>
-<figure><img src="../plan_tree.svg" /><figcaption>查询计划树</figcaption>
-</figure>
-</p>
-<ul>
-<li>物化（Materialization）</li>
-</ul>
-<p>如果采用物化策略，我们将从最底层的扫描算子开始，首先对 student 表进行扫描，筛选出 id=2077010001 的记录，扫描完成后将筛选出的记录暂存。随后将暂存下来的记录和 student_course 表中的记录输入连接算子 <span class="arithmatex">\(\Join\)</span>，执行连接操作。连接操作完成后，将连接的结果物化下来，最后交给查询计划树根节点的投影算子 <span class="arithmatex">\(\Pi_{grade}\)</span>，投影算子输出查询的最终结果。</p>
-<p>物化策略的查询开销不仅仅是所有查询算子开销之和，当中间结果较大、超出内存大小时，必须将其物化到磁盘上，这一过程也会产生不小的开销。</p>
-<ul>
-<li>流水线（Pipelining）</li>
-</ul>
-<p>物化策略的开销很大程度上来源于存储中间结果的过程，我们可以将关系代数树的多个算子组成一个流水线，每个算子的中间结果直接传递给流水线上的下一算子，从而避免存储中间结果的开销。</p>
-<p>例如，<span class="arithmatex">\(\Join\)</span> 和 <span class="arithmatex">\(\Pi_{grade}\)</span> 算子可以组成流水线，每当连接算子产生一条结果时，马上就可以传给投影算子进行投影操作。通过结合连接和投影，避免中间结果的物化过程，直接产生最终结果。</p>
-<p>流水线策略可以显著提高查询的执行效率，然而并不是所有算子都可以组成流水线。比如排序算子，在前一算子得到所有记录之前无法输出任何结果。</p>
-<!-- 目前仅讨论了单个关系运算如何执行，下面需要研究如何执行包含多个运算的查询计划树。
-
-## 物化
-
-最简单直观的想法是自底向上执行查询计划树，依次执行每个算子，每次执行的临时结果存储到内存或磁盘上，下一个算子在临时结果的基础上继续进行，这种执行策略称为**物化**。
-
-物化方法的策略简单，但会产生大量的中间结果，占据磁盘和内存空间，且查询过程中需要多次访问磁盘，效率较低。
-
-## 流水线
-
-执行查询计划的另一种方法是同时进行多个运算，一个运算产生的结果直接传递给使用这个结果的下一个运算，不需要将中间结果存储到磁盘，这种方法称为**流水线**。
-
-流水线中的每个操作可以由一个迭代算子来实现，每个迭代算子提供 Init 和 Next 接口。调用 Init 后，每次调用 next 返回该操作输出的下一条结果。同时迭代算子自身需要维护迭代状态，使得每次调用 next 返回正确的结果。 -->
+<h1 id="43">4.3 连接算法</h1>
+<p>连接运算是关系代数中一个重要操作，也往往是最耗时的操作。本节我们仅讨论两表连接算法，且仅讨论等值连接，即形如 <code>SELECT * FROM A,B WHERE A.a=B.b</code> 查询的连接算法。</p>
+<h2 id="nested-loop-join">嵌套循环连接 (Nested Loop Join)</h2>
+<p>嵌套循环连接是两表连接最基本的算法，算法描述如下：</p>
+<div class="highlight"><pre><span></span><code>for each row r1 in t1 {
+  for each row r2 in t2 {
+    if r1, r2 satisfies join conditions
+      join r1, r2
+  }
+}
+</code></pre></div>
+<p>嵌套循环连接存在多种改进方法，如数据库可以每次读取一个 block，减少 I/O 请求次数。考虑记录获取方式，即可得到基于块的嵌套循环连接算法 (Block Nested Loop Join)，算法描述如下：</p>
+<div class="highlight"><pre><span></span><code>for each block b1 of t1 {
+  if b1 not in memory
+    read b1 block b1 into memory
+  for each row r1 in block b1 {
+    for each block b2 of t2 {
+      if b2 not in memory
+        read block b2 into memory
+      for each row r2 in b2 {
+        if r1, r2 satisfies join conditions
+          join r1, r2
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>此外，如果内表在连接属性上有索引，则可以利用索引加速内循环，得到基于索引的循环连接算法 (Index Nested Loop Join)，有效提高连接效率。</p>
+<h2 id="sort-merge-join">排序归并连接 (Sort-Merge Join)</h2>
+<p>先将要连接的两个表在连接属性上排序，随后对排序后的表进行连接，算法描述如下：</p>
+<div class="highlight"><pre><span></span><code>sort t1, t2 on join keys
+cursor_1 &lt;- t1, cursor_2 &lt;- t2
+while cursor_1 and cursor_2:
+  if cursor_r &lt; cursor_2:
+    increment cursor_1
+  if cursor_1 &gt; cursor_2:
+    increment cursor_2
+  if cursor_1 == cursor_2:
+    Join cursor_1, cursor_2
+</code></pre></div>
+<p>如果两张表在连接前已经在连接属性上排好序，则可以省去排序操作。此外，排序归并连接算法的输出结果也是在连接属性上排好序的，如果查询在连接属性上有 <code>order by</code> 子句，排序归并连接算法便可以直接给出有序结果。</p>
+<h2 id="hash-join">哈希连接 (Hash Join)</h2>
+<p>对一张表进行哈希运算建立哈希表，哈希表的 key 为连接属性。对另一张表的每条记录，用哈希函数求得连接属性上的值，映射到哈希表上即可得到要连接的记录，算法描述如下：</p>
+<div class="highlight"><pre><span></span><code>build hash table HT for t1
+for each row r2 in t2:
+  if h(r2) in HT:
+    join t1, t2
+</code></pre></div>
+<p>哈希连接算法效率较高，算法复杂度为 <span class="arithmatex">\(O(T1+T2)\)</span>​，<span class="arithmatex">\(T1\)</span>​ 和 <span class="arithmatex">\(T2\)</span>​ 分别表示两张表记录的个数。但是哈希连接仅支持等值连接，且哈希表需要占用较大的内存空间，如果哈希表大小超出内存空间限制，则需要将哈希表写入临时文件。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
       
     
   </small>
@@ -1404,10 +1499,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-4/4-4-execution/" == "")
+    if ("chapter-6/6-3-join/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-4/4-4-execution/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-6/6-3-join/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1416,7 +1511,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (9.52%), <a href='mailto:lwb21@mails.tsinghua.edu.cn'>Wenbo Li</a> (90.48%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (1.89%), <a href='mailto:lwb21@mails.tsinghua.edu.cn'>Haowen Dong</a> (98.11%)</span>
   </small>
 </div>
 
@@ -1467,7 +1562,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../4-3-join/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 6.3 连接算法">
+          <a href="../6-2-scan/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 6.2 扫描算法">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1477,20 +1572,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                6.3 连接算法
+                6.2 扫描算法
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../explanation/intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总述">
+          <a href="../6-4-execution/" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.4 查询执行">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                总述
+                6.4 查询执行
               </div>
             </div>
             <div class="md-footer__button md-icon">
