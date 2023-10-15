@@ -2,177 +2,177 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/ci/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/faq/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/files/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-0/0-1-intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-0/0-2-backend/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-0/0-3-frontend/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-1/1-1-intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-1/1-2-page/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-1/1-3-buffer/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-1/1-4-api/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-2/api/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-2/fixed/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-2/intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-2/variable/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-3/api/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-3/btree/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-3/ds/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-3/intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-1-overview/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-2-scan/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-3-join/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-4/4-4-execution/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/5_1_intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/5_2_sql/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/5_3_logic/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-5/5_4_physic/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-1-intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-2-db/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/chapter-6/6-3-table/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/explanation/db/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/explanation/intro/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/explanation/query/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/explanation/table/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://thu-db.github.io/dbs-tutorial/timeline/2023F/</loc>
-         <lastmod>2023-10-14</lastmod>
+         <lastmod>2023-10-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
