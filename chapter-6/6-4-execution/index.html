@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#44" class="md-skip">
+        <a href="#64" class="md-skip">
           跳转至
         </a>
       
@@ -1347,7 +1347,7 @@
   
 
 
-<h1 id="44">4.4 查询执行</h1>
+<h1 id="64">6.4 查询执行</h1>
 <p>截至目前，我们讨论的都是单个关系代数操作的执行算法。现在我们需要考虑，对于一个涉及多个算子的查询计划树，我们应该怎样去执行。一个最简单的策略是将所有查询算子按照一定的方法排序，每次执行一个算子，执行完后再执行下一个算子，称为<strong>物化</strong>策略。这种方法的缺点是需要将中间结果暂存，往往需要存到磁盘上，带来较大的开销。另一种策略是将多个算子同时执行，一个算子处理一条数据后，将数据传递给下一个算子，不需要存储中间结果，这种策略称为<strong>流水线</strong>策略。</p>
 <p>我们考虑以下面这个关系代数表达式为例，描述物化策略和流水线策略的执行过程。</p>
 <div class="arithmatex">\[
@@ -1416,7 +1416,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (9.52%), <a href='mailto:lwb21@mails.tsinghua.edu.cn'>Haowen Dong</a> (90.48%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (4.76%), <a href='mailto:lwb21@mails.tsinghua.edu.cn'>Haowen Dong</a> (95.24%)</span>
   </small>
 </div>
 
