@@ -1499,6 +1499,7 @@
 <p>TODO：在跟教学实验平台对接完成后补充平台链接以及可能的截图示例。</p>
 <h2 id="2">2. 运行要求</h2>
 <p>CI 运行时会在命令行参数给出 <code>-b</code> 选项，给程序的输入为多行 SQL 语句，每一行一定是一个完整的 <code>;</code> 结尾的 SQL 语句，输出格式见 <a href="../chapter-0/0-3-frontend/">0.3 前端约定</a> 相关内容。</p>
+<p>评测器假定你的数据文件都存在 <code>./data</code> 下，因此在运行数据库前会先执行 <code>rm -rf ./data</code> 来清空数据（注意 CI 流程是从编译数据库开始的，因此理应不该有数据），但这更多地是为了方便本地评测，清空所有数据以避免之前留下的数据导致 SQL 执行结果与期望不符。但这不是强制性要求，你也可以将数据文件放在其他地方，在本地运行评测器前自己手动清理数据。</p>
 <p>考虑到往年部分同学采用将数据全部导入内存的作弊方法，以及我们的数据库系统很多细节设计都是为了解决内存高性能低容量与磁盘低性能高容量之间的矛盾，我们对 CI 运行时的资源进行了限制，我们限制如下：</p>
 <ul>
 <li>时间：&lt;3600s</li>
@@ -1545,30 +1546,21 @@
 </div>
 <p>输入文件后面则是正常的 SQL 语句，每一行都是一个完整的以 <code>;</code> 结尾的一个 SQL 语句，对应文法文件的 <code>statement</code>，不会出现用 <code>;</code> 隔开的多个语句的情况。空行和 <code>--</code> 开头的注释行会被忽略。</p>
 <h3 id="42">4.2 输出文件</h3>
-<p>输出文件也即测例的答案，但是注意 SQL 的答案和常规的 DSA OJ 不同，可以认为它充满了 Special Judge，它的行序与列序有时候是有序的，有时候是无序的（详见<a href="../chapter-0/0-3-frontend/">《0.3 前端约定》</a>一节），因此我们需要带有标注语法的输出文件格式来标明这些信息。</p>
-<p>输出文件是助教自定义的 <code>.ans</code> 后缀的文本文件。它由一些 <code>@</code> 打头的标记信息（下称 flag）、纯文本的答案和用于增强可读性的空行（除了答案区域外，空行可以任意添加）组成。一个答案的例子如下：</p>
-<div class="highlight"><pre><span></span><code>@SQL: DESC TBL;
-@DESC
-@BEGIN
-Field,Type,Null,Default
-a,INT,NO,NULL
-b,VARCHAR(16),NO,NULL
-c,FLOAT,NO,NULL
-@END
+<p>输出文件也即测例的答案，但是注意 SQL 的答案和常规的 DSA OJ 不同，可以认为它充满了 Special Judge，每一个 SQL 语句的输出需要单独处理，因此我们使用分隔符来显式地拆分不同 SQL 的输出。</p>
+<p>具体来说，输出文件在每一部分答案后面会增加 <code>@</code> 开头的一行作为结尾，<code>@</code> 后面的内容无关紧要，我们在样例中写了对应的 SQL 语句以提高可读性，如果你自己构造测例则对此没有要求。注意这和程序输出的要求是一致的，它们都需要保证输出的数据不会包含行首为 <code>@</code> 的数据，我们的测例会保证这一点。</p>
+<p>在输出内容的前后增加一些空行是不会影响评测器的，评测器会忽略这些空行，例如假设目前有 <code>DB</code> 与 <code>DB2</code> 两个数据库，我们连续执行了两次 <code>SHOW DATABASES</code>，下面是一个可能的输出文件：</p>
+<div class="highlight"><pre><span></span><code>DATABASES
+DB1
+DB2
+
+@SHOW DATABASES;
+
+DATABASES
+DB1
+DB2
+@SHOW DATABASES;
 </code></pre></div>
-<p>目前实现的 flag 说明如下：</p>
-<ul>
-<li><code>@SQL:</code> 说明了它在测例文件中对应的 SQL 语句，仅用于维护方便，评测器不会用到这一信息</li>
-<li><code>@DESC</code> 说明了这是一个 <code>DESC &lt;table&gt;</code> 语句，这一语句很特殊，因为它除了需要输出一张表外还需要额外输出其他信息，因此需要特别的 flag 标记和解析器来处理，如果不是这样的语句则不需要写 <code>@DESC</code></li>
-<li><code>@BEGIN</code> 与 <code>@END</code> 之间的若干行是 SQL 预计所期望的输出文本，注意这里的 <code>DESC</code> 恰好没有下面的约束信息（即表 <code>TBL</code> 没有创建任何约束），所以下面的内容被省略了，表与约束之间的一个空行也被省略了，加上它不影响正确性。注意 <code>@BEGIN</code> 与 <code>@END</code> 必须放在一个 SQL 语句对应的答案的最后，它之后的 flag 会被视为下一个 SQL 的答案的 flag。在最后一个 <code>@END</code> 后面添加标记信息属于未定义行为。</li>
-<li>由于 <code>SELECT *</code> 不需要考虑列序，所以同样需要一个 flag，<code>@STAR</code> 用于标记这个信息。</li>
-<li>如果需要按行排序，则需要用 <code>@ORDER:</code> 标记排序字段，注意冒号后有一个空格，如果有多个排序关键字则将字段名用空格隔开。此外排序默认是降序排序，如果是升序排序则用 <code>@ASC</code> 标记。通常 SQL 语法要求缺省情况下是 <code>ASC</code> 升序排序，与此处的约定相反，需要特别注意。</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">DESC? DESC!</p>
-<p>缺省为降序显然不合常理，这主要是因为 SQL 里通常缺省为升序 <code>ASC</code>，降序 <code>DESC</code> 需要显式标记，而 <code>DESC</code> 已经被 <code>DESC &lt;table&gt;</code> 抢占了，并且很难想到合适的替代词汇，所以只好将 <code>ASC</code> 设定为需要显式给出。</p>
-</div>
-<p>在排序上有一个无法绕过的问题：假设数据按列 <code>C</code> 排序，那么对 <code>C</code> 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 <code>C</code>，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
+<p>另外在排序上有一个无法绕过的问题：假设数据按列 <span class="arithmatex">\(C\)</span> 排序，那么对 <span class="arithmatex">\(C\)</span> 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 <span class="arithmatex">\(C\)</span>，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
 在我们的测例里测试 <code>ORDER BY</code> 的地方会避免这种情况，保证 <code>SELECT</code> 了所有排序关键字，如果你自己构造测例需要留意这一点。</p>
 
   <hr>
@@ -1576,7 +1568,7 @@ c,FLOAT,NO,NULL
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月14日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
       
     
   </small>
