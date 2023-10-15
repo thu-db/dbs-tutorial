@@ -10,13 +10,9 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-5/5_4_physic/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-4/4_3_logic/">
       
       
-        <link rel="prev" href="../5_3_logic/">
-      
-      
-        <link rel="next" href="../_5-1-intro/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +20,7 @@
     
     
       
-        <title>4.4 物理优化 - 数据库系统概论实验文档</title>
+        <title>4.3 逻辑优化：抽象语法树到逻辑计划树（选做） - 数据库系统概论实验文档</title>
       
     
     
@@ -81,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#54" class="md-skip">
+        <a href="#43" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.4 物理优化
+              4.3 逻辑优化：抽象语法树到逻辑计划树（选做）
             
           </span>
         </div>
@@ -710,20 +706,18 @@
       
   
   
-    
-  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -737,7 +731,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             step 4: 解析器
@@ -750,7 +744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_1_intro/" class="md-nav__link">
+      <a href="../../chapter-5/5_1_intro.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -770,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_2_sql/" class="md-nav__link">
+      <a href="../../chapter-5/5_2_sql.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -790,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_3_logic/" class="md-nav__link">
+      <a href="../../chapter-5/5_3_logic.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -808,18 +802,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../chapter-5/5_4_physic.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -828,7 +813,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -883,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../_5-1-intro/" class="md-nav__link">
+      <a href="../../chapter-5/_5-1-intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -903,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../_5-2-db/" class="md-nav__link">
+      <a href="../../chapter-5/_5-2-db/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -923,7 +907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../_5-3-table/" class="md-nav__link">
+      <a href="../../chapter-5/_5-3-table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1347,24 +1331,31 @@
   
 
 
-<h1 id="54">5.4 物理优化：查询计划树到物理执行计划（选做）</h1>
-<p>代数优化改变查询语句中操作的次序和组合，但不涉及底层的存取路径。物理优化就是要选择高效合理的操作算法或存取路径，求得优化的查询计划，达到查询优化的目标。</p>
-<p>查询优化器在物理优化阶段，主要解决的问题包括：</p>
-<ul>
-<li>单表扫描过程应该选择何种算法？</li>
-<li>两表连接使用何种连接算法？</li>
-<li>多表连接如何确定连接算法顺序？</li>
-<li>查询计划的规划时间是否可接受？</li>
-</ul>
-<p>可以选择基于规则的启发式优化或基于代价估算的优化。基于规则的启发式算法一般相对简单，优化效果一般但是速度较快，适合于解释执行的系统，查询优化和查询执行同时进行。编译执行的方式则是先进行编译优化后整体执行，查询优化和查询执行分离，此时使用基于代价估算的优化更容易获得更好的优化效果，但是可能会面临执行计划的选择空间很大，优化时间开销过高的问题。而将两者结合，先使用启发式算法限制候选空间，对于候选空间内的方案进行代价估计，这样可以在较短时间内获得一个相对较优的执行计划。</p>
-<p>这一部分是数据库系统的核心内容之一，物理计划的选择对于查询执行速度的影响是十分巨大的。很多情况下，一个不合理的的物理执行计划将会造成多个数量级的时间和空间开销。但是考虑到物理优化与底层系统设计有很强关联性，同时较为经典的物理计划选择算法都具有一定的实现难度。所以物理优化部分仅作为选做内容，如果各位同学希望对于这一部分进行深入研究，可以自行调研相关的经典文献并进行实现。</p>
+<h1 id="43">4.3 逻辑优化：抽象语法树到逻辑计划树（选做）</h1>
+<p>查询优化器在逻辑优化阶段主要解决的问题是：如何找出SQL语句的等价变换形式，使SQL执行更高效；一般可以使用代数优化的方式完成这一过程。代数优化是通过关系代数中一些等价变化的方式调整原始的抽象语法树结构，使其变化为执行过程上更为简洁高效的逻辑计划树的形式。主要是一些基于规则的固定转化模式，逻辑优化过程基于如下的经验规则：</p>
+<ol>
+<li>尽早进行选择运算，这样可以尽早降低运算数据的规模</li>
+<li>合并同表的多个选择和投影运算，减少表的扫描次数</li>
+<li>合并投影运算和其他双目运算（笛卡尔积，等值连接，并集差集），减少表的扫描次数</li>
+<li>合并选择运算与笛卡尔积，避免直接计算笛卡尔积</li>
+<li>提取公共子表达式，重复使用</li>
+</ol>
+<p>基于上述的经验规则，常用的变化包括如下几类：</p>
+<ol>
+<li>列裁剪：运算过程中仅保留必要的列，忽略其余列，降低数据传输开销。</li>
+<li>谓词下推：将查询语句中的过滤表达式计算尽可能下推到距离数据源最近的地方，以尽早完成数据的过滤，进而显著地减少数据传输或计算的开销。</li>
+<li>子查询合并：在语义等价条件下，多个子查询可以合并成一个子查询，这样多次表扫描，多次连接减少为单次表扫描和单次连接。</li>
+<li>谓词重写：利用一些等价规则将IN、OR、LIKE、BETWEEN、AND等谓词进行等价转化。</li>
+<li>条件化简：对于WHERE、HAVING等条件进行化简，例如常量传递和不等式变化等。</li>
+</ol>
+<p>逻辑优化部分的代码实现需要一定编译原理的课程基础以及较高的编程能力支持，所以这一部分可能对于部分没有接触过编译原理知识的同学造成过大的负担。所以逻辑优化的内容仅作为选做内容，希望各位对于数据库系统感兴趣的同学可以自行探索并实现这一部分的内容。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月5日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
       
     
   </small>
@@ -1381,10 +1372,10 @@
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-5/5_4_physic/" == "")
+    if ("chapter-4/4_3_logic/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-5/5_4_physic/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-4/4_3_logic/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1393,7 +1384,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (22.22%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (77.78%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (6.67%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (86.67%)</span>
   </small>
 </div>
 
@@ -1439,44 +1430,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="页脚" >
-        
-          
-          <a href="../5_3_logic/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 4.3 逻辑优化">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                上一页
-              </span>
-              <div class="md-ellipsis">
-                4.3 逻辑优化
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../_5-1-intro/" class="md-footer__link md-footer__link--next" aria-label="下一页: 5.1 概述">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              <div class="md-ellipsis">
-                5.1 概述
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
