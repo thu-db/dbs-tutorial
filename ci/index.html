@@ -1482,9 +1482,11 @@
 <h1 id="ci">CI 说明</h1>
 <p>CI（Continuous Integration，持续集成）是指软件发布流程的构建和单元测试阶段，GitLab、GitHub 等常见的基于 Git 的集成软件开发平台都带有类似的功能，我们将基于清华大学部署的 GitLab 的 CI 完成实验的自动化测试。</p>
 <p>截止2023年秋我们实际上使用的是集成测试而非单元测试，它并不能让你的实验每完成一部分后便进行测试，它只能在你将整个实验几大模块都完成后基于SQL的执行情况进行功能性测试。</p>
+<p>由于不同语言的程序需要不同的 CI 运行环境、依赖库等，我们只能适配有限的环境，截止2023年秋季助教预设的环境有 C++ 与 Python，因此如果你想选择其他语言，你可能需要自行编写对应的 Docker 镜像，或者你也可以等到有人完成适配后再选择该语言。</p>
 <div class="admonition abstract">
 <p class="admonition-title">激励机制</p>
 <p>如果你反馈了 CI 漏洞、测例错误、评测器逻辑错误等，甚至提了 PR，助教将根据贡献程度给同一问题的第一个提出者大作业加分，加分会在学期末进行汇总，至多累计（按大作业满分100计算意义下的）5分。</p>
+<p>如果你协助助教完成了某个语言的环境适配，可以取得至多包含在上述5分限制内的至多2分加分。</p>
 </div>
 <h2 id="1">1. 使用说明</h2>
 <p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
@@ -1568,7 +1570,7 @@ DB2
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月16日</span>
       
     
   </small>
