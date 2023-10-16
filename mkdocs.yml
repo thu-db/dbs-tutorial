@@ -73,8 +73,9 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
-    - navigation.instant
-    - navigation.instant.prefetch
+    # Why instant mode would break katex?
+    # - navigation.instant
+    # - navigation.instant.prefetch
     - navigation.top
     - navigation.footer
     - toc.follow
@@ -88,8 +89,6 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - markdown_captions
-  - pymdownx.arithmatex:
-      generic: true
   - pymdownx.details
   - pymdownx.keys
   - pymdownx.mark
