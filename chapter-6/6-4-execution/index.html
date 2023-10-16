@@ -1350,9 +1350,9 @@
 <h1 id="64">6.4 查询执行</h1>
 <p>截至目前，我们讨论的都是单个关系代数操作的执行算法。现在我们需要考虑，对于一个涉及多个算子的查询计划树，我们应该怎样去执行。一个最简单的策略是将所有查询算子按照一定的方法排序，每次执行一个算子，执行完后再执行下一个算子，称为<strong>物化</strong>策略。这种方法的缺点是需要将中间结果暂存，往往需要存到磁盘上，带来较大的开销。另一种策略是将多个算子同时执行，一个算子处理一条数据后，将数据传递给下一个算子，不需要存储中间结果，这种策略称为<strong>流水线</strong>策略。</p>
 <p>我们考虑以下面这个关系代数表达式为例，描述物化策略和流水线策略的执行过程。</p>
-<div class="arithmatex">\[
-\Pi_{grade}(\sigma_{id=2077010001}(student) \Join student\_course)
-\]</div>
+<p>$$
+\Pi_{grade}(\sigma_{id=2077010001}(student) \Join student_course)
+$$</p>
 <p>
 <figure><img src="../plan_tree.svg" /><figcaption>查询计划树</figcaption>
 </figure>
@@ -1360,13 +1360,13 @@
 <ul>
 <li>物化（Materialization）</li>
 </ul>
-<p>如果采用物化策略，我们将从最底层的扫描算子开始，首先对 student 表进行扫描，筛选出 id=2077010001 的记录，扫描完成后将筛选出的记录暂存。随后将暂存下来的记录和 student_course 表中的记录输入连接算子 <span class="arithmatex">\(\Join\)</span>，执行连接操作。连接操作完成后，将连接的结果物化下来，最后交给查询计划树根节点的投影算子 <span class="arithmatex">\(\Pi_{grade}\)</span>，投影算子输出查询的最终结果。</p>
+<p>如果采用物化策略，我们将从最底层的扫描算子开始，首先对 student 表进行扫描，筛选出 id=2077010001 的记录，扫描完成后将筛选出的记录暂存。随后将暂存下来的记录和 student_course 表中的记录输入连接算子 $\Join$，执行连接操作。连接操作完成后，将连接的结果物化下来，最后交给查询计划树根节点的投影算子 $\Pi_{grade}$，投影算子输出查询的最终结果。</p>
 <p>物化策略的查询开销不仅仅是所有查询算子开销之和，当中间结果较大、超出内存大小时，必须将其物化到磁盘上，这一过程也会产生不小的开销。</p>
 <ul>
 <li>流水线（Pipelining）</li>
 </ul>
 <p>物化策略的开销很大程度上来源于存储中间结果的过程，我们可以将关系代数树的多个算子组成一个流水线，每个算子的中间结果直接传递给流水线上的下一算子，从而避免存储中间结果的开销。</p>
-<p>例如，<span class="arithmatex">\(\Join\)</span> 和 <span class="arithmatex">\(\Pi_{grade}\)</span> 算子可以组成流水线，每当连接算子产生一条结果时，马上就可以传给投影算子进行投影操作。通过结合连接和投影，避免中间结果的物化过程，直接产生最终结果。</p>
+<p>例如，$\Join$ 和 $\Pi_{grade}$ 算子可以组成流水线，每当连接算子产生一条结果时，马上就可以传给投影算子进行投影操作。通过结合连接和投影，避免中间结果的物化过程，直接产生最终结果。</p>
 <p>流水线策略可以显著提高查询的执行效率，然而并不是所有算子都可以组成流水线。比如排序算子，在前一算子得到所有记录之前无法输出任何结果。</p>
 <!-- 目前仅讨论了单个关系运算如何执行，下面需要研究如何执行包含多个运算的查询计划树。
 
@@ -1528,7 +1528,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>

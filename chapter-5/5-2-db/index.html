@@ -1438,7 +1438,7 @@
 <p>C++ 在 C++17 中终于引入了 <code>&lt;filesystem&gt;</code> 库，可以跨系统地完成相关操作；常用高级语言通常都支持这些操作，如 Java 的 <code>java.io.File</code>、Python 的<code>os.path</code> 或 <code>pathlib</code> 等。</p>
 <p>如果你想使用 C 语言的系统耦合库来处理文件系统，请务必保证你的程序能在 Linux 上正常运行。</p>
 </div>
-<p>此外也有数据库采用“文件即数据库”的做法，例如 SQLite，它将所有数据全部写入一个文件中，这样做理论上效果与文件夹相差不大，只是（后文会提到）用文件夹的方法借用了文件系统来区分不同表格、索引等，而单文件法需要自行组织这些结构。如果你有兴趣也可以采用单文件法，它可以降低对文件系统的依赖，但这可能会导致你无法采用 <a href="./6-3-table.md">数据表管理</a> 中介绍的方法。</p>
+<p>此外也有数据库采用“文件即数据库”的做法，例如 SQLite，它将所有数据全部写入一个文件中，这样做理论上效果与文件夹相差不大，只是（后文会提到）用文件夹的方法借用了文件系统来区分不同表格、索引等，而单文件法需要自行组织这些结构。如果你有兴趣也可以采用单文件法，它可以降低对文件系统的依赖，但这可能会导致你无法采用 <a href="../5-3-table/">数据表管理</a> 中介绍的方法。</p>
 <h2 id="2">2. 切换数据库</h2>
 <p>执行 DML 需要已经指定了某个数据库后在该数据库中执行，因此我们通常需要用 <code>USE &lt;database&gt;</code> 语句来显式地指出当前使用的数据库。</p>
 <p>一种最简单的实现模式是仅在前端记录当前所使用的数据库，每次执行查询时将数据库名一并发送给后端；但这不是最佳实践，通常我们在切换数据库时还可能会关闭原来数据库的文件、刷新缓存、预加载新数据库的一些文件等，所以最好在前端与后端都记录当前正在使用的数据库：后端记录状态以处理查询，前端可以在交互模式下为用户展示当前正在使用的数据库。</p>
@@ -1451,7 +1451,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月15日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月16日</span>
       
     
   </small>
@@ -1592,7 +1592,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>

@@ -1359,8 +1359,8 @@
 </code></pre></div>
 <p>这条 SQL 可以被解析为下面两种关系代数：</p>
 <ul>
-<li><span class="arithmatex">\(\sigma_{id=2077010001}(\Pi_{name}(student))\)</span></li>
-<li><span class="arithmatex">\(\Pi_{name}(\sigma_{id=2077010001}(student))\)</span></li>
+<li>$\sigma_{id=2077010001}(\Pi_{name}(student))$</li>
+<li>$\Pi_{name}(\sigma_{id=2077010001}(student))$</li>
 </ul>
 <p>进一步，我们需要将关系代数的每一个操作转化为相应的查询算子，每一种查询算子对应于一种算法。一个关系代数操作对应的查询算法往往有多种，如选择操作可以通过全表扫描和索引扫描实现，表的连接操作可以通过嵌套循环连接、排序归并连接、哈希连接实现，我们将在 6.2 和 6.3 节介绍扫描算法和连接算法。一条 SQL 对应的多种关系代数该如何选择，以及如何选择关系代数对应的查询算子，是查询优化这一步骤需要考虑的事情，详细内容可参阅 4.3 和 4.4 节。</p>
 <p>最后，在我们选择好关系代数每个操作对应的算法后，便得到了一个完整的查询执行计划，下一步需要考虑的是如何将该查询计划在底层的页式文件系统上执行，主要分为物化和流水线两种策略，详见 6.4 节。</p>
@@ -1511,7 +1511,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>

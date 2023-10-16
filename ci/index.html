@@ -1517,7 +1517,7 @@
 <p>注意这里的控制并非是精确控制，不像 DSA 的 OJ，在数据库这样的大项目里精确控制时间与空间是几乎不可能的，你需要合理地估算。</p>
 <p>就时间而言，为了践行老师所说的“不卡时间”的准则，助教使用 Python 作为标程，确定 Python 版数据库能在规定时间内通过测试，而传统的数据库引擎通常用 C++ 编写，在复杂度、缓存等技术使用无误的情况下理应不会存在性能瓶颈。另一方面，实验推荐使用 C++ 完成，因此除非你对自己的 Python 性能优化很有把握，否则不建议使用 Python 完成实验。另外注意时间限制用了小于号，这是计算的是包含评测器消耗时间在内的总时间，评测器消耗的时间理应在10%以内。</p>
 <p>内存上对你的 DBMS 进程使用了虚存限制，推荐你使用 128MB 空间用作页式文件系统的缓存页，严格限制其他部分的内存应该在某个约束之内。理想情况下其他部分应采用 O(1) 的额外内存，当然严格限制 O(1) 会为你编程带来不必要的困难，因此在此约定所有查询结果不超过 32MB（按整数、浮点数均8字节，字符串为实际长度+1字节进行封底估算）。如果你计划完成聚合查询的选做，那么你或许应该谨慎考虑是否要将所有数据读入内存后再进行聚合操作。</p>
-<p>这里举一个内存估算的例子，附件提供的C++页式文件系统为缓存准备了 CAP=MOD=6k 个槽位，为了维护结构信息一次开了 CAP 若干倍个整数，但这部分是可以忽略的小量，即便开了 10 倍的整数，也不过是 <span class="arithmatex">\(6000 * 40B / 1024 / 1024 = 0.23MB\)</span>，它的主要内存消耗在于后面动态分配的 CAP 个页，每页 8192 字节，因此它的主要内存消耗约为 <span class="arithmatex">\(6000 * 8192B / 1024 / 1024 = 47MB\)</span>。</p>
+<p>这里举一个内存估算的例子，附件提供的C++页式文件系统为缓存准备了 CAP=MOD=6k 个槽位，为了维护结构信息一次开了 CAP 若干倍个整数，但这部分是可以忽略的小量，即便开了 10 倍的整数，也不过是 $6000 * 40B / 1024 / 1024 = 0.23MB$，它的主要内存消耗在于后面动态分配的 CAP 个页，每页 8192 字节，因此它的主要内存消耗约为 $6000 * 8192B / 1024 / 1024 = 47MB$。</p>
 <p>CPU 核数限制 1 则是提示不必使用并行加速等方法来卷性能。</p>
 <p>硬盘空间的约束通常用不上，这只是为了防止你的程序出现死循环输出等BUG而给的限制，实际上我们的数据总量通常在1GB以内，即便你用了一些辅助空间也远不会用到10GB——除非你滥用 append-only 模式、留了大量 Log 并且从来不进行空间回收。</p>
 <p>TODO：蹲一个真的把空间用超了的例子，在这里“公开处刑”。</p>
@@ -1567,7 +1567,7 @@ DB1
 DB2
 @SHOW DATABASES;
 </code></pre></div>
-<p>另外在排序上有一个无法绕过的问题：假设数据按列 <span class="arithmatex">\(C\)</span> 排序，那么对 <span class="arithmatex">\(C\)</span> 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 <span class="arithmatex">\(C\)</span>，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
+<p>另外在排序上有一个无法绕过的问题：假设数据按列 $C$ 排序，那么对 $C$ 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 $C$，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
 在我们的测例里测试 <code>ORDER BY</code> 的地方会避免这种情况，保证 <code>SELECT</code> 了所有排序关键字，如果你自己构造测例需要留意这一点。</p>
 
   <hr>
@@ -1716,7 +1716,7 @@ DB2
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
       <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
