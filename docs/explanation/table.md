@@ -21,6 +21,9 @@
 
 显示当前数据库中名为 `Identifier` 的现有数据表的信息，输出的格式和内容应遵循[《0.3 前端约定》](../chapter-0/0-3-frontend.md)一节的规定。
 
+## load_table
+
+加载路径为 `String` 的（csv）文件，并将数据导入当前数据库名为 `Identifier` 的数据表中。
 
 ## alter_add_index
 
