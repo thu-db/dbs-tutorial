@@ -46,6 +46,7 @@ table_statement
     : 'CREATE' 'TABLE' Identifier '(' field_list ')'                    # create_table
     | 'DROP' 'TABLE' Identifier                                         # drop_table
     | 'DESC' Identifier                                                 # describe_table
+    | 'LOAD' 'DATA' 'INFILE' String 'INTO' 'TABLE' Identifier           # load_table
     | 'INSERT' 'INTO' Identifier 'VALUES' value_lists                   # insert_into_table
     | 'DELETE' 'FROM' Identifier 'WHERE' where_and_clause               # delete_from_table
     | 'UPDATE' Identifier 'SET' set_clause 'WHERE' where_and_clause     # update_table
@@ -109,10 +110,10 @@ where_and_clause
 where_clause
     : column operator_ expression            # where_operator_expression
     | column operator_ '(' select_table ')'  # where_operator_select
-    | column 'IS' ('NOT')? Null             # where_null
-    | column 'IN' value_list                # where_in_list
-    | column 'IN' '(' select_table ')'      # where_in_select
-    | column 'LIKE' String                  # where_like_string
+    | column 'IS' ('NOT')? Null              # where_null
+    | column 'IN' value_list                 # where_in_list
+    | column 'IN' '(' select_table ')'       # where_in_select
+    | column 'LIKE' String                   # where_like_string
     ;
 
 column
