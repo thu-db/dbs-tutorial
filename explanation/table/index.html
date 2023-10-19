@@ -1206,6 +1206,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#load_table" class="md-nav__link">
+    load_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#alter_add_index" class="md-nav__link">
     alter_add_index
   </a>
@@ -1458,6 +1465,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#load_table" class="md-nav__link">
+    load_table
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#alter_add_index" class="md-nav__link">
     alter_add_index
   </a>
@@ -1539,6 +1553,8 @@
 <p>删除当前数据库中名为 <code>Identifier</code> 的现有数据表，包括其元信息与所有行数据。</p>
 <h2 id="describe_table">describe_table</h2>
 <p>显示当前数据库中名为 <code>Identifier</code> 的现有数据表的信息，输出的格式和内容应遵循<a href="../../chapter-0/0-3-frontend/">《0.3 前端约定》</a>一节的规定。</p>
+<h2 id="load_table">load_table</h2>
+<p>加载路径为 <code>String</code> 的（csv）文件，并将数据导入当前数据库名为 <code>Identifier</code> 的数据表中。</p>
 <h2 id="alter_add_index">alter_add_index</h2>
 <p>在当前数据库中名为 <code>Identifier</code> 的现有表中创建一个新的索引，这个索引建在 <code>identifiers</code> 这些（一或多）列上。</p>
 <p>注意虽然这里没有给索引命名，但同一张表中不应该有同名索引（即不能在相同列上建两次索引）。进一步考虑到联合索引的相关问题，你应该维护一个包含 <code>identifiers</code> 元组的索引名。</p>
@@ -1579,7 +1595,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月13日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月18日</span>
       
     
   </small>

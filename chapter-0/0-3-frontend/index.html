@@ -1568,8 +1568,13 @@
 <p>在上述约定下，假设我们编译得到的可执行程序是 <code>mydb</code>，则可以通过类似如下语句进行数据导入</p>
 <div class="highlight"><pre><span></span><code>./mydb<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>path/to/data/student.txt<span class="w"> </span>-t<span class="w"> </span>student<span class="w"> </span>-d<span class="w"> </span>curriculum
 </code></pre></div>
-<p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
-<p>注意，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查，你应当采用尽可能高效的方法将数据批量导入，例如填满一页记录后一次写入理应比逐条写入记录更快。</p>
+<p>此外我们也约定一种 SQL 语法用于在数据库进程运行期间导入数据以减少进程启动次数，详见 <code>SQL.g4</code> 中的 <code>load_table</code>。在实际自动化测试时可能会用到上述命令行参数，也可能用到下述 SQL 语句，你需要两者都实现，但这并不必做两次工作，它们在已经取得数据库、文件路径、表名三个参数的情况下完全可以用同一个函数处理。注意，使用 <code>LOAD DATA</code> 前应该已经指定过当前在使用的数据库。</p>
+<p>下面是用 <code>load_table</code> 语法时一个与上述命令行参数有相同效果的 SQL 指令：</p>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">curriculum</span><span class="p">;</span>
+<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="ss">&quot;path/to/data/student.txt&quot;</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student</span><span class="p">;</span>
+</code></pre></div>
+<p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。
+另外，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查，你应当采用尽可能高效的方法将数据批量导入，例如填满一页记录后一次写入理应比逐条写入记录更快。</p>
 <div class="admonition tip">
 <p class="admonition-title">高效导入</p>
 <p>数据导入理论上能够比 <code>INSERT INTO</code> 效率更高，一方面导入时不需要检查完整性约束，另一方面可以将批量导入实现为预先写满一整页后再将该页写入文件，减少缓存拷贝次数和文件IO次数。</p>
@@ -1619,7 +1624,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月16日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月18日</span>
       
     
   </small>
