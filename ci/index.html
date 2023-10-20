@@ -1504,7 +1504,7 @@
 </div>
 <h2 id="1">1. 平台说明</h2>
 <p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
-<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。</p>
+<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。注意，你必须通过了全部必做部分的测例后，才能开始完成选做测例，为此设置了一个名为 <code>optional</code> 的测例作为区分。</p>
 <div class="admonition info">
 <p class="admonition-title">测例分值</p>
 <p>简便起见，每个测例只有拿0分和拿满分两个情况，我们已经尽可能将测例进行拆散以便于大家得分。</p>
@@ -1513,6 +1513,7 @@
 <p class="admonition-title">分值待定</p>
 <p>注意，当你能看到这个信息框时，则表明测例以及分值都还在不断更新中，下面的测例点的分值仅仅是为了预览效果的缺省值，不代表最终分数。</p>
 </div>
+<p>下面是必做部分的测例。</p>
 <pre class="mermaid"><code>flowchart RL
     data["data(1)
 (data)"]
@@ -1520,18 +1521,12 @@
 (pk)"]
     query-b["query-b(3)
 (query)"]
-    query-order["query-order(2)
-(order)"]
     comb-pk["comb-pk(1)
 (comb,pk)"]
-    multi-join["multi-join(8)
-(mj)"]
     query-d["query-d(3)
 (query)"]
     comb-fk-schema["comb-fk-schema(1)
 (fk,comb)"]
-    query-nest["query-nest(2)
-(nest)"]
     index-data["index-data(8)
 (index)"]
     pk-schema["pk-schema(1)
@@ -1546,23 +1541,13 @@
 (join)"]
     join-data["join-data(3)
 (join)"]
-    query-fuzzy["query-fuzzy(1)
-(group)"]
-    query-group["query-group(1)
-(group)"]
     query-a["query-a(3)
 (query)"]
     table-data["table-data(2)
 (data)"]
-    query-aggregate["query-aggregate(2)
-(aggregate)"]
     query-data-a["query-data-a(3)
 (query)"]
-    null["null(2)
-(null)"]
     system["system(5)"]
-    unique["unique(1)
-(unique)"]
     fk["fk(2)
 (fk)"]
     index-schema["index-schema(4)
@@ -1572,16 +1557,12 @@
     query-data-b["query-data-b(3)
 (query)"]
     table["table(7)"]
-    optional["optional(0)"]
     data --&gt; table-data
     pk --&gt; query-a
     query-b --&gt; table
-    query-order --&gt; optional
     comb-pk --&gt; query-a
-    multi-join --&gt; optional
     query-d --&gt; table
     comb-fk-schema --&gt; comb-pk-schema
-    query-nest --&gt; optional
     index-data --&gt; query-data-b
     index-data --&gt; index-schema
     pk-schema --&gt; pk
@@ -1591,26 +1572,41 @@
     join --&gt; query-a
     join --&gt; query-b
     join-data --&gt; query-data-a
-    query-fuzzy --&gt; optional
-    query-group --&gt; optional
     query-a --&gt; table
     table-data --&gt; system
-    query-aggregate --&gt; optional
     query-data-a --&gt; data
-    null --&gt; optional
-    unique --&gt; optional
     fk --&gt; pk
     index-schema --&gt; query-data-a
     comb-fk --&gt; comb-pk
     query-data-b --&gt; data
-    table --&gt; system
-    optional --&gt; join
-    optional --&gt; join-data
-    optional --&gt; index-data
-    optional --&gt; comb-fk-schema
-    optional --&gt; fk-schema
-    optional --&gt; fk
-    optional --&gt; comb-fk</code></pre>
+    table --&gt; system</code></pre>
+<p>下面是选做部分的测例。</p>
+<pre class="mermaid"><code>flowchart BT
+    query-order["query-order(2)
+(order)"]
+    multi-join["multi-join(8)
+(mj)"]
+    query-nest["query-nest(2)
+(nest)"]
+    query-fuzzy["query-fuzzy(1)
+(group)"]
+    query-group["query-group(1)
+(group)"]
+    query-aggregate["query-aggregate(2)
+(aggregate)"]
+    null["null(2)
+(null)"]
+    unique["unique(1)
+(unique)"]
+    optional["optional(0)"]
+    query-order --&gt; optional
+    multi-join --&gt; optional
+    query-nest --&gt; optional
+    query-fuzzy --&gt; optional
+    query-group --&gt; optional
+    query-aggregate --&gt; optional
+    null --&gt; optional
+    unique --&gt; optional</code></pre>
 <div class="admonition info">
 <p class="admonition-title">开发顺序</p>
 <p>尽管实验文档是按照从下而上的顺序编写的，但是这个顺序可能并不符合敏捷开发的工程实践，相比之下你或许会希望快速完成整个框架，逐步通过部分测试以渐渐增长测试分数，这种情况下你也可以依据测例的依赖关系来决定你的功能实现顺序。</p>
