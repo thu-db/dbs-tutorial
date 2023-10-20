@@ -18,7 +18,7 @@ CI（Continuous Integration，持续集成）是指软件发布流程的构建�
 
 我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。
 
-由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。
+由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。注意，你必须通过了全部必做部分的测例后，才能开始完成选做测例，为此设置了一个名为 `optional` 的测例作为区分。
 
 !!!info "测例分值"
 
@@ -28,6 +28,8 @@ CI（Continuous Integration，持续集成）是指软件发布流程的构建�
 
     注意，当你能看到这个信息框时，则表明测例以及分值都还在不断更新中，下面的测例点的分值仅仅是为了预览效果的缺省值，不代表最终分数。
 
+下面是必做部分的测例。
+
 ```mermaid
 flowchart RL
     data["data(1)
@@ -36,18 +38,12 @@ flowchart RL
 (pk)"]
     query-b["query-b(3)
 (query)"]
-    query-order["query-order(2)
-(order)"]
     comb-pk["comb-pk(1)
 (comb,pk)"]
-    multi-join["multi-join(8)
-(mj)"]
     query-d["query-d(3)
 (query)"]
     comb-fk-schema["comb-fk-schema(1)
 (fk,comb)"]
-    query-nest["query-nest(2)
-(nest)"]
     index-data["index-data(8)
 (index)"]
     pk-schema["pk-schema(1)
@@ -62,23 +58,13 @@ flowchart RL
 (join)"]
     join-data["join-data(3)
 (join)"]
-    query-fuzzy["query-fuzzy(1)
-(group)"]
-    query-group["query-group(1)
-(group)"]
     query-a["query-a(3)
 (query)"]
     table-data["table-data(2)
 (data)"]
-    query-aggregate["query-aggregate(2)
-(aggregate)"]
     query-data-a["query-data-a(3)
 (query)"]
-    null["null(2)
-(null)"]
     system["system(5)"]
-    unique["unique(1)
-(unique)"]
     fk["fk(2)
 (fk)"]
     index-schema["index-schema(4)
@@ -88,16 +74,12 @@ flowchart RL
     query-data-b["query-data-b(3)
 (query)"]
     table["table(7)"]
-    optional["optional(0)"]
     data --> table-data
     pk --> query-a
     query-b --> table
-    query-order --> optional
     comb-pk --> query-a
-    multi-join --> optional
     query-d --> table
     comb-fk-schema --> comb-pk-schema
-    query-nest --> optional
     index-data --> query-data-b
     index-data --> index-schema
     pk-schema --> pk
@@ -107,27 +89,47 @@ flowchart RL
     join --> query-a
     join --> query-b
     join-data --> query-data-a
-    query-fuzzy --> optional
-    query-group --> optional
     query-a --> table
     table-data --> system
-    query-aggregate --> optional
     query-data-a --> data
-    null --> optional
-    unique --> optional
     fk --> pk
     index-schema --> query-data-a
     comb-fk --> comb-pk
     query-data-b --> data
     table --> system
-    optional --> join
-    optional --> join-data
-    optional --> index-data
-    optional --> comb-fk-schema
-    optional --> fk-schema
-    optional --> fk
-    optional --> comb-fk
 ```
+
+下面是选做部分的测例。
+
+```mermaid
+flowchart BT
+    query-order["query-order(2)
+(order)"]
+    multi-join["multi-join(8)
+(mj)"]
+    query-nest["query-nest(2)
+(nest)"]
+    query-fuzzy["query-fuzzy(1)
+(group)"]
+    query-group["query-group(1)
+(group)"]
+    query-aggregate["query-aggregate(2)
+(aggregate)"]
+    null["null(2)
+(null)"]
+    unique["unique(1)
+(unique)"]
+    optional["optional(0)"]
+    query-order --> optional
+    multi-join --> optional
+    query-nest --> optional
+    query-fuzzy --> optional
+    query-group --> optional
+    query-aggregate --> optional
+    null --> optional
+    unique --> optional
+```
+
 
 !!! info "开发顺序"
 
