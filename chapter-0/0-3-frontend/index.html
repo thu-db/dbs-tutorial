@@ -1542,9 +1542,9 @@
 <li><code>SHOW</code> 开头的语句，对于 <code>SHOW XX</code> 的语句，输出的表头即为 <code>XX</code></li>
 <li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>、<code>LOAD</code> 开头的语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示插入/删除/更新/导入的行数。</li>
 <li>任何语句如果破坏了完整性约束，则应该输出一个表头为 <code>!ERROR</code>，内容为一个字符串说明错误信息（你可以统一将批处理模式下所有的错误都这样输出以减少工作量，因为我们的测例中保证了不会有其他错误情况），CI 检查会采用关键词检测的办法判断你的报错信息，错误类型和关键词如下（注：无视大小写，<strong>且不能包含其他约束被破坏时用到的关键词</strong>）：<ul>
-<li>破坏外键约束：<code>foreign</code></li>
-<li>破坏主键约束：<code>primary</code></li>
-<li>（选做内容）破坏唯一约束：<code>unique</code></li>
+<li>增改记录导致破坏唯一性约束（包含主键和选做的 UNIQUE）：<code>duplicate</code></li>
+<li>任何原因导致破坏外键约束：<code>foreign</code></li>
+<li>Schema 的修改导致主键约束的数量错误：<code>primary</code></li>
 </ul>
 </li>
 </ul>
