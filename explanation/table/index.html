@@ -1261,13 +1261,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#alter_table_add_unique_1" class="md-nav__link">
-    alter_table_add_unique
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1527,13 +1520,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#alter_table_add_unique_1" class="md-nav__link">
-    alter_table_add_unique
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1585,7 +1571,6 @@
 <p>两种处理方式都是可以接受的，</p>
 <h2 id="alter_drop_index">alter_drop_index</h2>
 <p>在当前数据库中名为 <code>Identifier</code> 的现有表中删除建立在 <code>identifiers</code> 这些（一或多）列上的索引。</p>
-<p>注意其他一些约束也会添加</p>
 <p>注意一个因其他约束而存在的索引是不能被删除，例如主键约束、<code>UNIQUE</code> 约束等，此时应该给出报错并拒绝执行指令。</p>
 <h2 id="alter_table_drop_pk">alter_table_drop_pk</h2>
 <p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除现有主键约束。后一个 <code>Identifier</code> 表示主键名，考虑到如果存在主键，则一定唯一，因此可以不给定主键名。</p>
@@ -1600,13 +1585,13 @@
 <p>注意一般外键需要一个名字以便进行删除操作，如果没有指定名字则应该自动生成一个以完成删除操作。</p>
 <p>不同于索引，外键应用名字进行区分，即可能存在名为 <code>fk1</code> 与 <code>fk2</code> 的两个内容（即从何列关联到了何列）一样的外键，但这并不是考查内容，验收测例并不包含这种情况。</p>
 <p><strong>注意我们约定创建外键所指向的列必须是主键，如果不是也应该给出报错信息并拒绝执行。</strong></p>
+<div class="admonition info">
+<p class="admonition-title">外键与隐式索引</p>
+<p>对于创建外键的列是否会自动创建隐式索引的问题，在 SQL 规范中没有明确要求，一些常用 DBMS 如 SQL Server 不会自动创建索引，而 MySQL 则会创建。对此我们不做强制要求，但是出于自动化测试时的性能考虑，建议你统一加上以节约时间。若如此做，你需要考虑在已有隐式索引的情况下又被创建显式索引应该如何处理等，合理即可，但不能让你的程序崩溃。</p>
+</div>
 <h2 id="alter_table_add_unique">alter_table_add_unique</h2>
-<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中创建一个新的名为（后一个）<code>Identifier</code> 的 <code>UNIQUE</code> 约束，这个约束建在 <code>identifiers</code> 这些（一或多）列上。</p>
-<p>如果没有指定约束名则应该自动生成一个以便进行删除操作。</p>
-<p>UNIQUE 约束的实现效果相当于创建了索引并添加了 <code>NOT NULL</code> 约束。</p>
-<p>注意这是选做内容。</p>
-<h2 id="alter_table_add_unique_1">alter_table_add_unique</h2>
-<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除名为（后一个） <code>Identifier</code> 的现有 UNIQUE 约束。</p>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中创建一个新的名为（后一个）<code>Identifier</code> 的 <code>UNIQUE</code> 约束，这个约束建在 <code>identifiers</code> 这些（一或多）列上，如果没有指定约束名则应该自动生成一个以便进行删除操作。</p>
+<p>UNIQUE 约束的实现效果相当于创建了索引并要求不得重复，和主键约束相比 UNIQUE 约束允许 NULL。此外，UNIQUE 是一种特殊的 INDEX，删除 UNIQUE 也应该使用 <code>alter_drop_index</code>。</p>
 <p>注意这是选做内容。</p>
 
   <hr>

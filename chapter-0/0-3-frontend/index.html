@@ -1627,11 +1627,12 @@
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_A</span><span class="p">,</span><span class="w"> </span><span class="n">index_field_a</span><span class="p">);</span>
 <span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_B</span><span class="p">);</span>
 </code></pre></div>
-<p>注意，在自动化测试时<strong>输出完表格后，在输出约束信息前必须输出一个空行</strong>作为分隔（如果没有任何约束信息，则空行输出与否不影响结果正确性），并且下面的格式需要严格按照上述标准。由于我们的文法允许生成匿名主外键、索引，同学们可能会为它们设定不同的默认名字，因此在命名上我们给出如下要求：</p>
+<p>注意，在自动化测试时<strong>输出完表格后，在输出约束信息前必须输出一个空行</strong>作为分隔（如果没有任何约束信息，则空行输出与否不影响结果正确性），并且下面的格式需要严格按照上述标准。由于我们的文法允许生成匿名主外键、索引，同学们可能会为它们设定不同的默认名字，因此在命名上我们给出如下约束：</p>
 <ul>
 <li>输出约束名与否不影响正确性，建议你输出自己所存的约束名以便于调试</li>
 <li>自动化测试中 DROP 主键时一定不给出主键名</li>
 <li>自动化测试中如果要 DROP 其他约束，则一定会在创建时为它命名</li>
+<li>自动化测试时约束名长度一定不超过32</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Default NULL</p>

@@ -1504,8 +1504,113 @@
 </div>
 <h2 id="1">1. 平台说明</h2>
 <p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
-<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。</p>
-<p>TODO：完成全部测例后在这里放测例的依赖关系图。</p>
+<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。</p>
+<div class="admonition info">
+<p class="admonition-title">测例分值</p>
+<p>简便起见，每个测例只有拿0分和拿满分两个情况，我们已经尽可能将测例进行拆散以便于大家得分。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">分值待定</p>
+<p>注意，当你能看到这个信息框时，则表明测例以及分值都还在不断更新中，下面的测例点的分值仅仅是为了预览效果的缺省值，不代表最终分数。</p>
+</div>
+<pre class="mermaid"><code>flowchart RL
+    data["data(1)
+(data)"]
+    pk["pk(1)
+(pk)"]
+    query-b["query-b(3)
+(query)"]
+    query-order["query-order(2)
+(order)"]
+    comb-pk["comb-pk(1)
+(comb,pk)"]
+    multi-join["multi-join(8)
+(mj)"]
+    query-d["query-d(3)
+(query)"]
+    comb-fk-schema["comb-fk-schema(1)
+(fk,comb)"]
+    query-nest["query-nest(2)
+(nest)"]
+    index-data["index-data(8)
+(index)"]
+    pk-schema["pk-schema(1)
+(pk)"]
+    query-c["query-c(3)
+(query)"]
+    fk-schema["fk-schema(1)
+(fk)"]
+    comb-pk-schema["comb-pk-schema(1)
+(pk,comb)"]
+    join["join(3)
+(join)"]
+    join-data["join-data(3)
+(join)"]
+    query-fuzzy["query-fuzzy(1)
+(group)"]
+    query-group["query-group(1)
+(group)"]
+    query-a["query-a(3)
+(query)"]
+    table-data["table-data(2)
+(data)"]
+    query-aggregate["query-aggregate(2)
+(aggregate)"]
+    query-data-a["query-data-a(3)
+(query)"]
+    null["null(2)
+(null)"]
+    system["system(5)"]
+    unique["unique(1)
+(unique)"]
+    fk["fk(2)
+(fk)"]
+    index-schema["index-schema(4)
+(index)"]
+    comb-fk["comb-fk(2)
+(comb,fk)"]
+    query-data-b["query-data-b(3)
+(query)"]
+    table["table(7)"]
+    optional["optional(0)"]
+    data --&gt; table-data
+    pk --&gt; query-a
+    query-b --&gt; table
+    query-order --&gt; optional
+    comb-pk --&gt; query-a
+    multi-join --&gt; optional
+    query-d --&gt; table
+    comb-fk-schema --&gt; comb-pk-schema
+    query-nest --&gt; optional
+    index-data --&gt; query-data-b
+    index-data --&gt; index-schema
+    pk-schema --&gt; pk
+    query-c --&gt; table
+    fk-schema --&gt; pk
+    comb-pk-schema --&gt; pk-schema
+    join --&gt; query-a
+    join --&gt; query-b
+    join-data --&gt; query-data-a
+    query-fuzzy --&gt; optional
+    query-group --&gt; optional
+    query-a --&gt; table
+    table-data --&gt; system
+    query-aggregate --&gt; optional
+    query-data-a --&gt; data
+    null --&gt; optional
+    unique --&gt; optional
+    fk --&gt; pk
+    index-schema --&gt; query-data-a
+    comb-fk --&gt; comb-pk
+    query-data-b --&gt; data
+    table --&gt; system
+    optional --&gt; join
+    optional --&gt; join-data
+    optional --&gt; index-data
+    optional --&gt; comb-fk-schema
+    optional --&gt; fk-schema
+    optional --&gt; fk
+    optional --&gt; comb-fk</code></pre>
 <div class="admonition info">
 <p class="admonition-title">开发顺序</p>
 <p>尽管实验文档是按照从下而上的顺序编写的，但是这个顺序可能并不符合敏捷开发的工程实践，相比之下你或许会希望快速完成整个框架，逐步通过部分测试以渐渐增长测试分数，这种情况下你也可以依据测例的依赖关系来决定你的功能实现顺序。</p>
@@ -1534,7 +1639,10 @@
 <p>这里举一个内存估算的例子，附件提供的C++页式文件系统为缓存准备了 CAP=MOD=6k 个槽位，为了维护结构信息一次开了 CAP 若干倍个整数，但这部分是可以忽略的小量，即便开了 10 倍的整数，也不过是 $6000 * 40B / 1024 / 1024 = 0.23MB$，它的主要内存消耗在于后面动态分配的 CAP 个页，每页 8192 字节，因此它的主要内存消耗约为 $6000 * 8192B / 1024 / 1024 = 47MB$。</p>
 <p>CPU 核数限制 1 则是提示不必使用并行加速等方法来卷性能，另外对于 Python 的 <code>numpy</code> 这种库，默认会用多线程加速，在 Linux 上会因为大量 <code>pthread</code> 导致极高内存占用，所以我们在评测器中预设了 <code>OMP_THREAD_NUM=1</code> 来限制。</p>
 <p>硬盘空间的约束通常用不上，这只是为了防止你的程序出现死循环输出等BUG而给的限制，实际上我们的数据总量通常在1GB以内，即便你用了一些辅助空间也远不会用到10GB——除非你滥用 append-only 模式、留了大量 Log 并且从来不进行空间回收。</p>
+<div class="admonition example">
+<p class="admonition-title">超越空间限制实例</p>
 <p>TODO：蹲一个真的把空间用超了的例子，在这里“公开处刑”。</p>
+</div>
 <p>注意评测机的空间一般来说可以和任意一个 Linux 文件系统一样可以任意读写，但是原则上你应该只操作 <code>./</code> 路径下的空间，例如将数据存储在 <code>./data</code> 下是一个很好的选择。另外这部分空间会在评测结束后便清理掉，因此你不能指望助教提供你的程序在评测时生成的数据以协助你DEBUG。</p>
 <h2 id="3">3. 本地测试</h2>
 <p>CI 所用的测例均为公开测例，评测器用 Python 编写，同学们应该可以比较容易地在本地运行，因此建议在本地通过测试后再进行 CI 测试，以防无效的 CI 阻塞评测进度。这里强烈建议大家将用于开发的分支和用于提交到 CI 的分支区分开，作为避免滥用 CI 的防呆法，我们在初始的 CI 配置了设置了只有名为 <code>ci</code> 的分支 push 后会自动运行 CI，其他分支的 push 需要手动启动 CI。</p>
