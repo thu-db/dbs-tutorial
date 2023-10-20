@@ -58,13 +58,14 @@ select_table
     ;
 
 alter_statement
-    : 'ALTER' 'TABLE' Identifier 'ADD' 'INDEX' '(' identifiers ')'   			                            # alter_add_index
-    | 'ALTER' 'TABLE' Identifier 'DROP' 'INDEX' '(' identifiers ')'                                         # alter_drop_index
+    : 'ALTER' 'TABLE' Identifier 'ADD' 'INDEX' (Identifier)? '(' identifiers ')'   			                # alter_add_index
+    | 'ALTER' 'TABLE' Identifier 'DROP' 'INDEX' Identifier                                                  # alter_drop_index
     | 'ALTER' 'TABLE' Identifier 'DROP' 'PRIMARY' 'KEY' (Identifier)?                                       # alter_table_drop_pk
     | 'ALTER' 'TABLE' Identifier 'DROP' 'FOREIGN' 'KEY' Identifier                                          # alter_table_drop_foreign_key
     | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'PRIMARY' 'KEY' '(' identifiers ')'    # alter_table_add_pk
     | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
-    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'                                         # alter_table_add_unique
+    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' (Identifier)? '(' identifiers ')'                           # alter_table_add_unique
+    | 'ALTER' 'TABLE' Identifier 'DROP' 'UNIQUE' Identifier                                                 # alter_table_drop_unique
     ;
 
 field_list
