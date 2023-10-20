@@ -12,7 +12,6 @@
 - `primary_key_field`：用于创建主键约束，详见后文 [alter_table_add_pk](#altertableaddpk) 部分的说明。
 - `foreign_key_field`：用于创建外键约束，详见后文 [alter_table_add_foreign_key](#altertableaddforeignkey) 部分的说明。
 
-
 ## drop_table
 
 删除当前数据库中名为 `Identifier` 的现有数据表，包括其元信息与所有行数据。
@@ -45,8 +44,6 @@
 
 在当前数据库中名为 `Identifier` 的现有表中删除建立在 `identifiers` 这些（一或多）列上的索引。
 
-注意其他一些约束也会添加
-
 注意一个因其他约束而存在的索引是不能被删除，例如主键约束、`UNIQUE` 约束等，此时应该给出报错并拒绝执行指令。
 
 ## alter_table_drop_pk
@@ -75,18 +72,14 @@
 
 **注意我们约定创建外键所指向的列必须是主键，如果不是也应该给出报错信息并拒绝执行。**
 
-## alter_table_add_unique
+!!!info "外键与隐式索引"
 
-在当前数据库中名为（前一个） `Identifier` 的现有表中创建一个新的名为（后一个）`Identifier` 的 `UNIQUE` 约束，这个约束建在 `identifiers` 这些（一或多）列上。
-
-如果没有指定约束名则应该自动生成一个以便进行删除操作。
-
-UNIQUE 约束的实现效果相当于创建了索引并添加了 `NOT NULL` 约束。
-
-注意这是选做内容。
+    对于创建外键的列是否会自动创建隐式索引的问题，在 SQL 规范中没有明确要求，一些常用 DBMS 如 SQL Server 不会自动创建索引，而 MySQL 则会创建。对此我们不做强制要求，但是出于自动化测试时的性能考虑，建议你统一加上以节约时间。若如此做，你需要考虑在已有隐式索引的情况下又被创建显式索引应该如何处理等，合理即可，但不能让你的程序崩溃。
 
 ## alter_table_add_unique
 
-在当前数据库中名为（前一个） `Identifier` 的现有表中删除名为（后一个） `Identifier` 的现有 UNIQUE 约束。
+在当前数据库中名为（前一个） `Identifier` 的现有表中创建一个新的名为（后一个）`Identifier` 的 `UNIQUE` 约束，这个约束建在 `identifiers` 这些（一或多）列上，如果没有指定约束名则应该自动生成一个以便进行删除操作。
+
+UNIQUE 约束的实现效果相当于创建了索引并要求不得重复，和主键约束相比 UNIQUE 约束允许 NULL。此外，UNIQUE 是一种特殊的 INDEX，删除 UNIQUE 也应该使用 `alter_drop_index`。
 
 注意这是选做内容。

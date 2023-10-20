@@ -18,9 +18,116 @@ CI（Continuous Integration，持续集成）是指软件发布流程的构建�
 
 我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。
 
-由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。
+由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。
 
-TODO：完成全部测例后在这里放测例的依赖关系图。
+!!!info "测例分值"
+
+    简便起见，每个测例只有拿0分和拿满分两个情况，我们已经尽可能将测例进行拆散以便于大家得分。
+
+!!!warning "分值待定"
+
+    注意，当你能看到这个信息框时，则表明测例以及分值都还在不断更新中，下面的测例点的分值仅仅是为了预览效果的缺省值，不代表最终分数。
+
+```mermaid
+flowchart RL
+    data["data(1)
+(data)"]
+    pk["pk(1)
+(pk)"]
+    query-b["query-b(3)
+(query)"]
+    query-order["query-order(2)
+(order)"]
+    comb-pk["comb-pk(1)
+(comb,pk)"]
+    multi-join["multi-join(8)
+(mj)"]
+    query-d["query-d(3)
+(query)"]
+    comb-fk-schema["comb-fk-schema(1)
+(fk,comb)"]
+    query-nest["query-nest(2)
+(nest)"]
+    index-data["index-data(8)
+(index)"]
+    pk-schema["pk-schema(1)
+(pk)"]
+    query-c["query-c(3)
+(query)"]
+    fk-schema["fk-schema(1)
+(fk)"]
+    comb-pk-schema["comb-pk-schema(1)
+(pk,comb)"]
+    join["join(3)
+(join)"]
+    join-data["join-data(3)
+(join)"]
+    query-fuzzy["query-fuzzy(1)
+(group)"]
+    query-group["query-group(1)
+(group)"]
+    query-a["query-a(3)
+(query)"]
+    table-data["table-data(2)
+(data)"]
+    query-aggregate["query-aggregate(2)
+(aggregate)"]
+    query-data-a["query-data-a(3)
+(query)"]
+    null["null(2)
+(null)"]
+    system["system(5)"]
+    unique["unique(1)
+(unique)"]
+    fk["fk(2)
+(fk)"]
+    index-schema["index-schema(4)
+(index)"]
+    comb-fk["comb-fk(2)
+(comb,fk)"]
+    query-data-b["query-data-b(3)
+(query)"]
+    table["table(7)"]
+    optional["optional(0)"]
+    data --> table-data
+    pk --> query-a
+    query-b --> table
+    query-order --> optional
+    comb-pk --> query-a
+    multi-join --> optional
+    query-d --> table
+    comb-fk-schema --> comb-pk-schema
+    query-nest --> optional
+    index-data --> query-data-b
+    index-data --> index-schema
+    pk-schema --> pk
+    query-c --> table
+    fk-schema --> pk
+    comb-pk-schema --> pk-schema
+    join --> query-a
+    join --> query-b
+    join-data --> query-data-a
+    query-fuzzy --> optional
+    query-group --> optional
+    query-a --> table
+    table-data --> system
+    query-aggregate --> optional
+    query-data-a --> data
+    null --> optional
+    unique --> optional
+    fk --> pk
+    index-schema --> query-data-a
+    comb-fk --> comb-pk
+    query-data-b --> data
+    table --> system
+    optional --> join
+    optional --> join-data
+    optional --> index-data
+    optional --> comb-fk-schema
+    optional --> fk-schema
+    optional --> fk
+    optional --> comb-fk
+```
 
 !!! info "开发顺序"
 
@@ -63,7 +170,9 @@ CPU 核数限制 1 则是提示不必使用并行加速等方法来卷性能，�
 
 硬盘空间的约束通常用不上，这只是为了防止你的程序出现死循环输出等BUG而给的限制，实际上我们的数据总量通常在1GB以内，即便你用了一些辅助空间也远不会用到10GB——除非你滥用 append-only 模式、留了大量 Log 并且从来不进行空间回收。
 
-TODO：蹲一个真的把空间用超了的例子，在这里“公开处刑”。
+!!!example "超越空间限制实例"
+
+    TODO：蹲一个真的把空间用超了的例子，在这里“公开处刑”。
 
 注意评测机的空间一般来说可以和任意一个 Linux 文件系统一样可以任意读写，但是原则上你应该只操作 `./` 路径下的空间，例如将数据存储在 `./data` 下是一个很好的选择。另外这部分空间会在评测结束后便清理掉，因此你不能指望助教提供你的程序在评测时生成的数据以协助你DEBUG。
 

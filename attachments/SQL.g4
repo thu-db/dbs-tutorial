@@ -48,7 +48,7 @@ table_statement
     | 'DESC' Identifier                                                                             # describe_table
     | 'LOAD' 'DATA' 'INFILE' String 'INTO' 'TABLE' Identifier 'FIELDS' 'TERMINATED' 'BY' String     # load_table
     | 'INSERT' 'INTO' Identifier 'VALUES' value_lists                                               # insert_into_table
-    | 'DELETE' 'FROM' Identifier 'WHERE' where_and_clause                                           # delete_from_table
+    | 'DELETE' 'FROM' Identifier ('WHERE' where_and_clause)?                                        # delete_from_table
     | 'UPDATE' Identifier 'SET' set_clause 'WHERE' where_and_clause                                 # update_table
     | select_table                                                                                  # select_table_
     ;
@@ -65,7 +65,6 @@ alter_statement
     | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'PRIMARY' 'KEY' '(' identifiers ')'    # alter_table_add_pk
     | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
     | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' (Identifier)? '(' identifiers ')'                           # alter_table_add_unique
-    | 'ALTER' 'TABLE' Identifier 'DROP' 'UNIQUE' Identifier                                                 # alter_table_drop_unique
     ;
 
 field_list
