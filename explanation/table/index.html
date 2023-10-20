@@ -1261,6 +1261,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#alter_table_add_unique_1" class="md-nav__link">
+    alter_table_add_unique
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1520,6 +1527,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#alter_table_add_unique_1" class="md-nav__link">
+    alter_table_add_unique
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1556,7 +1570,7 @@
 <h2 id="load_table">load_table</h2>
 <p>加载路径为 <code>String</code> 的（csv）文件，并将数据导入当前数据库名为 <code>Identifier</code> 的数据表中。</p>
 <h2 id="alter_add_index">alter_add_index</h2>
-<p>在当前数据库中名为 <code>Identifier</code> 的现有表中创建一个新的索引，这个索引建在 <code>identifiers</code> 这些（一或多）列上。</p>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中创建一个新的索引，这个索引建在 <code>identifiers</code> 这些（一或多）列上，这个索引或许会被手动命名为（后一个） <code>Identifier</code>，如果没有则你应该为它自动生成名字。</p>
 <p>注意虽然这里没有给索引命名，但同一张表中不应该有同名索引（即不能在相同列上建两次索引）。进一步考虑到联合索引的相关问题，你应该维护一个包含 <code>identifiers</code> 元组的索引名。</p>
 <p>例如，无论你的底层实现是怎样的，就上层管理而言， <code>(course_id)</code>、<code>(course_id, course_number)</code>、<code>(course_number, course_id)</code> 是三个不同的索引，它们可以同时存在，各自被删除。</p>
 <p>另外还应考虑到索引可能是自动创建的，例如添加主键约束、<code>UNIQUE</code> 约束时自动创建了索引，在这些情况下你有两种处理思路：</p>
@@ -1574,7 +1588,7 @@
 <p>注意其他一些约束也会添加</p>
 <p>注意一个因其他约束而存在的索引是不能被删除，例如主键约束、<code>UNIQUE</code> 约束等，此时应该给出报错并拒绝执行指令。</p>
 <h2 id="alter_table_drop_pk">alter_table_drop_pk</h2>
-<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除现有主键约束。后一个 <code>Identifier</code> 表示主键名，考虑到如果存在主键，则一定唯一，因此可以不给定主键名。测例默认未给出，如果你有需要也可以在验收时要求加上。</p>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除现有主键约束。后一个 <code>Identifier</code> 表示主键名，考虑到如果存在主键，则一定唯一，因此可以不给定主键名。</p>
 <h2 id="alter_table_drop_foreign_key">alter_table_drop_foreign_key</h2>
 <p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除名为（后一个） <code>Identifier</code> 的现有外键约束。</p>
 <h2 id="alter_table_add_pk">alter_table_add_pk</h2>
@@ -1583,19 +1597,24 @@
 <p><strong>注意创建主键时如果对应列没有索引，则应当自动创建索引。</strong></p>
 <h2 id="alter_table_add_foreign_key">alter_table_add_foreign_key</h2>
 <p>在当前数据库中中名为（前一个） <code>Identifier</code> 的现有表中创建名为（后一个） <code>Identifier</code> 的新外键约束，约束建立在（前一个） <code>identifiers</code> 这些（一或多）列上，关联到当前数据库的名为（后一个） <code>Identifier</code> 的现有表的（后一个）<code>identifiers</code> 的（一或多）列上。</p>
-<p>注意一般外键需要一个名字以便进行删除操作，如果你愿意也可以忽视给定的名字，按某种规则自行为其设置名字，但要保证能够正常完成删除操作。</p>
+<p>注意一般外键需要一个名字以便进行删除操作，如果没有指定名字则应该自动生成一个以完成删除操作。</p>
 <p>不同于索引，外键应用名字进行区分，即可能存在名为 <code>fk1</code> 与 <code>fk2</code> 的两个内容（即从何列关联到了何列）一样的外键，但这并不是考查内容，验收测例并不包含这种情况。</p>
-<p><strong>注意我们约定创建外键并不要求被关联的目标表上对应列有索引，但如果你实现为自动创建索引，这也是可接受的，但不能因其没有对应索引而报错并拒绝执行指令。</strong></p>
+<p><strong>注意我们约定创建外键所指向的列必须是主键，如果不是也应该给出报错信息并拒绝执行。</strong></p>
 <h2 id="alter_table_add_unique">alter_table_add_unique</h2>
-<p>在当前数据库中名为 <code>Identifier</code> 的现有表中创建一个新的 <code>UNIQUE</code> 约束，这个约束建在 <code>identifiers</code> 这些（一或多）列上。</p>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中创建一个新的名为（后一个）<code>Identifier</code> 的 <code>UNIQUE</code> 约束，这个约束建在 <code>identifiers</code> 这些（一或多）列上。</p>
+<p>如果没有指定约束名则应该自动生成一个以便进行删除操作。</p>
 <p>UNIQUE 约束的实现效果相当于创建了索引并添加了 <code>NOT NULL</code> 约束。</p>
+<p>注意这是选做内容。</p>
+<h2 id="alter_table_add_unique_1">alter_table_add_unique</h2>
+<p>在当前数据库中名为（前一个） <code>Identifier</code> 的现有表中删除名为（后一个） <code>Identifier</code> 的现有 UNIQUE 约束。</p>
+<p>注意这是选做内容。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月18日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月20日</span>
       
     
   </small>
