@@ -1540,7 +1540,13 @@
 <li>仅下述语句需要给出对应表头并输出内容，其他直接输出分隔符即可：<ul>
 <li><code>SELECT</code> 语句，注意表头无需精简，在 <code>SELECT</code> 后的 <code>selector</code> 不是 <code>*</code> 时，表头与 <code>selector</code> 一致即可；在 <code>selector</code> 是 <code>*</code> 时，如果是单表则表头为列名，如果是多表则表头为 <code>&lt;table&gt;.&lt;column&gt;</code>，如 <code>student.id</code>，我们保证自动化测试时不会在 <code>selector</code> 中留坑</li>
 <li><code>SHOW</code> 开头的语句，对于 <code>SHOW XX</code> 的语句，输出的表头即为 <code>XX</code></li>
-<li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code> 语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示增/删/改的行数。</li>
+<li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>、<code>LOAD</code> 开头的语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示插入/删除/更新/导入的行数。</li>
+<li>任何语句如果破坏了完整性约束，则应该输出一个表头为 <code>!ERROR</code>，内容为一个字符串说明错误信息（你可以统一将批处理模式下所有的错误都这样输出以减少工作量，因为我们的测例中保证了不会有其他错误情况），CI 检查会采用关键词检测的办法判断你的报错信息，错误类型和关键词如下（注：无视大小写，<strong>且不能包含其他约束被破坏时用到的关键词</strong>）：<ul>
+<li>破坏外键约束：<code>foreign</code></li>
+<li>破坏主键约束：<code>primary</code></li>
+<li>（选做内容）破坏唯一约束：<code>unique</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>输出统一使用简化的 CSV 格式：同一行的不同字段间用英文逗号 <code>,</code> 分隔，<strong>无需考虑数据包含逗号的二义性问题。</strong>；</li>
@@ -1548,8 +1554,17 @@
 <li>需要输出多行数据时，如果不涉及 <code>ORDER BY</code> 则行序可以是任意的，否则应该按照 <code>ORDER BY</code> 的要求给出，排序关键字相同的若干行顺序是任意的。</li>
 <li>浮点数统一精确到小数点后两位；</li>
 <li>无需考虑非 ASCII 字符的编码及长度问题，最终测试可以假定全是 ASCII 可打印字符（你自行测试时它很可能是由你终端的设置决定）；</li>
-<li>不考虑语法错误、破坏完整性约束等输入错误的情形（对应内容的检查会在交互式模式下进行）；</li>
-<li>无需输出执行时间和行数统计；</li>
+<li>
+<p>不考虑语法错误以及一些边界情况导致需要报错的情形（对应内容的检查会在交互式模式下进行），但是注意出于验收效率考虑，完整性约束仍然需要在自动化测试中被考虑，且<strong>在自动化测试中对于完整性约束我们给出下述条件</strong>：</p>
+<ul>
+<li>会破坏完整性约束的插入、删除、更新语句一定只操作至多一行记录</li>
+<li>破坏完整性约束的语句一次只会破坏一个完整性约束，不会同时破坏主外键约束</li>
+<li>具体输出格式见上文</li>
+</ul>
+</li>
+<li>
+<p>无需输出执行时间和行数统计；</p>
+</li>
 <li>使用命令行可选参数 <code>-b</code> 表示以批处理模式启动；</li>
 <li>使用命令行可选参数 <code>-d &lt;database&gt;</code> 指定数据库名，即相当于已经执行了 <code>use &lt;database&gt;;</code> （交互模式也适用）；</li>
 </ul>
@@ -1571,13 +1586,14 @@
 <p>此外我们也约定一种 SQL 语法用于在数据库进程运行期间导入数据以减少进程启动次数，详见 <code>SQL.g4</code> 中的 <code>load_table</code>。在实际自动化测试时可能会用到上述命令行参数，也可能用到下述 SQL 语句，你需要两者都实现，但这并不必做两次工作，它们在已经取得数据库、文件路径、表名三个参数的情况下完全可以用同一个函数处理。注意，使用 <code>LOAD DATA</code> 前应该已经指定过当前在使用的数据库。</p>
 <p>下面是用 <code>load_table</code> 语法时一个与上述命令行参数有相同效果的 SQL 指令：</p>
 <div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">curriculum</span><span class="p">;</span>
-<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="ss">&quot;path/to/data/student.txt&quot;</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student</span><span class="p">;</span>
+<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="ss">&quot;path/to/data/student.txt&quot;</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="n">FIELDS</span><span class="w"> </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="p">;</span>
 </code></pre></div>
-<p>数据格式则同批量模式输出一样采用 CSV，这里我们直接约定字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。
-另外，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查，你应当采用尽可能高效的方法将数据批量导入，例如填满一页记录后一次写入理应比逐条写入记录更快。</p>
+<p>注意，后面的 <code>FIELDS TERMINATED BY ','</code> 仅仅是为了体现我们文法与 MySQL 的兼容性，实验并不要求实现不同字符甚至不同字符串的分隔符，你可以在处理时直接忽略这部分内容。我们约定数据格式同批量模式输出一样采用 CSV，且字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
+<p>另外，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查，你应当采用尽可能高效的方法将数据批量导入，例如填满一页记录后一次写入理应比逐条写入记录更快。</p>
 <div class="admonition tip">
 <p class="admonition-title">高效导入</p>
 <p>数据导入理论上能够比 <code>INSERT INTO</code> 效率更高，一方面导入时不需要检查完整性约束，另一方面可以将批量导入实现为预先写满一整页后再将该页写入文件，减少缓存拷贝次数和文件IO次数。</p>
+<p>注意，虽然不用检查完整性约束，但是约束仍然要建立，例如外键仍然要建立对应的索引，你可以自行考虑应该边导入数据边建立索引，还是等数据全部导入后一次建立索引，这可能会有不小的性能差异。</p>
 </div>
 <h2 id="desc">desc</h2>
 <p>这里我们给出 <code>DESC &lt;table_name&gt;</code> 指令的输出规范：</p>
@@ -1624,7 +1640,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月18日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月20日</span>
       
     
   </small>
