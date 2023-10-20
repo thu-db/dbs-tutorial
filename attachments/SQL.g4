@@ -43,14 +43,14 @@ db_statement
     ;
 
 table_statement
-    : 'CREATE' 'TABLE' Identifier '(' field_list ')'                    # create_table
-    | 'DROP' 'TABLE' Identifier                                         # drop_table
-    | 'DESC' Identifier                                                 # describe_table
-    | 'LOAD' 'DATA' 'INFILE' String 'INTO' 'TABLE' Identifier           # load_table
-    | 'INSERT' 'INTO' Identifier 'VALUES' value_lists                   # insert_into_table
-    | 'DELETE' 'FROM' Identifier 'WHERE' where_and_clause               # delete_from_table
-    | 'UPDATE' Identifier 'SET' set_clause 'WHERE' where_and_clause     # update_table
-    | select_table                                                      # select_table_
+    : 'CREATE' 'TABLE' Identifier '(' field_list ')'                                                # create_table
+    | 'DROP' 'TABLE' Identifier                                                                     # drop_table
+    | 'DESC' Identifier                                                                             # describe_table
+    | 'LOAD' 'DATA' 'INFILE' String 'INTO' 'TABLE' Identifier 'FIELDS' 'TERMINATED' 'BY' String     # load_table
+    | 'INSERT' 'INTO' Identifier 'VALUES' value_lists                                               # insert_into_table
+    | 'DELETE' 'FROM' Identifier 'WHERE' where_and_clause                                           # delete_from_table
+    | 'UPDATE' Identifier 'SET' set_clause 'WHERE' where_and_clause                                 # update_table
+    | select_table                                                                                  # select_table_
     ;
 
 select_table
@@ -58,13 +58,13 @@ select_table
     ;
 
 alter_statement
-    : 'ALTER' 'TABLE' Identifier 'ADD' 'INDEX' '(' identifiers ')'   			# alter_add_index
-    | 'ALTER' 'TABLE' Identifier 'DROP' 'INDEX' '(' identifiers ')'             # alter_drop_index
-    | 'ALTER' 'TABLE' Identifier 'DROP' 'PRIMARY' 'KEY' (Identifier)?           # alter_table_drop_pk
-    | 'ALTER' 'TABLE' Identifier 'DROP' 'FOREIGN' 'KEY' Identifier              # alter_table_drop_foreign_key
-    | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'PRIMARY' 'KEY' '(' identifiers ')'      # alter_table_add_pk
+    : 'ALTER' 'TABLE' Identifier 'ADD' 'INDEX' '(' identifiers ')'   			                            # alter_add_index
+    | 'ALTER' 'TABLE' Identifier 'DROP' 'INDEX' '(' identifiers ')'                                         # alter_drop_index
+    | 'ALTER' 'TABLE' Identifier 'DROP' 'PRIMARY' 'KEY' (Identifier)?                                       # alter_table_drop_pk
+    | 'ALTER' 'TABLE' Identifier 'DROP' 'FOREIGN' 'KEY' Identifier                                          # alter_table_drop_foreign_key
+    | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'PRIMARY' 'KEY' '(' identifiers ')'    # alter_table_add_pk
     | 'ALTER' 'TABLE' Identifier 'ADD' ('CONSTRAINT' (Identifier)?)? 'FOREIGN' 'KEY' '(' identifiers ')' 'REFERENCES' Identifier '(' identifiers ')'  # alter_table_add_foreign_key
-    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'             # alter_table_add_unique
+    | 'ALTER' 'TABLE' Identifier 'ADD' 'UNIQUE' '(' identifiers ')'                                         # alter_table_add_unique
     ;
 
 field_list

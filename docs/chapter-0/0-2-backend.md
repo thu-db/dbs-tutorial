@@ -222,7 +222,7 @@ mysql> SELECT grade FROM student_course WHERE student_id =
     我们将使用 `JOIN` 关键字的查询称为“显式 JOIN”，包含 `INNER JOIN`，`OUTER JOIN`，`LEFT JOIN`，`RIGHT JOIN`，`FULL JOIN`等。
 
     与之相对的便是下例中用到的 “隐式 JOIN”，它指不使用 `JOIN` 关键字，而是在 `FROM` 后用逗号隔开多个表名来对它们进行做内连接（INNER JOIN）。
-    这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN，如果在 `WHERE` 后面给出了连接条件则一定是等值连接，否则默认为求笛卡尔积。
+    这一语法比较简洁，在我们实验提供的文法文件中也只支持隐式 JOIN，并且它一定是等值连接，即便是多表 JOIN 也保证等值条件一定可以将多张表连接成一个“连通分支”。
 
 
 ```SQL
