@@ -1504,6 +1504,7 @@
 </div>
 <h2 id="1">1. 平台说明</h2>
 <p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
+<p>测例与评测器放在同一个 <a href="https://github.com/thu-db/dbs-testcase">GitHub 仓库</a> <code>dbs-testcase</code> 中，清华同学可以用<a href="https://git.tsinghua.edu.cn/dbs/2023/public/dbs-testcase">清华 Git 仓库</a>以更快地访问，两边内容是一致的。</p>
 <p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。注意，你必须通过了全部必做部分的测例后，才能开始完成选做测例，为此设置了一个名为 <code>optional</code> 的测例作为区分。</p>
 <div class="admonition info">
 <p class="admonition-title">测例分值</p>
@@ -1611,7 +1612,7 @@
 <p class="admonition-title">开发顺序</p>
 <p>尽管实验文档是按照从下而上的顺序编写的，但是这个顺序可能并不符合敏捷开发的工程实践，相比之下你或许会希望快速完成整个框架，逐步通过部分测试以渐渐增长测试分数，这种情况下你也可以依据测例的依赖关系来决定你的功能实现顺序。</p>
 </div>
-<p>TODO：在分发仓库前于此处填写设置测试内容的flag相关说明。</p>
+<p>关于 <code>dbs-testcase</code> 的具体用法见该仓库的 <code>README.md</code>，强烈推荐你在本地进行测试完成后再运行CI，CI仅用作上传分数。</p>
 <p>在你通过（部分或全部） CI 测例后，你可以在 CI 输出中看到自己的分数。我们通过教学实验平台进行了分数汇总，这里会保留你的最高成绩作为最终成绩，你可以前往平台查看。</p>
 <p>TODO：在跟教学实验平台对接完成后补充平台链接以及可能的截图示例。</p>
 <h2 id="2">2. 运行要求</h2>
@@ -1622,6 +1623,7 @@
 <p>一种可能的情况是你在本地跑测例，你的数据库中已经有了你花了一些时间建立导入的数据，你希望运行测例时不要干扰你已有的数据，那么在这种情况下你可以考虑为数据库新增一个参数来指定数据文件夹的路径。</p>
 <p>例如你可能会添加参数 <code>--data_dir ./test-data</code> 来让运行测例时处理的数据都在 <code>./test-data</code> 内，而平时你不加这一参数，默认的 <code>data_dir</code> 是 <code>./data</code>。</p>
 </div>
+<p>数据文件夹的位置我们没有统一要求，，但为了保证 CI 检查不出现问题，你需要保证数据文件夹应该在 <code>./</code> 之下，例如 <code>./data</code>。错误的位置可能导致没有访问权限从而出错，或者因为挂载盘类型不同而性能大降。</p>
 <p>评测器在运行期间课可能会不定期地试图重启 DBMS 以验证持久性，但我们并不要求崩溃一致性，你只需要保证 DBMS 能够正常退出即可，为此我们约定在输入 SQL 时如果输入一个 <code>"exit"</code> （常用于交互场景）或者读到 <code>EOF</code> （常用于重定向场景）则应该主动释放资源、退出进程。</p>
 <p>考虑到往年部分同学采用将数据全部导入内存的作弊方法，以及我们的数据库系统很多细节设计都是为了解决内存高性能低容量与磁盘低性能高容量之间的矛盾，我们对 CI 运行时的资源进行了限制，我们限制如下：</p>
 <ul>
@@ -1635,12 +1637,11 @@
 <p>内存上对你的 DBMS 进程使用了虚存限制，推荐你使用 128MB 空间用作页式文件系统的缓存页，严格限制其他部分的内存应该在某个约束之内。理想情况下其他部分应采用 O(1) 的额外内存，当然严格限制 O(1) 会为你编程带来不必要的困难，因此在此约定所有查询结果不超过 32MB（按整数、浮点数均8字节，字符串为实际长度+1字节进行封底估算）。如果你计划完成聚合查询的选做，那么你或许应该谨慎考虑是否要将所有数据读入内存后再进行聚合操作。</p>
 <p>这里举一个内存估算的例子，附件提供的C++页式文件系统为缓存准备了 CAP=MOD=6k 个槽位，为了维护结构信息一次开了 CAP 若干倍个整数，但这部分是可以忽略的小量，即便开了 10 倍的整数，也不过是 $6000 * 40B / 1024 / 1024 = 0.23MB$，它的主要内存消耗在于后面动态分配的 CAP 个页，每页 8192 字节，因此它的主要内存消耗约为 $6000 * 8192B / 1024 / 1024 = 47MB$。</p>
 <p>CPU 核数限制 1 则是提示不必使用并行加速等方法来卷性能，另外对于 Python 的 <code>numpy</code> 这种库，默认会用多线程加速，在 Linux 上会因为大量 <code>pthread</code> 导致极高内存占用，所以我们在评测器中预设了 <code>OMP_THREAD_NUM=1</code> 来限制。</p>
-<p>硬盘空间的约束通常用不上，这只是为了防止你的程序出现死循环输出等BUG而给的限制，实际上我们的数据总量通常在1GB以内，即便你用了一些辅助空间也远不会用到10GB——除非你滥用 append-only 模式、留了大量 Log 并且从来不进行空间回收。</p>
+<p>硬盘空间的约束通常用不上，这只是为了防止你的程序出现死循环输出等BUG而给的限制，实际上我们的数据总量通常在1GB以内，即便你用了一些辅助空间也远不会用到10GB——除非你滥用 append-only 模式、留了大量 Log 并且从来不进行空间回收。由于 CI 检测用到了 Docker，而严格的空间限制在 Docker 上并不容易实现，我们实际上将 <code>/builds</code> 路径挂载到了一个位于 SSD 上的 10GB 文件创建的虚拟文件系统上（其他路径均为机械硬盘），而 GitLab 的 runner 会将你的项目 clone 到 <code>/builds</code> 的一个多级子目录下。因此只要你按上文所说将数据文件存在 <code>./data</code> 下便是预料中的行为，值得一提的是对于 <code>Python</code> 的包管理软件 <code>pip</code> 而言它的包安装路径在机械硬盘上的家目录下，因此不会被计入 10GB 约束中，而像 <code>Node.js</code> 的 <code>npm</code> 默认将包装在 <code>./node_modules</code> 下则会计入上述 10GB约束。</p>
 <div class="admonition example">
 <p class="admonition-title">超越空间限制实例</p>
 <p>TODO：蹲一个真的把空间用超了的例子，在这里“公开处刑”。</p>
 </div>
-<p>注意评测机的空间一般来说可以和任意一个 Linux 文件系统一样可以任意读写，但是原则上你应该只操作 <code>./</code> 路径下的空间，例如将数据存储在 <code>./data</code> 下是一个很好的选择。另外这部分空间会在评测结束后便清理掉，因此你不能指望助教提供你的程序在评测时生成的数据以协助你DEBUG。</p>
 <h2 id="3">3. 本地测试</h2>
 <p>CI 所用的测例均为公开测例，评测器用 Python 编写，同学们应该可以比较容易地在本地运行，因此建议在本地通过测试后再进行 CI 测试，以防无效的 CI 阻塞评测进度。这里强烈建议大家将用于开发的分支和用于提交到 CI 的分支区分开，作为避免滥用 CI 的防呆法，我们在初始的 CI 配置了设置了只有名为 <code>ci</code> 的分支 push 后会自动运行 CI，其他分支的 push 需要手动启动 CI。</p>
 <div class="admonition warn">
@@ -1653,19 +1654,19 @@
 <p>尽管理论上你可以在完全不了解测例的格式甚至内容的情况下写出一个符合要求的 DBMS，从而直接通过测例，但相信多数同学还是会在实验过程中遇到测例未通过的情况，或者希望自行构造一些测例来辅助 DEBUG，甚至评测器本身也会存在一些 BUG，因此在这里解释一下测例的格式。</p>
 <h3 id="41">4.1 输入文件</h3>
 <p>测例的输入文件是 <code>.sql</code> 后缀的 SQL 文件，在文件头部用 SQL 注释语法标记了一些信息，它们定义了一些简易的键值对信息，用 SQL 单行注释符号 <code>--</code> 开头，在一个空格后追加 <code>@</code> 和键名，然后用 <code>:</code> 和空格隔开后面的值内容，下面是一个例子：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- @Name: system</span>
-<span class="c1">-- @Depends: init</span>
-<span class="c1">-- @Flags:</span>
-<span class="c1">-- @Description: Check basic database-level operation</span>
-<span class="c1">-- @Score: 5</span>
+<div class="highlight"><pre><span></span><code><span class="c1">-- @Name: comb-fk</span>
+<span class="c1">-- @Depends: comb-pk</span>
+<span class="c1">-- @Flags: comb fk</span>
+<span class="c1">-- @Description: Combined foreign key testing</span>
+<span class="c1">-- @Score: 2</span>
 </code></pre></div>
 <p>依次可以看到：</p>
 <ul>
-<li>这个测例的名称为 <code>system</code></li>
-<li>该测例依赖另一个测例 <code>init</code>，这意味着只有 <code>init</code> 成功执行后 <code>system</code> 才会被执行，否则会放弃执行 <code>system</code>；如果存在多个依赖，则用空格隔开，例如 <code>-- @Depends: init init-2 init-3</code></li>
-<li>启用该测例所需要的 flag，和依赖一样用空格隔开多个 flag，只有当这些 flag 都被给定时才有可能启用该测例以及（直接或间接）依赖该测例的测例</li>
-<li>对该测例的描述，主要用于标注测例的意图</li>
-<li>通过该测例可以获得5分</li>
+<li><code>Name</code>: 这个测例的名称为 <code>comb-fk</code></li>
+<li><code>Depends</code>: 该测例依赖另一个测例 <code>comb-pk</code>，这意味着只有 <code>comb-pk</code> 测例通过后 <code>comb-fk</code> 才会被执行，否则会放弃执行 <code>comb-fk</code>；如果存在多个依赖，则用空格隔开，例如 <code>-- @Depends: dep dep-1 dep-2</code></li>
+<li><code>Flags</code>: 启用该测例需要启用 flag <code>comb</code> 与 <code>fk</code>，和依赖一样用空格隔开多个 flag，只有当这些 flag 都被给定时才有可能启用该测例以及（直接或间接）依赖该测例的测例</li>
+<li><code>Description</code>: 对该测例的描述，主要用于标注测例的意图</li>
+<li><code>Score</code>: 通过该测例可以获得2分</li>
 </ul>
 <p>注意理论上这些标记信息应该在文件头部，先后顺序不重要，但每个信息只能出现一次；不在文件头部或者重复信息属于未定义行为。</p>
 <div class="admonition warning">
@@ -1711,7 +1712,7 @@ DB2
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月20日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月24日</span>
       
     
   </small>
