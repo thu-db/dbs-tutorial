@@ -92,6 +92,7 @@ flowchart BT
     query-group["query-group(1)\n(group)"]
     query-nest["query-nest(2)\n(nest)"]
     query-order["query-order(2)\n(order)"]
+    date["date(1)\n(date)"]
     unique["unique(1)\n(unique)"]
     null["null(2)\n(null)"]
     multi-join --> optional
@@ -100,6 +101,7 @@ flowchart BT
     query-group --> optional
     query-nest --> optional
     query-order --> optional
+    date --> optional
     unique --> optional
     null --> optional
 ```
