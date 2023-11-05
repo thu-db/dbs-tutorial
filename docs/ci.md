@@ -32,102 +32,74 @@ CI（Continuous Integration，持续集成）是指软件发布流程的构建�
 
 ```mermaid
 flowchart RL
-    data["data(1)
-(data)"]
-    pk["pk(1)
-(pk)"]
-    query-b["query-b(3)
-(query)"]
-    comb-pk["comb-pk(1)
-(comb,pk)"]
-    query-d["query-d(3)
-(query)"]
-    comb-fk-schema["comb-fk-schema(1)
-(fk,comb)"]
-    index-data["index-data(8)
-(index)"]
-    pk-schema["pk-schema(1)
-(pk)"]
-    query-c["query-c(3)
-(query)"]
-    fk-schema["fk-schema(1)
-(fk)"]
-    comb-pk-schema["comb-pk-schema(1)
-(pk,comb)"]
-    join["join(3)
-(join)"]
-    join-data["join-data(3)
-(join)"]
-    query-a["query-a(3)
-(query)"]
-    table-data["table-data(2)
-(data)"]
-    query-data-a["query-data-a(3)
-(query)"]
     system["system(5)"]
-    fk["fk(2)
-(fk)"]
-    index-schema["index-schema(4)
-(index)"]
-    comb-fk["comb-fk(2)
-(comb,fk)"]
-    query-data-b["query-data-b(3)
-(query)"]
     table["table(7)"]
-    data --> table-data
-    pk --> query-a
-    query-b --> table
-    comb-pk --> query-a
-    query-d --> table
-    comb-fk-schema --> comb-pk-schema
+    index-data["index-data(8)\n(index)"]
+    data["data(0)\n(data)"]
+    table-data["table-data(2)\n(data)"]
+    query-a["query-a(3)\n(query)"]
+    query-b["query-b(3)\n(query)"]
+    query-c["query-c(3)\n(query)"]
+    query-d["query-d(3)\n(query)"]
+    query-data-a["query-data-a(3)\n(query)"]
+    query-data-b["query-data-b(3)\n(query)"]
+    join-data["join-data(3)\n(join)"]
+    join["join(3)\n(join)"]
+    comb-pk["comb-pk(2)\n(comb,pk)"]
+    pk["pk(2)\n(pk)"]
+    comb-fk["comb-fk(2)\n(comb,fk)"]
+    fk["fk(2)\n(fk)"]
+    comb-fk-schema["comb-fk-schema(1)\n(fk,comb)"]
+    comb-pk-schema["comb-pk-schema(1)\n(pk,comb)"]
+    fk-schema["fk-schema(1)\n(fk)"]
+    pk-schema["pk-schema(1)\n(pk)"]
+    index-schema["index-schema(4)\n(index)"]
+    table --> system
     index-data --> query-data-b
     index-data --> index-schema
-    pk-schema --> pk
+    data --> table-data
+    table-data --> system
+    query-a --> table
+    query-b --> table
     query-c --> table
-    fk-schema --> pk
-    comb-pk-schema --> pk-schema
+    query-d --> table
+    query-data-a --> data
+    query-data-b --> data
+    join-data --> query-data-a
     join --> query-a
     join --> query-b
-    join-data --> query-data-a
-    query-a --> table
-    table-data --> system
-    query-data-a --> data
-    fk --> pk
-    index-schema --> query-data-a
+    comb-pk --> query-a
+    pk --> query-a
     comb-fk --> comb-pk
-    query-data-b --> data
-    table --> system
+    fk --> pk
+    comb-fk-schema --> comb-pk-schema
+    comb-pk-schema --> pk-schema
+    fk-schema --> pk
+    pk-schema --> pk
+    index-schema --> query-data-a
 ```
 
 下面是选做部分的测例。
 
 ```mermaid
 flowchart BT
-    query-order["query-order(2)
-(order)"]
-    multi-join["multi-join(8)
-(mj)"]
-    query-nest["query-nest(2)
-(nest)"]
-    query-fuzzy["query-fuzzy(1)
-(group)"]
-    query-group["query-group(1)
-(group)"]
-    query-aggregate["query-aggregate(2)
-(aggregate)"]
-    null["null(2)
-(null)"]
-    unique["unique(1)
-(unique)"]
     optional["optional(0)"]
-    query-order --> optional
+    multi-join["multi-join(6)\n(mj)"]
+    query-aggregate["query-aggregate(2)\n(aggregate)"]
+    query-fuzzy["query-fuzzy(1)\n(group)"]
+    query-group["query-group(1)\n(group)"]
+    query-nest["query-nest(2)\n(nest)"]
+    query-order["query-order(2)\n(order)"]
+    unique["unique(1)\n(unique)"]
+    null["null(2)\n(null)"]
     multi-join --> optional
-    query-nest --> optional
+    query-aggregate --> optional
     query-fuzzy --> optional
     query-group --> optional
-    query-aggregate --> optional
-    null --> optional
+    query-nest --> optional
+    query-order --> optional
     unique --> optional
+    null --> optional
 ```
 
 
@@ -135,7 +107,7 @@ flowchart BT
 
     尽管实验文档是按照从下而上的顺序编写的，但是这个顺序可能并不符合敏捷开发的工程实践，相比之下你或许会希望快速完成整个框架，逐步通过部分测试以渐渐增长测试分数，这种情况下你也可以依据测例的依赖关系来决定你的功能实现顺序。
 
-TODO：在分发仓库前于此处填写设置测试内容的flag相关说明。
+关于 flag 的具体使用说明你可以在测例仓库（DBS-Testcase）的 README 中查看，测例仓库的可以在 [GitHub](https://github.com/thu-db/dbs-testcase) 或 [清华 Git](https://git.tsinghua.edu.cn/dbs/2023/public/dbs-testcase)（限清华同学）查看。
 
 在你通过（部分或全部） CI 测例后，你可以在 CI 输出中看到自己的分数。我们通过教学实验平台进行了分数汇总，这里会保留你的最高成绩作为最终成绩，你可以前往平台查看。
 
@@ -190,7 +162,7 @@ CI 所用的测例均为公开测例，评测器用 Python 编写，同学们应
     
     例如 Windows 下在 read 子进程的 stdout 时无法用 ++ctrl+c++ 为父进程抛出 `KeyboardInterrupedt`，这可能用在你发现自己的数据库运行测例时太长时间无响应而想强行终止评测的情况，由于这一问题你可能只好直接关闭运行评测器的终端来强制终止进程。 
 
-TODO: 完成 Checker 后在此补充本地运行评测器的方法。
+评测器的使用方法见前文提到的 DBS-Testcase 的 README。
 
 
 ## 4. 测例格式
