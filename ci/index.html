@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.7">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4b4a2bd9.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
@@ -1497,124 +1497,97 @@
 <p>CI（Continuous Integration，持续集成）是指软件发布流程的构建和单元测试阶段，GitLab、GitHub 等常见的基于 Git 的集成软件开发平台都带有类似的功能，我们将基于清华大学部署的 GitLab 的 CI 完成实验的自动化测试。</p>
 <p>截止2023年秋我们实际上使用的是集成测试而非单元测试，它并不能让你的实验每完成一部分后便进行测试，它只能在你将整个实验几大模块都完成后基于SQL的执行情况进行功能性测试。</p>
 <p>由于不同语言的程序需要不同的 CI 运行环境、依赖库等，我们只能适配有限的环境，截止2023年秋季助教预设的环境有 C++ 与 Python，因此如果你想选择其他语言，你可能需要自行编写对应的 Docker 镜像并联系助教，或者你也可以等到有人完成适配后再选择该语言。</p>
+<p>测例内容、答案以及评测逻辑全部公开，这些内容都放在测例仓库（DBS-Testcase）中，同学们可以在 <a href="https://github.com/thu-db/dbs-testcase">GitHub</a> 或 <a href="https://git.tsinghua.edu.cn/dbs/2023/public/dbs-testcase">清华 Git</a>（限清华同学）查看。</p>
 <div class="admonition abstract">
 <p class="admonition-title">激励机制</p>
 <p>如果你反馈了 CI 漏洞、测例错误、评测器逻辑错误等，甚至提了 PR，助教将根据贡献程度给同一问题的第一个提出者大作业加分，加分会在学期末进行汇总，至多累计（按大作业满分100计算意义下的）5分。</p>
 <p>如果你协助助教完成了某个语言的环境适配，可以取得至多包含在上述5分限制内的至多2分加分。</p>
 </div>
 <h2 id="1">1. 平台说明</h2>
-<p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组只能由组长创建一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
-<p>测例与评测器放在同一个 <a href="https://github.com/thu-db/dbs-testcase">GitHub 仓库</a> <code>dbs-testcase</code> 中，清华同学可以用<a href="https://git.tsinghua.edu.cn/dbs/2023/public/dbs-testcase">清华 Git 仓库</a>以更快地访问，两边内容是一致的。</p>
-<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。注意，你必须通过了全部必做部分的测例后，才能开始完成选做测例，为此设置了一个名为 <code>optional</code> 的测例作为区分。</p>
+<p>我们会将分组DDL设在退课第一阶段结束后不久，分组DDL后开放仓库创建，每个组有一个仓库。注意如果你们分组已经非常明确，则完全可以在那之前开始完成实验，分发仓库后再将代码全部放入其中即可。</p>
+<p>仓库创建通过教学实验平台 <a href="https://lab.cs.tsinghua.edu.cn/unilab">UniLab Platform</a> 完成，分组信息导入完成后助教会发公告说明，通过该平台的指引可以创建仓库/获取权限。<strong>注意对多人小组来说，第一位操作的同学通过该平台会创建仓库并获得权限，后续同学也需要通过该平台获取仓库的权限。</strong></p>
+<p>由于测例中有必做内容也有选做内容，且测例之间可能存在明显的依赖关系，因此你可以通过设置相关 flag 变量的方法来约束 CI 进行的测试，从而使得你在完成部分测试时也能看到 CI 通过的✔️标志，同时也能有效避免无效的 CI 时间。关于 flag 的具体使用说明你可以在测例仓库的 README 中查看。</p>
+<p>为了方便大家快速获知测例基本信息，下面放了一个用 Mermaid 绘制的流程图来表示测例依赖关系及其他元信息。每一个框代表一个测例，每个框中的第一行是测例名以及小括号内的分值，如果该测例需要满足 flag 才能开启则会第二行小括号内用逗号隔开的若干个 flag。注意，你必须通过了全部必做部分的测例后，才能开始完成选做测例（为此设置了一个名为 <code>optional</code> 的 0 分测例作为区分）。</p>
 <div class="admonition info">
 <p class="admonition-title">测例分值</p>
 <p>简便起见，每个测例只有拿0分和拿满分两个情况，我们已经尽可能将测例进行拆散以便于大家得分。</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">分值待定</p>
-<p>注意，当你能看到这个信息框时，则表明测例以及分值都还在不断更新中，下面的测例点的分值仅仅是为了预览效果的缺省值，不代表最终分数。</p>
-</div>
-<p>下面是必做部分的测例。</p>
+<p>下面是必做部分的测例：</p>
 <pre class="mermaid"><code>flowchart RL
-    data["data(1)
-(data)"]
-    pk["pk(1)
-(pk)"]
-    query-b["query-b(3)
-(query)"]
-    comb-pk["comb-pk(1)
-(comb,pk)"]
-    query-d["query-d(3)
-(query)"]
-    comb-fk-schema["comb-fk-schema(1)
-(fk,comb)"]
-    index-data["index-data(8)
-(index)"]
-    pk-schema["pk-schema(1)
-(pk)"]
-    query-c["query-c(3)
-(query)"]
-    fk-schema["fk-schema(1)
-(fk)"]
-    comb-pk-schema["comb-pk-schema(1)
-(pk,comb)"]
-    join["join(3)
-(join)"]
-    join-data["join-data(3)
-(join)"]
-    query-a["query-a(3)
-(query)"]
-    table-data["table-data(2)
-(data)"]
-    query-data-a["query-data-a(3)
-(query)"]
     system["system(5)"]
-    fk["fk(2)
-(fk)"]
-    index-schema["index-schema(4)
-(index)"]
-    comb-fk["comb-fk(2)
-(comb,fk)"]
-    query-data-b["query-data-b(3)
-(query)"]
     table["table(7)"]
-    data --&gt; table-data
-    pk --&gt; query-a
-    query-b --&gt; table
-    comb-pk --&gt; query-a
-    query-d --&gt; table
-    comb-fk-schema --&gt; comb-pk-schema
+    index-data["index-data(8)\n(index)"]
+    data["data(0)\n(data)"]
+    table-data["table-data(2)\n(data)"]
+    query-a["query-a(3)\n(query)"]
+    query-b["query-b(3)\n(query)"]
+    query-c["query-c(3)\n(query)"]
+    query-d["query-d(3)\n(query)"]
+    query-data-a["query-data-a(3)\n(query)"]
+    query-data-b["query-data-b(3)\n(query)"]
+    join-data["join-data(3)\n(join)"]
+    join["join(3)\n(join)"]
+    comb-pk["comb-pk(2)\n(comb,pk)"]
+    pk["pk(2)\n(pk)"]
+    comb-fk["comb-fk(2)\n(comb,fk)"]
+    fk["fk(2)\n(fk)"]
+    comb-fk-schema["comb-fk-schema(1)\n(fk,comb)"]
+    comb-pk-schema["comb-pk-schema(1)\n(pk,comb)"]
+    fk-schema["fk-schema(1)\n(fk)"]
+    pk-schema["pk-schema(1)\n(pk)"]
+    index-schema["index-schema(4)\n(index)"]
+    table --&gt; system
     index-data --&gt; query-data-b
     index-data --&gt; index-schema
-    pk-schema --&gt; pk
+    data --&gt; table-data
+    table-data --&gt; system
+    query-a --&gt; table
+    query-b --&gt; table
     query-c --&gt; table
-    fk-schema --&gt; pk
-    comb-pk-schema --&gt; pk-schema
+    query-d --&gt; table
+    query-data-a --&gt; data
+    query-data-b --&gt; data
+    join-data --&gt; query-data-a
     join --&gt; query-a
     join --&gt; query-b
-    join-data --&gt; query-data-a
-    query-a --&gt; table
-    table-data --&gt; system
-    query-data-a --&gt; data
-    fk --&gt; pk
-    index-schema --&gt; query-data-a
+    comb-pk --&gt; query-a
+    pk --&gt; query-a
     comb-fk --&gt; comb-pk
-    query-data-b --&gt; data
-    table --&gt; system</code></pre>
-<p>下面是选做部分的测例。</p>
+    fk --&gt; pk
+    comb-fk-schema --&gt; comb-pk-schema
+    comb-pk-schema --&gt; pk-schema
+    fk-schema --&gt; pk
+    pk-schema --&gt; pk
+    index-schema --&gt; query-data-a</code></pre>
+<p>下面是选做部分的测例：</p>
 <pre class="mermaid"><code>flowchart BT
-    query-order["query-order(2)
-(order)"]
-    multi-join["multi-join(8)
-(mj)"]
-    query-nest["query-nest(2)
-(nest)"]
-    query-fuzzy["query-fuzzy(1)
-(group)"]
-    query-group["query-group(1)
-(group)"]
-    query-aggregate["query-aggregate(2)
-(aggregate)"]
-    null["null(2)
-(null)"]
-    unique["unique(1)
-(unique)"]
     optional["optional(0)"]
-    query-order --&gt; optional
+    multi-join["multi-join(6)\n(mj)"]
+    query-aggregate["query-aggregate(2)\n(aggregate)"]
+    query-fuzzy["query-fuzzy(1)\n(group)"]
+    query-group["query-group(1)\n(group)"]
+    query-nest["query-nest(2)\n(nest)"]
+    query-order["query-order(2)\n(order)"]
+    unique["unique(1)\n(unique)"]
+    null["null(2)\n(null)"]
     multi-join --&gt; optional
-    query-nest --&gt; optional
+    query-aggregate --&gt; optional
     query-fuzzy --&gt; optional
     query-group --&gt; optional
-    query-aggregate --&gt; optional
-    null --&gt; optional
-    unique --&gt; optional</code></pre>
+    query-nest --&gt; optional
+    query-order --&gt; optional
+    unique --&gt; optional
+    null --&gt; optional</code></pre>
 <div class="admonition info">
 <p class="admonition-title">开发顺序</p>
 <p>尽管实验文档是按照从下而上的顺序编写的，但是这个顺序可能并不符合敏捷开发的工程实践，相比之下你或许会希望快速完成整个框架，逐步通过部分测试以渐渐增长测试分数，这种情况下你也可以依据测例的依赖关系来决定你的功能实现顺序。</p>
 </div>
 <p>关于 <code>dbs-testcase</code> 的具体用法见该仓库的 <code>README.md</code>，强烈推荐你在本地进行测试完成后再运行CI，CI仅用作上传分数。</p>
-<p>在你通过（部分或全部） CI 测例后，你可以在 CI 输出中看到自己的分数。我们通过教学实验平台进行了分数汇总，这里会保留你的最高成绩作为最终成绩，你可以前往平台查看。</p>
-<p>TODO：在跟教学实验平台对接完成后补充平台链接以及可能的截图示例。</p>
+<p>在你通过（部分或全部） CI 测例后，你可以在 CI 输出中看到自己的分数。我们通过 UniLab Platform 进行了分数汇总，这里会保留你的最高成绩作为最终成绩，你可以前往平台查看。</p>
+<p>
+<figure><img src="../unilab.png" /><figcaption>Unilab Web 页面</figcaption>
+</figure>
+</p>
 <h2 id="2">2. 运行要求</h2>
 <p>CI 运行时会在命令行参数给出 <code>-b</code> 选项，给程序的输入为多行 SQL 语句，每一行一定是一个完整的 <code>;</code> 结尾的 SQL 语句，输出格式见 <a href="../chapter-0/0-3-frontend/">0.3 前端约定</a> 相关内容。</p>
 <p><strong>评测器在完成编译后、正式测试前会先用 <code>--init</code> 参数运行你的程序</strong>，这一阶段你或许会对你的数据文件做一些初始化来使它们成为一个合理的状态，如果此前已经有数据了应该全部删除，这主要是为了方便你本地测试不必在运行测例前手动删除已有的数据。理论上如果你觉得没必要有这么一个阶段，你可以在主函数里处理成看到该参数后直接退出程序。</p>
@@ -1649,7 +1622,7 @@
 <p>由于 Windows 系统底层与MacOS、Linux的固有差异，一些进程级的操作在两边会有所差异，尽管助教已经尽量修复了这些问题，目前仍然未能解决的遗留问题，如果同学们有解决办法欢迎积极贡献。</p>
 <p>例如 Windows 下在 read 子进程的 stdout 时无法用 <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> 为父进程抛出 <code>KeyboardInterrupedt</code>，这可能用在你发现自己的数据库运行测例时太长时间无响应而想强行终止评测的情况，由于这一问题你可能只好直接关闭运行评测器的终端来强制终止进程。 </p>
 </div>
-<p>TODO: 完成 Checker 后在此补充本地运行评测器的方法。</p>
+<p>评测器的使用方法见前文提到的 DBS-Testcase 的 README。</p>
 <h2 id="4">4. 测例格式</h2>
 <p>尽管理论上你可以在完全不了解测例的格式甚至内容的情况下写出一个符合要求的 DBMS，从而直接通过测例，但相信多数同学还是会在实验过程中遇到测例未通过的情况，或者希望自行构造一些测例来辅助 DEBUG，甚至评测器本身也会存在一些 BUG，因此在这里解释一下测例的格式。</p>
 <h3 id="41">4.1 输入文件</h3>
@@ -1712,7 +1685,7 @@ DB2
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年10月24日</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年11月5日</span>
       
     
   </small>
