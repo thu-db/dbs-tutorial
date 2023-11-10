@@ -45,7 +45,14 @@ nav:
     - 数据库管理文法: explanation/db.md
     - 数据表管理文法: explanation/table.md
     - 查询解析文法: explanation/query.md
-  - CI 说明: ci.md
+  - CI 说明:
+    - 整体说明: ci/intro.md
+    - 平台说明: ci/platform.md
+    - 运行要求: ci/run.md
+    - 容器环境: ci/env.md
+    - 本地测试: ci/local.md
+    - 测例格式: ci/testcase.md
+    - 命令行参数: ci/args.md
   - FAQ: faq.md
   - 更新记录: changelog.md
   - 附件: files.md
