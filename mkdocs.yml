@@ -54,8 +54,8 @@ nav:
     - 测例格式: ci/testcase.md
     - 命令行参数: ci/args.md
   - FAQ: faq.md
-  - 更新记录: changelog.md
   - 附件: files.md
+  - 更新记录: changelog.md
   - 课程安排:
     - 2023秋: timeline/2023F.md
 
