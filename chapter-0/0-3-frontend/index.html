@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.45e1311d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -1797,7 +1797,7 @@
 <li>仅下述语句需要给出对应表头并输出内容（即便没有内容也应该输出一个表头），其他直接输出分隔符即可：<ul>
 <li><code>SELECT</code> 语句，注意表头精简与否都可以，简便起见在 <code>SELECT</code> 后的 <code>selector</code> 不是 <code>*</code> 时，表头与 <code>selector</code> 一致即可，尤其是聚合查询，我们承诺不会添加额外的空格等导致隐藏的坑；在 <code>selector</code> 是 <code>*</code> 时一定是单表查询，表名输出与否不影响答案正确性。</li>
 <li><code>SHOW</code> 开头的语句，对于 <code>SHOW XX</code> 的语句，输出的表头即为 <code>XX</code></li>
-<li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>、<code>LOAD</code> 开头的语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示插入/删除/更新/导入的行数。</li>
+<li><code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>、<code>LOAD</code> 开头的语句均输出一个表头为 <code>rows</code>、内容为一个整数的表来展示插入/删除/更新/导入的行数。注意，对于 <code>UPDATE</code> 操作应该显示数据被修改的行数而非匹配到的行数，也即修改前后数据不变的行不应被计入内。</li>
 <li>任何语句如果破坏了完整性约束，则应该输出一个表头为 <code>!ERROR</code>，内容为一个字符串说明错误信息（你可以统一将批处理模式下所有的错误都这样输出以减少工作量，因为我们的测例中保证了不会有其他错误情况），CI 检查会采用关键词检测的办法判断你的报错信息，错误类型和关键词如下（注：无视大小写，<strong>且不能包含其他约束被破坏时用到的关键词</strong>）：<ul>
 <li>增改记录导致破坏唯一性约束（包含主键和选做的 UNIQUE）：<code>duplicate</code></li>
 <li>任何原因导致破坏外键约束：<code>foreign</code></li>
@@ -1918,7 +1918,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年11月16日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年12月13日</span>
   </span>
 
     
