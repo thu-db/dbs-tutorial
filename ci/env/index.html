@@ -1387,6 +1387,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rust 环境
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1635,6 +1644,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rust 环境
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1663,6 +1681,8 @@
 <li><code>CMake</code>: 3.25.1</li>
 <li><code>Make</code>: 4.3</li>
 <li><code>Python</code>: 3.11.5</li>
+<li><code>rustup</code>: 1.26.0</li>
+<li><code>rustc</code>/<code>cargo</code>: 1.74.1</li>
 </ul>
 <p>注意具体版本号在多数时候并不重要，你只需要知道它们是在学期初时安装即可，只有当你想使用一些很新的特性时可能需要查询版本来验证是否支持。</p>
 <p>如果你需要安装其他依赖可能会比较麻烦，尤其是通常用 <code>apt</code> 安装的那些，它们通常需要 root 权限，而出于安全性考虑你并没有 root 权限。为此你可以考虑：</p>
@@ -1681,6 +1701,21 @@
 <li><code>PyYAML</code>: 6.0.1</li>
 </ul>
 <p>如果你需要安装其他 pip 库，可以配置 <code>requirements.txt</code>，并将编译指令配置为 <code>pip install -r requirements.txt</code>。</p>
+<h2 id="rust">Rust 环境</h2>
+<p>镜像中配置了 <code>rustup</code>，并使用 <code>rustup</code> 安装了 <code>stable-x86_64-unknown-linux-gnu</code> 工具链。注意 profile 为 minimal，意味着默认只安装了 <code>rustc</code> <code>rust-std</code> 和 <code>cargo</code> 三个基本组件，如有特殊需要可以直接用 <code>rustup</code> 管理工具链和组件。</p>
+<p>对于依赖库，虽然容器内配置了 TUNA 镜像站提供的 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/">crates.io 稀疏索引</a>，但是该 registry 未提供下载服务，下载地址仍指向 crates.io，所以无法在内网环境中使用。</p>
+<p>一种可行的办法是使用 <a href="https://doc.rust-lang.org/cargo/commands/cargo-vendor.html"><code>cargo vendor</code></a> 把依赖的 crate 的源代码保存到项目中并提交到 VCS。但是注意 <code>cargo vendor</code> 无法按架构过滤 crate，从而导致会出现类似 <code>windows_x86_64_msvc</code> 的无用内容，增加约 40MB 的体积。建议使用 <a href="https://github.com/coreos/cargo-vendor-filterer"><code>cargo vendor-filterer</code></a> 来只获取编译 <code>x86_64-unknown-linux-gnu</code> 架构所需要的内容，或手动删除此类 <code>windows_xxx</code> crate 内 <code>lib</code> 文件夹下的内容。</p>
+<p>这里提供一个使用 <code>cargo vendor</code> 的配置文件供参考：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .cargo/config.toml</span>
+<span class="k">[source.crates-io]</span>
+<span class="n">replace-with</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vendored-sources&quot;</span>
+
+<span class="k">[source.vendored-sources]</span>
+<span class="n">directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vendor&quot;</span>
+
+<span class="k">[net]</span>
+<span class="n">offline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
 
 
 
@@ -1701,7 +1736,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年11月10日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年12月13日</span>
   </span>
 
     
@@ -1711,12 +1746,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="贡献者">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.536 5.536 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13v-1.75M0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20H0m24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9V20Z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>
+        <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>, 
+        <a href="mailto:asakuramizu111@gmail.com">AsakuraMizu</a>
     </nav>
   </span>
 
@@ -1747,7 +1783,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (56.76%), <a href='mailto:asakuramizu111@gmail.com'>AsakuraMizu</a> (43.24%)</span>
   </small>
 </div>
 
