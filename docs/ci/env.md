@@ -10,6 +10,8 @@ CI 运行环境实际上是一个 Linux 下的 Docker 容器，因此有必要�
 - `CMake`: 3.25.1
 - `Make`: 4.3
 - `Python`: 3.11.5
+- `rustup`: 1.26.0
+- `rustc`/`cargo`: 1.74.1
 
 注意具体版本号在多数时候并不重要，你只需要知道它们是在学期初时安装即可，只有当你想使用一些很新的特性时可能需要查询版本来验证是否支持。
 
@@ -30,3 +32,25 @@ CI 运行环境实际上是一个 Linux 下的 Docker 容器，因此有必要�
 - `PyYAML`: 6.0.1
 
 如果你需要安装其他 pip 库，可以配置 `requirements.txt`，并将编译指令配置为 `pip install -r requirements.txt`。
+
+## Rust 环境
+
+镜像中配置了 `rustup`，并使用 `rustup` 安装了 `stable-x86_64-unknown-linux-gnu` 工具链。注意 profile 为 minimal，意味着默认只安装了 `rustc` `rust-std` 和 `cargo` 三个基本组件，如有特殊需要可以直接用 `rustup` 管理工具链和组件。
+
+对于依赖库，虽然容器内配置了 TUNA 镜像站提供的 [crates.io 稀疏索引](https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/)，但是该 registry 未提供下载服务，下载地址仍指向 crates.io，所以无法在内网环境中使用。
+
+一种可行的办法是使用 [`cargo vendor`](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html) 把依赖的 crate 的源代码保存到项目中并提交到 VCS。但是注意 `cargo vendor` 无法按架构过滤 crate，从而导致会出现类似 `windows_x86_64_msvc` 的无用内容，增加约 40MB 的体积。建议使用 [`cargo vendor-filterer`](https://github.com/coreos/cargo-vendor-filterer) 来只获取编译 `x86_64-unknown-linux-gnu` 架构所需要的内容，或手动删除此类 `windows_xxx` crate 内 `lib` 文件夹下的内容。
+
+这里提供一个使用 `cargo vendor` 的配置文件供参考：
+
+```toml
+# .cargo/config.toml
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+
+[net]
+offline = true
+```
