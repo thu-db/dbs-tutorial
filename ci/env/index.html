@@ -1702,7 +1702,7 @@
 </ul>
 <p>如果你需要安装其他 pip 库，可以配置 <code>requirements.txt</code>，并将编译指令配置为 <code>pip install -r requirements.txt</code>。</p>
 <h2 id="rust">Rust 环境</h2>
-<p>镜像中配置了 <code>rustup</code>，并使用 <code>rustup</code> 安装了 <code>stable-x86_64-unknown-linux-gnu</code> 工具链。注意 profile 为 minimal，意味着默认只安装了 <code>rustc</code> <code>rust-std</code> 和 <code>cargo</code> 三个基本组件（版本为 1.74.1，如非特殊情况，不会在学期内变动），如有特殊需要可以直接用 <code>rustup</code> 管理工具链和组件。</p>
+<p>镜像中配置了 <code>rustup</code>，并使用 <code>rustup</code> 安装了 <code>stable-x86_64-unknown-linux-gnu</code> 工具链。注意 profile 为 minimal，意味着默认只安装了 <code>rustc</code> <code>rust-std</code> 和 <code>cargo</code> 三个基本组件，如有特殊需要可以直接用 <code>rustup</code> 管理工具链和组件。</p>
 <p>对于依赖库，虽然容器内配置了 TUNA 镜像站提供的 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/">crates.io 稀疏索引</a>，但是该 registry 未提供下载服务，下载地址仍指向 crates.io，所以无法在内网环境中使用。</p>
 <p>一种可行的办法是使用 <a href="https://doc.rust-lang.org/cargo/commands/cargo-vendor.html"><code>cargo vendor</code></a> 把依赖的 crate 的源代码保存到项目中并提交到 VCS。但是注意 <code>cargo vendor</code> 无法按架构过滤 crate，从而导致会出现类似 <code>windows_x86_64_msvc</code> 的无用内容，增加约 40MB 的体积。建议使用 <a href="https://github.com/coreos/cargo-vendor-filterer"><code>cargo vendor-filterer</code></a> 来只获取编译 <code>x86_64-unknown-linux-gnu</code> 架构所需要的内容，或手动删除此类 <code>windows_xxx</code> crate 内 <code>lib</code> 文件夹下的内容。</p>
 <p>这里提供一个使用 <code>cargo vendor</code> 的配置文件供参考：</p>
