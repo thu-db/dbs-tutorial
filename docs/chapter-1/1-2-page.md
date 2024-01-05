@@ -102,7 +102,7 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 
 $$
 2^{10} = 1024 = 1k = 1K \newline
-2^{12} = 4092 \newline
+2^{12} = 4096 \newline
 2^{13} = 8192 \newline
 2^{20} = 2^{10} k = 1m = 1M \newline
 2^{30} = 2^{10} m = 1g = 1G \newline
