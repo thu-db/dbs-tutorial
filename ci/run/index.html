@@ -1589,7 +1589,7 @@
 <p>例如你可能会添加参数 <code>--data_dir ./test-data</code> 来让运行测例时处理的数据都在 <code>./test-data</code> 内，而平时你不加这一参数，默认的 <code>data_dir</code> 是 <code>./data</code>。</p>
 </div>
 <p>数据文件夹的位置我们没有统一要求，，但为了保证 CI 检查不出现问题，你需要保证数据文件夹应该在 <code>./</code> 之下，例如 <code>./data</code>。错误的位置可能导致没有访问权限从而出错，或者因为挂载盘类型不同而性能大降。</p>
-<p>评测器在运行期间课可能会不定期地试图重启 DBMS 以验证持久性，但我们并不要求崩溃一致性，你只需要保证 DBMS 能够正常退出即可，为此我们约定在输入 SQL 时如果输入一个 <code>"exit"</code> （常用于交互场景）或者读到 <code>EOF</code> （常用于重定向场景）则应该主动释放资源、退出进程。</p>
+<p>评测器在运行期间可能会不定期地试图重启 DBMS 以验证持久性，但我们并不要求崩溃一致性，你只需要保证 DBMS 能够正常退出即可，为此我们约定在输入 SQL 时如果输入一个 <code>"exit"</code> （常用于交互场景）或者读到 <code>EOF</code> （常用于重定向场景）则应该主动释放资源、退出进程。</p>
 <p>考虑到往年部分同学采用将数据全部导入内存的作弊方法，以及我们的数据库系统很多细节设计都是为了解决内存高性能低容量与磁盘低性能高容量之间的矛盾，我们对 CI 运行时的资源进行了限制，我们限制如下：</p>
 <ul>
 <li>时间：~3600s</li>
@@ -1627,7 +1627,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年11月10日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年1月7日</span>
   </span>
 
     
