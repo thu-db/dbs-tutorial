@@ -103,11 +103,11 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.tilde:
       smart_delete: false
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+  # - pymdownx.superfences:
+  #     custom_fences:
+  #       - name: mermaid
+  #         class: mermaid
+  #         format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
   - git-authors:
@@ -125,6 +125,8 @@ plugins:
       locale: zh
   - search:
       lang: zh
+  - mermaid2:
+      javascript: https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js
 
 extra:
     # Add counter suffix for development to avoid extra counts of page visit

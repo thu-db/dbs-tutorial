@@ -3,3 +3,4 @@ mkdocs-material
 mkdocs-git-authors-plugin
 markdown-captions
 mkdocs-git-revision-date-localized-plugin
+mkdocs-mermaid2-plugin
