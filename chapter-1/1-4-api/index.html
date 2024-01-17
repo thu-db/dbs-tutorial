@@ -1581,55 +1581,55 @@
 
 
 <h1 id="14">1.4 对外提供的接口</h1>
-<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FD</span><span class="p">;</span>
-<span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">BufferType</span><span class="p">;</span>
+<pre><code class="language-C++">typedef int FD;
+typedef char *BufferType;
 
-<span class="k">class</span><span class="w"> </span><span class="nc">FileManager</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">FileManager</span><span class="p">();</span>
-<span class="w">  </span><span class="o">~</span><span class="n">FileManager</span><span class="p">();</span>
+class FileManager
+{
+public:
+  FileManager();
+  ~FileManager();
 
-<span class="w">  </span><span class="c1">// 下面的 BufferType 可以自行考虑具体实现，但是内存管理上最好由缓存系统管理而非文件系统</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">createFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="n">FD</span><span class="w"> </span><span class="nf">openFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+  // 下面的 BufferType 可以自行考虑具体实现，但是内存管理上最好由缓存系统管理而非文件系统
+  void createFile(string filename);
+  FD openFile(string filename);
+  void closeFile(FD fd);
+  void removeFile(string filename);
+  void readPage(FD fd, int pageID, BufferType buffer);
+  void writePage(FD fd, int pageID, BufferType buffer);
 
-<span class="w">  </span><span class="c1">// 文档提到的另一种思路，上层系统直接传文件名</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
-<span class="p">};</span>
+  // 文档提到的另一种思路，上层系统直接传文件名
+  void closeFile(string filename);
+  void readPage(string filename, int pageID, BufferType buffer);
+  void writePage(string filename, int pageID, BufferType buffer);
+};
 
-<span class="k">class</span><span class="w"> </span><span class="nc">BufferManager</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">BufferManager</span><span class="p">();</span>
-<span class="w">  </span><span class="o">~</span><span class="n">BufferManager</span><span class="p">();</span>
+class BufferManager
+{
+public:
+  BufferManager();
+  ~BufferManager();
 
-<span class="w">  </span><span class="c1">// 这里只展示用 FD 的方法，如果采用文件名直传，则所有 FD 都可以改为文件名</span>
+  // 这里只展示用 FD 的方法，如果采用文件名直传，则所有 FD 都可以改为文件名
 
-<span class="w">  </span><span class="c1">// 这些文件操作不一定需要，也可以实现成上层传文件名，底层自动处理打开、创建</span>
-<span class="w">  </span><span class="c1">// 如果实现则直接调用 FileManager 的操作</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">createFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="n">FD</span><span class="w"> </span><span class="nf">openFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeFile</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span>
+  // 这些文件操作不一定需要，也可以实现成上层传文件名，底层自动处理打开、创建
+  // 如果实现则直接调用 FileManager 的操作
+  void createFile(string filename);
+  FD openFile(string filename);
+  void closeFile(FD fd);
 
-<span class="w">  </span><span class="c1">// 是否需要删文件的接口取决于你的系统实现</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeFile</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+  // 是否需要删文件的接口取决于你的系统实现
+  void removeFile(string filename);
 
-<span class="w">  </span><span class="c1">// 1. 如果采用读引用的方法，则可以参考这两个接口，读写用的 buffer 空间由底层管理</span>
-<span class="w">  </span><span class="n">BufferType</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">markDirty</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">);</span>
+  // 1. 如果采用读引用的方法，则可以参考这两个接口，读写用的 buffer 空间由底层管理
+  BufferType readPage(FD fd, int pageID);
+  void markDirty(FD fd, int pageID);
 
-<span class="w">  </span><span class="c1">// 2. 如果采用读拷贝的方法，则可以参考这两个接口，读写用的 buffer 空间由上层管理</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">readPage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">writePage</span><span class="p">(</span><span class="n">FD</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pageID</span><span class="p">,</span><span class="w"> </span><span class="n">BufferType</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
-<span class="p">};</span>
-</code></pre></div>
+  // 2. 如果采用读拷贝的方法，则可以参考这两个接口，读写用的 buffer 空间由上层管理
+  void readPage(FD fd, int pageID, BufferType buffer);
+  void writePage(FD fd, int pageID, BufferType buffer);
+};
+</code></pre>
 
 
 

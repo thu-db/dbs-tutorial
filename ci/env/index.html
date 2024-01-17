@@ -1706,16 +1706,16 @@
 <p>对于依赖库，虽然容器内配置了 TUNA 镜像站提供的 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/">crates.io 稀疏索引</a>，但是该 registry 未提供下载服务，下载地址仍指向 crates.io，所以无法在内网环境中使用。</p>
 <p>一种可行的办法是使用 <a href="https://doc.rust-lang.org/cargo/commands/cargo-vendor.html"><code>cargo vendor</code></a> 把依赖的 crate 的源代码保存到项目中并提交到 VCS。但是注意 <code>cargo vendor</code> 无法按架构过滤 crate，从而导致会出现类似 <code>windows_x86_64_msvc</code> 的无用内容，增加约 40MB 的体积。建议使用 <a href="https://github.com/coreos/cargo-vendor-filterer"><code>cargo vendor-filterer</code></a> 来只获取编译 <code>x86_64-unknown-linux-gnu</code> 架构所需要的内容，或手动删除此类 <code>windows_xxx</code> crate 内 <code>lib</code> 文件夹下的内容。</p>
 <p>这里提供一个使用 <code>cargo vendor</code> 的配置文件供参考：</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># .cargo/config.toml</span>
-<span class="k">[source.crates-io]</span>
-<span class="n">replace-with</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vendored-sources&quot;</span>
+<pre><code class="language-toml"># .cargo/config.toml
+[source.crates-io]
+replace-with = &quot;vendored-sources&quot;
 
-<span class="k">[source.vendored-sources]</span>
-<span class="n">directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vendor&quot;</span>
+[source.vendored-sources]
+directory = &quot;vendor&quot;
 
-<span class="k">[net]</span>
-<span class="n">offline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-</code></pre></div>
+[net]
+offline = true
+</code></pre>
 
 
 

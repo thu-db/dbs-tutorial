@@ -1640,12 +1640,12 @@
 <p>尽管理论上你可以在完全不了解测例的格式甚至内容的情况下写出一个符合要求的 DBMS，从而直接通过测例，但相信多数同学还是会在实验过程中遇到测例未通过的情况，或者希望自行构造一些测例来辅助 DEBUG，甚至评测器本身也会存在一些 BUG，因此在这里解释一下测例的格式。</p>
 <h2 id="1">1. 输入文件</h2>
 <p>测例的输入文件是 <code>.sql</code> 后缀的 SQL 文件，在文件头部用 SQL 注释语法标记了一些信息，它们定义了一些简易的键值对信息，用 SQL 单行注释符号 <code>--</code> 开头，在一个空格后追加 <code>@</code> 和键名，然后用 <code>:</code> 和空格隔开后面的值内容，下面是一个例子：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- @Name: comb-fk</span>
-<span class="c1">-- @Depends: comb-pk</span>
-<span class="c1">-- @Flags: comb fk</span>
-<span class="c1">-- @Description: Combined foreign key testing</span>
-<span class="c1">-- @Score: 2</span>
-</code></pre></div>
+<pre><code class="language-SQL">-- @Name: comb-fk
+-- @Depends: comb-pk
+-- @Flags: comb fk
+-- @Description: Combined foreign key testing
+-- @Score: 2
+</code></pre>
 <p>依次可以看到：</p>
 <ul>
 <li><code>Name</code>: 这个测例的名称为 <code>comb-fk</code></li>
@@ -1664,7 +1664,7 @@
 <p>输出文件也即测例的答案，但是注意 SQL 的答案和常规的 DSA OJ 不同，可以认为它充满了 Special Judge，每一个 SQL 语句的输出需要单独处理，因此我们使用分隔符来显式地拆分不同 SQL 的输出。</p>
 <p>具体来说，输出文件在每一部分答案后面会增加 <code>@</code> 开头的一行作为结尾，<code>@</code> 后面的内容无关紧要，我们在样例中写了对应的 SQL 语句以提高可读性，如果你自己构造测例则对此没有要求。注意这和程序输出的要求是一致的，它们都需要保证输出的数据不会包含行首为 <code>@</code> 的数据，我们的测例会保证这一点。</p>
 <p>在输出内容的前后增加一些空行是不会影响评测器的，评测器会忽略这些空行，例如假设目前有 <code>DB</code> 与 <code>DB2</code> 两个数据库，我们连续执行了两次 <code>SHOW DATABASES</code>，下面是一个可能的输出文件：</p>
-<div class="highlight"><pre><span></span><code>DATABASES
+<pre><code>DATABASES
 DB1
 DB2
 
@@ -1674,7 +1674,7 @@ DATABASES
 DB1
 DB2
 @SHOW DATABASES;
-</code></pre></div>
+</code></pre>
 <p>另外在排序上有一个无法绕过的问题：假设数据按列 $C$ 排序，那么对 $C$ 字段相同的两条记录来说它们的顺序可以是任意的。但是查询语句有可能并没有 <code>SELECT</code> 出 $C$，此时评测器不可能判断程序是否正确给出了顺序，在这种情况下只能放弃检查有序性。
 在我们的测例里测试 <code>ORDER BY</code> 的地方会避免这种情况，保证 <code>SELECT</code> 了所有排序关键字，如果你自己构造测例需要留意这一点。</p>
 

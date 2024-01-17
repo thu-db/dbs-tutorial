@@ -1750,28 +1750,28 @@
 <h2 id="_2">运行模式</h2>
 <h3 id="1">1. 交互模式</h3>
 <p>交互模式可以参考 MySQL 的模式，如下是一个示例</p>
-<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">student</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">------------+--------+-----------+------+</span>
-<span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">status</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">sex</span><span class="w">  </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">------------+--------+-----------+------+</span>
-<span class="o">|</span><span class="w"> </span><span class="mi">2077310001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">王五</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="err">博士生</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="err">男</span><span class="w">   </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="mi">2077010001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">张三</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="err">本科生</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="err">男</span><span class="w">   </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="mi">2077210001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">李四</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="err">硕士生</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="err">男</span><span class="w">   </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">------------+--------+-----------+------+</span>
-<span class="mi">3</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">FROM</span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">student</span>
-<span class="w">    </span><span class="o">-&gt;</span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------+</span>
-<span class="o">|</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+</span>
-<span class="o">|</span><span class="w">        </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+</span>
-<span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
-<span class="n">mysql</span><span class="o">&gt;</span>
-</code></pre></div>
+<pre><code class="language-SQL">mysql&gt; SELECT * FROM student;
++------------+--------+-----------+------+
+| id         | name   | status    | sex  |
++------------+--------+-----------+------+
+| 2077310001 | 王五   | 博士生    | 男   |
+| 2077010001 | 张三   | 本科生    | 男   |
+| 2077210001 | 李四   | 硕士生    | 男   |
++------------+--------+-----------+------+
+3 rows in set (0.000 sec)
+mysql&gt; SELECT COUNT(*)
+    -&gt; FROM
+    -&gt; student
+    -&gt;
+    -&gt; ;
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.000 sec)
+mysql&gt;
+</code></pre>
 <p>交互模式不给出严格的要求，主要为了便于自己调试以及助教检查，能看出数据即可。仿照 MySQL 的 shell，以下给一些<strong>可选地</strong>参考实现细节：</p>
 <ul>
 <li>输入时在左边给出前缀并给出当前使用的数据库名</li>
@@ -1839,13 +1839,13 @@
 <li>使用命令行可选参数 <code>-t &lt;table&gt;</code> 指定目标表名；</li>
 </ul>
 <p>在上述约定下，假设我们编译得到的可执行程序是 <code>mydb</code>，则可以通过类似如下语句进行数据导入</p>
-<div class="highlight"><pre><span></span><code>./mydb<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>path/to/data/student.txt<span class="w"> </span>-t<span class="w"> </span>student<span class="w"> </span>-d<span class="w"> </span>curriculum
-</code></pre></div>
+<pre><code class="language-bash">./mydb -b -f path/to/data/student.txt -t student -d curriculum
+</code></pre>
 <p>此外我们也约定一种 SQL 语法用于在数据库进程运行期间导入数据以减少进程启动次数，详见 <code>SQL.g4</code> 中的 <code>load_table</code>。在实际自动化测试时可能会用到上述命令行参数，也可能用到下述 SQL 语句，你需要两者都实现，但这并不必做两次工作，它们在已经取得数据库、文件路径、表名三个参数的情况下完全可以用同一个函数处理。注意，使用 <code>LOAD DATA</code> 前应该已经指定过当前在使用的数据库。</p>
 <p>下面是用 <code>load_table</code> 语法时一个与上述命令行参数有相同效果的 SQL 指令：</p>
-<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">curriculum</span><span class="p">;</span>
-<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="ss">&quot;path/to/data/student.txt&quot;</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="n">FIELDS</span><span class="w"> </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="p">;</span>
-</code></pre></div>
+<pre><code class="language-SQL">USE curriculum;
+LOAD DATA INFILE &quot;path/to/data/student.txt&quot; INTO TABLE student FIELDS TERMINATED BY ',';
+</code></pre>
 <p>注意，后面的 <code>FIELDS TERMINATED BY ','</code> 仅仅是为了体现我们文法与 MySQL 的兼容性，实验并不要求实现不同字符甚至不同字符串的分隔符，你可以在处理时直接忽略这部分内容。我们约定数据格式同批量模式输出一样采用 CSV，且字符串中不会出现 <code>,</code>，因此可以很方便地手动解析。</p>
 <p>另外，我们默认使用数据导入时数据是“安全”的，即格式正确、满足完整性约定等，无需在这部分做对应检查，你应当采用尽可能高效的方法将数据批量导入，例如填满一页记录后一次写入理应比逐条写入记录更快。</p>
 <div class="admonition tip">
@@ -1864,27 +1864,27 @@
 </ol>
 <p>注意上面五部分中只有第一部分是一定有的（一张表至少有一列，我们的语法文件已经保证了这一点），剩下四部分如果没有则直接跳过，如果有则<strong>一行一条信息</strong>，每条信息后加分号。每一部分各条信息的顺序不作要求。在批处理模式中，第一部分的“表”按前文提及的简化的 CSV 格式输出，后面部分按照上述要求输出。</p>
 <p>这里用举例的方法给出一个参考，注意这里相比后端约定章节中的 <code>student_course</code> 表多了几个字段用于演示 UNIQUE 与 INDEX，这里的 <code>index_field_A</code> 与 <code>index_field_a</code> 形成组合索引，而 <code>index_field_B</code> 是单列索引。另外下面 <code>course_id_number</code> 是一个命名外键，其他的约束都是匿名的，如果有名字则都应该加在第一个小括号左边，和小括号之间没有空格。</p>
-<div class="highlight"><pre><span></span><code><span class="n">mydb</span><span class="o">&gt;</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="n">student_course</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">---------------+-------------+------+---------+</span>
-<span class="o">|</span><span class="w"> </span><span class="n">Field</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">Null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Default</span><span class="w"> </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">---------------+-------------+------+---------+</span>
-<span class="o">|</span><span class="w"> </span><span class="n">student_id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">course_id</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">course_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">grade</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">YES</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">term</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">unique_field</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">index_field_A</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">index_field_a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="n">index_field_B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">INT</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">NO</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w">    </span><span class="o">|</span>
-<span class="o">+</span><span class="c1">---------------+-------------+------+---------+</span>
-<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span><span class="w"> </span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">term</span><span class="p">);</span>
-<span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">student_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">student</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-<span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">course_id_number</span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">course_number</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">course_detail</span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">course_number</span><span class="p">);</span>
-<span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">unique_field</span><span class="p">);</span>
-<span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_A</span><span class="p">,</span><span class="w"> </span><span class="n">index_field_a</span><span class="p">);</span>
-<span class="k">INDEX</span><span class="w"> </span><span class="p">(</span><span class="n">index_field_B</span><span class="p">);</span>
-</code></pre></div>
+<pre><code class="language-SQL">mydb&gt; desc student_course;
++---------------+-------------+------+---------+
+| Field         | Type        | Null | Default |
++---------------+-------------+------+---------+
+| student_id    | INT         | NO   | NULL    |
+| course_id     | INT         | NO   | NULL    |
+| course_number | INT         | NO   | NULL    |
+| grade         | VARCHAR(3)  | YES  | NULL    |
+| term          | VARCHAR(16) | NO   | NULL    |
+| unique_field  | INT         | NO   | NULL    |
+| index_field_A | INT         | NO   | NULL    |
+| index_field_a | INT         | NO   | NULL    |
+| index_field_B | INT         | NO   | NULL    |
++---------------+-------------+------+---------+
+PRIMARY KEY (student_id, course_id, term);
+FOREIGN KEY (student_id) REFERENCES student(id);
+FOREIGN KEY course_id_number(course_id, course_number) REFERENCES course_detail(course_id, course_number);
+UNIQUE (unique_field);
+INDEX (index_field_A, index_field_a);
+INDEX (index_field_B);
+</code></pre>
 <p>注意，在自动化测试时<strong>输出完表格后，在输出约束信息前必须输出一个空行</strong>作为分隔（如果没有任何约束信息，则空行输出与否不影响结果正确性），并且下面的格式需要严格按照上述标准。由于我们的文法允许生成匿名主外键、索引，同学们可能会为它们设定不同的默认名字，因此在命名上我们给出如下约束：</p>
 <ul>
 <li>输出约束名与否不影响正确性，建议你输出自己所存的约束名以便于调试</li>
