@@ -7,6 +7,7 @@
 由于SQL语句转抽象语法树的部分是编译原理课程已经充分研究的内容，所以第一个转化阶段不作为本次实验的重点内容，可以直接基于给出的文法文件利用antlr的访问者模式生成这一部分代码。解析器部分重点的实验内容为逻辑优化和物理优化的过程。
 
 考虑到部分同学可能没有接触过编译原理课程的相关内容，在此给出利用antlr生成C++版本编译器基本代码的流程。
+
 1. 配置JAVA环境
 2. 访问www.antlr.org/download.html，下载最新版的的antlr4.jar文件
 3. 通过如下指令可以生成最基本的C++版本编译器代码
@@ -16,7 +17,6 @@ java -jar <antlr4.jar文件路径> -Dlanguage=Cpp <sql.g4语法文件路径> -vi
 4. 通过继承BaseVisitor可以在编译器中实现自定义的编译过程，从而实现编译器的设计
 5. 在使用自动生成的antlr4代码时，需要下载对应版本的antlr4-runtime.h库文件并利用编译配置文件正确包含这一头文件
 6. 解析SQL过程中使用生成代码的方式
-
   ```c++
   #include <string>
   #include "antlr4-runtime.h"
@@ -45,7 +45,6 @@ java -jar <antlr4.jar文件路径> -Dlanguage=Cpp <sql.g4语法文件路径> -vi
     auto iRes = iVisitor.visit(iTree);
     return iRes;
   }
-
   ```
 
 7. 如果同学们没有接触过antlr，也可以使用自己熟悉的其他编译代码生成工具，但是需要保证能够支持要求的文法标准。
