@@ -70,7 +70,7 @@ flowchart BT
     optional["optional(0)"]
     multi-join["multi-join(6)\n(mj)"]
     query-aggregate["query-aggregate(1)\n(aggregate)"]
-    query-fuzzy["query-fuzzy(2)\n(group)"]
+    query-fuzzy["query-fuzzy(2)\n(fuzzy)"]
     query-group["query-group(1)\n(group)"]
     query-nest["query-nest(2)\n(nest)"]
     query-order["query-order(2)\n(order)"]
