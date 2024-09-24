@@ -1565,6 +1565,10 @@
 <p>在参考代码 <code>testfilesystem.cpp</code> 中展示了正确用法：启动系统时要调用静态成员函数 <code>MyBitMap::initConst()</code>，否则哈希值计算错误可能导致多个文件被视为同一个。</p>
 </div>
 <div class="admonition question">
+<p class="admonition-title">编译时缺少antlr-runtime依赖如何处理？</p>
+<p>注意根据自身系统，在antlr的下载页面中下载对应版本的runtime依赖环境。注意阅读antlr runtime依赖的使用文档，根据你自身的编译配置依赖的引用。注意，下载页面中已经提供了源码以及预编译的版本，绝大部分情况下<strong>不需要重新自行编译</strong>，直接利用编译工具cmake等添加依赖信息或者直接复制源码文件即可。</p>
+</div>
+<div class="admonition question">
 <p class="admonition-title">数据库可以使用自定义文法吗？</p>
 <p>CI测试部分的语法不可以自定义，其余部分允许合理的自定义。不过我们希望大家尽量使用本文档中提供的文法，以节约验收的时间成本。</p>
 </div>
@@ -1672,7 +1676,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (79.17%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (20.83%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (73.08%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (26.92%)</span>
   </small>
 </div>
 
