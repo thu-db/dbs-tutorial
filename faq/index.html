@@ -1577,6 +1577,18 @@
 <p>对于索引功能（如在SELECT、UPDATE等语句中涉及索引列与常量的比较操作），要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能 CI 范围内以 CI 要求为准。</p>
 </div>
 <div class="admonition question">
+<p class="admonition-title">CI运行结果为什么和本地不一致？</p>
+<p>CI的文件系统对一些文件操作有着比一般Linux环境更高的要求：例如“尝试删除没有关闭的文件”的情况而导致文件夹递归删除失败；“直接访问未初始化内存区域”导致读取内容不可控；...等问题。因此遇到CI和本地结果比一至的情况请检查是否存在文件管理和内存管理等方面的实现问题。</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">如何在CI中输出信息进行调试？</p>
+<p>stderr 可以用来直接将信息打印到CI的输出里，一个使用例子是可以让数据库在batch模式下将读取到的每句SQL输出到stderr，这样在CI中程序崩溃时可以知道自己是执行哪一句SQL时出了问题。类比上述方法，可以自定义调试信息在CI中的输出。</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">浮点数精度是否会导致CI测试无法通过？</p>
+<p>设计的测例将尽可能避免出现这种情况。同时建议涉及到浮点数时使用double类型进行存储和计算。</p>
+</div>
+<div class="admonition question">
 <p class="admonition-title">数据库可以实现说明文档没有列举的选做功能吗？</p>
 <p>可以，但是需要自己构造测例进行展示，并向助教解释该功能的实现。对于说明文档列举的必做、选做功能，我们会准备测例进行测试。</p>
 </div>
@@ -1676,7 +1688,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (73.08%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (26.92%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (55.88%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (44.12%)</span>
   </small>
 </div>
 
