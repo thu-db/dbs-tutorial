@@ -1560,21 +1560,17 @@
 
 <h1 id="faq">FAQ</h1>
 <p>这里收集了一些近年来本实验相关的常见问题，我们会在每年课程进行中动态更新本节。</p>
-<!-- !!!question "数据库各模块是否必须按照说明文档中的建议时间完成？"
-
-    不一定。但我们建议大家合理规划时间，把数据库各模块分散在整个学期完成，为各模块组装后的端到端测试留出足够的 Debug 时间和测试时间。由于代码量较大，系统较复杂，希望大家不要把大量代码集中在验收前完成。 -->
-
 <div class="admonition question">
 <p class="admonition-title">参考实现的页式文件系统似乎有 bug，同时打开多个文件会出现混乱？</p>
 <p>在参考代码 <code>testfilesystem.cpp</code> 中展示了正确用法：启动系统时要调用静态成员函数 <code>MyBitMap::initConst()</code>，否则哈希值计算错误可能导致多个文件被视为同一个。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">数据库可以使用自定义文法吗？</p>
-<p>必做功能不可以，选做功能可以。不过我们希望大家尽量使用本文档中提供的文法，以节约验收的时间成本。</p>
+<p>CI测试部分的语法不可以自定义，其余部分允许合理的自定义。不过我们希望大家尽量使用本文档中提供的文法，以节约验收的时间成本。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">数据库有性能要求吗？</p>
-<p>对于索引功能（如在SELECT、UPDATE等语句中涉及索引列与常量的比较操作），要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能 CI 范围内以 CI 要求为准，线下验收部分要求每条语句执行时间不超过30分钟。</p>
+<p>对于索引功能（如在SELECT、UPDATE等语句中涉及索引列与常量的比较操作），要求能够在百万级数据下查询时明显比不用索引快。希望大家不要用一些投机手段，如：故意降低不用索引时数据库的性能。其他功能 CI 范围内以 CI 要求为准。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">数据库可以实现说明文档没有列举的选做功能吗？</p>
@@ -1585,12 +1581,8 @@
 <p>由于最终测试的表有很多行，无法通过逐行插入的方式导入到数据库中，所以大家一定要实现批量导入数据的功能，CI 也对此有要求。</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">最终测试时会有多大数据规模？</p>
-<p>（最后更新于 2023秋）各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B，表名、列名长度不超过 32B。</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">最终测试的测例会提前发布吗？</p>
-<p>不会。但是我们会提前发布最终测试的数据，大家可以导入到自己的数据库中，并自己构造测例进行测试。</p>
+<p class="admonition-title">CI测试时可能面临的最大数据规模？</p>
+<p>各表总数据量小于 1GB，单表列数不超过 10，表数不超过 8，单列最大长度不超过 2048B，表名、列名长度不超过 32B。</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">验收时会考查 SQL 语法错误的输入报错吗？</p>
@@ -1610,7 +1602,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">如果多人组队完成，线下验收时所有人都必须到场吗？</p>
-<p>不要求所有人都到场，但是验收时助教会提问一些数据库实现的细节，要求到场的人能够回答。</p>
+<p>助教需要再线下验收时提问组员来判断组员的参与程度，因此<strong>要求所有人都进行检查</strong>。原则上每位同学均需要线下到场参加检查。对于确实存在客观情况无法到现场的同学，要求向助教请假（请假形式会在验收前通知）并通过腾讯会议与组员一同参加。任何情况下，每组必须有至少一人线下到场检查。</p>
 </div>
 
 
@@ -1632,7 +1624,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年1月7日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月24日</span>
   </span>
 
     
@@ -1649,7 +1641,7 @@
     <nav>
       
         <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>, 
-        <a href="mailto:sunzy2000@qq.com">Zhaoyan Sun</a>
+        <a href="mailto:dhw21@mails.tsinghua.edu.cn">Haowen Dong</a>
     </nav>
   </span>
 
@@ -1680,7 +1672,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (85.71%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (14.29%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (79.17%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (20.83%)</span>
   </small>
 </div>
 
