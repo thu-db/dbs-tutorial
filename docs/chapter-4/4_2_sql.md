@@ -15,7 +15,7 @@
 java -jar <antlr4.jar文件路径> -Dlanguage=Cpp <sql.g4语法文件路径> -visitor -no-listener -o <生成代码文件输出路径>
 ```
 4. 通过继承BaseVisitor可以在编译器中实现自定义的编译过程，从而实现编译器的设计
-5. 在使用自动生成的antlr4代码时，需要下载对应版本的antlr runtime库文件，例如[c++](https://www.antlr.org/download/antlr4-cpp-runtime-4.13.2-source.zip)，并利用根绝文档在你所使用的编译配置文件中正确包含该依赖
+5. 在使用自动生成的antlr4代码时，需要下载对应版本的antlr runtime库文件，例如[c++](https://www.antlr.org/download/antlr4-cpp-runtime-4.13.2-source.zip)，并根据其中的文档，结合你自己使用的编译环境，在配置文件中正确包含该依赖
 6. 解析SQL过程中使用生成代码的方式
 
 ```c++
