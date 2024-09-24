@@ -9,7 +9,7 @@
 考虑到部分同学可能没有接触过编译原理课程的相关内容，在此给出利用antlr生成C++版本编译器基本代码的流程。
 
 1. 配置JAVA环境（注意是JDK环境）
-2. 访问www.antlr.org/download.html，下载最新版antlr的jar包文件（![直接下载](https://www.antlr.org/download/antlr-4.13.2-complete.jar)）
+2. 访问www.antlr.org/download.html，下载最新版antlr的jar包文件[直接下载](https://www.antlr.org/download/antlr-4.13.2-complete.jar)
 3. 通过如下指令可以生成最基本的C++版本编译器代码
 ```
 java -jar <antlr4.jar文件路径> -Dlanguage=Cpp <sql.g4语法文件路径> -visitor -no-listener -o <生成代码文件输出路径>
