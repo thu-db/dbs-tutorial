@@ -1577,32 +1577,34 @@
 <li>在使用自动生成的antlr4代码时，需要下载对应版本的antlr runtime库文件，例如<a href="https://www.antlr.org/download/antlr4-cpp-runtime-4.13.2-source.zip">c++</a>，并根据其中的文档，结合你自己使用的编译环境，在配置文件中正确包含该依赖</li>
 <li>解析SQL过程中使用生成代码的方式</li>
 </ol>
-<p>```c++
-  #include <string>
-  #include "antlr4-runtime.h"</p>
-<p>// 包含你完成的Visitor类
-  #include "YourVisitor.h"</p>
-<p>using namespace antlr4;</p>
-<p>// 返回类型根据你的visitor决定
-  auto parse(std::String sSQL) {
-    // 解析SQL语句sSQL的过程
-    // 转化为输入流
-    ANTLRInputStream sInputStream(sSQL);
-    // 设置Lexer
-    SQLLexer iLexer(&amp;sInputStream);
-    CommonTokenStream sTokenStream(&amp;iLexer);
-    // 设置Parser
-    SQLParser iParser(&amp;sTokenStream);
-    auto iTree = iParser.program();
-    // 构造你的visitor
-    YourVisitor iVisitor{/<em>YourVisitor的构造函数</em>/};
-    // visitor模式下执行SQL解析过程
-    // --如果采用解释器方式可以在解析过程中完成执行过程（相对简单，但是很难进行进一步优化，功能上已经达到实验要求）
-    // --如果采用编译器方式则需要生成自行设计的物理执行执行计划（相对复杂，易于进行进一步优化，希望有能力的同学自行调研尝试）
-    auto iRes = iVisitor.visit(iTree);
-    return iRes;
-  }
-  ```</p>
+<pre><code class="language-c++">#include &lt;string&gt;
+#include &quot;antlr4-runtime.h&quot;
+
+// 包含你完成的Visitor类
+#include &quot;YourVisitor.h&quot;
+
+using namespace antlr4;
+
+// 返回类型根据你的visitor决定
+auto parse(std::String sSQL) {
+  // 解析SQL语句sSQL的过程
+  // 转化为输入流
+  ANTLRInputStream sInputStream(sSQL);
+  // 设置Lexer
+  SQLLexer iLexer(&amp;sInputStream);
+  CommonTokenStream sTokenStream(&amp;iLexer);
+  // 设置Parser
+  SQLParser iParser(&amp;sTokenStream);
+  auto iTree = iParser.program();
+  // 构造你的visitor
+  YourVisitor iVisitor{/*YourVisitor的构造函数*/};
+  // visitor模式下执行SQL解析过程
+  // --如果采用解释器方式可以在解析过程中完成执行过程（相对简单，但是很难进行进一步优化，功能上已经达到实验要求）
+  // --如果采用编译器方式则需要生成自行设计的物理执行执行计划（相对复杂，易于进行进一步优化，希望有能力的同学自行调研尝试）
+  auto iRes = iVisitor.visit(iTree);
+  return iRes;
+}
+</code></pre>
 <ol>
 <li>如果同学们没有接触过antlr，也可以使用自己熟悉的其他编译代码生成工具，但是需要保证能够支持要求的文法标准。</li>
 </ol>
@@ -1675,7 +1677,7 @@
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (65.85%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (31.71%), <a href='mailto:dt.dtech.dhw@gmail.com'>Haowen Dong</a> (2.44%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (4.88%), <a href='mailto:dhw21@mails.tsinghua.edu.cn'>Haowen Dong</a> (92.68%), <a href='mailto:dt.dtech.dhw@gmail.com'>Haowen Dong</a> (2.44%)</span>
   </small>
 </div>
 
