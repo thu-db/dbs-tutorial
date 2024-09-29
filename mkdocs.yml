@@ -58,6 +58,7 @@ nav:
   - 更新记录: changelog.md
   - 课程安排:
     - 2023秋: timeline/2023F.md
+    - 2024秋: timeline/2024F.md
 
 theme:
   name: material
