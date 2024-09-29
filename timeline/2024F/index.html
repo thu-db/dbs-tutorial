@@ -10,8 +10,10 @@
         <meta name="author" content="数据库系统概论教学组">
       
       
-        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/chapter-3/api/">
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/timeline/2024F/">
       
+      
+        <link rel="prev" href="../2023F/">
       
       
       
@@ -20,7 +22,7 @@
     
     
       
-        <title>3.4 对外提供的接口（仅供参考） - 数据库系统概论实验文档</title>
+        <title>2024秋 - 数据库系统概论实验文档</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#34" class="md-skip">
+        <a href="#2024" class="md-skip">
           跳转至
         </a>
       
@@ -109,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3.4 对外提供的接口（仅供参考）
+              2024秋
             
           </span>
         </div>
@@ -649,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../intro/" class="md-nav__link">
+      <a href="../../chapter-3/intro/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -670,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../btree/" class="md-nav__link">
+      <a href="../../chapter-3/btree/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -691,7 +693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ds/" class="md-nav__link">
+      <a href="../../chapter-3/ds/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1448,17 +1450,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
         
           
           <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
@@ -1472,7 +1476,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             课程安排
@@ -1486,7 +1490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../timeline/2023F/" class="md-nav__link">
+      <a href="../2023F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1504,10 +1508,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../timeline/2024F/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1516,6 +1529,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1565,33 +1579,34 @@
   
 
 
-<h1 id="34">3.4 对外提供的接口（仅供参考）</h1>
-<pre><code class="language-C++">class IndexScan {  
-  public:
-       IndexScan    ();         // 构造函数
-       ~IndexScan   ();         // 析构函数        
-    RC GetNextEntry (RID &amp;rid); // 类似于Python中的迭代器，不断调用获取下一个记录的位置
-};
-
-// 基础功能中，索引关键字只要求单列整型
-class IndexHandler {
-  public:
-       IndexHandler  ();                     // 构造函数
-       ~IndexHandler ();                     // 析构函数
-    RC CreateIndex   (const char *fileName); // 创建索引
-    RC DestroyIndex  (const char *fileName); // 删除索引
-    RC OpenIndex     (const char *fileName); // 通过缓存管理模块打开索引，并获取其句柄
-    RC CloseIndex    ();                     // 关闭索引
-    RC Search        (int lowerBound, int upperBound, IndexScan &amp;indexScan);            
-                                             // 查找某个范围内的记录，结果通过迭代器访问
-    RC DeleteRecord  (int lowerBound, int upperBound);       
-                                             // 删除某个范围内的记录
-    RC InsertRecord  (int key, const RID &amp;rid); 
-                                             // 插入某个记录的位置
-    RC UpdateRecord  (int oldKey, const RID &amp;oldRid, int newKey, const RID &amp;newRid);
-                                             // 更新特定记录的关键字或位置
-};
-</code></pre>
+<h1 id="2024">2024秋大作业安排</h1>
+<p>以下是本学期暂定的课程大作业相关的一些时间安排。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>注意暂定安排可能受突发情况影响，请以网络学堂、微信群发布的通知为准。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9月30日</td>
+<td>布置大作业，发布本文档</td>
+</tr>
+<tr>
+<td>12月9日</td>
+<td>奋战三星期，造个数据库</td>
+</tr>
+<tr>
+<td>24年1月11日</td>
+<td>验收大作业，完成DDL</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1612,7 +1627,7 @@ class IndexHandler {
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2022年10月13日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年9月29日</span>
   </span>
 
     
@@ -1623,13 +1638,12 @@ class IndexHandler {
   <span class="md-source-file__fact">
     <span class="md-icon" title="贡献者">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>, 
-        <a href="mailto:sunzy2000@qq.com">Zhaoyan Sun</a>
+        <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>
     </nav>
   </span>
 
@@ -1648,10 +1662,10 @@ class IndexHandler {
   <script>
     var counter_img = document.createElement("img")
     // Change suffix to be compatable with old honkit style path
-    if ("chapter-3/api/" == "")
+    if ("timeline/2024F/" == "")
       counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
     else
-      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/chapter-3/api/".slice(0, -1) + ".md" + ""
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/timeline/2024F/".slice(0, -1) + ".md" + ""
     counter_img.alt = "visitor badge"
     document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
   </script>
@@ -1660,7 +1674,7 @@ class IndexHandler {
 
 <div class="md-source-date">
   <small>
-    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a> (7.41%), <a href='mailto:sunzy2000@qq.com'>Zhaoyan Sun</a> (92.59%)</span>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
   </small>
 </div>
 
@@ -1707,6 +1721,28 @@ class IndexHandler {
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../2023F/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 2023秋">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                2023秋
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
