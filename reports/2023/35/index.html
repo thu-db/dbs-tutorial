@@ -1,0 +1,3504 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="数据库系统概论教学组">
+      
+      
+        <link rel="canonical" href="https://thu-db.github.io/dbs-tutorial/reports/2023/35/">
+      
+      
+        <link rel="prev" href="../24/">
+      
+      
+        <link rel="next" href="../39/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
+    
+    
+      
+        <title>35组（2人） - 数据库系统概论实验文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#202335" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="数据库系统概论实验文档" class="md-header__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数据库系统概论实验文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              35组（2人）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="purple" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/thu-db/dbs-tutorial" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    thu-db/dbs-tutorial
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="数据库系统概论实验文档" class="md-nav__button md-logo" aria-label="数据库系统概论实验文档" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.png" alt="logo">
+
+    </a>
+    数据库系统概论实验文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/thu-db/dbs-tutorial" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    thu-db/dbs-tutorial
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 0: 整体介绍
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            step 0: 整体介绍
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-0/0-1-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-0/0-2-backend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0.2 后端约定
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-0/0-3-frontend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0.3 前端约定
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 1: 文件管理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            step 1: 文件管理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-1/1-1-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.1 文件管理模块概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-1/1-2-page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.2 页式文件系统设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-1/1-3-buffer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3 LRU 缓存设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-1/1-4-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4 对外提供接口
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 2: 记录管理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            step 2: 记录管理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-2/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.1 记录管理模块概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-2/fixed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.2 记录页面的设计模式-定长记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-2/variable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.3 记录页面的设计模式-变长记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 3: 索引管理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            step 3: 索引管理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-3/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 索引管理模块概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-3/btree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.2 索引结构-B树和B+树
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-3/ds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.3 更多的索引结构（阅读内容）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 4: 解析器
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            step 4: 解析器
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-4/4_1_intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-4/4_2_sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.2 SQL简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-4/4_3_logic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 逻辑优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-4/4_4_physic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 物理优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 5: 系统管理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            step 5: 系统管理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-5/5-1-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-5/5-2-db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 数据库管理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-5/5-3-table/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.3 数据表管理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    step 6: 查询处理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            step 6: 查询处理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-6/6-1-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.1 概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-6/6-2-scan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.2 扫描算法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-6/6-3-join/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.3 连接算法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapter-6/6-4-execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.4 查询执行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    文法解释
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            文法解释
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanation/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    总述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanation/db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据库管理文法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanation/table/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据表管理文法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../explanation/query/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    查询解析文法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    CI 说明
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            CI 说明
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    整体说明
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/platform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    平台说明
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/run/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    运行要求
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/env/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    容器环境
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/local/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    本地测试
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/testcase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    测例格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ci/args/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    命令行参数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    优秀作业报告展示
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            优秀作业报告展示
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    说明
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14_2" id="__nav_14_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2023年
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_14_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14_2">
+            <span class="md-nav__icon md-icon"></span>
+            2023年
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1组（3人）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../24/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    24组（1人）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    35组（2人）
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    35组（2人）
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      后端模块设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="后端模块设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      页管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="页管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器和算法模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="迭代器和算法模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据库管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据库管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆式记录管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="堆式记录管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      变长短记录储存实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      变长超长字段储存实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      B+树索引模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B+树索引模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据完整性约束
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据完整性约束">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      前端模块设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="前端模块设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      查询处理模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      语法解析模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      前端交互模块
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验结果
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行时间和运行内存
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      磁盘占用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      小组分工
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方库使用清单
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文献
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他贡献
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../39/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    39组（2人）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    课程安排
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            课程安排
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../timeline/2023F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023秋
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../timeline/2024F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024秋
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目结构概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      后端模块设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="后端模块设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      页管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="页管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器和算法模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="迭代器和算法模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据库管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据库管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆式记录管理模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="堆式记录管理模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      变长短记录储存实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      变长超长字段储存实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      B+树索引模块
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B+树索引模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据完整性约束
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据完整性约束">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      前端模块设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="前端模块设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      查询处理模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      语法解析模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      前端交互模块
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验结果
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行时间和运行内存
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      磁盘占用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      小组分工
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方库使用清单
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文献
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他贡献
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+                  
+
+  
+  
+
+
+<h1 id="202335">2023年秋35组项目总结报告</h1>
+<h2 id="_1">使用说明</h2>
+<p>【数据删除】</p>
+<h2 id="_2">项目结构概述</h2>
+<p>下面列出了重要的代码文件</p>
+<pre><code>src/
++- pagefile/
+|  +- pageCache.h  # 页文件系统前置类型定义
+|  +- pageFileSys.h  # 页文件管理器和页缓存模块实现
+|  +- pageFileSys.cpp
+|  +- pageFileInterface.h  # 页文件管理器和页缓存模块接口
+|  +- pageFileInterface.cpp
+|
++- common/
+|  +- types.h  # 定义基础类型别名
+|  +- consts.h  # 定义常量
+|  +- db_exception.h  # 定义异常
+|  +- iterator_base.h  # 迭代器算法模板
+|  +- automove_ptr.h  # 一个智能指针的简单实现
+|
++- frontend/  # 由SQL.g4自动生成的代码
+|
++- backend/
+|  +- dbsys.h  # 后端接口文件
+|  +- dbstream.h  # 调试用流输出接口
+|  +- db_sys.cpp  # 数据库管理模块
+|  +- db_stream.cpp  # 调试用流输出
+|  +- db_record.cpp  # 堆式记录管理模块
+|  +- db_index.cpp  # B+树索引模块
+|  +- db_algorithm.cpp  # 一些值算法，如比较、排序等
+|
++- sql/
+|  +- DBTabulate.cpp  # 表格绘制
+|  +- DBVisitor.cpp  # SQL语句分析处理
+|
++- main.cpp  # 代码入口，包括后端测试代码
++- SQL.g4
+</code></pre>
+<h2 id="_3">后端模块设计</h2>
+<h3 id="_4">页管理模块</h3>
+<h4 id="_5">概述</h4>
+<p>出于性能和项目完整性的考虑，我们自己实现了一个页式文件管理系统和页缓存管理。这个实现的主要特色是实现了对页较好的抽象，读取、写入页非常便捷。另外不需要上层手动管理<code>dirty</code>标记，标记和刷写都是自动完成的。</p>
+<p><code>pageFileSys.h</code>中定义了一个<code>FileManager</code>和一个<code>CacheController</code>的单例类，分别用于实现文件管理和缓存页管理。</p>
+<p><code>pageFileInterface.h</code>中定义了<code>PageFile</code>类、<code>RPage</code>类和<code>WPage</code>类，作为页管理的接口类。</p>
+<h4 id="_6">接口说明</h4>
+<p>下面给出<code>pageFileInterface.h</code>中接口类的主要接口。</p>
+<pre><code class="language-c++">// 页文件接口类
+class PageFile
+{
+    // 初始化文件系统，指定工作目录
+    static void init(const string&amp; path);
+    // 删除一个文件（夹）
+    static void remove(const string&amp; file);
+    // 创建或打开一个文件
+    explicit PageFile(const string&amp; file);
+    // 保存这个文件
+    void flush() const;
+    // 保存并关闭这个文件
+    void close();
+    // 页数
+    i32 page_cnt() const;
+    // 分配新页
+    PageID alloc_page();
+    // 获取只读页，不标记dirty
+    RPage get_readonly_page(PageID pid) const;
+    // 获取可读页，并标记dirty
+    WPage get_writable_page(PageID pid);
+};
+
+// 只读页
+class RPage
+{
+    // 判断空页
+    bool empty() const;
+    // 获取页文件
+    PageFile get_page_file() const;
+    // 获取页号
+    PageID get_page_id() const;
+    // 获取这一页的可写版本，并标记dirty
+    WPage to_writable() const;
+
+    // 将此页的某个bias以const T*形式返回
+    template &lt;typename T&gt;
+    const T* as(PageBias byteBias = 0) const;
+};
+
+// 可写页，继承只读页的接口
+class WPage
+    : public RPage
+{
+    // 将此页的某个bias以T*形式返回
+    template &lt;typename T&gt;
+    T* as(PageBias byteBias = 0);
+};
+</code></pre>
+<h4 id="_7">实现</h4>
+<p><code>FileManager</code>的实现主要是维护了一个文件名到文件ID的映射表，这样可以根据文件名寻找到文件句柄。其他提供的诸如自动创建文件、刷新文件，几乎只是对<code>std::fstream</code>的进一步封装。</p>
+<p><code>CacheController</code>将缓存页组成一个循环链表，采用LRU+writeback的缓存策略。当缓存命中时，页会被插入到链表末尾；当缓存未命中，会从头开始，寻找首个未被引用的页牺牲，并将新页插入链表末尾。</p>
+<p><code>PageFile</code>将文件接口封装为一个类，方便了文件的访问。</p>
+<p><code>RPage</code>类和<code>WPage</code>类类似于<code>std::shared_ptr</code>，维护一个对页的引用计数，若页仍在使用时，缓存替换算法会忽略此页。同时，使用类型转换和const的特性，自动维护<code>dirty</code>标记。</p>
+<h3 id="_8">迭代器和算法模块</h3>
+<h4 id="_9">概述</h4>
+<p>此数据库系统使用了流水线的查询算法，一次处理一条数据，因此非常节省内存，效率也很高。流水线的核心就是迭代器。并且迭代器可以将通用算法和数据库的特定算法分离。</p>
+<p>下面是迭代器基类模板的接口。</p>
+<pre><code class="language-c++">template &lt;typename T&gt;
+class BaseIterator
+{
+    BaseIterator();
+    virtual ~BaseIterator();
+    // 定位下一个值
+    virtual void single_step() = 0;
+    // 返回当前值
+    virtual T get() const = 0;
+    // 是否结束，如果已经结束，调用single_step()和get()是UB
+    virtual bool is_end() const = 0;
+};
+</code></pre>
+<h4 id="_10">继承关系</h4>
+<p>图中@表示虚基类，$表示数据库系统中特化的迭代器类</p>
+<pre><code>@BaseIterator&lt;T&gt;  # 迭代器基类
++- EmptyIterator&lt;T&gt;  # 空迭代器类
++- NumberIterator  # 自然数生成器类
++- @BasePipelineIterator&lt;T, F&gt;  # 流水线迭代器基类
+|  +- @BaseMappingIterator&lt;T, F&gt;  # 映射迭代器基类
+|  |  +- IdentityMappingIterator&lt;T&gt;  # 恒等映射迭代器类
+|  |  +- FunctionalMappingIterator&lt;T, F&gt;  # 位置无关函数映射迭代器类
+|  |  +- $RemoveHandleIterator  # 去除handle迭代器
+|  |  +- $RecordHeapHandle::GetRecordIterator  # 堆句柄映射迭代器
+|  |
+|  +- @BaseFilterIterator&lt;T&gt;  # 筛选迭代器基类
+|  |  +- LeakingFilterIterator&lt;T&gt;  # 无条件筛选迭代器类
+|  |  +- FunctionalFilterIterator&lt;T&gt;  # 位置无关函数筛选迭代器类
+|  |  +- $WhereRecordFilterIterator  # Where子句筛选迭代器
+|  |  +- $WhereRecordValueFilterIterator  # Where子句值筛选迭代器
+|  |
+|  +- @BaseSubIterator&lt;T&gt;  # 子迭代器基类
+|  |  +- BiasLimitIterator&lt;T&gt;  # 偏移和截断迭代器类
+|  |
+|  +- BufferedIterator&lt;T&gt;  # 缓冲区迭代器类
+|  |  +- ReversedIterator&lt;T&gt;  # 倒序迭代器
+|  |
+|  +- @BaseCartesianProductIterator&lt;T, F0, F1&gt;  # 双源流水线基类
+|  |  +- $HardJoinIterator  # 硬连接迭代器
+|  |
+|  +- SortedIterator&lt;T&gt;  # 排序迭代器
+|  |  +- $SingleColumnSortIterator  # 单列排序迭代器
+|  |  +- $SingleColumnSortValueIterator  # 单列值排序迭代器
+|  |
+|  +- $SingleColumnGroupIterator  # 单列分组聚合迭代器
+|  +- $IndexedJoinIterator  # 索引加速的连接迭代器
+|
++- $RecordHeapHandle::AllHandleIterator  # 堆全局迭代器
++- $BtreeIndexHandle::BtreeIndexIterator  # 索引范围迭代器
+</code></pre>
+<h4 id="_11">实现</h4>
+<p><code>SortedIterator&lt;T&gt;</code>使用的是堆排序，针对ORDER BY + LIMIT的情况对空间占用进行了优化。具体来说，若待排序总量$N$，限制输出排序后的前$K$项，令$k=min(K, N)$，则其时间复杂度$O(N\log k)$，空间复杂度$O(k)$。</p>
+<p><code>HardJoinIterator</code>是较为平凡的JOIN实现，仅仅是将两个迭代器的返回值做循环连接，后续再做筛选，时间复杂度$O(NM)$。。<code>IndexedJoinIterator</code>是用索引优化的JOIN实现，当等值条件一侧有索引时，即可使用索引查找值，时间复杂度$O(N\log M)$。</p>
+<p>其他的算法都比较易懂。</p>
+<h3 id="_12">数据库管理模块</h3>
+<h4 id="_13">概述</h4>
+<p>这个模块主要是管理诸如数据库列表、Schema、约束等元数据。出于实现的便捷性考虑，使用了“文件夹即数据库”的管理方法，元数据序列化后保存在文本文件中。</p>
+<p>具体文件格式如图：</p>
+<pre><code>db/  # 数据库根目录
++- dbs.txt  # 数据库名列表
++- &lt;db_name&gt;/
+|  +- schemas.txt  # 表名列表
+|  +- &lt;table_name&gt;/
+|  |  +- pattern.txt  # 表格式、约束、索引列表
+|  |  +- data.p  # 数据文件
+|  |  +- &lt;index_name&gt;_i.p  # 索引文件
+|  |  +- ...
+|  +- ...
++- ...
+</code></pre>
+<h4 id="_14">接口</h4>
+<p>下面给出了<code>DbSysHandle</code>，<code>DatabaseHandle</code>，<code>SchemaHandle</code>的主要接口。<code>SchemaHandle</code>中还有增删改数据的接口，此处未列出。</p>
+<pre><code class="language-c++">// 表句柄类
+class SchemaHandle
+{
+    // 新构造
+    SchemaHandle(DatabaseHandle* db_, const string&amp; name, const Pattern&amp; pattern);
+    // 读取
+    SchemaHandle(DatabaseHandle* db_, const string&amp; name);
+    // 表名
+    string get_name() const;
+
+    // 获取表结构
+    const Pattern* get_pattern() const;
+    // 获取记录堆
+    RecordHeapHandle* get_record_heap();
+
+    // 创建约束
+    void add_constraint(const string&amp; cons_name, ConstraintType type, FieldIdSet cols, string fk_ref={});
+    // 删除约束，删除主键name可以为空
+    void drop_constraint(const string&amp; cons_name, ConstraintType type);
+    // 获取约束，返回下标，-1表示不存在。
+    // 由于共用命名空间，只需要一个name参数；name=&quot;&quot;获取主键
+    int get_constraint_name(const string&amp; cons_name) const;
+    // 获取全部约束
+    std::vector&lt;ConstraintDesc&gt;* get_constraint();
+    // 根据名字获取约束
+    ConstraintDesc* find_constraint(const string&amp; cons_name);
+    // 获取索引
+    std::vector&lt;AutoMovePtr&lt;BtreeIndexHandle&gt;&gt;* get_indexes();
+};
+
+// 数据库句柄类
+class DatabaseHandle
+{
+    // 创建或打开数据库
+    DatabaseHandle(string name);
+    // 数据库名
+    string get_name() const;
+
+    // 获取表名列表
+    const std::vector&lt;string&gt;&amp; get_schema_name_list();
+    // 创建表
+    void create_schema(const string&amp; name, const Pattern&amp; schema_pattern);
+    // 删除表
+    void drop_schema(const string&amp; name);
+    // 获取表
+    SchemaHandle* get_schema(const string&amp; name);
+};
+
+// 数据库系统句柄类，单例
+class DbSysHandle
+{
+    // 单例模式
+    static DbSysHandle* inst();
+    // 卸载全局单例
+    static void uninstall();
+    // 清空所有文件
+    static void clear_all();
+
+    // 获取当前数据库名
+    string get_cur_db_name() const noexcept;
+    // 获取数据库名列表
+    const std::vector&lt;string&gt;&amp; get_db_name_list();
+    // 获取当前数据库句柄
+    DatabaseHandle* get_cur_db();
+
+    // 删除数据库
+    void switch_db(const string&amp; db_name);
+    // 创建数据库
+    void create_db(const string&amp; db_name);
+    // 删除数据库
+    void drop_db(const string&amp; db_name);
+};
+
+// 卸载DbSysHandle单例，用于程序退出前操作
+void uninstall_dbsys();
+</code></pre>
+<h4 id="_15">实现</h4>
+<p>除了实体名字重复或不存在，和增删约束时检查完整性约束，其他几乎所有检查都是由前端完成的，因此主要的逻辑并不复杂。值得一说的是约束管理和序列化。</p>
+<p>将INDEX, UNIQUE, PK, FK统称为<strong>约束</strong>，<strong>约束</strong>=<strong>约束条件</strong>+<strong>索引</strong>，每一个<strong>约束</strong>都对应一个<strong>索引</strong>，不同的<strong>约束</strong>可能共用一个<strong>索引</strong>（索引可以理解为一棵B+树）。列序号有序对可以唯一地确定一个<strong>索引</strong>。因此，实现中<strong>约束</strong>和<strong>索引</strong>是分开管理的。新建的约束可能会新建索引，也可能复用现有的索引。当某个索引不再被任何约束所使用，这个索引应当被删除。另外，由于各种约束都是统一管理，因此共用一个命名空间是比较自然的。添加约束时，首先判断是否已经存在可用的索引，如果没有则新建；接着进行完整性约束判断；如果是外键，需要给引用的表添加引用标记；最后将索引关联到此约束完成添加约束。删除约束时，删除失败的充要条件是：删除的是主键且引用标记非空，删除完成后，若索引未被其他约束引用，可以将索引删除。</p>
+<p>序列化/反序列化是将数据结构储存/读出的过程。为了实现的便捷性，使用了基于<code>basic_ostream::write/basic_ostream::read</code>的序列化/反序列化。对于定长的基本数据类型，如整数、枚举、基本数据组成的结构体，直接使用二进制读写即可；对于变长的数据类型，如<code>string</code>,<code>vector</code>，则先读写长度，再依次读写其元素。通过对要序列化/反序列化的类型重载符号<code>||</code>，很容易实现这个功能。这种实现方式的优势是泛用性极高，且读写速度很快。</p>
+<h3 id="_16">堆式记录管理模块</h3>
+<h4 id="_17">概述</h4>
+<p>堆式记录管理模块可以进行如下操作：</p>
+<ol>
+<li>插入：输入一条记录，返回其句柄</li>
+<li>查询：输入一个句柄，返回其记录</li>
+<li>删除：输入一个句柄，删除这条记录</li>
+<li>遍历：返回一个包含所有句柄的列表（实现中是一个遍历迭代器）</li>
+</ol>
+<p><strong>保证</strong>：一个记录被插入后，删除前，句柄不会改变</p>
+<p><strong>不保证</strong>：记录的任何顺序</p>
+<h4 id="_18">接口</h4>
+<pre><code class="language-c++">// 多类型值
+struct RecordField : public std::variant&lt;NullValue, i32, f64, string&gt;;
+
+// 记录值
+using RecordValue = std::vector&lt;RecordField&gt;;
+
+// 记录句柄
+struct RecordHandle
+{
+    PageID pid;
+    SlotID sid;
+};
+
+// 记录
+struct Record
+{
+    RecordHandle handle;
+    RecordValue value;
+};
+
+// 堆式记录管理器句柄
+class RecordHeapHandle
+{
+    // 读取或新建
+    RecordHeapHandle(const string&amp; filename_, const Pattern* pattern_);
+
+    // 插入
+    Record insert(const RecordValue&amp; rec);
+    // 查询
+    Record get(RecordHandle h) const;
+    // 获取记录数量
+    usize size() const;
+    // 删除
+    void remove(RecordHandle h);
+
+    // 全局迭代器
+    class AllHandleIterator : public BaseIterator&lt;Record&gt;;
+    // 全局迭代器工厂（插入删除会导致此迭代器失效）
+    AllHandleIterator get_all_handler_iterator() const;
+
+    // 句柄映射迭代器
+    class GetRecordIterator : public BaseMappingIterator&lt;Record, RecordHandle&gt;;
+    // 句柄映射迭代器工厂
+    GetRecordIterator get_getter_iterator() const;
+};
+</code></pre>
+<h4 id="_19">变长短记录储存实现</h4>
+<p>下图是课件中SQL Server的记录格式。</p>
+<p><img alt="" src="../../images/2023-35-1.png" width="50%" /></p>
+<p>堆式记录管理模块的设计参考了SQL Server的记录管理设计，使用了页头+块+槽列表的模式。槽列表从页尾向前生长，每一个槽位2字节，保存记录块在页中的偏移；槽若为0代表槽位为空。</p>
+<p><strong>页头格式</strong>：</p>
+<ol>
+<li>下一个数据页编号</li>
+<li>槽数量</li>
+<li>记录数量</li>
+<li>尾空闲块偏移</li>
+</ol>
+<p>数据页通过链表相连，便于遍历记录。</p>
+<p>块分为记录块和空闲块。</p>
+<p><strong>记录块格式</strong>：</p>
+<ol>
+<li>（2 Byte）块长度</li>
+<li>（2 Byte）NULL位图</li>
+<li>依次填入定长字段；若为NULL，填入任意值</li>
+<li>依次填入变长字段，1 Byte长度，后面是内容；如果是NULL，不填入任何值</li>
+<li>（...）空闲空间，记录不一定和块等长，允许预留空间</li>
+</ol>
+<p>可以看出，只能支持长度&lt;=255的变长字符串。</p>
+<p><strong>空闲块格式</strong>：</p>
+<ol>
+<li>（2 Byte）此块长度</li>
+<li>（2 Byte）下一个块的页内偏移</li>
+<li>（4 Byte）下一个块的页编号</li>
+<li>（...）空闲空间</li>
+</ol>
+<p><strong>空间分配回收算法</strong>：</p>
+<p>空间分配算法较为简易，支持空闲块分裂回收，但不支持合并，因此可能产生碎片问题。将所有空闲页按照大小，分为16B一级的64级，组成64个链表。当需要块分配时，会从大到小搜索链表，找到满足如下条件的空闲块：大小足够；页槽位有空，或页尾块可以分配2B的新槽位。如果所需的大小和空闲块相差16B以上，执行块分裂。块回收算法比较简单，直接将块插入合适的空闲链表就行。</p>
+<p>碎片问题可以通过碎片整理实现。由于记录的句柄由页编号、槽号组成，只要将页中每一个记录块从前往后依次放置，然后更新槽中的偏移量，即可完成碎片整理。但是由于时间关系，此功能并未实现。</p>
+<h4 id="_20">变长超长字段储存实现</h4>
+<p>为了解决储存超长字段的问题，引入链接页。链接页一共有6种，分别为包含32个大小为255的槽；16个大小为510的槽；……；1个大小为8160的槽。</p>
+<p>当某条记录中有一个长度&gt;255的字符串，需要将其存储到链接页中。首先不断截取前8160字节，存储到8160B的链接页中，直到其长度&lt;8160。接着计算出其适合的槽位大小。此处有一个读写性能和存储效率的权衡。例如，对于一个长度为7650的字符串，可以将其存储到一个8160的槽中，也可以拆分存储到4080+2040+1020+510的槽中。尽管后者存储效率为100%，但是读一个字符串需要读4个页，而前者只需读一个页。目前使用的算法是：对于长度&lt;8160的串，至多将其拆到两个页中，这样最差的存储效率为75%，平均90%左右。</p>
+<p>存储完成后，记录下每一个链接页的页号（4B），槽号（1B），组成一个新的字符串，并在字符串最前面打上特殊字符标记。并将这个新字符串存储到记录页中。按照这种方法，大约可以存储长度高达255/5*8160=400K的字符串。</p>
+<p>至于链接页的回收，是将相同类型的链接页组成一个链表。由于链接页的槽都是定长的，处理相对简单，不做赘述。</p>
+<h3 id="b">B+树索引模块</h3>
+<h4 id="_21">概述</h4>
+<p>一个索引维护了一个特定的列有序对到记录句柄的映射关系，并且提供了顺序访问的功能。具体来说，<strong>键</strong>是一个若干个整数组成的序列$K=(k_0,k_1,...,k_{w-1})$（$w$是索引列的数量），<strong>值</strong>是记录句柄$V=(pid,sid)$。但是这样实现还有一点缺陷，当数据删除时，由于可能有相同值，需要顺序地查找正确的句柄。因此，可以将键和值结合起来，组成一个必然唯一的键$K'=(k_0,k_1,...,k_{w-1},pid,sid)$。这样做还有一个好处就是值就在键中，不需要额外存储值。</p>
+<h4 id="_22">接口</h4>
+<p>真正控制树的是<code>BtreeController</code>类，下面展示的是接口类，Record会被接口类转成键$K'$</p>
+<pre><code class="language-c++">class BtreeIndexHandle
+{
+    // 读取或新建
+    BtreeIndexHandle(SchemaHandle* schema_, const string&amp; name_, const FieldIdSet&amp; fields_);
+    // 获取描述信息
+    BtreeDesc get_desc() const;
+    // 删除此索引，应立即析构
+    void drop();
+
+    // 插入记录，所有现有的迭代器失效
+    void insert_record(const Record&amp; rec);
+    // 删除记录，所有现有的迭代器失效
+    void remove_record(const Record&amp; rec);
+    // 判断值是否存在
+    // 判断远程值是否存在，用于主键和外键
+    bool value_exist(const RecordValue&amp; v, const BtreeIndexHandle* remote = nullptr) const;
+    // 判断是否不存在重复值
+    bool is_unique() const;
+
+    // 范围迭代器，输出记录句柄
+    class BtreeIndexIterator : public BaseIterator&lt;RecordHandle&gt;;
+    // 获取范围迭代器，默认值为 -inf &lt; itr &lt; +inf
+    BtreeIndexIterator get_range_iterator(
+        const std::vector&lt;i32&gt;&amp; equal_val = {},
+        i32 left_val = INT_MIN, bool left_eq = false,
+        i32 right_val = INT_MAX, bool right_eq = false) const;
+};
+</code></pre>
+<p>其中范围迭代器用于对查找优化，可以优化如下条件：</p>
+<p>若某索引建立在$C_1,C_2,...C_{w-1}$上，查询条件是$C_1=v_1\and ...\and C_{m-1}=v_{m-1}\and v_{m1}\lhd C_m\lhd v_{m2}$，其中$\lhd$为小于或小于等于，且$C_{m+1},...C_{w-1}$均有NOT NULL约束，那么可以使用此索引的范围迭代器进行优化。</p>
+<h4 id="_23">实现</h4>
+<p>下图是B+树结构示意图</p>
+<p><img alt="" src="../../images/2023-35-2.png" width="67%" /></p>
+<p>每一个页都保存了父页的页号、左右兄弟的叶页号；非叶页的每一个节点值是子页的最小值，并且保存了子页的页号；元页保存了根页的页号。页中节点以数组的形式组织。</p>
+<p>选择数组结构的原因是：链表虽然插入是常数复杂度，但是插入前都需要顺序地搜索插入位置，还是线性复杂度；而数组结构可以使用二分查找。一般来说，读操作比写操作更加频繁，牺牲部分写性能换取读性能是可以接受的。并且数组实现更加节约存储空间，增加了一个页容纳节点的个数。</p>
+<p><strong>搜索过程</strong>：</p>
+<p>从根开始，二分搜索到&lt;=目标的最后一个值，继续查找此子页，直到找到叶页。</p>
+<p><strong>插入过程</strong>：</p>
+<p>首先查找到&lt;目标的最后一个值（必然没有重复值），在其后面插入值。由于是在后面插入，不会影响页中最小值，故不需要向上更新值。如果页中节点到达某个临界值，执行页分裂。将页中的节点平分到两个页中，更新所有子页的父指针，然后递归地在父页中插入新节点。如果根节点要分裂，先创建包含一个节点的新根，再执行分裂。</p>
+<p><strong>删除过程</strong>：</p>
+<p>删除过程和标准的（或者说是数据结构课上学的）B树差别较大。标准的B树中，超节点中的节点数小于N/2（N为上溢临界）就要发生下溢，下溢方法包括向左右兄弟挪用节点和与左右兄弟合并。这是由于一般的B树是用链表实现的，因此移动一个节点的代价非常小。而数组每次移动一个节点效率非常低。因此，自己设计了一个批量挪用的算法，并且放宽了下溢的界。</p>
+<p>具体来说，当某页中节点数小于N/7，发生下溢。如果左右兄弟节点数&gt;3N/7，执行节点平均，即两个页平均分配所有的节点，最终两个页的节点数都在2N/7~4N/7；若左右兄弟节点数均&lt;=3N/7，选择一个执行页合并，这和标准的过程类似，最终页的节点数页在2N/7~4N/7，下溢可能向上传播。当下溢传播到根页的子页时，此时根页只剩余1个节点，直接删除，将其子页作为新页。</p>
+<h3 id="_24">数据完整性约束</h3>
+<h4 id="_25">概述</h4>
+<p>数据完整性约束并不是一个独立的模块，但是值得单独说。接口被嵌入<code>SchemaHandle</code>中，因为其可以同时控制堆和索引。</p>
+<h4 id="_26">接口</h4>
+<pre><code class="language-c++">// Schema句柄
+class SchemaHandle
+{
+    // 插入操作，同时进行数据堆操作和索引操作
+    Record insert_unchecked(const RecordValue&amp; rec);
+    // 删除操作，同时进行数据堆操作和索引操作
+    void remove_unchecked(const Record&amp; rec);
+    // 插入操作，先进行约束检查
+    Record insert(const RecordValue&amp; rec);
+    // 删除操作，先进行约束检查
+    void remove(const Record&amp; rec);
+    // 修改操作，
+    Record update(const Record&amp; old_val, const RecordValue&amp; new_val);
+};
+</code></pre>
+<h4 id="_27">实现</h4>
+<p><strong>插入</strong>：</p>
+<ol>
+<li>检查每一个约束，如有违反，抛出异常</li>
+<li>INDEX，不检查</li>
+<li>UNIQUE，检查值是否已存在</li>
+<li>PK，检查值是否已存在，是否非空</li>
+<li>FK，检查值是否为空，如果非空，在父表主键中是否存在</li>
+<li>数据插入堆</li>
+<li>数据插入索引，特别的，若索引列中有NULL，则不进入索引</li>
+</ol>
+<p><strong>删除</strong>：</p>
+<ol>
+<li>检查每一个外键引用，若值被外键引用，则抛出异常</li>
+<li>数据从堆中删除</li>
+<li>数据从索引中删除，特别的，若索引列中有NULL，则不需要删除</li>
+</ol>
+<p><strong>修改</strong>：</p>
+<ol>
+<li>检查是否修改了外键，若未修改，跳过删除前检查</li>
+<li>删除旧条目</li>
+<li>尝试添加新条目</li>
+<li>若添加失败，重新插入旧条目</li>
+</ol>
+<h2 id="_28">前端模块设计</h2>
+<h3 id="_29">查询处理模块</h3>
+<p>针对单表查询，具有如下可优化条件：对于数据表上某个索引 $ I=(C_1,C_2,...,C_n)$，其中 $C_i$ 表示列；如果筛选条件在该索引列上经过约化，在该索引上表现为 $C_1 = V_1  and  C_2 = V_2  ...  and   v_m&lt;(=)C_m&lt;(=)v_m$，即在前 $m-1$ 个索引列中取等号值，在第 $m$ 个索引列可以取区间值。其中 $0\le m\le n$，$m=0$ 退化成全表搜索；其余条件，包括其他列上的条件以及 LIKE，IN LIST，涉及字符串的比较条件等等均不属于此类。</p>
+<p>综合考虑单表查询的可加速条件，分组聚合，排序分页操作，使用迭代器和算法模块中多种类通过 <code>connect()</code> 连接，完成单表查询的处理操作，拼接逻辑顺序链如下：</p>
+<pre><code>AllHandleIterator                       # 无法进行索引加速的链起点
+(BtreeIndexIterator)                    # 能够进行索引加速的链起点
+(-&gt;WhereRecordFilterIterator)?          # 能够索引加速条件之外的额外筛选条件
+ -&gt;RemoveHandleIterator                 # 删除句柄，仅保留值
+(-&gt;SingleColumnSortValueIterator        
+ -&gt;SingleColumnGroupIterator)?          # 先排序，后分组聚合 GROUP BY
+(-&gt;SingleColumnSortValueIterator        # 排序 ORDER BY
+ -&gt;ReversedIterator&lt;RecordValue&gt;)?      # 对于默认情况需要 Reverse，DESC 情况不需要
+(-&gt;BiasLimitIterator&lt;RecordValue&gt;)?     # Offset + Limit
+-&gt;[output/recurse]                      # 结果输出或递归返回
+</code></pre>
+<p>特别地，对于 UPDATE/DELETE 语句，虽然没有 GROUP BY，ORDER BY 的复杂筛选条件，但存在被筛选出来的值在修改后依然被重复选取的问题，因此需要使用 <code>BufferedIterator</code> 类进行暂存操作，使用的迭代器拼接逻辑顺序如下：</p>
+<pre><code>AllHandleIterator
+(BtreeIndexIterator)
+(-&gt;WhereRecordFilterIterator)?
+ -&gt;BufferedIterator&lt;Record&gt;
+ -&gt;[update/remove]
+</code></pre>
+<p>针对多表查询，存在如下多表可加速条件：对于 $C_i=D_j$，$C$ 和 $D$ 为不同表的列，如果 $D_j$ 是某个索引位序为 1 的列，则可以使用索引加速；特别地，如果同时存在 $C_i = D_j  and  C_p = D_q$，而 $D_j$ 和 $D_q$ 为该索引的前两列，也可以加速，依此类推；$D$ 和 $C$ 出现的先后顺序并不重要，也可以使用 $C$ 上的索引加速；实际实现过程简化为如下迭代器拼接模型（以双表为例，能够进行索引优化）：</p>
+<pre><code>AllHandleIterator                       # 第一张表全局迭代器
+-&gt;RemoveHandleIterator                  # 删除句柄，仅保留值
+-&gt;IndexedJoinIterator                   # 使用第二张表进行索引加速
+-&gt;WhereRecordValueFilterIterator        # 两张表的其余 where 语句（第二张表的条件列序号需要加上第一张表偏移量）
+(-&gt;SingleColumnSortValueIterator        
+ -&gt;SingleColumnGroupIterator)?          # 先排序，后分组聚合 GROUP BY，需要列重定向
+(-&gt;SingleColumnSortValueIterator        # 排序 ORDER BY，需要列重定向
+ -&gt;ReversedIterator&lt;RecordValue&gt;)?      # 对于默认情况需要 Reverse，DESC 情况不需要
+(-&gt;BiasLimitIterator&lt;RecordValue&gt;)?     # Offset + Limit
+ -&gt;[output/recurse]                     # 结果输出或递归返回
+</code></pre>
+<p>对于不存在索引优化的情况，仅需使用 <code>HardJoinIterator</code> 对两表筛选后的列进行硬连接即可；
+对于更多表的情况，将 GROUP 与 ORDER 语句延迟到最后计算偏移，重复之上的索引加速/硬连接流程即可。</p>
+<h3 id="_30">语法解析模块</h3>
+<p>语法解析使用实验框架默认提供的文法文件 <code>src/SQL.g4</code>，同时额外添加有关 <code>DATE</code> 数据类型的相关文法；对于文法文件使用 Antlr 库进行解析（通过 <code>./g4-generate.sh</code> 自动化生成解析器），生成具有 Visitor 模式的文件基类，位于 <code>src/frontend</code> 文件夹下；之后通过 <code>src/sql/DBVisitor.h</code> 继承自动生成的文法，从而实现自动文法解析功能。</p>
+<p>针对自动生成的语法分析树，通过平凡的解析操作获取其语义信息，对接其余模块系统相应接口进行操作；对于获取到的异常信息根据当前所处不同模式的要求进行不同类型的处理。</p>
+<p>对于涉及记录插入删改文法，在语法解析同时将进行类型检查，具体实现为：从数据表中提取相应列基本信息，与输入字段进行类型比对；特别地，在具体实现过程中实现了<strong>隐式类型转换</strong>，使用字符串插入表项类型为 INT 和 FLOAT、使用后者插入VARCHAR 的表项都是被允许的行为，具体通过 <code>std::stoi</code> 与 <code>std::stod</code> 执行类型转换，转换中出错才抛出类型不符异常。</p>
+<p>对于索引增删语句，默认命名格式为——主键：Primary；外键：Foreign_[表名]；Index/Unique索引：Index_[col1]_[col2] 等；在创建索引时负责检查字段类型（在实验要求中为 INT 型）以及是否重复，在创建外键时检查 REFERENCE 的对象是否是主键。</p>
+<p>对于 SELECT - FROM - WHERE - GROUP - ORDER 类型的复杂语句，执行的语法分析操作顺序如下：</p>
+<ul>
+<li>
+<p>将语句选中的所有表单列表入栈类全局成员变量栈 <code>targetTables</code>，用于子语句出错分析以及递归查询操作；</p>
+</li>
+<li>
+<p>对于单表情形，遍历所有 WHERE 子句，针对所有 INT 列与整型数比较的情形，对 INT 类型查询条件进行约化，在所有 INT 列上创建新的条件类型，包括三种情况 <code>NONE</code>, <code>EQ</code> 和 <code>RANGE</code>，分别代表该列不存在筛选条件，筛选条件为相等和区间的情况，以下两句 SQL 语句均在列 <code>id</code> 上创建新条件类型，分别为 <code>RANGE</code> 型区间 [6, 8) 和 <code>EQ</code> 型取值 9；</p>
+</li>
+</ul>
+<p><code>sql
+  SELECT * FROM T WHERE T.id &gt;= 6 AND T.id &lt; 8;
+  SELECT * FROM T WHERE T.id &gt;= 5 AND T.id = 9;</code></p>
+<ul>
+<li>由于所有条件用 AND 拼接，也可能导致筛选结果提前判断为空集直接返回，例如以下语句：</li>
+</ul>
+<p><code>sql
+  SELECT * FROM T WHERE T.id &gt;= 6 AND T.id &lt; 8 AND T.id = 10;
+  SELECT * FROM T WHERE T.id &gt;= 5 AND T.id = 9 AND T.id &gt; 10;</code></p>
+<ul>
+<li>
+<p>处理 ORDER BY 和 GROUP BY 子句，获取其表单以及列序号，同时处理 OFFSET 和 LIMIT 获取具体值；</p>
+</li>
+<li>
+<p>根据 SELECT *，SELECT 某些列，SELECT 列聚合以及多表 JOIN 不同情况区分考虑：</p>
+</li>
+<li>
+<p>SELECT * 的情况，要求中规定只能单表（事实上多表完全可以实现），首先根据索引加速条件筛选出能够通过索引 B+ 树加速的条件，再根据无法加速的条件构建 WHERE 语句迭代器，之后针对索引加速与否，是否排序并指定 OFFSET 和 LIMIT 进行区分；</p>
+</li>
+<li>SELECT 单表某些列的情况，存在涉及聚合函数的情况，需要使用 GROUP BY 迭代器策略；其余实现步骤与 SELECT * 一致；</li>
+<li>SELECT 多表的情况，需要针对条件查找多表索引优化的使用；具体实现采用较为简单的一种方式，即逐表查找引用的筛选可能；即从双表开始依次查找是否拥有针对第二张表的可能索引加速，针对不同的情况对双表采用 <code>HardJoin</code> 以及 <code>IndexedJoin</code> 的方式；按照 SQL 语句中的顺序，每引入一张表都遍历查找条件，搜索是否存在加速的情况；另外的方法为在多表上构建索引关联树，从而更好决定加速条件的选取，但在实现中较为复杂；其他不可加速条件以及 GROUP，ORDER 子句处理方式同单表；
+     <strong>在多表的情形下</strong>，由于序列号经过多轮重组，在解析函数中同时<strong>维护当前选中列信息的列表</strong>，保证选择的列与语义一致。</li>
+</ul>
+<p>其他涉及 WHERE 语句的操作流程与上述对 WHERE 的处理类似，例如 UPDATE 和 DELETE，不同的是 UPDATE 和 DELETE 只涉及单表，也没有 SELECT 中复杂的分组聚合与排序，因此要简单很多。
+在前端针对查询策略创建了如下前端专用类，位于 <code>src/sql/WhereMeta.h</code> 中：</p>
+<pre><code class="language-cpp">// 描述Where_Clause类型
+struct whereClauseMetaFront {
+    // 语句类型
+    ClauseType clause_type;
+    // 操作符类型
+    std::variant&lt;CmpOperator, NullOperand&gt; operand = NullOperand();
+    // 表名
+    std::string schema;
+    // 列名
+    std::string column;
+    // 操作值表
+    std::vector&lt;RecordField&gt; values = {};
+};
+
+// 描述Selector类
+struct selectorMetaFront {
+    // 聚合函数
+    AggregatorType ag_type;
+    // 表名
+    std::string schema;
+    // 列名
+    std::string column;
+    // 表名是否定义
+    bool schemaDefined;
+}; 
+
+enum class FieldConditionType : i8 {
+    NONE = 0,
+    EQ,
+    RANGE
+};
+
+// 针对每个 Field 的可加速条件类（单表）
+struct FieldConditions {
+    // 可加速类型
+    FieldConditionType cond_type = FieldConditionType::NONE;
+    // 能加速只能是 int，当类型为 EQ 则 values[0] 表示取值，为 RANGE 则表示区间
+    std::vector&lt;i32&gt; values = {-2147483648, 2147483647};
+    // 左端点取等
+    bool left_eq = false;
+    // 右端点取等
+    bool right_eq = false;
+    // 语句对应的 where_clause 所在项
+    std::vector&lt;i32&gt; whereIndex = {};
+};
+</code></pre>
+<p>对于递归查询的处理实现依赖全局成员变量栈 <code>targetTables</code>，在进入一个查询的解析函数时，通过该栈是否为空判断当前是否处于递归查询过程中，设置函数临时布尔类型变量 <code>recurseSearch</code>。该变量被激活时，屏蔽查询的任何可能的输出（出错除外），转而将所有输出结果递归返回给上一层查询中的 <code>where_clause</code>；同时对于所有递归中的查询，其结果合法当且仅当只有一列或单个聚合函数被筛选出来，否则抛出异常；<code>where_operator</code> 收到的递归返回结果尽可能为单值，<code>where_in</code> 则可支持单列多值；</p>
+<p>DATE 类型直接在解析过程中通过合法性判断之后转换成 INT 类型存储和比较，而不需要创建新的类型。</p>
+<h3 id="_31">前端交互模块</h3>
+<p>为了符合迭代器流水线的交互方式，在 <code>DBTabulate.cpp</code> 中实现了简单的表格绘制类方法，并能够支持中文输出时的用户友好性。
+针对交互模式全面仿照 MySQL 系统，对于增删改操作输出 <code>Query Ok</code>，对于筛选查看操作输出 <code>Rows in set</code>，对于筛选结果为空输出 <code>Empty Set</code> 语句，并能够输出操作时间。
+使用某个测试用例，在交互模式下输出示意图如下：</p>
+<pre><code class="language-sql">sql&gt; SELECT C_MKTSEGMENT, COUNT(*), MAX(C_ACCTBAL)  FROM CUSTOMER GROUP BY C_MKTSEGMENT;
++============+============+==============+
+|C_MKTSEGMENT|COUNT(*)    |MAX(C_ACCTBAL)|
++============+============+==============+
+|MACHINERY   |8956        |9999.640000   |
+|HOUSEHOLD   |9130        |9990.920000   |
+|FURNITURE   |8961        |9999.720000   |
+|BUILDING    |9088        |9999.490000   |
+|AUTOMOBILE  |8865        |9997.840000   |
++============+============+==============+
+5 rows in set (1.267 sec)
+</code></pre>
+<p>针对报错信息处理统一使用 <code>db_exception_base</code> 基类的派生类，用来代表数据库使用途中的各种错误；特别地，对于破坏唯一性约束、破坏外键约束、主键约束数量错误、日期错误以及 NULL 类型错误的情况，在批处理模式按照要求输出 <code>!ERROR</code> 进行特殊处理，而不是抛出异常。</p>
+<h2 id="_32">实验结果</h2>
+<h3 id="_33">功能</h3>
+<p>CI 得分 80/80，获得全部 CI 分数：</p>
+<p><img alt="" src="../../images/2023-35-3.png" /></p>
+<p>具体完成的功能为：</p>
+<p><strong>基础功能</strong>：基本运行，系统管理，查询解析，完整性约束，模式管理，索引模块
+<strong>选做功能</strong>：多表 JOIN，模糊查询，聚合查询，分组查询，排序分页，嵌套查询，变长字符串存储，日期 DATE，UNIQUE 约束，NULL 完整性约束</p>
+<p>对于使用索引进行单表查询优化的操作，使用测例 index-data 中在大数据表上的筛选操作进行测试，性能提升效果如下：</p>
+<pre><code class="language-sql">-- 优化前：17.18 s，优化后：0.007 s
+DELETE FROM LINEITEM WHERE L_ORDERKEY &gt;= 450950 AND L_ORDERKEY &lt; 451050;
+-- 优化前：3.71 s，优化后：0.002 s
+SELECT * FROM ORDERS WHERE O_ORDERKEY &gt; 5 AND O_ORDERKEY &lt; 50;
+</code></pre>
+<p>另外，对于多表查询的极端情形（测例中的五表连接），采用硬连接方法几乎无法保证能够在限定时间内完成 CI，使用索引优化查询后时间缩短至 61s 左右；综上所述可见使用索引提升效果明显。</p>
+<h3 id="_34">运行时间和运行内存</h3>
+<p>由于使用了流水线模式，即使在缓存页非常少的情况下，也能达到较好的性能。下面实际测试了100页(0.8MB)和10000页(80MB)的效果。</p>
+<table>
+<thead>
+<tr>
+<th>缓存页数量</th>
+<th>100</th>
+<th>10000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总运行内存</td>
+<td>7MB</td>
+<td>87MB</td>
+</tr>
+<tr>
+<td>5表join测例（复杂查询）</td>
+<td>63s</td>
+<td>61s</td>
+</tr>
+<tr>
+<td>data测例（大量插入）</td>
+<td>304s</td>
+<td>268s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_35">磁盘占用</h3>
+<p>用验收时展示的字符串插入测试测试磁盘占用。</p>
+<p>short.csv是总长为10,000,000的字符串，长度10-200均匀分布。</p>
+<p>long.csv是总长为100,000,000的字符串，长度30-30000，对数均匀分布。</p>
+<p><img alt="" src="../../images/2023-35-4.png" /></p>
+<pre><code class="language-sql">DROP DATABASE VARCHARTEST;
+CREATE DATABASE VARCHARTEST;
+USE VARCHARTEST;
+
+CREATE TABLE SHORTSTR (ID INT, VALUE VARCHAR(30000));
+CREATE TABLE LONGSTR (ID INT, VALUE VARCHAR(30000));
+LOAD DATA INFILE '/short.csv' INTO TABLE SHORTSTR FIELDS TERMINATED BY ',';
+LOAD DATA INFILE '/long.csv' INTO TABLE LONGSTR FIELDS TERMINATED BY ',';
+</code></pre>
+<p>结果：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>.csv文件大小</th>
+<th>数据堆文件大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>short</td>
+<td>10.7 MB</td>
+<td>11.6 MB</td>
+</tr>
+<tr>
+<td>long</td>
+<td>100 MB</td>
+<td>106.2 MB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_36">小组分工</h2>
+<p>【数据删除】：框架搭建，后端，报告相关部分</p>
+<p>【数据删除】：前端，CI，报告相关部分</p>
+<h2 id="_37">第三方库使用清单</h2>
+<p>Antlr4：用于文法解析</p>
+<p>argparse：用于命令行参数解析</p>
+<h2 id="_38">参考文献</h2>
+<p>无</p>
+<h2 id="_39">其他贡献</h2>
+<p>【数据删除】</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年10月18日</span>
+  </span>
+
+    
+    
+    
+      
+  
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="贡献者">
+      
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+      
+    </span>
+    <nav>
+      
+        <a href="mailto:rcycyzh@163.com">Congyuan Rao</a>
+    </nav>
+  </span>
+
+    
+    
+  </aside>
+
+
+
+
+
+                
+
+
+<div id="visitor-badge-insert-div">
+  <script>
+    var counter_img = document.createElement("img")
+    // Change suffix to be compatable with old honkit style path
+    if ("reports/2023/35/" == "")
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/README.md" + ""
+    else
+      counter_img.src = "https://visitor-badge.laobi.icu/badge?page_id=thu-db.github.io/dbs-tutorial/reports/2023/35/".slice(0, -1) + ".md" + ""
+    counter_img.alt = "visitor badge"
+    document.querySelector("#visitor-badge-insert-div").appendChild(counter_img)
+  </script>
+</div>
+
+
+<div class="md-source-date">
+  <small>
+    Authors: <span class='git-page-authors git-authors'><a href='mailto:rcycyzh@163.com'>Congyuan Rao</a></span>
+  </small>
+</div>
+
+<div id="my-comment">
+  <script>
+    var discussion = document.getElementById('my-comment');
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'thu-db/dbs-tutorial');
+    script.setAttribute('issue-term', "pathname");
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    discussion.appendChild(script);
+  </script>
+</div>
+
+
+
+
+<script>
+
+</script>
+<style>
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../24/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 24组（1人）">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                24组（1人）
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../39/" class="md-footer__link md-footer__link--next" aria-label="下一页: 39组（2人）">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                39组（2人）
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021-2023 数据库系统概论教学组。All Rights Reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../assets/js/katex.0.16.7.min.js"></script>
+      
+        <script src="../../../assets/js/auto-render.0.16.7.min.js"></script>
+      
+    
+  </body>
+</html>
