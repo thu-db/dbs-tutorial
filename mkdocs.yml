@@ -56,6 +56,13 @@ nav:
   - FAQ: faq.md
   - 附件: files.md
   - 更新记录: changelog.md
+  - "优秀作业报告展示":
+    - 说明: reports/index.md
+    - "2023年":
+      - 1组（3人）: reports/2023/1.md
+      - 24组（1人）: reports/2023/24.md
+      - 35组（2人）: reports/2023/35.md
+      - 39组（2人）: reports/2023/39.md
   - 课程安排:
     - 2023秋: timeline/2023F.md
     - 2024秋: timeline/2024F.md
@@ -127,7 +134,7 @@ plugins:
   - search:
       lang: zh
   - mermaid2:
-      javascript: https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js
+      javascript: assets/js/mermaid.10.7.0.min.js
 
 extra:
     # Add counter suffix for development to avoid extra counts of page visit
@@ -136,9 +143,10 @@ extra:
 extra_javascript:
   # Next 3 lines for katex
   - javascripts/katex.js 
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  - assets/js/katex.0.16.7.min.js  
+  - assets/js/auto-render.0.16.7.min.js
 
 extra_css:
   # Next line for katex
+  # I tried to serve everything local, however the fonts made me hesitate
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
