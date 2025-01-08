@@ -68,7 +68,8 @@ flowchart RL
 ```mermaid
 flowchart BT
     optional["optional(0)"]
-    multi-join["multi-join(6)\n(mj)"]
+    multi-join-opt["multi-join-opt(4)\n(mjo)"]
+    multi-join["multi-join(2)\n(mj)"]
     query-aggregate["query-aggregate(1)\n(aggregate)"]
     query-fuzzy["query-fuzzy(2)\n(fuzzy)"]
     query-group["query-group(1)\n(group)"]
@@ -77,6 +78,7 @@ flowchart BT
     date["date(1)\n(date)"]
     unique["unique(1)\n(unique)"]
     null["null(2)\n(null)"]
+    multi-join-opt --> multi-join
     multi-join --> optional
     query-aggregate --> optional
     query-fuzzy --> optional

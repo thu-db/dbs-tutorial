@@ -6,7 +6,7 @@ CI（Continuous Integration，持续集成）是指软件发布流程的构建�
 
 由于不同语言的程序需要不同的 CI 运行环境、依赖库等，我们只能适配有限的环境，截止2023年秋季助教预设的环境有 C++ 与 Python，因此如果你想选择其他语言，你可能需要自行编写对应的 Docker 镜像并联系助教，或者你也可以等到有人完成适配后再选择该语言。
 
-测例内容、答案以及评测逻辑全部公开，这些内容都放在测例仓库（DBS-Testcase）中，同学们可以在 [GitHub](https://github.com/thu-db/dbs-testcase) 或 [清华 Git](https://git.tsinghua.edu.cn/dbs/2023/public/dbs-testcase)（限清华同学）查看。
+测例内容、答案以及评测逻辑全部公开，这些内容都放在测例仓库（DBS-Testcase）中，同学们可以在 [GitHub](https://github.com/thu-db/dbs-testcase) 或 [清华 Git](https://git.tsinghua.edu.cn/dbs/2024/public/dbs-testcase)（限清华同学）查看。
 
 
 !!! abstract "激励机制"
