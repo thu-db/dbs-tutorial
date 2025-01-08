@@ -49,3 +49,5 @@ auto parse(std::String sSQL) {
 ```
 
 7. 如果同学们没有接触过antlr，也可以使用自己熟悉的其他编译代码生成工具，但是需要保证能够支持要求的文法标准。
+
+8. antlr4使用样例参考: [Makefile的样例](https://cloud.tsinghua.edu.cn/f/3dc07cb1cd7e4a028990/?dl=1)，[CMakeLists的样例](https://cloud.tsinghua.edu.cn/f/1fe5cf35d74648c88e1b/?dl=1)。
