@@ -2434,12 +2434,12 @@
 <p>前一种实现性能更高，但是用起来也有更高的风险；后一种更直观，但是会引入拷贝一页的成本。无论是哪一种实现，均是基于写回策略。</p>
 <p>在参考实现中，采用的上述第一种方案，因此它还为缓存管理器提供了以下接口：</p>
 <ul>
-<li>close: 关闭管理器，将所有脏页写回文件（个人建议写入析构函数）</li>
-<li>writeBack: 将指定页面写回并舍弃</li>
-<li>release: 将指定页面舍弃，即使是脏页也不写回</li>
-<li>access: 标记一页被访问过</li>
-<li>markDirty: 标记一页为脏页</li>
-<li>allocPage: 越过查找缓存直接进行文件 IO，需要调用方保证该页不在缓存</li>
+<li><code>close</code>: 关闭管理器，将所有脏页写回文件（个人建议写入析构函数）</li>
+<li><code>writeBack</code>: 将指定页面写回并舍弃</li>
+<li><code>release</code>: 将指定页面舍弃，即使是脏页也不写回</li>
+<li><code>access</code>: 标记一页被访问过</li>
+<li><code>markDirty</code>: 标记一页为脏页</li>
+<li><code>allocPage</code>: 越过查找缓存直接进行文件 IO，需要调用方保证该页不在缓存</li>
 </ul>
 
 
