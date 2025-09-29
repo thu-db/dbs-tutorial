@@ -89,12 +89,12 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 
 无论你选择以何种语言、设计模式、命名风格，我们都应设计以下对外接口来供上层系统使用：
 
-- CreateFile: 创建文件，对应参考实现中的 `FileManager::createFile`
-- OpenFile: 打开文件，对应参考实现中的 `FileManager::openFile`
-- CloseFile: 关闭文件，对应参考实现中的 `FileManager::closeFile`
-- RemoveFile: 删除文件，参考实现中未实现该功能
-- ReadPage: 读取文件中指定一页，对应参考实现中 `FileManager::readPage`
-- WritePage: 写入文件中指定一页，对应参考实现中 `FileManager::writePage`
+- `CreateFile`: 创建文件，对应参考实现中的 `FileManager::createFile`
+- `OpenFile`: 打开文件，对应参考实现中的 `FileManager::openFile`
+- `CloseFile`: 关闭文件，对应参考实现中的 `FileManager::closeFile`
+- `RemoveFile`: 删除文件，参考实现中未实现该功能
+- `ReadPage`: 读取文件中指定一页，对应参考实现中 `FileManager::readPage`
+- `WritePage`: 写入文件中指定一页，对应参考实现中 `FileManager::writePage`
 
 ## 附录
 
