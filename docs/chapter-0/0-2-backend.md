@@ -67,7 +67,7 @@ CREATE TABLE course_detail (
 );
 ```
 
-最后，一位同学的选课信息 (student_course) 需要添加成绩 (grade)、学期 (term) 信息。注意它有复合主键 (student_id, course_id, term)，这暗示着一门课在一个学期只能被一名同学选一次（更多的时候一名同学只能选一门课一次，但这不由数据库保证），(course_id, course_number) 构成了复合外键指向 course 的复合主键。
+最后，一位同学的选课信息 (student_course) 需要添加成绩 (grade)、学期 (term) 信息。注意它有复合主键 (student_id, course_id, term)，这暗示着一门课在一个学期只能被一名同学选一次（更多的时候一名同学只能选一门课一次，但这不由数据库保证），(course_id, course_number) 构成了复合外键指向 course_detail 的复合主键。
 
 ```SQL
 CREATE TABLE student_course (
@@ -267,4 +267,4 @@ mysql> SELECT student_id, student.name student_name, course_id, course.name cour
 注意这里用到了很多细节操作，包括连接时同表间出现重名字段需要加表名前缀，没有出现则不用加；SELECT 后面的字段名后可以加别称来让输出结果的表头更好看（如 `student_name`）。
 
 !!!warning "声明：仅供展示"
-    整个 step 0 中的举例均只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。
+    本节中的举例均只是做一个 MySQL 效果展示以及一些~~好看的~~输出格式样例，相关语法不一定是实验内容。
