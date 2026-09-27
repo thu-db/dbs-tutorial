@@ -73,7 +73,7 @@ E7 94 B7 00 E6 9C AC E7 A7 91 E7 94 9F 00 00 00 00 00
 |打开文件|open|fopen|fstream::open|
 |关闭文件|close|fclose|fstream::close|
 |删除文件|unlink / rmdir|remove|filesystem::remove|
-|文件偏移|lseek|fseek|fstream::seekp / fsteam::seekg|
+|文件偏移|lseek|fseek|fstream::seekp / fstream::seekg|
 |数据读取|read|fread|fstream::read|
 |数据写入|write|fwrite|fstream::write|
 

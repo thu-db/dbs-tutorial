@@ -3,3 +3,4 @@
 .antlr
 /.vscode
 /.venv
+.DS_Store

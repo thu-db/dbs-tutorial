@@ -27,7 +27,7 @@
         using namespace antlr4;
 
         // 返回类型根据你的visitor决定
-        auto parse(std::String sSQL) {
+        auto parse(std::string sSQL) {
           // 解析SQL语句sSQL的过程
           // 转化为输入流
           ANTLRInputStream sInputStream(sSQL);

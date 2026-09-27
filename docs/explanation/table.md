@@ -1,6 +1,6 @@
 # 数据表管理文法
 
-本节内容包括数据表的 schema 相关的文法，包括数据表本身的增删改以及索引的增减等。注意本节内容除非有特殊说明，否则在正常执行时均不对输出进行要求。对于可能涉及到建立索引的指令（包括建立索引、建立主键约束、建立 UNIQUE 约束等）需要显示所消耗的时间。
+本节内容包括数据表的 schema 相关的文法，包括数据表本身的增删改以及索引的增减等。注意本节内容除非有特殊说明，否则在正常执行时均不对输出进行要求。对于可能涉及到建立索引的指令（包括建立索引、建立主键约束、建立 UNIQUE 约束等）需要显示所消耗的时间（交互模式）。
 
 ## create_table
 
@@ -9,8 +9,8 @@
 注意 `field_list` 中是逗号隔开的若干 `field`，每个 `field` 都包含有三种语句：
 
 - `normal_field`：用于创建新的列，这里不做赘述。但你应当保证逻辑的严密性，考虑到同名列、默认值类型等细节问题。
-- `primary_key_field`：用于创建主键约束，详见后文 [alter_table_add_pk](#altertableaddpk) 部分的说明。
-- `foreign_key_field`：用于创建外键约束，详见后文 [alter_table_add_foreign_key](#altertableaddforeignkey) 部分的说明。
+- `primary_key_field`：用于创建主键约束，详见后文 [alter_table_add_pk](#alter_table_add_pk) 部分的说明。
+- `foreign_key_field`：用于创建外键约束，详见后文 [alter_table_add_foreign_key](#alter_table_add_foreign_key) 部分的说明。
 
 ## drop_table
 
@@ -42,7 +42,7 @@
 
 ## alter_drop_index
 
-在当前数据库中名为 `Identifier` 的现有表中删除建立在 `identifiers` 这些（一或多）列上的索引。
+在当前数据库中名为 `Identifier` 的现有表中删除名为 `identifiers` 的索引。
 
 注意一个因其他约束而存在的索引是不能被删除，例如主键约束、`UNIQUE` 约束等，此时应该给出报错并拒绝执行指令。
 

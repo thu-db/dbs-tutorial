@@ -1,7 +1,7 @@
 site_name: 数据库系统概论实验文档
 site_author: '数据库系统概论教学组'
 site_url: 'https://thu-db.github.io/dbs-tutorial/'
-copyright: 'Copyright &copy; 2021-2025 数据库系统概论教学组。All Rights Reserved.'
+copyright: 'Copyright &copy; 2021-2026 数据库系统概论教学组。All Rights Reserved.'
 
 
 repo_name: thu-db/dbs-tutorial
@@ -67,6 +67,7 @@ nav:
     - 2023秋: timeline/2023F.md
     - 2024秋: timeline/2024F.md
     - 2025秋: timeline/2025F.md
+    - 2026秋: timeline/2026F.md
 
 theme:
   name: material

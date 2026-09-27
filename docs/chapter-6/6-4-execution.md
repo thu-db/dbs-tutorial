@@ -5,7 +5,7 @@
 我们考虑以下面这个关系代数表达式为例，描述物化策略和流水线策略的执行过程。
 
 $$
-\Pi_{grade}(\sigma_{id=2077010001}(student) \Join student\_course)
+\Pi_{grade}(\sigma_{id=2077010001}(student) \Join student\\_course)
 $$
 
 ![查询计划树](plan_tree.svg)

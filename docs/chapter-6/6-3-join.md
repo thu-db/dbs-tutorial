@@ -41,15 +41,25 @@ for each block b1 of t1 {
 先将要连接的两个表在连接属性上排序，随后对排序后的表进行连接，算法描述如下：
 
 ```
-sort t1, t2 on join keys
-cursor_1 <- t1, cursor_2 <- t2
-while cursor_1 and cursor_2:
-  if cursor_r < cursor_2:
-    increment cursor_1
-  if cursor_1 > cursor_2:
-    increment cursor_2
-  if cursor_1 == cursor_2:
-    Join cursor_1, cursor_2
+sort A, B by join_key
+i ← 0; j ← 0
+
+while i < |A| and j < |B|:
+  if A[i].key < B[j].key:
+    i ← i + 1
+  else if A[i].key > B[j].key:
+    j ← j + 1
+  else:
+    key ← A[i].key
+    start ← j
+
+    while j < |B| and B[j].key == key:
+      j ← j + 1
+
+    while i < |A| and A[i].key == key:
+      for t ← start to j - 1:
+        emit concatenate(A[i], B[t])
+      i ← i + 1
 ```
 
 如果两张表在连接前已经在连接属性上排好序，则可以省去排序操作。此外，排序归并连接算法的输出结果也是在连接属性上排好序的，如果查询在连接属性上有 `order by` 子句，排序归并连接算法便可以直接给出有序结果。
@@ -59,10 +69,15 @@ while cursor_1 and cursor_2:
 对一张表进行哈希运算建立哈希表，哈希表的 key 为连接属性。对另一张表的每条记录，用哈希函数求得连接属性上的值，映射到哈希表上即可得到要连接的记录，算法描述如下：
 
 ```
-build hash table HT for t1
-for each row r2 in t2:
-  if h(r2) in HT:
-    join t1, t2
+H ← empty buckets                  // 每个桶保存记录列表
+
+for a in A:
+  H[h(a.key)].append(a)
+
+for b in B:
+  for a in H[h(b.key)]:
+    if a.key == b.key:
+      emit concatenate(a, b)
 ```
 
 哈希连接算法效率较高，算法复杂度为 $O(T1+T2)$​，$T1$​ 和 $T2$​ 分别表示两张表记录的个数。但是哈希连接仅支持等值连接，且哈希表需要占用较大的内存空间，如果哈希表大小超出内存空间限制，则需要将哈希表写入临时文件。
