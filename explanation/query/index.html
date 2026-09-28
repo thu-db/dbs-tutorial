@@ -2456,7 +2456,7 @@
 
 
 <h1 id="_1">查询解析文法</h1>
-<p>本节介绍数据的增删查改语句及其语义。所有输出格式统一遵循《0.3 前端约定》。交互模式建议显示执行耗时，并可显示便于人工检查的行数提示；批处理模式只输出规定的结果内容及 <code>@</code> 分隔行，不额外输出这些提示。其中，<code>INSERT</code>、<code>UPDATE</code>、<code>DELETE</code>、<code>LOAD</code> 成功时输出的<code>rows</code> 表属于必需的执行结果，不属于可省略的额外统计信息。</p>
+<p>这里的查询解析包含了对具体某张表的数据的增删查改。注意该部分的指令可能存在性能瓶颈，要求执行完毕后输出总用时，推荐以秒为单位（交互模式）。</p>
 <h2 id="where_and_clause">where_and_clause</h2>
 <p>虽然 <code>where_and_clause</code> 只是几个完整文法的一个公用部分，但是本身已经足够复杂，这里单独进行解释。</p>
 <p>注意 <code>where_and_clause</code> 是支持 <code>AND</code> 与运算的一系列条件，我们的必做项只对 <code>AND</code> 进行要求。</p>
